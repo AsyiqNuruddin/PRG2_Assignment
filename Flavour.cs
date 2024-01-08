@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PRG2_Assignment
+namespace PRG2_Assignment_Flavour
 {
     internal class Flavour
     {
