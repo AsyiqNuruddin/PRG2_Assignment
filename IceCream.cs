@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using PRG2_Assignment_Topping;
 using PRG2_Assignment_Flavour;
-namespace PRG2_Assignment
+
+namespace PRG2_Assignment_IceCream
 {
     abstract class IceCream
     {
