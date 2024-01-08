@@ -35,7 +35,7 @@ namespace PRG2_Assignment
         }
         public override string ToString()
         {
-            return base.ToString();
+            return $"Type: {Type} Premuim: {Premium} Quantity: {Quantity}";
         }
     }
 }
