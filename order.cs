@@ -1,4 +1,5 @@
 ﻿using System;
+using PRG2_Assignment_IceCream;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PRG2_Assignment
 {
-    internal class order
+    internal class Order
     {
         public int id {  get; set; }
         public DateTime timeRecieved { get; set; }
