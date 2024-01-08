@@ -11,5 +11,6 @@ namespace PRG2_Assignment
         public string name {  get; set; }
         public int memberid { get; set; }
         public DateTime dob {  get; set; }
+        
     }
 }
