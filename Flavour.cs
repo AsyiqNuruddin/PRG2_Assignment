@@ -26,5 +26,16 @@ namespace PRG2_Assignment
             get { return quantity; }
             set { quantity = value; }
         }
+        public Flavour() { }
+        public Flavour(string type,bool premium, int quantity) 
+        { 
+            Type = type;
+            Premium = premium;
+            Quantity = quantity;
+        }
+        public override string ToString()
+        {
+            return base.ToString();
+        }
     }
 }
