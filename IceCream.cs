@@ -41,12 +41,7 @@ namespace PRG2_Assignment
             Flavours = flavours;
             Toppings = toppings;
         }
-        public double CalculatePrice()
-        {
-            double price = 0;
-
-            return price;
-        }
+        public abstract double CalculatePrice();
         public override string ToString()
         {
             return $"{Option} {Scoops} {Flavours} {Toppings}";
