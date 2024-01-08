@@ -1,11 +1,17 @@
-﻿using System;
+﻿//==========================================================
+// Student Number : S10262791
+// Student Name : Asyiq Nuruddin
+// Partner Name : Jia Xiang
+//==========================================================
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PRG2_Assignment_Topping;
 using PRG2_Assignment_Flavour;
-namespace PRG2_Assignment
+
+namespace PRG2_Assignment_IceCream
 {
     abstract class IceCream
     {

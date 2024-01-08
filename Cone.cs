@@ -13,14 +13,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PRG2_Assignment_Cup
+namespace PRG2_Assignment_Cone
 {
-    internal class Cup : IceCream
+    internal class Cone : IceCream
     {
-        public Cup():base() { }
-        public Cup(string option, int scoops, List<Flavour> flavours, List<Topping> toppings) :base(option,scoops,flavours,toppings) 
+        private bool dipped;
+        public bool Dipped
         {
-
+            get { return dipped; }
+            set { dipped = value; }
+        }
+        public Cone():base() { }
+        public Cone(string option, int scoops, List<Flavour> flavours, List<Topping> toppings,bool dipped):base(option, scoops, flavours, toppings)
+        {
+            Dipped = dipped;
         }
         public override double CalculatePrice()
         {
@@ -28,7 +34,7 @@ namespace PRG2_Assignment_Cup
         }
         public override string ToString()
         {
-            return $"{Option} {Scoops} {Flavours} {Toppings}";
+            return $"{Option} {Scoops} {Flavours} {Toppings} {Dipped}";
         }
     }
 }
