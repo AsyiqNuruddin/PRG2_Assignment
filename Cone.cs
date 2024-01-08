@@ -1,4 +1,9 @@
-﻿using PRG2_Assignment;
+﻿//==========================================================
+// Student Number : S10262791
+// Student Name : Asyiq Nuruddin
+// Partner Name : Jia Xiang
+//==========================================================
+using PRG2_Assignment;
 using PRG2_Assignment_Flavour;
 using PRG2_Assignment_IceCream;
 using PRG2_Assignment_Topping;
