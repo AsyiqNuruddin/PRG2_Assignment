@@ -21,9 +21,9 @@ namespace PRG2_Assignment
             timeRecieved = tR;
 
         }
-        public void Modifyicecream(int) { }
-        public void AddIceCream(IceCream) { }
-        public void DeleteIceCream(int) { }
+        public void Modifyicecream(int id) { }
+        public void AddIceCream(IceCream ice) { }
+        public void DeleteIceCream(int id) { }
         public static double CalcualteTotal() {
 
             double total = 0;
