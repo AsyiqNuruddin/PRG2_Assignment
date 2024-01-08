@@ -8,5 +8,8 @@ namespace PRG2_Assignment
 {
     internal class customer
     {
+        public string name {  get; set; }
+        public int memberid { get; set; }
+        public DateTime dob {  get; set; }
     }
 }
