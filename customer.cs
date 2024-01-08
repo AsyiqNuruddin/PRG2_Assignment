@@ -8,9 +8,29 @@ namespace PRG2_Assignment
 {
     internal class customer
     {
-        public string name {  get; set; }
+        public string name { get; set; }
         public int memberid { get; set; }
-        public DateTime dob {  get; set; }
+        public DateTime dob { get; set; }
+        public Order currentOrder { get; set; }
+        public List<Order> orderHistory { get; set; }
+        public PointCard rewards { get; set; }
+        public customer() { }
+        public customer(string nam,int member,DateTime brith) 
+        {
+
+            name = nam;
+            memberid = member;
+            dob = brith;
+            orderHistory = new List<Order>();
         
+        
+        }
+        public static order Makeorder() { }
+        public static bool isBirthday() { }
+        public override string ToString()
+        {
+            return $"{name}{memberid}{dob}";
+        }
+
     }
 }
