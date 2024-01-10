@@ -91,7 +91,6 @@ void Option2()
 //==========================================================
 // Student Number : S10262791
 // Student Name : Asyiq Nuruddin
-// Partner Name : Jia Xiang
 //==========================================================
 void Option3() 
 {
