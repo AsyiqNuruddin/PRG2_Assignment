@@ -79,12 +79,42 @@ void Option1(Dictionary<int, customer> DictCustomer)
 {
     foreach(var kvp in DictCustomer)
     {
-        Console.WriteLine($"Name: {kvp.Value.name,-10} Member ID:{kvp.Value.memberid,-10} DateofBirth: {kvp.Value.dob,-10:dd/MM/yy}");
+        Console.WriteLine($"Name: {kvp.Value.name,-10} Member ID:{kvp.Value.memberid,-10} DateofBirth: {kvp.Value.dob,-10:dd/MM/yyyy}");
     }
 }
-void Option2() { }
-void Option3() {
+void Option2() 
+{ 
 
+}
+
+
+//==========================================================
+// Student Number : S10262791
+// Student Name : Asyiq Nuruddin
+// Partner Name : Jia Xiang
+//==========================================================
+void Option3() 
+{
+    Console.WriteLine("Registration of a new customer");
+    Console.Write("Enter your Name: ");
+    string nameInp = Console.ReadLine();
+    Console.Write("Enter your ID Number: ");
+    int idInp = Convert.ToInt32(Console.ReadLine());
+    Console.Write("Enter your Date Of Birth in DD/MM/YYYY: ");
+    DateTime dob = Convert.ToDateTime(Console.ReadLine());
+    customer newCustomer = new customer(nameInp,idInp,dob);
+    Console.WriteLine("Your registration customer details");
+    Console.WriteLine($"Name: {newCustomer.name,-10} Member ID:{newCustomer.memberid,-10} DateofBirth: {newCustomer.dob,-10:dd/MM/yyyy}");
+    PointCard newPC = new PointCard(0,0);
+    newCustomer.rewards = newPC;
+
+    using (StreamWriter sw = new StreamWriter("customers.csv", true))
+    {
+        string? row;
+        row = string.Join(",", newCustomer.name, newCustomer.memberid, $"{newCustomer.dob:dd/MM/yyyy}");
+        sw.WriteLine(row);
+    }
+    Console.WriteLine("Registration Successfull");
 
 }
 void Option4() { }
