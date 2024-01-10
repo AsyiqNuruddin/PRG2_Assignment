@@ -1,0 +1,4 @@
+C:\Users\pizza\Ngee_Ann_Poly\PRG2\Assignment\PRG2_Assignment\obj\Debug\net6.0\PRG2_Assignment.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\pizza\Ngee_Ann_Poly\PRG2\Assignment\PRG2_Assignment\obj\Debug\net6.0\PRG2_Assignment.AssemblyInfoInputs.cache
+C:\Users\pizza\Ngee_Ann_Poly\PRG2\Assignment\PRG2_Assignment\obj\Debug\net6.0\PRG2_Assignment.AssemblyInfo.cs
+C:\Users\pizza\Ngee_Ann_Poly\PRG2\Assignment\PRG2_Assignment\obj\Debug\net6.0\PRG2_Assignment.csproj.CoreCompileInputs.cache
