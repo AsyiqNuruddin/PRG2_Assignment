@@ -13,12 +13,14 @@ using System;
 //==========================================================
 // Student Number : S10262791
 // Student Name : Asyiq Nuruddin
-// Partner Name : Jia Xiang
 //==========================================================
 Dictionary<int, customer> DictCustomer = new Dictionary<int, customer>();
-
+Dictionary<int, Flavour> DictFlavour = new Dictionary<int, Flavour>();
+Dictionary<int, Topping> DictTopping = new Dictionary<int, Topping>();
 
 InitCustomer("customers.csv");
+InitFlavour(DictFlavour);
+InitToppings(DictTopping);
 // Loop of Options
 while (true) 
 {
@@ -48,7 +50,10 @@ while (true)
         break;
     }
 }
-
+//==========================================================
+// Student Number : S10262791
+// Student Name : Asyiq Nuruddin
+//==========================================================
 void InitCustomer(string txtfile)
 {
     using (StreamReader sr = new StreamReader(txtfile))
@@ -72,7 +77,50 @@ void InitCustomer(string txtfile)
 //==========================================================
 // Student Number : S10262791
 // Student Name : Asyiq Nuruddin
-// Partner Name : Jia Xiang
+//==========================================================
+void InitFlavour(Dictionary<int, Flavour> df)
+{
+    df.Add(1,new Flavour("Vanilla", false, 1));
+    df.Add(2,new Flavour("Chocolate", false, 1));
+    df.Add(3,new Flavour("Strawberry", false, 1));
+    df.Add(4,new Flavour("Durian", true, 1));
+    df.Add(5,new Flavour("Ube", true, 1));
+    df.Add(6,new Flavour("Sea Salt", true, 1));
+}
+void InitToppings(Dictionary<int, Topping> dt)
+{
+    dt.Add(1,new Topping("Sprinkles"));
+    dt.Add(2,new Topping("Mochi"));
+    dt.Add(3,new Topping("Sago"));
+    dt.Add(4,new Topping("Oreos"));
+}
+//==========================================================
+// Student Number : S10262791
+// Student Name : Asyiq Nuruddin
+//==========================================================
+void DisplayFlavours(Dictionary<int, Flavour> df)
+{
+    int count = 1;
+    foreach (var flavour in df.Values)
+    {
+        Console.Write($"[{count}]Type: {flavour.Type}");
+        count++;
+    }
+}
+void DisplayToppings(Dictionary<int, Topping> dt)
+{
+    int count = 1;
+    foreach (Topping topping in dt.Values)
+    {
+        Console.Write($"[{count}]Type: {topping.Type,10}");
+        count++;
+    }
+}
+
+
+//==========================================================
+// Student Number : S10262791
+// Student Name : Asyiq Nuruddin
 //==========================================================
 
 void Option1(Dictionary<int, customer> DictCustomer) 
@@ -95,14 +143,14 @@ void Option2()
 void Option3() 
 {
     Console.WriteLine("Registration of a new customer");
-    Console.Write("Enter your Name: ");
+    Console.Write("Enter their Name: ");
     string nameInp = Console.ReadLine();
-    Console.Write("Enter your ID Number: ");
+    Console.Write("Enter their ID Number: ");
     int idInp = Convert.ToInt32(Console.ReadLine());
-    Console.Write("Enter your Date Of Birth in DD/MM/YYYY: ");
+    Console.Write("Enter their Date Of Birth in DD/MM/YYYY: ");
     DateTime dob = Convert.ToDateTime(Console.ReadLine());
     customer newCustomer = new customer(nameInp,idInp,dob);
-    Console.WriteLine("Your registration customer details");
+    Console.WriteLine("Their registration customer details");
     Console.WriteLine($"Name: {newCustomer.name,-10} Member ID:{newCustomer.memberid,-10} DateofBirth: {newCustomer.dob,-10:dd/MM/yyyy}");
     PointCard newPC = new PointCard(0,0);
     newCustomer.rewards = newPC;
@@ -116,7 +164,88 @@ void Option3()
     Console.WriteLine("Registration Successfull");
 
 }
-void Option4() { }
+//==========================================================
+// Student Number : S10262791
+// Student Name : Asyiq Nuruddin
+//==========================================================
+static customer? Search(Dictionary<int,customer> sDict, int userInp)
+{
+    foreach (var v in sDict)
+    {
+        if (v.Value.memberid == userInp)
+        {
+            return v.Value;
+        }
+    }
+    return null;
+}
+//==========================================================
+// Student Number : S10262791
+// Student Name : Asyiq Nuruddin
+//==========================================================
+(int,Flavour,Topping) IceCreamAdd(Dictionary<int,Flavour> df, Dictionary<int, Topping> dt)
+{
+    Console.Write("Enter number of scoops: ");
+    int scoops = Convert.ToInt32(Console.ReadLine());
+
+    DisplayFlavours(DictFlavour);
+    Console.WriteLine("Choose the flavour");
+    int flvIndex = Convert.ToInt32(Console.ReadLine());
+    Flavour flav = null;
+    if (df.ContainsKey(flvIndex))
+    {
+         flav = df[flvIndex];
+    }
+    DisplayToppings(DictTopping);
+    Console.WriteLine("Choose the flavour");
+    int topIndex = Convert.ToInt32(Console.ReadLine());
+    Topping top = null;
+    if (dt.ContainsKey(topIndex))
+    {
+        top = dt[topIndex];
+    }
+    return (scoops, flav, top);
+}
+//==========================================================
+// Student Number : S10262791
+// Student Name : Asyiq Nuruddin
+//==========================================================
+void Option4() 
+{
+    // Refresh customer obj data
+    InitCustomer("customers.csv");
+    Option1(DictCustomer);
+    Console.WriteLine("Select the customer: ");
+    int idInp = Convert.ToInt32(Console.ReadLine());
+    customer? result = Search(DictCustomer, idInp);
+    if (result != null)
+    {
+        Console.WriteLine("Found Customer ");
+        Order cusOrder = new Order();
+        Console.Write("Enter their ice cream order type (Cup, Cone or Waffle): ");
+        string choiceInp = Console.ReadLine();
+        choiceInp = choiceInp.ToLower();
+        if(choiceInp == "cup")
+        {
+            Console.WriteLine("Chosen Cup");
+            (int, Flavour, Topping) cat = IceCreamAdd(DictFlavour,DictTopping);
+        }else if (choiceInp == "cone")
+        {
+            Console.WriteLine("Chosen Cone");
+            (int, Flavour, Topping) cat = IceCreamAdd(DictFlavour, DictTopping);
+        }
+        else if (choiceInp == "waffle")
+        {
+            Console.WriteLine("Chosen Waffle");
+            (int, Flavour, Topping) cat = IceCreamAdd(DictFlavour, DictTopping);
+        }
+    }
+    else
+    {
+        Console.WriteLine("Customer not found");
+    }
+
+}
 void Option5() {
     //ist the customers
     //prompt user to select a customer and retrieve the selected customer
