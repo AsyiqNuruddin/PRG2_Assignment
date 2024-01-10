@@ -48,6 +48,9 @@ namespace PRG2_Assignment_IceCream
             Toppings = toppings;
         }
         public abstract double CalculatePrice();
+            
+        
+   
         public override string ToString()
         {
             return $"{Option} {Scoops} {Flavours} {Toppings}";

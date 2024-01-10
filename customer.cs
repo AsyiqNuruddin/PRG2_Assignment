@@ -31,11 +31,15 @@ namespace PRG2_Assignment
         
         }
         public static Order Makeorder() {
-            Order order = new Order(,DateTime.Now);
+            Order order = new Order(1,DateTime.Now);
+            return order;
         
         
         }
-        public static bool isBirthday() { }
+        public static bool isBirthday() {
+
+            return true;
+        }
         public override string ToString()
         {
             return $"{name}{memberid}{dob}";
