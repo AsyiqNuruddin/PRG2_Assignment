@@ -56,6 +56,7 @@ while (true)
 //==========================================================
 void InitCustomer(string txtfile)
 {
+    DictCustomer = new Dictionary<int, customer>();
     using (StreamReader sr = new StreamReader(txtfile))
     {
         List<string> rowList = new List<string>();
@@ -103,7 +104,7 @@ void DisplayFlavours(Dictionary<int, Flavour> df)
     int count = 1;
     foreach (var flavour in df.Values)
     {
-        Console.Write($"[{count}]Type: {flavour.Type}");
+        Console.WriteLine($"[{count}]: {flavour.Type,-10}");
         count++;
     }
 }
@@ -112,7 +113,7 @@ void DisplayToppings(Dictionary<int, Topping> dt)
     int count = 1;
     foreach (Topping topping in dt.Values)
     {
-        Console.Write($"[{count}]Type: {topping.Type,10}");
+        Console.WriteLine($"[{count}]: {topping.Type,-10}");
         count++;
     }
 }
@@ -189,7 +190,7 @@ static customer? Search(Dictionary<int,customer> sDict, int userInp)
     int scoops = Convert.ToInt32(Console.ReadLine());
 
     DisplayFlavours(DictFlavour);
-    Console.WriteLine("Choose the flavour");
+    Console.Write("Choose the flavour: ");
     int flvIndex = Convert.ToInt32(Console.ReadLine());
     Flavour flav = null;
     if (df.ContainsKey(flvIndex))
@@ -197,7 +198,7 @@ static customer? Search(Dictionary<int,customer> sDict, int userInp)
          flav = df[flvIndex];
     }
     DisplayToppings(DictTopping);
-    Console.WriteLine("Choose the flavour");
+    Console.Write("Choose the topping: ");
     int topIndex = Convert.ToInt32(Console.ReadLine());
     Topping top = null;
     if (dt.ContainsKey(topIndex))
@@ -215,7 +216,7 @@ void Option4()
     // Refresh customer obj data
     InitCustomer("customers.csv");
     Option1(DictCustomer);
-    Console.WriteLine("Select the customer: ");
+    Console.Write("Select the customer: ");
     int idInp = Convert.ToInt32(Console.ReadLine());
     customer? result = Search(DictCustomer, idInp);
     if (result != null)
@@ -238,6 +239,7 @@ void Option4()
         {
             Console.WriteLine("Chosen Waffle");
             (int, Flavour, Topping) cat = IceCreamAdd(DictFlavour, DictTopping);
+            Console.WriteLine(cat);
         }
     }
     else
