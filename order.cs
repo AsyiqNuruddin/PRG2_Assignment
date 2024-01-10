@@ -24,10 +24,17 @@ namespace PRG2_Assignment
         public Order(int Id, DateTime tR) {
             id = Id;
             timeRecieved = tR;
-            IceCreamlist = new List<IceCream>
+            
 
         }
-        public void Modifyicecream(int id) { }
+        public void Modifyicecream(int id) {
+            foreach (IceCream ic in IceCreamlist)
+            {
+                if(ic.Id)
+            }
+
+
+        }
         public void AddIceCream(IceCream ice) {
             IceCreamlist.Add(ice)
         
