@@ -16,13 +16,14 @@ using System;
 
 Dictionary<int,customer> DictCustomer = new Dictionary<int,customer>();
 
-InitCustomer("customers.csv")
-Option1(DictCustomer)
+InitCustomer("customers.csv");
+Option1(DictCustomer);
 void InitCustomer(string txtfile)
 {
     using (StreamReader sr = new StreamReader(txtfile))
     {
         List<string> rowList = new List<string>();
+        List<string> headers = new List<string>();
 
         string? s = sr.ReadLine();
         if (s != null)
