@@ -1,4 +1,5 @@
 ﻿using PRG2_Assignment;
+using PRG2_Assignment_Customer;
 using PRG2_Assignment_Cone;
 using PRG2_Assignment_Cup;
 using PRG2_Assignment_Flavour;
@@ -6,7 +7,49 @@ using PRG2_Assignment_IceCream;
 using PRG2_Assignment_Topping;
 using System;
 
-void Option1() { }
+
+//==========================================================
+// Student Number : S10262791
+// Student Name : Asyiq Nuruddin
+// Partner Name : Jia Xiang
+//==========================================================
+
+Dictionary<int,customer> DictCustomer = new Dictionary<int,customer>();
+
+InitCustomer("customers.csv")
+Option1(DictCustomer)
+void InitCustomer(string txtfile)
+{
+    using (StreamReader sr = new StreamReader(txtfile))
+    {
+        List<string> rowList = new List<string>();
+
+        string? s = sr.ReadLine();
+        if (s != null)
+        {
+            headers = s.Split(",").ToList();
+        }
+        while ((s = sr.ReadLine()) != null)
+        {
+            rowList = s.Split(',').ToList();
+
+            DictCustomer.Add(Convert.ToInt32(rowList[1]), new customer(rowList[0], Convert.ToInt32(rowList[1]), Convert.ToDateTime(rowList[2])) );
+        }
+    }
+}
+//==========================================================
+// Student Number : S10262791
+// Student Name : Asyiq Nuruddin
+// Partner Name : Jia Xiang
+//==========================================================
+
+void Option1(Dictionary<int, customer> DictCustomer) 
+{
+    foreach(var kvp in DictCustomer)
+    {
+        Console.WriteLine($"Name: {kvp.Value.name,-10} Member ID:{kvp.Value.memberid,-10} DateofBirth{kvp.Value.dob}");
+    }
+}
 void Option2() { }
 void Option3() {
 
