@@ -1,4 +1,6 @@
 ﻿using PRG2_Assignment;
+using PRG2_Assignment_Order;
+using PRG2_Assignment_PointCard;
 using PRG2_Assignment_Customer;
 using PRG2_Assignment_Cone;
 using PRG2_Assignment_Cup;
@@ -13,11 +15,40 @@ using System;
 // Student Name : Asyiq Nuruddin
 // Partner Name : Jia Xiang
 //==========================================================
+Dictionary<int, customer> DictCustomer = new Dictionary<int, customer>();
 
-Dictionary<int,customer> DictCustomer = new Dictionary<int,customer>();
 
 InitCustomer("customers.csv");
-Option1(DictCustomer);
+// Loop of Options
+while (true) 
+{
+    Console.Write("Please enter your option: ");
+    string usrInp = Console.ReadLine();
+    if (usrInp == "1")
+    {
+        Option1(DictCustomer);
+    }else if (usrInp == "2")
+    {
+        Option2();
+    }else if (usrInp == "3")
+    {
+        Option3();
+    }else if (usrInp == "4")
+    {
+        Option4();
+    }else if (usrInp == "5")
+    {
+        Option5();
+    }else if (usrInp == "6")
+    {
+        Option6();
+    }else if(usrInp == "-1")
+    {
+        Console.WriteLine("Thanks for using the application!");
+        break;
+    }
+}
+
 void InitCustomer(string txtfile)
 {
     using (StreamReader sr = new StreamReader(txtfile))
@@ -48,7 +79,7 @@ void Option1(Dictionary<int, customer> DictCustomer)
 {
     foreach(var kvp in DictCustomer)
     {
-        Console.WriteLine($"Name: {kvp.Value.name,-10} Member ID:{kvp.Value.memberid,-10} DateofBirth{kvp.Value.dob}");
+        Console.WriteLine($"Name: {kvp.Value.name,-10} Member ID:{kvp.Value.memberid,-10} DateofBirth: {kvp.Value.dob,-10:dd/MM/yy}");
     }
 }
 void Option2() { }

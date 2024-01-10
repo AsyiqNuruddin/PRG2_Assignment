@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PRG2_Assignment_PointCard;
+using PRG2_Assignment_Order;
 
 namespace PRG2_Assignment_Customer
 {

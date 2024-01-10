@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Globalization;
 
-namespace PRG2_Assignment
+namespace PRG2_Assignment_Order
 {
     internal class Order
     {
