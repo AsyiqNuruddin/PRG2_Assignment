@@ -24,10 +24,14 @@ namespace PRG2_Assignment
         public Order(int Id, DateTime tR) {
             id = Id;
             timeRecieved = tR;
+            IceCreamlist = new List<IceCream>
 
         }
         public void Modifyicecream(int id) { }
-        public void AddIceCream(IceCream ice) { }
+        public void AddIceCream(IceCream ice) {
+            IceCreamlist.Add(ice)
+        
+        }
         public void DeleteIceCream(int id) { }
         public static double CalcualteTotal() {
 
