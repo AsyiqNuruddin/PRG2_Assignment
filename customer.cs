@@ -30,7 +30,8 @@ namespace PRG2_Assignment
         
         
         }
-        public static order Makeorder() {
+        public static Order Makeorder() {
+            Order order = new Order(,DateTime.Now);
         
         
         }

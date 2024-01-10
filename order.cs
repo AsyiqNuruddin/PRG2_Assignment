@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Globalization;
 
 namespace PRG2_Assignment
 {
@@ -28,18 +29,21 @@ namespace PRG2_Assignment
 
         }
         public void Modifyicecream(int id) {
-            foreach (IceCream ic in IceCreamlist)
-            {
-                if(ic.Id)
-            }
+            IceCream modice = IceCreamlist[id-1];
+            
+            
+            
 
 
         }
         public void AddIceCream(IceCream ice) {
-            IceCreamlist.Add(ice)
+            IceCreamlist.Add(ice);
         
         }
-        public void DeleteIceCream(int id) { }
+        public void DeleteIceCream(int id) {
+            IceCreamlist.Remove(IceCreamlist[id-1]);
+        
+        }
         public static double CalcualteTotal() {
 
             double total = 0;
