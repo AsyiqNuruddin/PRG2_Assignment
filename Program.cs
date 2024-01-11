@@ -143,7 +143,7 @@ void Option2()
         customer customer = kvp.Value;
         if (customer.currentOrder.IceCreamlist != null) {
             foreach (IceCream or in customer.currentOrder.IceCreamlist) {
-                Console.WriteLine(or)
+                Console.WriteLine(or);
     
 
             }
