@@ -365,6 +365,7 @@ void option6() {
     Console.Write("Select the customer: ");
     int idInp = Convert.ToInt32(Console.ReadLine());
     customer? result = Search(DictCustomer, idInp);
+    Console.WriteLine(result);
 
 
 
