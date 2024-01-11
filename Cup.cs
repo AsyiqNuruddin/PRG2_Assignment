@@ -38,7 +38,7 @@ namespace PRG2_Assignment_Cup
             {
                 topstring += $"\n{t.Type,-10}";
             }
-            return $"\nIce Cream Type: {Option}\n---------------\nScoop Count: {Scoops} {flavstring}{topstring}";
+            return $"Ice Cream Type: {Option}\n---------------\nScoop Count: {Scoops} {flavstring}{topstring}";
         }
     }
 }

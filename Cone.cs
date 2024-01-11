@@ -46,7 +46,7 @@ namespace PRG2_Assignment_Cone
             }
             if (dipped)
             {
-                return $"\nIce Cream Type: {Option}\n{"Dipped with Chocolate Cone",-10}\n---------------\nScoop Count: {Scoops} {flavstring}{topstring}";
+                return $"Ice Cream Type: {Option}\n{"Dipped with Chocolate Cone",-10}\n---------------\nScoop Count: {Scoops} {flavstring}{topstring}";
             }
             else
             {
