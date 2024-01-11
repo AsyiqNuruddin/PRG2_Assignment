@@ -77,7 +77,7 @@ void InitCustomer(string txtfile)
         {
             rowList = s.Split(',').ToList();
             customer newCustomer = new customer(rowList[0], Convert.ToInt32(rowList[1]), Convert.ToDateTime(rowList[2]));
-            newCustomer.rewards = new PointCard();
+            newCustomer.Rewards = new PointCard();
             DictCustomer.Add(Convert.ToInt32(rowList[1]), newCustomer);
         }
     }
@@ -135,18 +135,18 @@ void Option1(Dictionary<int, customer> DictCustomer)
 {
     foreach(var kvp in DictCustomer)
     {
-        Console.WriteLine($"Name: {kvp.Value.name,-15} Member ID:{kvp.Value.memberid,-10} DateofBirth: {kvp.Value.dob,-10:dd/MM/yyyy}");
+        Console.WriteLine($"Name: {kvp.Value.Name,-15} Member ID:{kvp.Value.MemberId,-10} DateofBirth: {kvp.Value.Dob,-10:dd/MM/yyyy}");
     }
 }
 void Option2() 
 {
     foreach (var kvp in DictCustomer)
     {
-        Console.WriteLine($"Name: {kvp.Value.name,-10} Member ID:{kvp.Value.memberid,-10} DateofBirth: {kvp.Value.dob,-10:dd/MM/yyyy}");
+        Console.WriteLine($"Name: {kvp.Value.Name,-15} Member ID:{kvp.Value.MemberId,-10} DateofBirth: {kvp.Value.Dob,-10:dd/MM/yyyy}");
         Console.WriteLine("orders");
         customer customer = kvp.Value;
-        if(customer != null && customer.currentOrder != null && customer.currentOrder.IceCreamlist != null) {
-            foreach (IceCream or in customer.currentOrder.IceCreamlist) {
+        if(customer != null && customer.CurrentOrder != null && customer.CurrentOrder.IceCreamlist != null) {
+            foreach (IceCream or in customer.CurrentOrder.IceCreamlist) {
                 Console.WriteLine(or);
     
 
@@ -180,14 +180,14 @@ void Option3()
     DateTime dob = Convert.ToDateTime(Console.ReadLine());
     customer newCustomer = new customer(nameInp,idInp,dob);
     Console.WriteLine("Their registration customer details");
-    Console.WriteLine($"Name: {newCustomer.name,-10} Member ID:{newCustomer.memberid,-10} DateofBirth: {newCustomer.dob,-10:dd/MM/yyyy}");
+    Console.WriteLine($"Name: {newCustomer.Name,-10} Member ID:{newCustomer.MemberId,-10} DateofBirth: {newCustomer.Dob,-10:dd/MM/yyyy}");
     PointCard newPC = new PointCard(0,0);
-    newCustomer.rewards = newPC;
+    newCustomer.Rewards = newPC;
 
     using (StreamWriter sw = new StreamWriter("customers.csv", true))
     {
         string? row;
-        row = string.Join(",", newCustomer.name, newCustomer.memberid, $"{newCustomer.dob:dd/MM/yyyy}");
+        row = string.Join(",", newCustomer.Name, newCustomer.MemberId, $"{newCustomer.Dob:dd/MM/yyyy}");
         sw.WriteLine(row);
     }
     Console.WriteLine("Registration Successfull");
@@ -201,7 +201,7 @@ static customer? Search(Dictionary<int,customer> sDict, int userInp)
 {
     foreach (var v in sDict)
     {
-        if (v.Value.memberid == userInp)
+        if (v.Value.MemberId == userInp)
         {
             return v.Value;
         }
@@ -292,12 +292,11 @@ void Option4()
     InitCustomer("customers.csv");
 
     Option1(DictCustomer);
-
     IceCream newice = null;
-    Order newOrd = new Order(1,DateTime.Now);
     Console.Write("Select the customer: ");
     int idInp = Convert.ToInt32(Console.ReadLine());
     customer? result = Search(DictCustomer, idInp);
+    Order newOrd = result.MakeOrder();
     if (result != null)
     {
         while (true)
@@ -373,7 +372,7 @@ void Option4()
             printed += $"{v}\n";
         }
         Console.WriteLine(printed);
-        if (result.rewards.tier == "gold")
+        if (result.Rewards.tier == "gold")
         {
             GoldQueueOrder.Enqueue(newOrd);
         }
@@ -396,16 +395,98 @@ void Option5() {
     //fulfilled(if applicable) and all ice cream details associated with the order
 
 }
-void Option6() {
+void Option6()
+{
     InitCustomer("customers.csv");
     Option1(DictCustomer);
     Console.Write("Select the customer: ");
     int idInp = Convert.ToInt32(Console.ReadLine());
     customer? result = Search(DictCustomer, idInp);
     Console.WriteLine(result);
+    if (result != null)
+    {
+        Console.WriteLine("Menu:\r\n1. Modify an existing ice cream in the order\r\n2. Add a new ice cream to the order\r\n3. Delete an existing ice cream from the order");
+        Console.Write("Please enter the number corresponding to your choice: ");
+        int choice = Convert.ToInt32(Console.ReadLine());
+        if (choice == 1) { }
+        else if (choice == 2)
+        {
+            result.MakeOrder();
+            List<Flavour> flavlist = new List<Flavour>();
+            List<Topping> toplist = new List<Topping>();
+            Console.WriteLine("Enter their ice cream order type (Cup, Cone or Waffle): ");
+            string newopt = Console.ReadLine();
+
+            if (newopt == "cup")
+            {
+                Console.Write("Enter number of scoops: ");
+
+
+                int newscp = Convert.ToInt16(Console.ReadLine());
+                for (int scoopIndex = 1; scoopIndex <= newscp; scoopIndex++)
+                {
+                    Console.WriteLine($"Enter flavour number {scoopIndex} : ");
+                    string newflav = Console.ReadLine();
+                    if (newflav.ToLower() == "durian" || newflav.ToLower() == "ube" || newflav.ToLower() == "sea slat")
+                    {
+                        foreach (Flavour flav in flavlist)
+                        {
+                            if (flav.Type == newflav.ToLower())
+                            {
+                                flav.Quantity += 1;
+
+
+                            }
+                            else
+                            {
+                                Flavour flavour = new Flavour(newflav, true, 1);
+                                flavlist.Add(flavour);
+
+                            }
+
+                        }
 
 
 
+                    }
+                    else
+                    {
+
+                        foreach (Flavour flav in flavlist)
+                        {
+                            if (flav.Type == newflav.ToLower())
+                            {
+                                flav.Quantity += 1;
+
+
+                            }
+                            else
+                            {
+                                Flavour flavour = new Flavour(newflav, false, 1);
+                                flavlist.Add(flavour);
+                            }
+
+                        }
+                    }
+
+
+                }
+                Console.WriteLine("Enter number of toppings: ");
+                int newtop = Convert.ToInt16(Console.ReadLine());
+
+                for (int topIndex = 1; topIndex <= newtop; topIndex++)
+                {
+                    Console.WriteLine($"Enter topping number {1} : ");
+                    string top = Console.ReadLine();
+                    Topping tops = new Topping(top);
+                    toplist.Add(tops);
+                }
+                IceCream newice = new Cup(newopt, newscp, flavlist, toplist);
+                result.CurrentOrder.AddIceCream(newice);
+                Console.WriteLine();
+
+            }
+        }
+    }
 
 }
-
