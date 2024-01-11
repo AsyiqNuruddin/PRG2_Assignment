@@ -32,11 +32,19 @@ namespace PRG2_Assignment_Customer
         
         
         }
-        public static Order Makeorder() {
-            Order order = new Order(1,DateTime.Now);
-            return order;
-        
-        
+        public void MakeOrder()
+        {
+            // Increment the order ID to make it unique
+            int newOrderId = orderHistory.Count + 1;
+
+            // Create a new order with a unique ID and the current timestamp
+            currentOrder = new Order(newOrderId, DateTime.Now);
+
+            // Move the current order to order history
+            if (currentOrder != null)
+            {
+                orderHistory.Add(currentOrder);
+            }
         }
         public static bool isBirthday() {
 
