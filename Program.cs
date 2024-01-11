@@ -265,62 +265,81 @@ void Option4()
 {
     // Refresh customer obj data
     InitCustomer("customers.csv");
+
     Option1(DictCustomer);
+
+    IceCream newice = null;
+    Order newOrd = new Order();
     Console.Write("Select the customer: ");
     int idInp = Convert.ToInt32(Console.ReadLine());
     customer? result = Search(DictCustomer, idInp);
     if (result != null)
     {
-        Console.WriteLine("Found Customer ");
-        Order cusOrder = new Order();
-        Console.Write("Enter their ice cream order type (Cup, Cone or Waffle): ");
-        string choiceInp = Console.ReadLine();
-        choiceInp = choiceInp.ToLower();
-        if(choiceInp == "cup")
+        while (true)
         {
-            Console.WriteLine("Chosen Cup");
-            (int, List<Flavour>, List<Topping>) cat = IceCreamAdd(DictFlavour,DictTopping);
-            IceCream newice = new Cup("Cup", cat.Item1, cat.Item2, cat.Item3);
-        }
-        else if (choiceInp == "cone")
-        {
-            Console.WriteLine($"Chosen Cone");
-            Console.Write("Do you want your cone dipped?(Y/N)");
-            string dipInp = Console.ReadLine();
-            dipInp = dipInp.ToLower();
-            if (dipInp == "y")
+            Console.WriteLine("Found Customer ");
+            Order cusOrder = new Order();
+            Console.Write("Enter their ice cream order type (Cup, Cone or Waffle): ");
+            string choiceInp = Console.ReadLine();
+            choiceInp = choiceInp.ToLower();
+            if (choiceInp == "cup")
             {
+                Console.WriteLine("Chosen Cup");
                 (int, List<Flavour>, List<Topping>) cat = IceCreamAdd(DictFlavour, DictTopping);
-                IceCream newice = new Cone("Cone", cat.Item1, cat.Item2, cat.Item3, true);
+                newice = new Cup("Cup", cat.Item1, cat.Item2, cat.Item3);
             }
-            else if (dipInp == "n")
+            else if (choiceInp == "cone")
             {
-                (int, List<Flavour>, List<Topping>) cat = IceCreamAdd(DictFlavour, DictTopping);
-                IceCream newice = new Cone("Cone", cat.Item1, cat.Item2, cat.Item3, false);
+                Console.WriteLine($"Chosen Cone");
+                Console.Write("Do you want your cone dipped?(Y/N): ");
+                string dipInp = Console.ReadLine();
+                dipInp = dipInp.ToLower();
+                if (dipInp == "y")
+                {
+                    (int, List<Flavour>, List<Topping>) cat = IceCreamAdd(DictFlavour, DictTopping);
+                    newice = new Cone("Cone", cat.Item1, cat.Item2, cat.Item3, true);
+                }
+                else if (dipInp == "n")
+                {
+                    (int, List<Flavour>, List<Topping>) cat = IceCreamAdd(DictFlavour, DictTopping);
+                    newice = new Cone("Cone", cat.Item1, cat.Item2, cat.Item3, false);
+                }
             }
-        }
-        else if (choiceInp == "waffle")
-        {
-            Console.WriteLine("Chosen Waffle");
-            Console.Write("Do you want your cone dipped?(Red velvet, charcoal, or pandan waffle)");
-            string wafInp = Console.ReadLine();
-            string waf = WaffleChoice(wafInp);
-            if (waf == "red velvet")
+            else if (choiceInp == "waffle")
             {
-                (int, List<Flavour>, List<Topping>) cat = IceCreamAdd(DictFlavour, DictTopping);
-                IceCream newice = new Waffle("Waffle", cat.Item1, cat.Item2, cat.Item3, wafInp);
+                Console.WriteLine("Chosen Waffle");
+                Console.Write("Do you want your cone dipped?(Red velvet, charcoal, or pandan waffle)");
+                string wafInp = Console.ReadLine();
+                string waf = WaffleChoice(wafInp);
+                if (waf == "red velvet")
+                {
+                    (int, List<Flavour>, List<Topping>) cat = IceCreamAdd(DictFlavour, DictTopping);
+                    newice = new Waffle("Waffle", cat.Item1, cat.Item2, cat.Item3, wafInp);
+                }
+                else if (wafInp == "charcoal")
+                {
+                    (int, List<Flavour>, List<Topping>) cat = IceCreamAdd(DictFlavour, DictTopping);
+                    newice = new Waffle("Waffle", cat.Item1, cat.Item2, cat.Item3, wafInp);
+                }
+                else if (wafInp == "pandan waffle")
+                {
+                    (int, List<Flavour>, List<Topping>) cat = IceCreamAdd(DictFlavour, DictTopping);
+                    newice = new Waffle("Waffle", cat.Item1, cat.Item2, cat.Item3, wafInp);
+                }
             }
-            else if (wafInp == "charcoal")
+            Console.WriteLine($"Your order: {newice}");
+            newOrd.AddIceCream(newice);
+            Console.Write("Do you wish to continue ordering? (Y/N)");
+            string check = Console.ReadLine();
+            check = check.ToLower();
+            if (check == "y")
             {
-                (int, List<Flavour>, List<Topping>) cat = IceCreamAdd(DictFlavour, DictTopping);
-                IceCream newice = new Waffle("Waffle", cat.Item1, cat.Item2, cat.Item3, wafInp);
+                continue;
             }
-            else if (wafInp == "pandan waffle")
+            else if (check == "n")
             {
-                (int, List<Flavour>, List<Topping>) cat = IceCreamAdd(DictFlavour, DictTopping);
-                IceCream newice = new Waffle("Waffle", cat.Item1,cat.Item2, cat.Item3, wafInp);
+                break;
             }
-            
         }
     }
     else
