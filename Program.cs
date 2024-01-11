@@ -396,7 +396,7 @@ void Option5() {
     //fulfilled(if applicable) and all ice cream details associated with the order
 
 }
-void option6() {
+void Option6() {
     InitCustomer("customers.csv");
     Option1(DictCustomer);
     Console.Write("Select the customer: ");
