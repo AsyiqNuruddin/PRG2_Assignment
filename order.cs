@@ -16,6 +16,7 @@ namespace PRG2_Assignment_Order
 {
     internal class Order
     {
+        
         public int id {  get; set; }
         public DateTime timeRecieved { get; set; }
         public DateTime? timeFulfilled { get; set; }
