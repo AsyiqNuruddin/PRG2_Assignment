@@ -296,13 +296,13 @@ void Option4()
     Console.Write("Select the customer: ");
     int idInp = Convert.ToInt32(Console.ReadLine());
     customer? result = Search(DictCustomer, idInp);
-    Order newOrd = result.MakeOrder();
     if (result != null)
     {
+        Order newOrd = result.CurrentOrder;
         while (true)
         {
             Console.WriteLine("Found Customer ");
-            Order cusOrder = new Order();
+            
             Console.Write("Enter their ice cream order type (Cup, Cone or Waffle): ");
             string choiceInp = Console.ReadLine();
             choiceInp = choiceInp.ToLower();
@@ -365,6 +365,7 @@ void Option4()
                 break;
             }
         }
+        result.MakeOrder();
         Console.WriteLine($"Order [{newOrd.id}] is successfull");
         string printed = $"Total Number of Ice Creams: {newOrd.IceCreamlist.Count}\n---------------";
         foreach (var v in newOrd.IceCreamlist)

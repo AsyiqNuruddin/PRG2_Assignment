@@ -22,6 +22,7 @@ namespace PRG2_Assignment_Customer
 
         public customer()
         {
+            CurrentOrder = new Order();
             OrderHistory = new List<Order>();
         }
 
@@ -30,23 +31,23 @@ namespace PRG2_Assignment_Customer
             Name = name;
             MemberId = memberId;
             Dob = birth;
+            CurrentOrder = new Order();
             OrderHistory = new List<Order>();
         }
 
-        public Order MakeOrder()
+        public void MakeOrder()
         {
             // Increment the order ID to make it unique
             int newOrderId = OrderHistory.Count + 1;
 
             // Create a new order with a unique ID and the current timestamp
-            Order CurrentOrder = new Order(newOrderId, DateTime.Now);
+            CurrentOrder = new Order(newOrderId, DateTime.Now);
 
             // Move the current order to order history
             if (CurrentOrder != null)
             {
                 OrderHistory.Add(CurrentOrder);
             }
-            return CurrentOrder;
         }
 
         public static bool IsBirthday()

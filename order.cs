@@ -22,7 +22,10 @@ namespace PRG2_Assignment_Order
         public DateTime? timeFulfilled { get; set; }
         public List<IceCream> IceCreamlist
         { get; set; }
-        public Order() { }
+        public Order() 
+        {
+            IceCreamlist = new List<IceCream>();
+        }
         public Order(int Id, DateTime tR) {
             id = Id;
             timeRecieved = tR;
