@@ -149,7 +149,7 @@ void Option2()
 
             }
         }
-        else { Console.WriteLine(); }
+        
             
                
 
