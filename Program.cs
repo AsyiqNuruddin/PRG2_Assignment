@@ -403,9 +403,13 @@ void Option6() {
     int idInp = Convert.ToInt32(Console.ReadLine());
     customer? result = Search(DictCustomer, idInp);
     Console.WriteLine(result);
+    if (result != null)
+    {
+        Console.WriteLine("Menu:\r\n1. Modify an existing ice cream in the order\r\n2. Add a new ice cream to the order\r\n3. Delete an existing ice cream from the order");
 
 
 
 
-}
+
+    }
 
