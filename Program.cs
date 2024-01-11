@@ -407,6 +407,8 @@ void Option6()
     if (result != null)
     {
         Console.WriteLine("Menu:\r\n1. Modify an existing ice cream in the order\r\n2. Add a new ice cream to the order\r\n3. Delete an existing ice cream from the order");
+        Console.Write("Please enter the number corresponding to your choice: ");
+        int choice = Convert.ToInt32(Console.ReadLine());
 
 
 
