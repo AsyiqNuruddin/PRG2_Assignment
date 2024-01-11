@@ -8,6 +8,9 @@ using PRG2_Assignment_Flavour;
 using PRG2_Assignment_IceCream;
 using PRG2_Assignment_Topping;
 using System;
+using System.Diagnostics;
+using Microsoft.VisualBasic.FileIO;
+using static System.Formats.Asn1.AsnWriter;
 
 
 //==========================================================
@@ -184,28 +187,75 @@ static customer? Search(Dictionary<int,customer> sDict, int userInp)
 // Student Number : S10262791
 // Student Name : Asyiq Nuruddin
 //==========================================================
-(int,Flavour,Topping) IceCreamAdd(Dictionary<int,Flavour> df, Dictionary<int, Topping> dt)
+(int, List<Flavour>, List<Topping>) IceCreamAdd(Dictionary<int,Flavour> df, Dictionary<int, Topping> dt)
 {
     Console.Write("Enter number of scoops: ");
     int scoops = Convert.ToInt32(Console.ReadLine());
-
-    DisplayFlavours(DictFlavour);
-    Console.Write("Choose the flavour: ");
-    int flvIndex = Convert.ToInt32(Console.ReadLine());
-    Flavour flav = null;
-    if (df.ContainsKey(flvIndex))
+    List<Flavour> flavList = new List<Flavour>();
+    for(int i = 1; i < scoops + 1; i++)
     {
-         flav = df[flvIndex];
+        DisplayFlavours(DictFlavour);
+        Console.Write($"Choose the flavour of scoop [{i}]: ");
+        int flvIndex = Convert.ToInt32(Console.ReadLine());
+        if (df.ContainsKey(flvIndex))
+        {
+            if (flavList.Contains(df[flvIndex]))
+            {
+                foreach (var v in flavList)
+                {
+                    if(v == df[flvIndex])
+                    {
+                        v.Quantity = v.Quantity + 1;
+                    }
+                }
+            }
+            else
+            {
+                flavList.Add(df[flvIndex]);
+            }
+        }
     }
-    DisplayToppings(DictTopping);
-    Console.Write("Choose the topping: ");
-    int topIndex = Convert.ToInt32(Console.ReadLine());
-    Topping top = null;
-    if (dt.ContainsKey(topIndex))
+    Console.Write("Enter number of toppings: ");
+    int topCount = Convert.ToInt32(Console.ReadLine());
+    List<Topping> topList = new List<Topping>();
+    for (int i = 0;i < topCount;i++)
     {
-        top = dt[topIndex];
+        DisplayToppings(DictTopping);
+        Console.Write($"Choose the [{i}] topping : ");
+        int topIndex = Convert.ToInt32(Console.ReadLine());
+        if (dt.ContainsKey(topIndex))
+        {
+            topList.Add(dt[topIndex]);
+        }
     }
-    return (scoops, flav, top);
+    return (scoops, flavList, topList);
+}
+string? WaffleChoice(string wafInp)
+{
+    wafInp = wafInp.ToLower();
+    if(wafInp != null)
+    {
+        if(wafInp == "red velvet")
+        {
+            return wafInp;
+        }else if(wafInp == "charcoal")
+        {
+            return wafInp;
+        }
+        else if(wafInp == "pandan waffle")
+        {
+            return wafInp;
+        }
+        else
+        {
+            return null;
+        }
+    }
+    else
+    {
+        return null;
+    }
+    
 }
 //==========================================================
 // Student Number : S10262791
@@ -229,17 +279,48 @@ void Option4()
         if(choiceInp == "cup")
         {
             Console.WriteLine("Chosen Cup");
-            (int, Flavour, Topping) cat = IceCreamAdd(DictFlavour,DictTopping);
-        }else if (choiceInp == "cone")
+            (int, List<Flavour>, List<Topping>) cat = IceCreamAdd(DictFlavour,DictTopping);
+            IceCream newice = new Cup("Cup", cat.Item1, cat.Item2, cat.Item3);
+        }
+        else if (choiceInp == "cone")
         {
-            Console.WriteLine("Chosen Cone");
-            (int, Flavour, Topping) cat = IceCreamAdd(DictFlavour, DictTopping);
+            Console.WriteLine($"Chosen Cone");
+            Console.Write("Do you want your cone dipped?(Y/N)");
+            string dipInp = Console.ReadLine();
+            dipInp = dipInp.ToLower();
+            if (dipInp == "y")
+            {
+                (int, List<Flavour>, List<Topping>) cat = IceCreamAdd(DictFlavour, DictTopping);
+                IceCream newice = new Cone("Cone", cat.Item1, cat.Item2, cat.Item3, true);
+            }
+            else if (dipInp == "n")
+            {
+                (int, List<Flavour>, List<Topping>) cat = IceCreamAdd(DictFlavour, DictTopping);
+                IceCream newice = new Cone("Cone", cat.Item1, cat.Item2, cat.Item3, false);
+            }
         }
         else if (choiceInp == "waffle")
         {
             Console.WriteLine("Chosen Waffle");
-            (int, Flavour, Topping) cat = IceCreamAdd(DictFlavour, DictTopping);
-            Console.WriteLine(cat);
+            Console.Write("Do you want your cone dipped?(Red velvet, charcoal, or pandan waffle)");
+            string wafInp = Console.ReadLine();
+            string waf = WaffleChoice(wafInp);
+            if (waf == "red velvet")
+            {
+                (int, List<Flavour>, List<Topping>) cat = IceCreamAdd(DictFlavour, DictTopping);
+                IceCream newice = new Waffle("Waffle", cat.Item1, cat.Item2, cat.Item3, wafInp);
+            }
+            else if (wafInp == "charcoal")
+            {
+                (int, List<Flavour>, List<Topping>) cat = IceCreamAdd(DictFlavour, DictTopping);
+                IceCream newice = new Waffle("Waffle", cat.Item1, cat.Item2, cat.Item3, wafInp);
+            }
+            else if (wafInp == "pandan waffle")
+            {
+                (int, List<Flavour>, List<Topping>) cat = IceCreamAdd(DictFlavour, DictTopping);
+                IceCream newice = new Waffle("Waffle", cat.Item1,cat.Item2, cat.Item3, wafInp);
+            }
+            
         }
     }
     else
