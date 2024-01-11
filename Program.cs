@@ -18,6 +18,8 @@ using static System.Formats.Asn1.AsnWriter;
 // Student Name : Asyiq Nuruddin
 //==========================================================
 Dictionary<int, customer> DictCustomer = new Dictionary<int, customer>();
+Queue<Order> GoldQueueOrder = new Queue<Order>();
+Queue<Order> RegularQueueOrder = new Queue<Order>();
 Dictionary<int, Flavour> DictFlavour = new Dictionary<int, Flavour>();
 Dictionary<int, Topping> DictTopping = new Dictionary<int, Topping>();
 
@@ -73,8 +75,9 @@ void InitCustomer(string txtfile)
         while ((s = sr.ReadLine()) != null)
         {
             rowList = s.Split(',').ToList();
-
-            DictCustomer.Add(Convert.ToInt32(rowList[1]), new customer(rowList[0], Convert.ToInt32(rowList[1]), Convert.ToDateTime(rowList[2])) );
+            customer newCustomer = new customer(rowList[0], Convert.ToInt32(rowList[1]), Convert.ToDateTime(rowList[2]));
+            newCustomer.rewards = new PointCard();
+            DictCustomer.Add(Convert.ToInt32(rowList[1]), newCustomer);
         }
     }
 }
@@ -131,7 +134,7 @@ void Option1(Dictionary<int, customer> DictCustomer)
 {
     foreach(var kvp in DictCustomer)
     {
-        Console.WriteLine($"Name: {kvp.Value.name,-10} Member ID:{kvp.Value.memberid,-10} DateofBirth: {kvp.Value.dob,-10:dd/MM/yyyy}");
+        Console.WriteLine($"Name: {kvp.Value.name,-15} Member ID:{kvp.Value.memberid,-10} DateofBirth: {kvp.Value.dob,-10:dd/MM/yyyy}");
     }
 }
 void Option2() 
@@ -218,7 +221,7 @@ static customer? Search(Dictionary<int,customer> sDict, int userInp)
     Console.Write("Enter number of toppings: ");
     int topCount = Convert.ToInt32(Console.ReadLine());
     List<Topping> topList = new List<Topping>();
-    for (int i = 0;i < topCount;i++)
+    for (int i = 1;i < topCount + 1;i++)
     {
         DisplayToppings(DictTopping);
         Console.Write($"Choose the [{i}] topping : ");
@@ -269,7 +272,7 @@ void Option4()
     Option1(DictCustomer);
 
     IceCream newice = null;
-    Order newOrd = new Order();
+    Order newOrd = new Order(1,DateTime.Now);
     Console.Write("Select the customer: ");
     int idInp = Convert.ToInt32(Console.ReadLine());
     customer? result = Search(DictCustomer, idInp);
@@ -308,7 +311,7 @@ void Option4()
             else if (choiceInp == "waffle")
             {
                 Console.WriteLine("Chosen Waffle");
-                Console.Write("Do you want your cone dipped?(Red velvet, charcoal, or pandan waffle)");
+                Console.Write("Do you want your cone dipped?(Red velvet, charcoal, or pandan): ");
                 string wafInp = Console.ReadLine();
                 string waf = WaffleChoice(wafInp);
                 if (waf == "red velvet")
@@ -321,7 +324,7 @@ void Option4()
                     (int, List<Flavour>, List<Topping>) cat = IceCreamAdd(DictFlavour, DictTopping);
                     newice = new Waffle("Waffle", cat.Item1, cat.Item2, cat.Item3, wafInp);
                 }
-                else if (wafInp == "pandan waffle")
+                else if (wafInp == "pandan")
                 {
                     (int, List<Flavour>, List<Topping>) cat = IceCreamAdd(DictFlavour, DictTopping);
                     newice = new Waffle("Waffle", cat.Item1, cat.Item2, cat.Item3, wafInp);
@@ -329,7 +332,7 @@ void Option4()
             }
             Console.WriteLine($"Your order: {newice}");
             newOrd.AddIceCream(newice);
-            Console.Write("Do you wish to continue ordering? (Y/N)");
+            Console.Write("Do you wish to continue ordering? (Y/N): ");
             string check = Console.ReadLine();
             check = check.ToLower();
             if (check == "y")
@@ -340,6 +343,21 @@ void Option4()
             {
                 break;
             }
+        }
+        Console.WriteLine("Order is successfull");
+        string printed = $"Total Number of Ice Creams: {newOrd.IceCreamlist.Count}\n---------------";
+        foreach (var v in newOrd.IceCreamlist)
+        {
+            printed += $"{v}\n";
+        }
+        Console.WriteLine(printed);
+        if (result.rewards.tier == "gold")
+        {
+            GoldQueueOrder.Enqueue(newOrd);
+        }
+        else
+        {
+            RegularQueueOrder.Enqueue(newOrd);
         }
     }
     else

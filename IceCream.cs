@@ -48,12 +48,19 @@ namespace PRG2_Assignment_IceCream
             Toppings = toppings;
         }
         public abstract double CalculatePrice();
-            
-        
-   
         public override string ToString()
         {
-            return $"{Option} {Scoops} {Flavours} {Toppings}";
+            string flavstring = $"\nFlavours {"Qty",-10}\n---------------";
+            string topstring = $"\nToppings\n---------------";
+            foreach (var f in Flavours)
+            {
+                flavstring += $"\n{f.Type,-10} {f.Quantity,-10}";
+            }
+            foreach (var t in Toppings)
+            {
+                topstring += $"\n{t.Type,-10}";
+            }
+            return $"Ice Cream Type: {Option}\nScoop Count: {Scoops} {flavstring}{topstring}";
         }
 
     }

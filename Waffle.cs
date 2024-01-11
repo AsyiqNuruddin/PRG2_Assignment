@@ -33,7 +33,17 @@ namespace PRG2_Assignment
         }
         public override string ToString()
         {
-            return $"{Option} {Scoops} {Flavours} {Toppings} {WaffleFlavour}";
+            string flavstring = $"\n---------------\n{"Flavours",-10} {"Qty",-10}";
+            string topstring = $"\n---------------\nToppings";
+            foreach (var f in Flavours)
+            {
+                flavstring += $"\n{f.Type,-10} {f.Quantity,-10}";
+            }
+            foreach (var t in Toppings)
+            {
+                topstring += $"\n{t.Type,-10}";
+            }
+            return $"\nIce Cream Type: {Option}\n{waffleFlavour,-10}\n---------------\nScoop Count: {Scoops} {flavstring}{topstring}";
         }
     }
 }

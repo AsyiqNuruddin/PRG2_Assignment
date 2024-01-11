@@ -16,7 +16,7 @@ namespace PRG2_Assignment_PointCard
         {
             public int points { get; set; }
             public int punchCard { get; set; }
-            public string teir { get; set; }
+            public string tier { get; set; }
             public PointCard() { }
 
             public PointCard(int Points, int PunchCard)
@@ -36,7 +36,7 @@ namespace PRG2_Assignment_PointCard
             public override string ToString()
             {
 
-                return $"{points}   {teir}   {punchCard}";
+                return $"{points}   {tier}   {punchCard}";
             }
         }
 }

@@ -34,7 +34,25 @@ namespace PRG2_Assignment_Cone
         }
         public override string ToString()
         {
-            return $"{Option} {Scoops} {Flavours} {Toppings} {Dipped}";
+            string flavstring = $"\n---------------\n{"Flavours",-10} {"Qty",-10}";
+            string topstring = $"\n---------------\nToppings";
+            foreach (var f in Flavours)
+            {
+                flavstring += $"\n{f.Type,-10} {f.Quantity,-10}";
+            }
+            foreach (var t in Toppings)
+            {
+                topstring += $"\n{t.Type,-10}";
+            }
+            if (dipped)
+            {
+                return $"\nIce Cream Type: {Option}\n{"Dipped with Chocolate Cone",-10}\n---------------\nScoop Count: {Scoops} {flavstring}{topstring}";
+            }
+            else
+            {
+                return $"\nIce Cream Type: {Option}\n{"Plain Cone",-10}\n---------------\nScoop Count: {Scoops} {flavstring}{topstring}";
+            }
+            
         }
     }
 }

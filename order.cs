@@ -25,7 +25,7 @@ namespace PRG2_Assignment_Order
         public Order(int Id, DateTime tR) {
             id = Id;
             timeRecieved = tR;
-            
+            IceCreamlist = new List<IceCream>();
 
         }
         public void Modifyicecream(int id) {
