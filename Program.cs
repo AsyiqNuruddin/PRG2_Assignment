@@ -135,7 +135,28 @@ void Option1(Dictionary<int, customer> DictCustomer)
     }
 }
 void Option2() 
-{ 
+{
+    foreach (var kvp in DictCustomer)
+    {
+        Console.WriteLine($"Name: {kvp.Value.name,-10} Member ID:{kvp.Value.memberid,-10} DateofBirth: {kvp.Value.dob,-10:dd/MM/yyyy}");
+        Console.WriteLine("orders");
+        customer customer = kvp.Value;
+        if (customer.currentOrder.IceCreamlist != null) {
+            foreach (IceCream or in customer.currentOrder.IceCreamlist) {
+                Console.WriteLine(or)
+    
+
+            }
+        }
+        else { Console.WriteLine(); }
+            
+               
+
+
+           
+                
+                
+    }
 
 }
 
@@ -338,6 +359,11 @@ void Option5() {
 
 }
 void Option6() {
+    InitCustomer("customers.csv");
+    Option1(DictCustomer);
+    Console.Write("Select the customer: ");
+    int idInp = Convert.ToInt32(Console.ReadLine());
+    customer? result = Search(DictCustomer, idInp);
     Console.WriteLine("Menu:\r\n1. Modify an existing ice cream in the order\r\n2. Add a new ice cream to the order\r\n3. Delete an existing ice cream from the order");
     Console.Write("Please enter the number corresponding to your choice: ");
     int choice = Convert.ToInt32(Console.ReadLine());
@@ -417,6 +443,8 @@ void Option6() {
 
             }
             IceCream newice = new Cup(newopt, newscp, flavlist, toplist);
+            result.currentOrder.AddIceCream(newice);
+
         }
         else if (newopt == "cone")
         {
@@ -490,12 +518,14 @@ void Option6() {
             if (dipped == "yes")
             {
                 IceCream newice = new Cone(newopt, newscp, flavlist, toplist, true);
+                result.currentOrder.AddIceCream(newice);
 
             }
             else if (dipped == "no")
             {
 
                 IceCream newice = new Cone(newopt, newscp, flavlist, toplist, false);
+                result.currentOrder.AddIceCream(newice);
 
             }
 
@@ -576,9 +606,9 @@ void Option6() {
                 if (waffleFlavor == "red velvet" || waffleFlavor == "charcoal" || waffleFlavor == "pandan")
                 {
                     IceCream newice = new Waffle(newopt, newscp, flavlist, toplist,waffleFlavor );
+                    result.currentOrder.AddIceCream(newice);
 
                 }
-                
 
 
 
@@ -586,6 +616,7 @@ void Option6() {
 
 
             }
+            
         }
 
 
