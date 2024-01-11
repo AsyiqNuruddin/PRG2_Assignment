@@ -365,7 +365,7 @@ void Option4()
                 break;
             }
         }
-        Console.WriteLine("Order is successfull");
+        Console.WriteLine($"Order [{newOrd.id}] is successfull");
         string printed = $"Total Number of Ice Creams: {newOrd.IceCreamlist.Count}\n---------------";
         foreach (var v in newOrd.IceCreamlist)
         {
