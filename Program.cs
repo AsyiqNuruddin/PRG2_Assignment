@@ -452,7 +452,8 @@ void Option6()
                     }
                     else
                     {
-
+                        Flavour flavour = new Flavour(newflav, false, 1);
+                        flavlist.Add(flavour);
                         foreach (Flavour flav in flavlist)
                         {
                             if (flav.Type == newflav.ToLower())
@@ -463,8 +464,7 @@ void Option6()
                             }
                             else
                             {
-                                Flavour flavour = new Flavour(newflav, false, 1);
-                                flavlist.Add(flavour);
+                                
                             }
 
                         }
