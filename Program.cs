@@ -365,7 +365,8 @@ void Option6() {
     Console.Write("Select the customer: ");
     int idInp = Convert.ToInt32(Console.ReadLine());
     customer? result = Search(DictCustomer, idInp);
-    if(result != null) { 
+
+    if (result != null) { 
         Console.WriteLine("Menu:\r\n1. Modify an existing ice cream in the order\r\n2. Add a new ice cream to the order\r\n3. Delete an existing ice cream from the order");
         Console.Write("Please enter the number corresponding to your choice: ");
         int choice = Convert.ToInt32(Console.ReadLine());
