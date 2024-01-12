@@ -383,7 +383,7 @@ void Option4()
                 Console.WriteLine("");
             }
         }
-        if(result.CurrentOrder != null)
+        if(result.CurrentOrder.IceCreamlist.Count == null)
         {
             result.MakeOrder();
             Console.WriteLine($"Order [{result.OrderHistory.Last().id}] is successfull");
@@ -515,11 +515,3 @@ void Option6()
 
 
 
-void ProcessOrder(Order order)
-{
-    Console.WriteLine($"{order.timeRecieved}");
-    foreach (var v in order.IceCreamlist)
-    {
-        Console.WriteLine(v);
-    }
-}
