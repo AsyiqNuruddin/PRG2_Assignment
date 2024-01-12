@@ -448,6 +448,8 @@ void Option6()
             Console.Write("Enter a ice cream to modify: ");
             int icecreanindex = Convert.ToInt32(Console.ReadLine());
             IceCream Modifyice = result.CurrentOrder.IceCreamlist[icecreanindex - 1];
+            Console.Write("Enter their ice cream order type (Cup, Cone or Waffle): ");
+            string choiceInp = Console.ReadLine();
 
         }
         else if (choice == 2) {
@@ -493,7 +495,8 @@ void displaywaffle(Dictionary<int, string> wafflelist) {
     }
 
 }
-initwaffle(wafflelist);
+
+
 
 
 void Makeicecream(string type,customer result) {
@@ -501,6 +504,7 @@ void Makeicecream(string type,customer result) {
     List<Flavour> flavlist = new List<Flavour>();
     List<Topping> toplist = new List<Topping>();
     Dictionary<int, string> wafflelist = new Dictionary<int, string>();
+    initwaffle(wafflelist);
 
     if (type == "cup")
     {
@@ -575,7 +579,7 @@ void Makeicecream(string type,customer result) {
 
         }
         displaywaffle(wafflelist);
-        Console.WriteLine("Enter waffle flavour: ");
+        Console.Write("Enter waffle flavour: ");
         int wafflenum = Convert.ToInt32(Console.ReadLine());
         string waffeflav = wafflelist[wafflenum];
         newIceCream = new Waffle("waffle", newscp, flavlist, toplist,waffeflav);
@@ -633,6 +637,9 @@ void Makeicecream(string type,customer result) {
 
 
     
+}
+void modifyicecream(string type,customer result ) { 
+
 }
 
 
