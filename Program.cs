@@ -519,7 +519,31 @@ void Makeicecream(string type,customer result) {
             Console.Write($"Enter flavour number {scoopIndex} : ");
             int newflav = Convert.ToInt32(Console.ReadLine());
             Flavour addflact =DictFlavour[newflav ];
-            flavlist.Add(addflact);
+            if (addflact != null)
+            {
+                flavlist.Add(addflact);
+            }
+            else
+            {
+                foreach (var flav in flavlist)
+                {
+                    if (flav.Type == addflact.Type)
+                    {
+                        flav.Quantity += 1;
+
+
+                    }
+
+
+                }
+
+
+
+
+
+
+
+            }
 
 
 
@@ -559,7 +583,31 @@ void Makeicecream(string type,customer result) {
             Console.Write($"Enter flavour number {scoopIndex} : ");
             int newflav = Convert.ToInt32(Console.ReadLine());
             Flavour addflact = DictFlavour[newflav ];
-            flavlist.Add(addflact);
+            if (addflact != null)
+            {
+                flavlist.Add(addflact);
+            }
+            else
+            {
+                foreach (var flav in flavlist)
+                {
+                    if (flav.Type == addflact.Type)
+                    {
+                        flav.Quantity += 1;
+
+
+                    }
+
+
+                }
+
+
+
+
+
+
+
+            }
 
 
 
@@ -598,7 +646,30 @@ void Makeicecream(string type,customer result) {
             Console.Write($"Enter flavour number {scoopIndex} : ");
             int newflav = Convert.ToInt32(Console.ReadLine());
             Flavour addflact = DictFlavour[newflav ];
-            flavlist.Add(addflact);
+            if (addflact != null)
+            {
+                flavlist.Add(addflact);
+            }
+            else {
+                foreach (var flav in flavlist)
+                {
+                    if (flav.Type == addflact.Type)
+                    {
+                        flav.Quantity += 1;
+
+
+                    }
+
+
+                }
+
+
+
+
+
+
+
+            }
 
 
 
@@ -638,7 +709,162 @@ void Makeicecream(string type,customer result) {
 
     
 }
-void modifyicecream(string type,customer result ) { 
+void modifydiplay() {
+    Console.WriteLine("[1] change type");
+    Console.WriteLine("[2] cahnge number of scoop");
+    Console.WriteLine("[3] cahnge flavour of scoop");
+    Console.WriteLine("[4] change toppings");
+}
+
+
+void modifyicecream(string type,IceCream result,customer cust ) {
+    initwaffle(wafflelist);
+    List<Flavour> flavlist = new List<Flavour>();
+    IceCream modifiedice = null;
+    if (type == "cone") {
+    
+    }
+    else if (type == "waffle") { }
+    else if (type == "cup") {
+        modifydiplay();
+        Console.Write("Enter an option: ");
+        string option = Console.ReadLine();
+        if (option == "1") {
+            Console.Write("Enter new type(Cone or Waffle): ");
+            string newtype = Console.ReadLine();
+            if (newtype == "cone") {
+                Console.Write("Do you want your cone dipped?(Y/N):");
+                string dipped = Console.ReadLine();
+                if (dipped.ToLower() == "y")
+                {
+                    modifiedice = new Cone("cone",result.Scoops,result.Flavours,result.Toppings,true);
+                    
+
+
+                }
+                else if (dipped.ToLower() == "n")
+                {
+                    modifiedice = new Cone("cone", result.Scoops, result.Flavours, result.Toppings, false);
+
+
+
+                }
+            }
+            else if (newtype == "waffle") {
+                displaywaffle(wafflelist);
+                Console.Write("Enter waffle flavour: ");
+                int wafflenum = Convert.ToInt32(Console.ReadLine());
+                string waffeflav = wafflelist[wafflenum];
+                modifiedice = new Waffle("waffle", result.Scoops, result.Flavours, result.Toppings, waffeflav);
+            }
+            cust.CurrentOrder.IceCreamlist.Remove(result);
+            cust.CurrentOrder.AddIceCream(modifiedice);
+
+
+        }
+        else if (option == "2") {
+            Console.Write("Enter number of scoops: ");
+
+
+            int newscp = Convert.ToInt16(Console.ReadLine());
+
+            DisplayFlavours(DictFlavour);
+            for (int scoopIndex = 1; scoopIndex <= newscp; scoopIndex++)
+            {
+                Console.Write($"Enter flavour number {scoopIndex} : ");
+                int newflav = Convert.ToInt32(Console.ReadLine());
+                Flavour addflact = DictFlavour[newflav];
+                if (addflact != null)
+                {
+                    flavlist.Add(addflact);
+                }
+                else
+                {
+                    foreach (var flav in flavlist)
+                    {
+                        if (flav.Type == addflact.Type)
+                        {
+                            flav.Quantity += 1;
+
+
+                        }
+
+
+                    }
+
+
+
+
+
+
+
+                }
+
+
+
+            }
+            result.Flavours = flavlist;
+        }
+        else if (option == "3") {
+            flavlist.Clear();
+            int count = 1;
+            foreach (var flavour in result.Flavours) {
+                Console.Write($"Enter flavour number {count} : ");
+                count++;
+                int newflav = Convert.ToInt32(Console.ReadLine());
+                Flavour addflact = DictFlavour[newflav];
+                if (addflact != null)
+                {
+                    flavlist.Add(addflact);
+                }
+                else
+                {
+                    foreach (var flav in flavlist)
+                    {
+                        if (flav.Type == addflact.Type)
+                        {
+                            flav.Quantity += 1;
+
+
+                        }
+
+
+                    }
+
+
+
+
+
+
+
+                }
+
+
+            }
+            result.Flavours= flavlist;
+        
+        }
+        else if (option == "4") {
+            List<Topping> toplist = new List<Topping>();
+            Console.Write("Enter number of toppings: ");
+
+
+            int newtop = Convert.ToInt16(Console.ReadLine());
+            DisplayToppings(DictTopping);
+            for (int topIndex = 1; topIndex <= newtop; topIndex++)
+            {
+                Console.Write($"Enter toping number {topIndex} : ");
+                int addtop = Convert.ToInt32(Console.ReadLine());
+                Topping toppingtolist = DictTopping[addtop];
+                toplist.Add(toppingtolist);
+
+
+            }
+            result.Toppings= toplist;
+        }
+
+
+    }
 
 }
 
