@@ -559,5 +559,39 @@ void Option6()
 
 }
 
+void Makeicecream(string type) {
+    List<Flavour> flavlist = new List<Flavour>();
+    List<Topping> toplist = new List<Topping>();
+
+    if (type == "cone")
+    {
+        Console.Write("Enter number of scoops: ");
+
+
+        int newscp = Convert.ToInt16(Console.ReadLine());
+
+        DisplayFlavours(DictFlavour);
+        for (int scoopIndex = 1; scoopIndex <= newscp; scoopIndex++)
+        {
+            Console.Write($"Enter flavour number {scoopIndex} : ");
+            int newflav = Convert.ToInt32(Console.ReadLine());
+            Flavour addflact =DictFlavour[newflav - 1];
+            flavlist.Add(addflact);
+
+
+
+        }
+
+    }
+
+
+    else if (type == "waffle") { }
+    else if (type == "cup") { }
+
+
+
+    
+}
+
 
 
