@@ -1031,7 +1031,7 @@ void modifyicecream(IceCream result,customer cust ) {
         }
 
     }
-    else if (type is Cup)
+    else if (result is Cup)
     {
         modifydiplay();
         Console.Write("Enter an option: ");
