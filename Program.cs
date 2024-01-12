@@ -403,10 +403,8 @@ void Option4()
             }
 
         }
-        else { 
-            result.CurrentOrder.AddIceCream(newice);
         
-        }
+        
     }
     else
     {
@@ -426,7 +424,7 @@ void Option6()
     
 {
     
-    InitCustomer("customers.csv");
+    
     Option1(DictCustomer);
     Console.Write("Select the customer: ");
     int idInp = Convert.ToInt32(Console.ReadLine());
