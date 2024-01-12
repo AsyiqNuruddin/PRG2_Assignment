@@ -559,7 +559,8 @@ void Option6()
 
 }
 
-void Makeicecream(string type) {
+void Makeicecream(string type,customer result) {
+    IceCream newIceCream = null;
     List<Flavour> flavlist = new List<Flavour>();
     List<Topping> toplist = new List<Topping>();
 
@@ -581,6 +582,25 @@ void Makeicecream(string type) {
 
 
         }
+        Console.Write("Enter number of toppings: ");
+
+
+        int newtop = Convert.ToInt16(Console.ReadLine());
+        DisplayToppings(DictTopping);
+        for (int topIndex = 1; topIndex <= newtop; topIndex++) {
+            Console.Write($"Enter toping number {topIndex} : ");
+            int addtop = Convert.ToInt32(Console.ReadLine());
+            Topping toppingtolist = DictTopping[addtop - 1];
+            toplist.Add(toppingtolist);
+
+
+        }
+        newIceCream = new Cup("cup",newscp,flavlist,toplist);
+        result.CurrentOrder.AddIceCream(newIceCream);
+        
+
+
+
 
     }
 
