@@ -430,7 +430,21 @@ void Option6()
         Console.WriteLine("Menu:\r\n1. Modify an existing ice cream in the order\r\n2. Add a new ice cream to the order\r\n3. Delete an existing ice cream from the order");
         Console.Write("Please enter the number corresponding to your choice: ");
         int choice = Convert.ToInt32(Console.ReadLine());
-        if (choice == 1) { }
+        if (choice == 1) {
+            int count = 1;
+            foreach (IceCream or in result.CurrentOrder.IceCreamlist)
+            {
+                Console.WriteLine($"[{count}]");
+                Console.WriteLine(or);
+                count++;
+
+
+            }
+            Console.Write("Enter a ice cream to modify: ");
+            int icecreanindex = Convert.ToInt32(Console.ReadLine());
+            IceCream Modifyice = result.CurrentOrder.IceCreamlist[icecreanindex - 1];
+
+        }
         else if (choice == 2) { }
         else if (choice == 3) { }
 
