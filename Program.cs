@@ -432,7 +432,7 @@ void Option6()
         int choice = Convert.ToInt32(Console.ReadLine());
         if (choice == 1) { }
         else if (choice == 2) { }
-        else if (choice == 4) { }
+        else if (choice == 3) { }
 
     }
 
