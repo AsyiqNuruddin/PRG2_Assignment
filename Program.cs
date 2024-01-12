@@ -451,104 +451,21 @@ void Option6()
 
         }
         else if (choice == 2) {
-            Order newOrd = result.CurrentOrder;
-            IceCream newice = null;
-            while (true)
-            {
+            while (true) {
                 Console.Write("Enter their ice cream order type (Cup, Cone or Waffle): ");
                 string choiceInp = Console.ReadLine();
-                choiceInp = choiceInp.ToLower();
-                if (choiceInp == "cup")
-                {
-                    Console.WriteLine("Chosen Cup");
-                    (int, List<Flavour>, List<Topping>) cat = IceCreamAdd(DictFlavour, DictTopping);
-                    newice = new Cup("Cup", cat.Item1, cat.Item2, cat.Item3);
-                }
-                else if (choiceInp == "cone")
-                {
-                    Console.WriteLine($"Chosen Cone");
-                    Console.Write("Do you want your cone dipped?(Y/N): ");
-                    string dipInp = Console.ReadLine();
-                    dipInp = dipInp.ToLower();
-                    if (dipInp == "y")
-                    {
-                        (int, List<Flavour>, List<Topping>) cat = IceCreamAdd(DictFlavour, DictTopping);
-                        newice = new Cone("Cone", cat.Item1, cat.Item2, cat.Item3, true);
-                    }
-                    else if (dipInp == "n")
-                    {
-                        (int, List<Flavour>, List<Topping>) cat = IceCreamAdd(DictFlavour, DictTopping);
-                        newice = new Cone("Cone", cat.Item1, cat.Item2, cat.Item3, false);
-                    }
-                }
-                else if (choiceInp == "waffle")
-                {
-                    Console.WriteLine("Chosen Waffle");
-                    Console.Write("Do you want your cone dipped?(Red velvet, charcoal, or pandan): ");
-                    string wafInp = Console.ReadLine();
-                    string waf = WaffleChoice(wafInp);
-                    if (waf == "red velvet")
-                    {
-                        (int, List<Flavour>, List<Topping>) cat = IceCreamAdd(DictFlavour, DictTopping);
-                        newice = new Waffle("Waffle", cat.Item1, cat.Item2, cat.Item3, wafInp);
-                    }
-                    else if (wafInp == "charcoal")
-                    {
-                        (int, List<Flavour>, List<Topping>) cat = IceCreamAdd(DictFlavour, DictTopping);
-                        newice = new Waffle("Waffle", cat.Item1, cat.Item2, cat.Item3, wafInp);
-                    }
-                    else if (wafInp == "pandan")
-                    {
-                        (int, List<Flavour>, List<Topping>) cat = IceCreamAdd(DictFlavour, DictTopping);
-                        newice = new Waffle("Waffle", cat.Item1, cat.Item2, cat.Item3, wafInp);
-                    }
-                }
-                else
-                {
-                    break;
-                }
-                Console.WriteLine($"Your order: {newice}");
-                newOrd.AddIceCream(newice);
+                Makeicecream(choiceInp,result);
                 Console.Write("Do you wish to continue ordering? (Y/N): ");
-                string check = Console.ReadLine();
-                check = check.ToLower();
-                if (check == "y")
+                string yesorno = Console.ReadLine();
+                if (yesorno.ToLower() == "y")
                 {
                     continue;
+
                 }
-                else if (check == "n")
-                {
+                else if (yesorno.ToLower() == "n") {
                     break;
+                
                 }
-                else
-                {
-                    Console.WriteLine("");
-                }
-            }
-            if (result.CurrentOrder.IceCreamlist.Count == null)
-            {
-                result.MakeOrder();
-                Console.WriteLine($"Order [{result.OrderHistory.Last().id}] is successfull");
-                string printed = $"Total Number of Ice Creams: {newOrd.IceCreamlist.Count}\n";
-                foreach (var v in newOrd.IceCreamlist)
-                {
-                    printed += $"{v}\n";
-                }
-                Console.WriteLine(printed);
-                if (result.Rewards.tier == "gold")
-                {
-                    GoldQueueOrder.Enqueue(newOrd);
-                }
-                else
-                {
-                    RegularQueueOrder.Enqueue(newOrd);
-                }
-
-            }
-            else
-            {
-                result.CurrentOrder.AddIceCream(newice);
-
             }
 
         }
@@ -559,7 +476,7 @@ void Option6()
 
 }
 Dictionary<int,string> wafflelist = new Dictionary<int,string>();
-void initwaffle() {
+void initwaffle(Dictionary<int, string> wafflelist) {
     wafflelist.Add(1, "regular");
     wafflelist.Add(2, "Red velvet");
     wafflelist.Add(3, "charcoal");
@@ -569,18 +486,21 @@ void initwaffle() {
 
 
 }
-void displaywaffle() {
+void displaywaffle(Dictionary<int, string> wafflelist) {
     foreach (var kpv in wafflelist) {
         Console.WriteLine($"[{kpv.Key}]: {kpv.Value,-10}");
 
     }
 
 }
+initwaffle(wafflelist);
+
 
 void Makeicecream(string type,customer result) {
     IceCream newIceCream = null;
     List<Flavour> flavlist = new List<Flavour>();
     List<Topping> toplist = new List<Topping>();
+    Dictionary<int, string> wafflelist = new Dictionary<int, string>();
 
     if (type == "cup")
     {
@@ -634,7 +554,7 @@ void Makeicecream(string type,customer result) {
         {
             Console.Write($"Enter flavour number {scoopIndex} : ");
             int newflav = Convert.ToInt32(Console.ReadLine());
-            Flavour addflact = DictFlavour[newflav - 1];
+            Flavour addflact = DictFlavour[newflav ];
             flavlist.Add(addflact);
 
 
@@ -654,7 +574,7 @@ void Makeicecream(string type,customer result) {
 
 
         }
-        displaywaffle();
+        displaywaffle(wafflelist);
         Console.WriteLine("Enter waffle flavour: ");
         int wafflenum = Convert.ToInt32(Console.ReadLine());
         string waffeflav = wafflelist[wafflenum];
