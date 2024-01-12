@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\pizza\\Ngee_Ann_Poly\\PRG2\\Assignment\\PRG2_Assignment\\PRG2_Assignment.csproj": {}
+    "C:\\Users\\pizza\\Source\\Repos\\PRG2_Assignment\\PRG2_Assignment.csproj": {}
   },
   "projects": {
-    "C:\\Users\\pizza\\Ngee_Ann_Poly\\PRG2\\Assignment\\PRG2_Assignment\\PRG2_Assignment.csproj": {
+    "C:\\Users\\pizza\\Source\\Repos\\PRG2_Assignment\\PRG2_Assignment.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\pizza\\Ngee_Ann_Poly\\PRG2\\Assignment\\PRG2_Assignment\\PRG2_Assignment.csproj",
+        "projectUniqueName": "C:\\Users\\pizza\\Source\\Repos\\PRG2_Assignment\\PRG2_Assignment.csproj",
         "projectName": "PRG2_Assignment",
-        "projectPath": "C:\\Users\\pizza\\Ngee_Ann_Poly\\PRG2\\Assignment\\PRG2_Assignment\\PRG2_Assignment.csproj",
+        "projectPath": "C:\\Users\\pizza\\Source\\Repos\\PRG2_Assignment\\PRG2_Assignment.csproj",
         "packagesPath": "C:\\Users\\pizza\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\pizza\\Ngee_Ann_Poly\\PRG2\\Assignment\\PRG2_Assignment\\obj\\",
+        "outputPath": "C:\\Users\\pizza\\Source\\Repos\\PRG2_Assignment\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\pizza\\AppData\\Roaming\\NuGet\\NuGet.Config",

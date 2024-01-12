@@ -50,10 +50,21 @@ while (true)
     }else if (usrInp == "6")
     {
         Option6();
-    }else if(usrInp == "-1")
+    }else if (usrInp == "7")
+    {
+        Option7();
+    }else if (usrInp == "8")
+    {
+        Option8();
+    }
+    else if(usrInp == "-1")
     {
         Console.WriteLine("Thanks for using the application!");
         break;
+    }
+    else
+    {
+        Console.WriteLine("Please enter a appriopriate input [1 - 7] Option or [-1] to Exit");
     }
 }
 //==========================================================
@@ -298,11 +309,10 @@ void Option4()
     customer? result = Search(DictCustomer, idInp);
     if (result != null)
     {
+        Console.WriteLine("Found Customer ");
         Order newOrd = result.CurrentOrder;
         while (true)
         {
-            Console.WriteLine("Found Customer ");
-            
             Console.Write("Enter their ice cream order type (Cup, Cone or Waffle): ");
             string choiceInp = Console.ReadLine();
             choiceInp = choiceInp.ToLower();
@@ -351,6 +361,10 @@ void Option4()
                     newice = new Waffle("Waffle", cat.Item1, cat.Item2, cat.Item3, wafInp);
                 }
             }
+            else
+            {
+                break;
+            }
             Console.WriteLine($"Your order: {newice}");
             newOrd.AddIceCream(newice);
             Console.Write("Do you wish to continue ordering? (Y/N): ");
@@ -364,22 +378,29 @@ void Option4()
             {
                 break;
             }
+            else
+            {
+                Console.WriteLine("");
+            }
         }
-        result.MakeOrder();
-        Console.WriteLine($"Order [{result.OrderHistory.Last().id}] is successfull");
-        string printed = $"Total Number of Ice Creams: {newOrd.IceCreamlist.Count}\n---------------";
-        foreach (var v in newOrd.IceCreamlist)
+        if(result.CurrentOrder != null)
         {
-            printed += $"{v}\n";
-        }
-        Console.WriteLine(printed);
-        if (result.Rewards.tier == "gold")
-        {
-            GoldQueueOrder.Enqueue(newOrd);
-        }
-        else
-        {
-            RegularQueueOrder.Enqueue(newOrd);
+            result.MakeOrder();
+            Console.WriteLine($"Order [{result.OrderHistory.Last().id}] is successfull");
+            string printed = $"Total Number of Ice Creams: {newOrd.IceCreamlist.Count}\n";
+            foreach (var v in newOrd.IceCreamlist)
+            {
+                printed += $"{v}\n";
+            }
+            Console.WriteLine(printed);
+            if (result.Rewards.tier == "gold")
+            {
+                GoldQueueOrder.Enqueue(newOrd);
+            }
+            else
+            {
+                RegularQueueOrder.Enqueue(newOrd);
+            }
         }
     }
     else
@@ -490,4 +511,15 @@ void Option6()
         }
     }
 
+}
+
+
+
+void ProcessOrder(Order order)
+{
+    Console.WriteLine($"{order.timeRecieved}");
+    foreach (var v in order.IceCreamlist)
+    {
+        Console.WriteLine(v);
+    }
 }
