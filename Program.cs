@@ -423,7 +423,9 @@ void Option5() {
 
 }
 void Option6()
+    
 {
+    
     InitCustomer("customers.csv");
     Option1(DictCustomer);
     Console.Write("Select the customer: ");
@@ -634,7 +636,7 @@ void Makeicecream(string type,customer result) {
         result.CurrentOrder.AddIceCream(newIceCream);
 
     }
-    else if (type == "coon") {
+    else if (type == "con") {
         Console.Write("Enter number of scoops: ");
 
 
@@ -718,6 +720,7 @@ void modifydiplay() {
 
 
 void modifyicecream(IceCream result,customer cust ) {
+    Dictionary<int, string> wafflelist = new Dictionary<int, string>();
     initwaffle(wafflelist);
     List<Flavour> flavlist = new List<Flavour>();
     IceCream modifiedice = null;
