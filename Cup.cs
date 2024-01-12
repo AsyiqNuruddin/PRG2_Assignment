@@ -30,13 +30,17 @@ namespace PRG2_Assignment_Cup
         {
             string flavstring = $"\n---------------\n{"Flavours",-10} {"Qty",-10}";
             string topstring = $"\n---------------\nToppings";
+            int fcount = 1;
             foreach (var f in Flavours)
             {
-                flavstring += $"\n{f.Type,-10} {f.Quantity,-10}";
+                flavstring += $"\n[{fcount}]{f.Type,-10} {f.Quantity,-10}";
+                fcount++;
             }
+            int tcount = 1;
             foreach (var t in Toppings)
             {
-                topstring += $"\n{t.Type,-10}";
+                topstring += $"\n[{tcount}]{t.Type,-10}";
+                tcount++;
             }
             return $"Ice Cream Type: {Option}\n---------------\nScoop Count: {Scoops} {flavstring}{topstring}";
         }

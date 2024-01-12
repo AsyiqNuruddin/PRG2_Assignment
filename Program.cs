@@ -225,45 +225,60 @@ static customer? Search(Dictionary<int,customer> sDict, int userInp)
 //==========================================================
 (int, List<Flavour>, List<Topping>) IceCreamAdd(Dictionary<int,Flavour> df, Dictionary<int, Topping> dt)
 {
-    Console.Write("Enter number of scoops: ");
+    Console.Write("Enter number of scoops [1-3]: ");
     int scoops = Convert.ToInt32(Console.ReadLine());
     List<Flavour> flavList = new List<Flavour>();
-    for(int i = 1; i < scoops + 1; i++)
+    if (scoops <= 3 && scoops > 0)
     {
-        DisplayFlavours(DictFlavour);
-        Console.Write($"Choose the flavour of scoop [{i}]: ");
-        int flvIndex = Convert.ToInt32(Console.ReadLine());
-        if (df.ContainsKey(flvIndex))
+        for (int i = 1; i < scoops + 1; i++)
         {
-            if (flavList.Contains(df[flvIndex]))
+            DisplayFlavours(DictFlavour);
+            Console.Write($"Choose the flavour of scoop [{i}]: ");
+            int flvIndex = Convert.ToInt32(Console.ReadLine());
+            if (df.ContainsKey(flvIndex))
             {
-                foreach (var v in flavList)
+                if (flavList.Contains(df[flvIndex]))
                 {
-                    if(v == df[flvIndex])
+                    foreach (var v in flavList)
                     {
-                        v.Quantity = v.Quantity + 1;
+                        if (v == df[flvIndex])
+                        {
+                            v.Quantity = v.Quantity + 1;
+                        }
                     }
                 }
-            }
-            else
-            {
-                flavList.Add(df[flvIndex]);
+                else
+                {
+                    flavList.Add(df[flvIndex]);
+                }
             }
         }
+    }
+    else
+    {
+        Console.WriteLine("Invalid number of scoops | Only 1 to 3 scoops");
     }
     Console.Write("Enter number of toppings: ");
     int topCount = Convert.ToInt32(Console.ReadLine());
     List<Topping> topList = new List<Topping>();
-    for (int i = 1;i < topCount + 1;i++)
+    if (topCount > 0)
     {
-        DisplayToppings(DictTopping);
-        Console.Write($"Choose the [{i}] topping : ");
-        int topIndex = Convert.ToInt32(Console.ReadLine());
-        if (dt.ContainsKey(topIndex))
+        for (int i = 1; i < topCount + 1; i++)
         {
-            topList.Add(dt[topIndex]);
+            DisplayToppings(DictTopping);
+            Console.Write($"Choose the [{i}] topping : ");
+            int topIndex = Convert.ToInt32(Console.ReadLine());
+            if (dt.ContainsKey(topIndex))
+            {
+                topList.Add(dt[topIndex]);
+            }
         }
     }
+    else
+    {
+        Console.WriteLine("No toppings added");
+    }
+
     return (scoops, flavList, topList);
 }
 string? WaffleChoice(string wafInp)
@@ -311,6 +326,8 @@ void Option4()
     {
         Console.WriteLine("Found Customer ");
         Order newOrd = result.CurrentOrder;
+        newOrd.id = result.OrderHistory.Count + 1;
+        newOrd.timeRecieved = DateTime.Now;
         while (true)
         {
             Console.Write("Enter their ice cream order type (Cup, Cone or Waffle): ");
@@ -383,10 +400,9 @@ void Option4()
                 Console.WriteLine("");
             }
         }
-        if(result.CurrentOrder.IceCreamlist.Count == null)
+        if(result.CurrentOrder.IceCreamlist.Count != 0)
         {
-            result.MakeOrder();
-            Console.WriteLine($"Order [{result.OrderHistory.Last().id}] is successfull");
+            Console.WriteLine($"\nOrder Number[{result.CurrentOrder.id}] is successfull");
             string printed = $"Total Number of Ice Creams: {newOrd.IceCreamlist.Count}\n";
             foreach (var v in newOrd.IceCreamlist)
             {
@@ -515,3 +531,49 @@ void Option6()
 
 
 
+void ProcessOrder(Order order)
+{
+    Console.WriteLine($"{order.timeRecieved}");
+    foreach (var v in order.IceCreamlist)
+    {
+        Console.WriteLine($"\n{v}");
+    }
+}
+void Option7()
+{
+    Order order;
+    customer odrcustomer;
+    if (GoldQueueOrder.Count > 0)
+    {
+        order = GoldQueueOrder.Dequeue();
+        foreach (var v in DictCustomer.Values)
+        {
+            if (v.CurrentOrder == order)
+            {
+                odrcustomer = v;
+            }
+        }
+        ProcessOrder(order);
+
+    }
+    else if (RegularQueueOrder.Count > 0)
+    {
+        order = RegularQueueOrder.Dequeue();
+        foreach (var v in DictCustomer.Values)
+        {
+            if (v.CurrentOrder == order)
+            {
+                odrcustomer = v;
+            }
+        }
+        ProcessOrder(order);
+    }
+    else
+    {
+        Console.WriteLine("No more orders");
+    }
+}
+void Option8()
+{
+
+}
