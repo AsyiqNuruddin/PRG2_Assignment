@@ -413,8 +413,10 @@ void Option4()
 
 }
 void Option5() {
-    //ist the customers
-    //prompt user to select a customer and retrieve the selected customer
+    Option1(DictCustomer);
+    Console.Write("Select the customer: ");
+    int idInp = Convert.ToInt32(Console.ReadLine());
+    customer? result = Search(DictCustomer, idInp);
     //retrieve all the order objects of the customer, past and current
     // for each order, display all the details of the order including datetime received, datetime
     //fulfilled(if applicable) and all ice cream details associated with the order
@@ -429,7 +431,7 @@ void Option6()
     Console.Write("Select the customer: ");
     int idInp = Convert.ToInt32(Console.ReadLine());
     customer? result = Search(DictCustomer, idInp);
-    Console.WriteLine(result);
+    
     if (result != null)
     {
         Console.WriteLine("Menu:\r\n1. Modify an existing ice cream in the order\r\n2. Add a new ice cream to the order\r\n3. Delete an existing ice cream from the order");
