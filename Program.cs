@@ -417,7 +417,28 @@ void Option5() {
     Console.Write("Select the customer: ");
     int idInp = Convert.ToInt32(Console.ReadLine());
     customer? result = Search(DictCustomer, idInp);
-    //retrieve all the order objects of the customer, past and current
+    List<IceCream> currentorder = result.CurrentOrder.IceCreamlist;
+    Console.WriteLine("current order");
+    Console.WriteLine(result.CurrentOrder.timeRecieved);
+    foreach (IceCream currenrorderice in currentorder) {
+        Console.WriteLine(currenrorderice);
+
+
+    }
+    Console.WriteLine("pass orders");
+    foreach (Order pastorder in result.OrderHistory) {
+        Console.WriteLine(pastorder.timeRecieved);
+        Console.WriteLine(pastorder.timeFulfilled);
+        foreach (IceCream pastorderice in pastorder.IceCreamlist) {
+            Console.WriteLine(pastorder);
+
+        }
+    
+    
+    } 
+    
+
+
     // for each order, display all the details of the order including datetime received, datetime
     //fulfilled(if applicable) and all ice cream details associated with the order
 
