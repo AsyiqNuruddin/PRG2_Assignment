@@ -435,7 +435,8 @@ void Option6()
         Console.WriteLine("Menu:\r\n1. Modify an existing ice cream in the order\r\n2. Add a new ice cream to the order\r\n3. Delete an existing ice cream from the order");
         Console.Write("Please enter the number corresponding to your choice: ");
         int choice = Convert.ToInt32(Console.ReadLine());
-        if (choice == 1) {
+        if (choice == 1)
+        {
             int count = 1;
             foreach (IceCream or in result.CurrentOrder.IceCreamlist)
             {
@@ -448,15 +449,17 @@ void Option6()
             Console.Write("Enter a ice cream to modify: ");
             int icecreanindex = Convert.ToInt32(Console.ReadLine());
             IceCream Modifyice = result.CurrentOrder.IceCreamlist[icecreanindex - 1];
-            
-            modifyicecream(Modifyice,result);
+
+            modifyicecream(Modifyice, result);
 
         }
-        else if (choice == 2) {
-            while (true) {
+        else if (choice == 2)
+        {
+            while (true)
+            {
                 Console.Write("Enter their ice cream order type (Cup, Cone or Waffle): ");
                 string choiceInp = Console.ReadLine();
-                Makeicecream(choiceInp,result);
+                Makeicecream(choiceInp, result);
                 Console.Write("Do you wish to continue ordering? (Y/N): ");
                 string yesorno = Console.ReadLine();
                 if (yesorno.ToLower() == "y")
@@ -464,11 +467,30 @@ void Option6()
                     continue;
 
                 }
-                else if (yesorno.ToLower() == "n") {
+                else if (yesorno.ToLower() == "n")
+                {
                     break;
-                
+
                 }
             }
+
+        }
+        else if (choice == 3) {
+            int count = 1;
+            foreach (IceCream or in result.CurrentOrder.IceCreamlist)
+            {
+                Console.WriteLine($"[{count}]");
+                Console.WriteLine(or);
+                count++;
+
+
+            }
+            Console.Write("Enter a ice cream to remove: ");
+            int icecreanindex = Convert.ToInt32(Console.ReadLine());
+            IceCream Modifyice = result.CurrentOrder.IceCreamlist[icecreanindex - 1];
+            result.CurrentOrder.DeleteIceCream(Modifyice);
+
+
 
         }
     }
