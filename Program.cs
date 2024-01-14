@@ -410,7 +410,7 @@ void Option4()
                 Console.WriteLine("Invalid Input (Y/N) or (y/n) only\nOrder will be stopped");
             }
         }
-<<<<<<< HEAD
+
         if(result.CurrentOrder.IceCreamlist.Count != 0)
 =======
         if (result.CurrentOrder.IceCreamlist.Count == null)
