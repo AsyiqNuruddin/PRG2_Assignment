@@ -288,14 +288,17 @@ string? WaffleChoice(string wafInp)
     {
         if(wafInp == "red velvet")
         {
-            return wafInp;
+            return "Red Velvet";
         }else if(wafInp == "charcoal")
         {
-            return wafInp;
+            return "Charcoal";
         }
-        else if(wafInp == "pandan waffle")
+        else if(wafInp == "pandan")
         {
-            return wafInp;
+            return "Pandan";
+        }else if (wafInp == "plain")
+        {
+            return "Plain";
         }
         else
         {
@@ -359,23 +362,30 @@ void Option4()
             else if (choiceInp == "waffle")
             {
                 Console.WriteLine("Chosen Waffle");
-                Console.Write("Do you want your cone dipped?(Red velvet, charcoal, or pandan): ");
+                Console.Write("Do you want a waffle flavour?(Red velvet, charcoal, or pandan) or plain: ");
                 string wafInp = Console.ReadLine();
                 string waf = WaffleChoice(wafInp);
-                if (waf == "red velvet")
+                if (waf == "Red Velvet")
                 {
                     (int, List<Flavour>, List<Topping>) cat = IceCreamAdd(DictFlavour, DictTopping);
-                    newice = new Waffle("Waffle", cat.Item1, cat.Item2, cat.Item3, wafInp);
+                    newice = new Waffle("Waffle", cat.Item1, cat.Item2, cat.Item3, waf);
                 }
-                else if (wafInp == "charcoal")
+                else if (waf == "Charcoal")
                 {
                     (int, List<Flavour>, List<Topping>) cat = IceCreamAdd(DictFlavour, DictTopping);
-                    newice = new Waffle("Waffle", cat.Item1, cat.Item2, cat.Item3, wafInp);
+                    newice = new Waffle("Waffle", cat.Item1, cat.Item2, cat.Item3, waf);
                 }
-                else if (wafInp == "pandan")
+                else if (waf == "Pandan")
                 {
                     (int, List<Flavour>, List<Topping>) cat = IceCreamAdd(DictFlavour, DictTopping);
-                    newice = new Waffle("Waffle", cat.Item1, cat.Item2, cat.Item3, wafInp);
+                    newice = new Waffle("Waffle", cat.Item1, cat.Item2, cat.Item3, waf);
+                }
+                else if(waf == "Plain")
+                {
+                    {
+                        (int, List<Flavour>, List<Topping>) cat = IceCreamAdd(DictFlavour, DictTopping);
+                        newice = new Waffle("Waffle", cat.Item1, cat.Item2, cat.Item3, waf);
+                    }
                 }
             }
             else
@@ -397,7 +407,7 @@ void Option4()
             }
             else
             {
-                Console.WriteLine("");
+                Console.WriteLine("Invalid Input (Y/N) or (y/n) only\nOrder will be stopped");
             }
         }
         if(result.CurrentOrder.IceCreamlist.Count != 0)
@@ -531,49 +541,3 @@ void Option6()
 
 
 
-void ProcessOrder(Order order)
-{
-    Console.WriteLine($"{order.timeRecieved}");
-    foreach (var v in order.IceCreamlist)
-    {
-        Console.WriteLine($"\n{v}");
-    }
-}
-void Option7()
-{
-    Order order;
-    customer odrcustomer;
-    if (GoldQueueOrder.Count > 0)
-    {
-        order = GoldQueueOrder.Dequeue();
-        foreach (var v in DictCustomer.Values)
-        {
-            if (v.CurrentOrder == order)
-            {
-                odrcustomer = v;
-            }
-        }
-        ProcessOrder(order);
-
-    }
-    else if (RegularQueueOrder.Count > 0)
-    {
-        order = RegularQueueOrder.Dequeue();
-        foreach (var v in DictCustomer.Values)
-        {
-            if (v.CurrentOrder == order)
-            {
-                odrcustomer = v;
-            }
-        }
-        ProcessOrder(order);
-    }
-    else
-    {
-        Console.WriteLine("No more orders");
-    }
-}
-void Option8()
-{
-
-}

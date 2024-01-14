@@ -24,25 +24,63 @@ namespace PRG2_Assignment_Cup
         }
         public override double CalculatePrice()
         {
-            throw new NotImplementedException();
+            double price = 0;
+            if (Scoops == 1)
+            {
+                price += 4;
+            }else if (Scoops == 2)
+            {
+                price += 5.50;
+            }else if (Scoops == 3)
+            {
+                price += 6.50;
+            }
+            foreach(var f in Flavours)
+            {
+                if(f.Premium == true)
+                {
+                    price += 2;
+                }
+            }
+            foreach(var t in Toppings)
+            {
+                price += 1;
+            }
+            return price;
         }
         public override string ToString()
         {
-            string flavstring = $"\n---------------\n{"Flavours",-10} {"Qty",-10}";
-            string topstring = $"\n---------------\nToppings";
-            int fcount = 1;
+            string flavstring = $"\n---------------------------------\n{"Flavours",-21} {"Qty",-6}{"Price",-4}";
+            string topstring = $"\n---------------------------------\n{"Toppings",-28}{"Price",-4}";
             foreach (var f in Flavours)
             {
-                flavstring += $"\n[{fcount}]{f.Type,-10} {f.Quantity,-10}";
-                fcount++;
+                if (f.Premium == true)
+                {
+                    flavstring += $"\n{f.Type,-22} {f.Quantity,-5}{"$2.00",5}";
+                }
+                else
+                {
+                    flavstring += $"\n{f.Type,-22} {f.Quantity,-5}{"$0.00",5}";
+                }
             }
-            int tcount = 1;
             foreach (var t in Toppings)
             {
-                topstring += $"\n[{tcount}]{t.Type,-10}";
-                tcount++;
+                topstring += $"\n{t.Type,-18}{"",-10}{"$1.00",-5}";
             }
-            return $"Ice Cream Type: {Option}\n---------------\nScoop Count: {Scoops} {flavstring}{topstring}";
+            double price = 0;
+            if (Scoops == 1)
+            {
+                price += 4;
+            }
+            else if (Scoops == 2)
+            {
+                price += 5.50;
+            }
+            else if (Scoops == 3)
+            {
+                price += 6.50;
+            }
+            return $"\n{"Ice Cream Type: " + Option,-28}{"Price",-5}\n---------------------------------\n{"Scoops: " + Scoops,-28}{$"${price:0.00}",-5}{flavstring}{topstring}\n---------------------------------\n{"Total",-28}${CalculatePrice():0.00}";
         }
     }
 }
