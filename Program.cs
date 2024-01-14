@@ -412,9 +412,6 @@ void Option4()
         }
 
         if(result.CurrentOrder.IceCreamlist.Count != 0)
-=======
-        if (result.CurrentOrder.IceCreamlist.Count == null)
->>>>>>> 27e0ab3605b641784a43009bf13c88771645fe38
         {
             Console.WriteLine($"\nOrder Number[{result.CurrentOrder.id}] is successfull");
             string printed = $"Total Number of Ice Creams: {newOrd.IceCreamlist.Count}\n";
@@ -541,7 +538,7 @@ void Option6()
             Console.Write("Enter a ice cream to remove: ");
             int icecreanindex = Convert.ToInt32(Console.ReadLine());
             IceCream Modifyice = result.CurrentOrder.IceCreamlist[icecreanindex - 1];
-            result.CurrentOrder.DeleteIceCream(Modifyice);
+            //result.CurrentOrder.DeleteIceCream(Modifyice);
 
 
 
