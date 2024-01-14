@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "XphL4Yz5OMfF7dB3dq7LJd8RpHbfh+g6LyydIBXJhx1wgYcia6b1wmm87PL5FqGCB730RBtdQGXkLMCei+z22w==",
   "success": true,
   "projectFilePath": "C:\\Users\\pizza\\source\\repos\\PRG2_Assignment\\PRG2_Assignment.csproj",
+=======
+  "dgSpecHash": "EbnK87bwXJ6o3POD6aA/6wng1l0OxXvf2CAlpeEItVn7qXJh3wcULJPIbBaLHnJeeVo/bmWxR0+PGstYK4Fowg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\khooj\\Source\\Repos\\PRG2_Assignment\\PRG2_Assignment.csproj",
+>>>>>>> 27e0ab3605b641784a43009bf13c88771645fe38
   "expectedPackageFiles": [],
   "logs": []
 }

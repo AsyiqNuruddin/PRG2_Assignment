@@ -1,6 +1,7 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
     "C:\\Users\\pizza\\source\\repos\\PRG2_Assignment\\PRG2_Assignment.csproj": {}
   },
   "projects": {
@@ -12,9 +13,26 @@
         "projectPath": "C:\\Users\\pizza\\source\\repos\\PRG2_Assignment\\PRG2_Assignment.csproj",
         "packagesPath": "C:\\Users\\pizza\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\pizza\\source\\repos\\PRG2_Assignment\\obj\\",
+=======
+    "C:\\Users\\khooj\\Source\\Repos\\PRG2_Assignment\\PRG2_Assignment.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\khooj\\Source\\Repos\\PRG2_Assignment\\PRG2_Assignment.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\khooj\\Source\\Repos\\PRG2_Assignment\\PRG2_Assignment.csproj",
+        "projectName": "PRG2_Assignment",
+        "projectPath": "C:\\Users\\khooj\\Source\\Repos\\PRG2_Assignment\\PRG2_Assignment.csproj",
+        "packagesPath": "C:\\Users\\khooj\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\khooj\\Source\\Repos\\PRG2_Assignment\\obj\\",
+>>>>>>> 27e0ab3605b641784a43009bf13c88771645fe38
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\pizza\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\khooj\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -55,7 +73,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
