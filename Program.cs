@@ -73,7 +73,6 @@ while (true)
 //==========================================================
 void InitCustomer(string txtfile)
 {
-    DictCustomer = new Dictionary<int, customer>();
     using (StreamReader sr = new StreamReader(txtfile))
     {
         List<string> rowList = new List<string>();
@@ -430,12 +429,10 @@ void Option4()
             }
 
         }
-        
-        
     }
     else
     {
-        Console.WriteLine("Customer not found");
+        Console.WriteLine("Customer Member Id not found");
     }
 
 }
