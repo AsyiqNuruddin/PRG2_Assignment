@@ -25,8 +25,8 @@ Dictionary<int, Flavour> DictFlavour = new Dictionary<int, Flavour>();
 Dictionary<int, Topping> DictTopping = new Dictionary<int, Topping>();
 
 InitCustomer("customers.csv");
-InitFlavour(DictFlavour);
-InitToppings(DictTopping);
+InitFlavours("flavours.csv",DictFlavour);
+InitToppings("toppings.csv",DictTopping);
 // Loop of Options
 while (true) 
 {
@@ -87,7 +87,8 @@ void InitCustomer(string txtfile)
         {
             rowList = s.Split(',').ToList();
             customer newCustomer = new customer(rowList[0], Convert.ToInt32(rowList[1]), Convert.ToDateTime(rowList[2]));
-            newCustomer.Rewards = new PointCard();
+            newCustomer.Rewards = new PointCard(Convert.ToInt32(rowList[4]), Convert.ToInt32(rowList[5]));
+            newCustomer.Rewards.tier = rowList[3];
             DictCustomer.Add(Convert.ToInt32(rowList[1]), newCustomer);
         }
     }
@@ -96,21 +97,86 @@ void InitCustomer(string txtfile)
 // Student Number : S10262791
 // Student Name : Asyiq Nuruddin
 //==========================================================
-void InitFlavour(Dictionary<int, Flavour> df)
+void InitFlavours(string txtfile, Dictionary<int, Flavour> df)
 {
-    df.Add(1,new Flavour("Vanilla", false, 1));
-    df.Add(2,new Flavour("Chocolate", false, 1));
-    df.Add(3,new Flavour("Strawberry", false, 1));
-    df.Add(4,new Flavour("Durian", true, 1));
-    df.Add(5,new Flavour("Ube", true, 1));
-    df.Add(6,new Flavour("Sea Salt", true, 1));
+    using (StreamReader sr = new StreamReader(txtfile))
+    {
+        List<string> headers = new List<string>();
+        List<string> rowList = new List<string>();
+        int count = 1;
+
+        string? s = sr.ReadLine();
+        if (s != null)
+        {
+            headers = s.Split(",").ToList();
+        }
+        while ((s = sr.ReadLine()) != null)
+        {
+            rowList = s.Split(',').ToList();
+
+            Flavour flav;
+            if(Convert.ToInt32(rowList[1]) > 0)
+            {
+                flav = new Flavour(rowList[0], true, 1);
+            }
+            else
+            {
+                flav = new Flavour(rowList[0], false, 1);
+            }
+            df.Add(count, flav);
+            count ++;
+        }
+    }
 }
-void InitToppings(Dictionary<int, Topping> dt)
+//==========================================================
+// Student Number : S10262791
+// Student Name : Asyiq Nuruddin
+//==========================================================
+void InitToppings(string txtfile, Dictionary<int, Topping> dt)
 {
-    dt.Add(1,new Topping("Sprinkles"));
-    dt.Add(2,new Topping("Mochi"));
-    dt.Add(3,new Topping("Sago"));
-    dt.Add(4,new Topping("Oreos"));
+    using (StreamReader sr = new StreamReader(txtfile))
+    {
+        List<string> headers = new List<string>();
+        List<string> rowList = new List<string>();
+        int count = 1;
+        string? s = sr.ReadLine();
+        if (s != null)
+        {
+            headers = s.Split(",").ToList();
+        }
+        while ((s = sr.ReadLine()) != null)
+        {
+            rowList = s.Split(',').ToList();
+
+            dt.Add(count, new Topping(rowList[0]));
+            count++;
+        }
+    }
+}
+//==========================================================
+// Student Number : S10262791
+// Student Name : Asyiq Nuruddin
+//==========================================================
+void InitOrders(string txtfile)
+{
+    using (StreamReader sr = new StreamReader(txtfile))
+    {
+        List<string> rowList = new List<string>();
+        List<string> headers = new List<string>();
+
+        string? s = sr.ReadLine();
+        if (s != null)
+        {
+            headers = s.Split(",").ToList();
+        }
+        while ((s = sr.ReadLine()) != null)
+        {
+            rowList = s.Split(',').ToList();
+
+            Order order = new Order(Convert.ToInt32(rowList[0]), Convert.ToDateTime(rowList[2]));
+            order.timeFulfilled = Convert.ToDateTime(rowList[3]);
+        }
+    }
 }
 //==========================================================
 // Student Number : S10262791
@@ -118,20 +184,16 @@ void InitToppings(Dictionary<int, Topping> dt)
 //==========================================================
 void DisplayFlavours(Dictionary<int, Flavour> df)
 {
-    int count = 1;
-    foreach (var flavour in df.Values)
+    foreach (var v in df)
     {
-        Console.WriteLine($"[{count}]: {flavour.Type,-10}");
-        count++;
+        Console.WriteLine($"[{v.Key}]: {v.Value.Type,-10}");
     }
 }
 void DisplayToppings(Dictionary<int, Topping> dt)
 {
-    int count = 1;
-    foreach (Topping topping in dt.Values)
+    foreach (var v in dt)
     {
-        Console.WriteLine($"[{count}]: {topping.Type,-10}");
-        count++;
+        Console.WriteLine($"[{v.Key}]: {v.Value.Type,-10}");
     }
 }
 
@@ -145,7 +207,7 @@ void Option1(Dictionary<int, customer> DictCustomer)
 {
     foreach(var kvp in DictCustomer)
     {
-        Console.WriteLine($"Name: {kvp.Value.Name,-15} Member ID:{kvp.Value.MemberId,-10} DateofBirth: {kvp.Value.Dob,-10:dd/MM/yyyy}");
+        Console.WriteLine($"Name: {kvp.Value.Name,-15} Member ID:{kvp.Value.MemberId,-10} DateofBirth: {kvp.Value.Dob,-10:dd/MM/yyyy} MemberShip Status: {kvp.Value.Rewards.tier,-10} Points: {kvp.Value.Rewards.points,-3} Punch Card: {kvp.Value.Rewards.punchCard}");
     }
 }
 void Option2() 
@@ -200,6 +262,7 @@ void Option3()
         row = string.Join(",", newCustomer.Name, newCustomer.MemberId, $"{newCustomer.Dob:dd/MM/yyyy}");
         sw.WriteLine(row);
     }
+    DictCustomer.Add(newCustomer.MemberId, newCustomer);
     Console.WriteLine("Registration Successfull");
 
 }
@@ -295,9 +358,9 @@ string? WaffleChoice(string wafInp)
         else if(wafInp == "pandan")
         {
             return "Pandan";
-        }else if (wafInp == "plain")
+        }else if (wafInp == "original")
         {
-            return "Plain";
+            return "Original";
         }
         else
         {
@@ -316,9 +379,7 @@ string? WaffleChoice(string wafInp)
 //==========================================================
 void Option4() 
 {
-    // Refresh customer obj data
-    InitCustomer("customers.csv");
-
+    // show Customer Details
     Option1(DictCustomer);
     IceCream newice = null;
     Console.Write("Select the customer: ");
@@ -361,30 +422,17 @@ void Option4()
             else if (choiceInp == "waffle")
             {
                 Console.WriteLine("Chosen Waffle");
-                Console.Write("Do you want a waffle flavour?(Red velvet, charcoal, or pandan) or plain: ");
+                Console.Write("Do you want a waffle flavour?(Red velvet, charcoal, or pandan) or original: ");
                 string wafInp = Console.ReadLine();
                 string waf = WaffleChoice(wafInp);
-                if (waf == "Red Velvet")
+                if (waf != null)
                 {
                     (int, List<Flavour>, List<Topping>) cat = IceCreamAdd(DictFlavour, DictTopping);
                     newice = new Waffle("Waffle", cat.Item1, cat.Item2, cat.Item3, waf);
                 }
-                else if (waf == "Charcoal")
+                else
                 {
-                    (int, List<Flavour>, List<Topping>) cat = IceCreamAdd(DictFlavour, DictTopping);
-                    newice = new Waffle("Waffle", cat.Item1, cat.Item2, cat.Item3, waf);
-                }
-                else if (waf == "Pandan")
-                {
-                    (int, List<Flavour>, List<Topping>) cat = IceCreamAdd(DictFlavour, DictTopping);
-                    newice = new Waffle("Waffle", cat.Item1, cat.Item2, cat.Item3, waf);
-                }
-                else if(waf == "Plain")
-                {
-                    {
-                        (int, List<Flavour>, List<Topping>) cat = IceCreamAdd(DictFlavour, DictTopping);
-                        newice = new Waffle("Waffle", cat.Item1, cat.Item2, cat.Item3, waf);
-                    }
+                    Console.WriteLine($"Waffle flavour {wafInp} not available or invalid");
                 }
             }
             else
@@ -427,14 +475,12 @@ void Option4()
             {
                 RegularQueueOrder.Enqueue(newOrd);
             }
-
         }
     }
     else
     {
         Console.WriteLine("Customer Member Id not found");
     }
-
 }
 void Option5() {
     Option1(DictCustomer);
@@ -1251,6 +1297,3 @@ void modifyicecream(IceCream result,customer cust ) {
     }
 
 }
-
-
-

@@ -1,15 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "XphL4Yz5OMfF7dB3dq7LJd8RpHbfh+g6LyydIBXJhx1wgYcia6b1wmm87PL5FqGCB730RBtdQGXkLMCei+z22w==",
+  "dgSpecHash": "Z5UB2UkGVGrKiNGCR6Pfo9WbKL/YFobntsiLstpUidzy9jUhfiTUNPe9lwLEAyh07AvHdYiHc322cq/pNi/G9A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\pizza\\source\\repos\\PRG2_Assignment\\PRG2_Assignment.csproj",
+  "projectFilePath": "C:\\Users\\pizza\\Ngee_Ann_Poly\\PRG2\\Assignment\\PRG2_Assignment\\PRG2_Assignment.csproj",
   "expectedPackageFiles": [],
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file C:\\Users\\pizza\\source\\repos\\PRG2_Assignment\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  "logs": []
 }

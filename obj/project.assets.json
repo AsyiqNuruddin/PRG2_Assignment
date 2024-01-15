@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\pizza\\source\\repos\\PRG2_Assignment\\PRG2_Assignment.csproj",
+      "projectUniqueName": "C:\\Users\\pizza\\Ngee_Ann_Poly\\PRG2\\Assignment\\PRG2_Assignment\\PRG2_Assignment.csproj",
       "projectName": "PRG2_Assignment",
-      "projectPath": "C:\\Users\\pizza\\source\\repos\\PRG2_Assignment\\PRG2_Assignment.csproj",
+      "projectPath": "C:\\Users\\pizza\\Ngee_Ann_Poly\\PRG2\\Assignment\\PRG2_Assignment\\PRG2_Assignment.csproj",
       "packagesPath": "C:\\Users\\pizza\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\pizza\\source\\repos\\PRG2_Assignment\\obj\\",
+      "outputPath": "C:\\Users\\pizza\\Ngee_Ann_Poly\\PRG2\\Assignment\\PRG2_Assignment\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\pizza\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -64,13 +64,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file C:\\Users\\pizza\\source\\repos\\PRG2_Assignment\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  }
 }
