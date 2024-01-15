@@ -250,20 +250,35 @@ void Option3()
     int idInp = Convert.ToInt32(Console.ReadLine());
     Console.Write("Enter their Date Of Birth in DD/MM/YYYY: ");
     DateTime dob = Convert.ToDateTime(Console.ReadLine());
-    customer newCustomer = new customer(nameInp,idInp,dob);
-    Console.WriteLine("Their registration customer details");
-    Console.WriteLine($"Name: {newCustomer.Name,-10} Member ID:{newCustomer.MemberId,-10} DateofBirth: {newCustomer.Dob,-10:dd/MM/yyyy}");
-    PointCard newPC = new PointCard(0,0);
-    newCustomer.Rewards = newPC;
-
-    using (StreamWriter sw = new StreamWriter("customers.csv", true))
+    bool same = false;
+    foreach(var kvp in DictCustomer)
     {
-        string? row;
-        row = string.Join(",", newCustomer.Name, newCustomer.MemberId, $"{newCustomer.Dob:dd/MM/yyyy}");
-        sw.WriteLine(row);
+        if(kvp.Key == idInp)
+        {
+            same = true;
+        }
     }
-    DictCustomer.Add(newCustomer.MemberId, newCustomer);
-    Console.WriteLine("Registration Successfull");
+    if (!same)
+    {
+        customer newCustomer = new customer(nameInp, idInp, dob);
+        Console.WriteLine("Their registration customer details");
+        Console.WriteLine($"Name: {newCustomer.Name,-10} Member ID:{newCustomer.MemberId,-10} DateofBirth: {newCustomer.Dob,-10:dd/MM/yyyy}");
+        PointCard newPC = new PointCard(0, 0);
+        newCustomer.Rewards = newPC;
+
+        using (StreamWriter sw = new StreamWriter("customers.csv", true))
+        {
+            string? row;
+            row = string.Join(",", newCustomer.Name, newCustomer.MemberId, $"{newCustomer.Dob:dd/MM/yyyy}");
+            sw.WriteLine(row);
+        }
+        DictCustomer.Add(newCustomer.MemberId, newCustomer);
+        Console.WriteLine("Registration Successfull");
+    }
+    else
+    {
+        Console.WriteLine("Member ID Number used\nPlease use another Member ID Number");
+    }
 
 }
 //==========================================================
