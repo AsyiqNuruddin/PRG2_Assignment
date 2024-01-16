@@ -27,6 +27,7 @@ Dictionary<int, Topping> DictTopping = new Dictionary<int, Topping>();
 InitCustomer("customers.csv");
 InitFlavours("flavours.csv",DictFlavour);
 InitToppings("toppings.csv",DictTopping);
+InitOrders("orders.csv");
 // Loop of Options
 while (true) 
 {
@@ -180,23 +181,20 @@ void InitOrders(string txtfile)
                 if (v.Key == Convert.ToInt32(rowList[1]))
                 {
                     bool addOrderHist = false;
-                    foreach (var o in v.Value.OrderHistory)
-                    {
-                        if(o.id == order.id)
-                        {
-
-                            addOrderHist = true;
-                        }
-                    }
+                    // 4Option,5Scoops,6Dipped,7WaffleFlavour,8Flavour1,9Flavour2,10Flavour3,11Topping1,12Topping2,13Topping3,14Topping4
+                    IceCream newIC = IceCreamRead(rowList[4], Convert.ToInt32(rowList[5]), rowList[6], rowList[7], rowList[8], rowList[9], rowList[10], rowList[11], rowList[12], rowList[13], rowList[14]);
+                    order.AddIceCream(newIC);
+                    v.Value.OrderHistory.Add(order);
+                    addOrderHist = true;
                 }
             }
         }
     }
 }
 // 4Option,5Scoops,6Dipped,7WaffleFlavour,8Flavour1,9Flavour2,10Flavour3,11Topping1,12Topping2,13Topping3,14Topping4
-IceCream IceCreamRead(string Option, int Scoops, bool Dipped, string WaffleFlavour, string Flavour1, string Flavour2, string Flavour3, string Topping1, string Topping2, string Topping3, string Topping4)
+IceCream IceCreamRead(string Option, int Scoops, string Dipped, string? WaffleFlavour, string? Flavour1, string? Flavour2, string? Flavour3, string? Topping1, string? Topping2, string? Topping3, string? Topping4)
 {
-    IceCream newIC = null;
+    IceCream? newIC = new Cup();
     List<Flavour> flavList = new List<Flavour>();
     List<Topping> topList = new List<Topping>();
     if (Option == "Cup")
@@ -233,6 +231,7 @@ IceCream IceCreamRead(string Option, int Scoops, bool Dipped, string WaffleFlavo
                 topList.Add(v.Value);
             }
         }
+        newIC = new Cup(Option,Scoops,flavList,topList);
     }
     else if (Option == "Cone")
     {
@@ -271,20 +270,56 @@ IceCream IceCreamRead(string Option, int Scoops, bool Dipped, string WaffleFlavo
                 topList.Add(v.Value);
             }
         }
-        if (Dipped)
+        if(Dipped == "TRUE")
         {
-
+            newIC = new Cone(Option, Scoops, flavList, topList, true);
         }
-        else
+        else if(Dipped == "FALSE")
         {
-
+            newIC = new Cone(Option, Scoops, flavList, topList, false);
         }
+        
     }
     else if (Option == "Waffle")
     {
+        foreach (var v in DictFlavour)
+        {
+            if (v.Value.Type == Flavour1)
+            {
+                flavList.Add(v.Value);
+            }
+            else if (v.Value.Type == Flavour2)
+            {
+                flavList.Add(v.Value);
+            }
+            else if (v.Value.Type == Flavour3)
+            {
+                flavList.Add(v.Value);
+            }
 
+        }
+        foreach (var v in DictTopping)
+        {
+            if (v.Value.Type == Topping1)
+            {
+                topList.Add(v.Value);
+            }
+            else if (v.Value.Type == Topping2)
+            {
+                topList.Add(v.Value);
+            }
+            else if (v.Value.Type == Topping3)
+            {
+                topList.Add(v.Value);
+            }
+            else if (v.Value.Type == Topping4)
+            {
+                topList.Add(v.Value);
+            }
+        }
+        newIC = new Waffle(Option, Scoops, flavList, topList, WaffleFlavour);
     }
-    return null;
+    return newIC;
 }
 //==========================================================
 // Student Number : S10262791
@@ -316,6 +351,7 @@ void Option1(Dictionary<int, customer> DictCustomer)
     foreach(var kvp in DictCustomer)
     {
         Console.WriteLine($"Name: {kvp.Value.Name,-15} Member ID:{kvp.Value.MemberId,-10} DateofBirth: {kvp.Value.Dob,-10:dd/MM/yyyy} MemberShip Status: {kvp.Value.Rewards.tier,-10} Points: {kvp.Value.Rewards.points,-3} Punch Card: {kvp.Value.Rewards.punchCard}");
+        Console.WriteLine(kvp.Value.OrderHistory.Count);
     }
 }
 void Option2() 
