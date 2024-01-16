@@ -30,7 +30,7 @@ namespace PRG2_Assignment
         public override double CalculatePrice()
         {
             double price = 0;
-            if (WaffleFlavour != "Plain")
+            if (WaffleFlavour != "Original")
             {
                 price += 3;
             }

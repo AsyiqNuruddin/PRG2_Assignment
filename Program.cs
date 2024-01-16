@@ -175,8 +175,117 @@ void InitOrders(string txtfile)
 
             Order order = new Order(Convert.ToInt32(rowList[0]), Convert.ToDateTime(rowList[2]));
             order.timeFulfilled = Convert.ToDateTime(rowList[3]);
+            foreach (var v in DictCustomer)
+            {
+                if (v.Key == Convert.ToInt32(rowList[1]))
+                {
+                    bool addOrderHist = false;
+                    foreach (var o in v.Value.OrderHistory)
+                    {
+                        if(o.id == order.id)
+                        {
+
+                            addOrderHist = true;
+                        }
+                    }
+                }
+            }
         }
     }
+}
+// 4Option,5Scoops,6Dipped,7WaffleFlavour,8Flavour1,9Flavour2,10Flavour3,11Topping1,12Topping2,13Topping3,14Topping4
+IceCream IceCreamRead(string Option, int Scoops, bool Dipped, string WaffleFlavour, string Flavour1, string Flavour2, string Flavour3, string Topping1, string Topping2, string Topping3, string Topping4)
+{
+    IceCream newIC = null;
+    List<Flavour> flavList = new List<Flavour>();
+    List<Topping> topList = new List<Topping>();
+    if (Option == "Cup")
+    {
+        foreach (var v in DictFlavour)
+        {
+            if (v.Value.Type == Flavour1)
+            {
+                flavList.Add(v.Value);
+            }
+            else if (v.Value.Type == Flavour2)
+            {
+                flavList.Add(v.Value);
+            }
+            else if (v.Value.Type == Flavour3)
+            {
+                flavList.Add(v.Value);
+            }
+
+        }
+        foreach (var v in DictTopping)
+        {
+            if (v.Value.Type == Topping1)
+            {
+                topList.Add(v.Value);
+            }else if (v.Value.Type == Topping2)
+            {
+                topList.Add(v.Value);
+            }else if(v.Value.Type == Topping3)
+            {
+                topList.Add(v.Value);
+            }else if( v.Value.Type == Topping4)
+            {
+                topList.Add(v.Value);
+            }
+        }
+    }
+    else if (Option == "Cone")
+    {
+        foreach (var v in DictFlavour)
+        {
+            if (v.Value.Type == Flavour1)
+            {
+                flavList.Add(v.Value);
+            }
+            else if (v.Value.Type == Flavour2)
+            {
+                flavList.Add(v.Value);
+            }
+            else if (v.Value.Type == Flavour3)
+            {
+                flavList.Add(v.Value);
+            }
+
+        }
+        foreach (var v in DictTopping)
+        {
+            if (v.Value.Type == Topping1)
+            {
+                topList.Add(v.Value);
+            }
+            else if (v.Value.Type == Topping2)
+            {
+                topList.Add(v.Value);
+            }
+            else if (v.Value.Type == Topping3)
+            {
+                topList.Add(v.Value);
+            }
+            else if (v.Value.Type == Topping4)
+            {
+                topList.Add(v.Value);
+            }
+        }
+        if (Dipped)
+        {
+
+        }
+        else
+        {
+
+            
+        }
+    }
+    else if (Option == "Waffle")
+    {
+
+    }
+    return null;
 }
 //==========================================================
 // Student Number : S10262791
@@ -264,12 +373,13 @@ void Option3()
         Console.WriteLine("Their registration customer details");
         Console.WriteLine($"Name: {newCustomer.Name,-10} Member ID:{newCustomer.MemberId,-10} DateofBirth: {newCustomer.Dob,-10:dd/MM/yyyy}");
         PointCard newPC = new PointCard(0, 0);
+        newPC.tier = "Ordinary";
         newCustomer.Rewards = newPC;
 
         using (StreamWriter sw = new StreamWriter("customers.csv", true))
         {
             string? row;
-            row = string.Join(",", newCustomer.Name, newCustomer.MemberId, $"{newCustomer.Dob:dd/MM/yyyy}");
+            row = string.Join(",", newCustomer.Name, newCustomer.MemberId, $"{newCustomer.Dob:dd/MM/yyyy}",newCustomer.Rewards.tier,newCustomer.Rewards.points,newCustomer.Rewards.punchCard);
             sw.WriteLine(row);
         }
         DictCustomer.Add(newCustomer.MemberId, newCustomer);
@@ -335,10 +445,10 @@ static customer? Search(Dictionary<int,customer> sDict, int userInp)
     {
         Console.WriteLine("Invalid number of scoops | Only 1 to 3 scoops");
     }
-    Console.Write("Enter number of toppings: ");
+    Console.Write("Enter number of toppings [1-4]: ");
     int topCount = Convert.ToInt32(Console.ReadLine());
     List<Topping> topList = new List<Topping>();
-    if (topCount > 0)
+    if (topCount > 0 && topCount <= 4)
     {
         for (int i = 1; i < topCount + 1; i++)
         {
@@ -482,14 +592,16 @@ void Option4()
                 printed += $"{v}\n";
             }
             Console.WriteLine(printed);
-            if (result.Rewards.tier == "gold")
+            if (result.Rewards.tier == "Gold")
             {
                 GoldQueueOrder.Enqueue(newOrd);
+                Console.WriteLine(result);
             }
             else
             {
                 RegularQueueOrder.Enqueue(newOrd);
             }
+                
         }
     }
     else
