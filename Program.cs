@@ -278,7 +278,6 @@ IceCream IceCreamRead(string Option, int Scoops, bool Dipped, string WaffleFlavo
         else
         {
 
-            
         }
     }
     else if (Option == "Waffle")
