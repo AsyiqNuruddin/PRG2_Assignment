@@ -1472,102 +1472,74 @@ void orderscsv()
                 string? line = sr.ReadLine();
                 if (line != null)
                 {
+                    
                     string[] stringtolist = line.Split(",");
-                    customer custom = DictCustomer[stringtolist[1]];
-                    Order newor = null;
-                    IceCream iceCream = null;
-                    if (custom.OrderHistory == null)
-                    {
-                        newor = new Order(stringtolist[0], DateTime.Parse(stringtolist[3]););
-                        newor.timeFulfilled = DateTime.Parse(stringtolist[4]);
-
-                    }
-                    else
-                    {
-                        foreach (Order or in custom.OrderHistory)
+                    if (stringtolist != null) {
+                        customer custom = DictCustomer[Convert.ToInt16(stringtolist[1])];
+                        Order newor = null;
+                        IceCream iceCream = null;
+                        if (custom.OrderHistory == null)
                         {
-                            if (or.id = stringtolist[0])
-                            {
-                                newor = or;
-
-                            }
+                            newor = new Order(Convert.ToInt16(stringtolist[0]), DateTime.Parse(stringtolist[3]));
+                            newor.timeFulfilled = DateTime.Parse(stringtolist[4]);
 
                         }
-                    }
-
-
-
-                    custom.CurrentOrder.id = stringtolist[0];
-                    if (stringtolist[4].ToLower() == "cup")
-                    {
-                        List<Flavour> fkav = new List<Flavour>();
-
-
-                        custom.CurrentOrder.id = stringtolist[0];
-
-                        int scoops = Convert.ToInt16(stringtolist[5])
-
-
-                        for (int i = 0; i <= scoops , i++)
+                        else
                         {
-                            fkav.Add(Flavour(stringtolist[7 + i]));
-
-                        }
-                        List<Topping> topping = new List<Topping>();
-                        for (int i = 0; i <= 4 , i++)
-                        {
-                            string newtop = stringtolist[11 + i]
-                            if (newtop != null)
+                            foreach (Order or in custom.OrderHistory)
                             {
-                                topping.Add(Topping(newtop))
+                                if (or.id == Convert.ToInt16(stringtolist[0]))
+                                {
+                                    newor = or;
 
+                                }
 
                             }
-                            else
-                            {
-                                break;
-
-                            }
-
-
-
                         }
-                        iceCream = new Cone("cone", scoops, fkav, topping);
 
 
-                    }
-                    else if (stringtolist[4].ToLower() == "waffle")
-                    {
-                        List<Flavour> fkav = new List<Flavour>();
 
-                        custom.CurrentOrder.id = stringtolist[0];
+                        
+                        if (stringtolist[4].ToLower() == "cup")
+                        {
+                            List<Flavour> fkav = new List<Flavour>();
 
-                        int scoops = Convert.ToInt16(stringtolist[5]);
+
+
+
+                            int scoops = Convert.ToInt16(stringtolist[5]);
+    
 
                         for (int i = 0; i <= scoops; i++)
-                        {
-                            fkav.Add(new Flavour(stringtolist[7 + i]));
-                        }
-
-                        List<Topping> topping = new List<Topping>();
-                        for (int i = 0; i <= 4; i++)
-                        {
-                            string newtop = stringtolist[11 + i];
-                            if (newtop != null)
                             {
-                                topping.Add(new Topping(newtop));
+                                Flavour flavour = new Flavour(stringtolist[7 + i],true,);
+                                fkav.Add(flavour);
+
                             }
-                            else
+                            List<Topping> topping = new List<Topping>();
+                            for (int i = 0; i <= 4 , i++)
                             {
-                                break;
+                                string newtop = stringtolist[11 + i];
+                                if (newtop != null)
+                                {
+                                    Topping tops = new Topping(newtop);
+                                    topping.Add(tops);
+
+
                             }
+                                else
+                                {
+                                    break;
+
+                                }
+
+
+
+                            }
+                            iceCream = new Cone("cone", scoops, fkav, topping,);
+
+
                         }
-
-                        iceCream = new Waffle("waffle", scoops, fkav, topping, stringtolist[7]);
-                    }
-
-                    else if (stringtolist[4].ToLower() == "cup")
-                    {
                         else if (stringtolist[4].ToLower() == "waffle")
                         {
                             List<Flavour> fkav = new List<Flavour>();
@@ -1595,17 +1567,49 @@ void orderscsv()
                                 }
                             }
 
-                            iceCream = new Cone("cone", scoops, fkav, topping, Convert.ToBoolean(stringtolist[6]));
+                            iceCream = new Waffle("waffle", scoops, fkav, topping, stringtolist[7]);
                         }
 
+                        else if (stringtolist[4].ToLower() == "cup")
+                        {
+                        else if (stringtolist[4].ToLower() == "waffle")
+                            {
+                                List<Flavour> fkav = new List<Flavour>();
+
+                                custom.CurrentOrder.id = stringtolist[0];
+
+                                int scoops = Convert.ToInt16(stringtolist[5]);
+
+                                for (int i = 0; i <= scoops; i++)
+                                {
+                                    fkav.Add(new Flavour(stringtolist[7 + i]));
+                                }
+
+                                List<Topping> topping = new List<Topping>();
+                                for (int i = 0; i <= 4; i++)
+                                {
+                                    string newtop = stringtolist[11 + i];
+                                    if (newtop != null)
+                                    {
+                                        topping.Add(new Topping(newtop));
+                                    }
+                                    else
+                                    {
+                                        break;
+                                    }
+                                }
+
+                                iceCream = new Cone("cone", scoops, fkav, topping, Convert.ToBoolean(stringtolist[6]));
+                            }
 
 
 
+
+
+                        }
+                        newor.IceCreamlist.Add(iceCream);
 
                     }
-                    newor.IceCreamlist.Add(iceCream);
-
-
 
                 }
 
