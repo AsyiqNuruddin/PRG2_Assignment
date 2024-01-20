@@ -20,7 +20,7 @@ namespace PRG2_Assignment_Order
         public int id {  get; set; }
         public DateTime timeRecieved { get; set; }
         public DateTime? timeFulfilled { get; set; }
-        public List<IceCream> IceCreamlist;
+        public List<IceCream> IceCreamlist
         { get; set; }
         public Order() 
         {
