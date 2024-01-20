@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\khooj\\Source\\Repos\\PRG2_Assignment1\\PRG2_Assignment.csproj": {}
+    "C:\\Users\\khooj\\Source\\Repos\\PRG2_Assignment\\PRG2_Assignment.csproj": {}
   },
   "projects": {
-    "C:\\Users\\khooj\\Source\\Repos\\PRG2_Assignment1\\PRG2_Assignment.csproj": {
+    "C:\\Users\\khooj\\Source\\Repos\\PRG2_Assignment\\PRG2_Assignment.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\khooj\\Source\\Repos\\PRG2_Assignment1\\PRG2_Assignment.csproj",
+        "projectUniqueName": "C:\\Users\\khooj\\Source\\Repos\\PRG2_Assignment\\PRG2_Assignment.csproj",
         "projectName": "PRG2_Assignment",
-        "projectPath": "C:\\Users\\khooj\\Source\\Repos\\PRG2_Assignment1\\PRG2_Assignment.csproj",
+        "projectPath": "C:\\Users\\khooj\\Source\\Repos\\PRG2_Assignment\\PRG2_Assignment.csproj",
         "packagesPath": "C:\\Users\\khooj\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\khooj\\Source\\Repos\\PRG2_Assignment1\\obj\\",
+        "outputPath": "C:\\Users\\khooj\\Source\\Repos\\PRG2_Assignment\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -59,7 +59,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
