@@ -27,11 +27,24 @@ namespace PRG2_Assignment_PointCard
             }
             public void AddPoints(int poi)
             {
+                points += poi;
 
 
             }
-            public void RedeemPoints(int poi) { }
-            public void Punch() { }
+            public void RedeemPoints(int poi) {
+                points -= poi;
+        
+            }
+            public void Punch() {
+                punchCard++;
+                if (points == 11) {
+                    points = 0;
+                    
+            
+                }
+            
+        
+            }
 
             public override string ToString()
             {
