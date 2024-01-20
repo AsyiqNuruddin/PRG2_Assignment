@@ -48,12 +48,19 @@ namespace PRG2_Assignment_Customer
             {
                 OrderHistory.Add(CurrentOrder);
             }
+            
         }
 
         public static bool IsBirthday()
         {
-
-            return true;
+            
+            
+            if ( Dob == DateTime.Now) { 
+                return true;
+            
+            }
+            else { return false; }
+            
         }
 
         public override string ToString()
