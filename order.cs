@@ -48,7 +48,7 @@ namespace PRG2_Assignment_Order
             IceCreamlist.Remove(IceCreamlist[id-1]);
         
         }
-        public static double CalcualteTotal() {
+        public double CalcualteTotal() {
             double total = 0;
 
             foreach (IceCream ice in IceCreamlist) { 
