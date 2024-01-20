@@ -51,7 +51,7 @@ namespace PRG2_Assignment_Customer
             
         }
 
-        public static bool IsBirthday()
+        public bool IsBirthday()
         {
             
             
