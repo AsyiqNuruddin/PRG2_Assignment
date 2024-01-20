@@ -20,7 +20,7 @@ namespace PRG2_Assignment_Order
         public int id {  get; set; }
         public DateTime timeRecieved { get; set; }
         public DateTime? timeFulfilled { get; set; }
-        public List<IceCream> IceCreamlist
+        public List<IceCream> IceCreamlist;
         { get; set; }
         public Order() 
         {
@@ -49,8 +49,15 @@ namespace PRG2_Assignment_Order
         
         }
         public static double CalcualteTotal() {
-
             double total = 0;
+
+            foreach (IceCream ice in IceCreamlist) { 
+                
+                double price = ice.CalculatePrice();
+                total += price;
+
+            
+            }
             return total;
 
         }
