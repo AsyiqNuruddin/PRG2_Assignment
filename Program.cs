@@ -703,9 +703,7 @@ void Option6()
             }
             Console.Write("Enter a ice cream to modify: ");
             int icecreanindex = Convert.ToInt32(Console.ReadLine());
-            IceCream Modifyice = result.CurrentOrder.IceCreamlist[icecreanindex - 1];
-
-            modifyicecream(Modifyice, result);
+            result.CurrentOrder.Modifyicecream(icecreanindex);
 
         }
         else if (choice == 2)
