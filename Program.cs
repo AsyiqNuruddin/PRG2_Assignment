@@ -881,6 +881,12 @@ void Option7() {
     }
     else {
         Console.WriteLine($"points: {servingcustomer.Rewards.points}");
+        int points = Convert.ToInt16(Math.Floor(total * 0.72));
+        servingcustomer.Rewards.AddPoints(points);
+
+    }
+    foreach (IceCream ice in servingorder.IceCreamlist) {
+        servingcustomer.Rewards.Punch();
     
     }
 
