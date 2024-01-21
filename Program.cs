@@ -649,25 +649,32 @@ void Option5() {
     Console.Write("Select the customer: ");
     int idInp = Convert.ToInt32(Console.ReadLine());
     customer? result = Search(DictCustomer, idInp);
-    List<IceCream> currentorder = result.CurrentOrder.IceCreamlist;
-    Console.WriteLine("current order");
-    Console.WriteLine(result.CurrentOrder.timeRecieved);
-    foreach (IceCream currenrorderice in currentorder) {
-        Console.WriteLine(currenrorderice);
+    if (result != null)
+    {
+        List<IceCream> currentorder = result.CurrentOrder.IceCreamlist;
+        Console.WriteLine("current order");
+        Console.WriteLine(result.CurrentOrder.timeRecieved);
+        foreach (IceCream currenrorderice in currentorder)
+        {
+            Console.WriteLine(currenrorderice);
 
-
-    }
-    Console.WriteLine("pass orders");
-    foreach (Order pastorder in result.OrderHistory) {
-        Console.WriteLine(pastorder.timeRecieved);
-        Console.WriteLine(pastorder.timeFulfilled);
-        foreach (IceCream pastorderice in pastorder.IceCreamlist) {
-            Console.WriteLine(pastorder);
 
         }
-    
-    
-    } 
+        Console.WriteLine("pass orders");
+        foreach (Order pastorder in result.OrderHistory)
+        {
+            Console.WriteLine(pastorder.timeRecieved);
+            Console.WriteLine(pastorder.timeFulfilled);
+            foreach (IceCream pastorderice in pastorder.IceCreamlist)
+            {
+                Console.WriteLine(pastorder);
+
+            }
+
+
+        }
+    }
+    else { Console.WriteLine("invalid customer"); }
     
 
 
@@ -684,7 +691,7 @@ void Option6()
     Console.Write("Select the customer: ");
     int idInp = Convert.ToInt32(Console.ReadLine());
     customer? result = Search(DictCustomer, idInp);
-    
+
     if (result != null)
     {
         Console.WriteLine("Menu:\r\n1. Modify an existing ice cream in the order\r\n2. Add a new ice cream to the order\r\n3. Delete an existing ice cream from the order");
@@ -702,7 +709,8 @@ void Option6()
 
             }
             Console.Write("Enter a ice cream to modify: ");
-            try {
+            try
+            {
                 int icecreanindex = Convert.ToInt32(Console.ReadLine());
                 result.CurrentOrder.Modifyicecream(icecreanindex);
             }
@@ -739,7 +747,8 @@ void Option6()
                     break;
 
                 }
-                else {
+                else
+                {
                     Console.WriteLine("invalid input.order finished.");
 
 
@@ -747,7 +756,8 @@ void Option6()
             }
 
         }
-        else if (choice == "2") {
+        else if (choice == "2")
+        {
 
             int count = 1;
             foreach (IceCream or in result.CurrentOrder.IceCreamlist)
@@ -759,11 +769,14 @@ void Option6()
 
             }
             Console.Write("Enter a ice cream to remove: ");
-            try { int icecreanindex = Convert.ToInt32(Console.ReadLine());
+            try
+            {
+                int icecreanindex = Convert.ToInt32(Console.ReadLine());
                 result.CurrentOrder.DeleteIceCream(icecreanindex);
             }
 
-            catch (FormatException){
+            catch (FormatException)
+            {
                 Console.WriteLine("invalid input.");
 
             }
@@ -781,6 +794,10 @@ void Option6()
 
         }
         else { Console.WriteLine("invalid input"); }
+    }
+    else {
+        Console.WriteLine("invalid custoemr.");
+
     }
        
 
