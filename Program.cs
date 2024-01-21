@@ -875,6 +875,8 @@ void Option7() {
         int points = Convert.ToInt16(Math.Floor(total * 0.72));
         servingcustomer.Rewards.AddPoints(points);
         servingcustomer.CurrentOrder.timeFulfilled = DateTime.Now;
+        servingcustomer.OrderHistory.Add(servingcustomer.CurrentOrder);
+        servingcustomer.CurrentOrder = null;
 
 
     }
@@ -894,7 +896,7 @@ void Option7() {
         servingcustomer.Rewards.AddPoints(points);
         servingcustomer.CurrentOrder.timeFulfilled = DateTime.Now;
         servingcustomer.OrderHistory.Add(servingcustomer.CurrentOrder);
-        servingcustomer.CurrentOrder.
+        servingcustomer.CurrentOrder = null ;
 
     }
     foreach (IceCream ice in servingorder.IceCreamlist) {
@@ -911,9 +913,21 @@ void Option7() {
 } 
 void Option8() {
     Console.Write("Enter the year: ");
+    int year = Convert.ToInt16(Console.ReadLine()); 
+
     foreach (var custo in DictCustomer) {
         customer custom = custo.Value;
-        foreach (Order or in custom.OrderHistory) { 
+        foreach (Order or in custom.OrderHistory) {
+            DateTime? orderdate = or.timeFulfilled;
+            if (orderdate.Value.Year == year) { 
+
+                
+                
+            
+            
+            
+            
+            }
 
         
         
