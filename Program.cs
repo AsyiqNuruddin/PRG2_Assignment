@@ -689,8 +689,8 @@ void Option6()
     {
         Console.WriteLine("Menu:\r\n1. Modify an existing ice cream in the order\r\n2. Add a new ice cream to the order\r\n3. Delete an existing ice cream from the order");
         Console.Write("Please enter the number corresponding to your choice: ");
-        int choice = Convert.ToInt32(Console.ReadLine());
-        if (choice == 1)
+        string choice = Console.ReadLine();
+        if (choice == "1")
         {
             int count = 1;
             foreach (IceCream or in result.CurrentOrder.IceCreamlist)
@@ -702,11 +702,24 @@ void Option6()
 
             }
             Console.Write("Enter a ice cream to modify: ");
-            int icecreanindex = Convert.ToInt32(Console.ReadLine());
-            result.CurrentOrder.Modifyicecream(icecreanindex);
+            try {
+                int icecreanindex = Convert.ToInt32(Console.ReadLine());
+                result.CurrentOrder.Modifyicecream(icecreanindex);
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("invalid input.");
+
+            }
+            catch (IndexOutOfRangeException)
+            {
+                Console.WriteLine("invalid input.");
+
+            }
+
 
         }
-        else if (choice == 2)
+        else if (choice == "2")
         {
             while (true)
             {
@@ -722,13 +735,20 @@ void Option6()
                 }
                 else if (yesorno.ToLower() == "n")
                 {
+                    Console.WriteLine("order finished.");
                     break;
+
+                }
+                else {
+                    Console.WriteLine("invalid input.order finished.");
+
 
                 }
             }
 
         }
-        else if (choice == 3) {
+        else if (choice == "2") {
+
             int count = 1;
             foreach (IceCream or in result.CurrentOrder.IceCreamlist)
             {
@@ -739,13 +759,28 @@ void Option6()
 
             }
             Console.Write("Enter a ice cream to remove: ");
-            int icecreanindex = Convert.ToInt32(Console.ReadLine());
-            IceCream Modifyice = result.CurrentOrder.IceCreamlist[icecreanindex - 1];
-            //result.CurrentOrder.DeleteIceCream(Modifyice);
+            try { int icecreanindex = Convert.ToInt32(Console.ReadLine());
+                result.CurrentOrder.DeleteIceCream(icecreanindex);
+            }
+
+            catch (FormatException){
+                Console.WriteLine("invalid input.");
+
+            }
+            catch (IndexOutOfRangeException)
+            {
+                Console.WriteLine("invalid input.");
+
+            }
+
+
+
+
 
 
 
         }
+        else { Console.WriteLine("invalid input"); }
     }
        
 
