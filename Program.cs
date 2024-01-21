@@ -874,6 +874,7 @@ void Option7() {
         Console.WriteLine($"fianl toatal: {total}");
         int points = Convert.ToInt16(Math.Floor(total * 0.72));
         servingcustomer.Rewards.AddPoints(points);
+        servingcustomer.CurrentOrder.timeFulfilled = DateTime.Now;
 
 
     }
@@ -891,6 +892,9 @@ void Option7() {
         else if (redeem == "n") { }
         int points = Convert.ToInt16(Math.Floor(total * 0.72));
         servingcustomer.Rewards.AddPoints(points);
+        servingcustomer.CurrentOrder.timeFulfilled = DateTime.Now;
+        servingcustomer.OrderHistory.Add(servingcustomer.CurrentOrder);
+        servingcustomer.CurrentOrder.
 
     }
     foreach (IceCream ice in servingorder.IceCreamlist) {
@@ -905,6 +909,22 @@ void Option7() {
 
 
 } 
+void Option8() {
+    Console.Write("Enter the year: ");
+    foreach (var custo in DictCustomer) {
+        customer custom = custo.Value;
+        foreach (Order or in custom.OrderHistory) { 
+
+        
+        
+        }
+        
+    
+    }
+
+
+
+}
 Dictionary<int,string> wafflelist = new Dictionary<int,string>();
 void initwaffle(Dictionary<int, string> wafflelist) {
     wafflelist.Add(1, "regular");
