@@ -7,6 +7,7 @@ using PRG2_Assignment_Cup;
 using PRG2_Assignment_Flavour;
 using PRG2_Assignment_IceCream;
 using PRG2_Assignment_Topping;
+using System.Globalization;
 using System;
 using System.Diagnostics;
 using Microsoft.VisualBasic.FileIO;
@@ -56,7 +57,7 @@ while (true)
         Option7();
     }else if (usrInp == "8")
     {
-        //Option8();
+        Option8();
     }
     else if(usrInp == "-1")
     {
@@ -913,32 +914,43 @@ void Option7() {
 } 
 void Option8() {
     Console.Write("Enter the year: ");
-    int year = Convert.ToInt16(Console.ReadLine()); 
+    int inputYear = int.Parse(Console.ReadLine());
+
+    // Assuming DictCustomer is a Dictionary<string, customer>
+    double[] monthlyTotals = new double[12]; // One entry for each month
 
     foreach (var custo in DictCustomer) {
         customer custom = custo.Value;
-        foreach (Order or in custom.OrderHistory) {
-            DateTime? orderdate = or.timeFulfilled;
-            if (orderdate.Value.Year == year) { 
 
-                
-                
-            
-            
-            
-            
-            }
+        // Group orders by month
+        var ordersByMonth = custom.OrderHistory
+            .Where(or => or.timeFulfilled.HasValue && or.timeFulfilled.Value.Year == inputYear)
+            .GroupBy(or => or.timeFulfilled.Value.Month);
 
-        
-        
+        // Iterate through each month
+        foreach (var monthGroup in ordersByMonth) {
+            int month = monthGroup.Key;
+
+            // Retrieve IceCreamList for the month
+            List<IceCream> iceCreamList = monthGroup
+                .SelectMany(or => or.IceCreamlist)
+                .ToList();
+
+            // Calculate total for the month
+            double monthTotal = iceCreamList.Sum(iceCream => iceCream.CalculatePrice());
+            monthlyTotals[month - 1] += monthTotal; // Adjust month index to 0-based
+
+            // Do something with the monthTotal or other logic
+            Console.WriteLine($"Month: {month}, Ice Cream Total: {monthTotal}");
         }
-        
-    
     }
 
-
-
+    // Print the total for each month
+    for (int i = 0; i < monthlyTotals.Length; i++) {
+        Console.WriteLine($"Total for {CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i + 1)}: {monthlyTotals[i]}");
+    }
 }
+
 Dictionary<int,string> wafflelist = new Dictionary<int,string>();
 void initwaffle(Dictionary<int, string> wafflelist) {
     wafflelist.Add(1, "regular");
