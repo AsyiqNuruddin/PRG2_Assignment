@@ -913,6 +913,7 @@ void Option7() {
 
 } 
 void Option8() {
+    double  yearlytoal = 0;
     Console.Write("Enter the year: ");
     int inputYear = int.Parse(Console.ReadLine());
 
@@ -939,9 +940,10 @@ void Option8() {
             // Calculate total for the month
             double monthTotal = iceCreamList.Sum(iceCream => iceCream.CalculatePrice());
             monthlyTotals[month - 1] += monthTotal; // Adjust month index to 0-based
+            yearlytoal += monthTotal;
 
             // Do something with the monthTotal or other logic
-            Console.WriteLine($"Month: {month}, Ice Cream Total: {monthTotal}");
+            
         }
     }
 
@@ -949,6 +951,7 @@ void Option8() {
     for (int i = 0; i < monthlyTotals.Length; i++) {
         Console.WriteLine($"Total for {CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i + 1)}: {monthlyTotals[i]}");
     }
+    Console.WriteLine($"total: {yearlytoal}");
 }
 
 Dictionary<int,string> wafflelist = new Dictionary<int,string>();
