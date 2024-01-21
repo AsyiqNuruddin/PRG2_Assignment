@@ -554,6 +554,7 @@ void Option4()
         while (true)
         {
             Console.Write("Enter their ice cream order type (Cup, Cone or Waffle): ");
+            
             string choiceInp = Console.ReadLine();
             choiceInp = choiceInp.ToLower();
             if (choiceInp == "cup")
@@ -804,6 +805,77 @@ void Option6()
     
 
 }
+void Optiion7() { 
+    Order servingorder = GoldQueueOrder.Dequeue();
+    double total = servingorder.CalcualteTotal();
+    foreach (IceCream ice in servingorder.IceCreamlist) {
+        Console.WriteLine(ice);
+
+    }
+    Console.WriteLine($"total cost: {total}");
+    customer servingcustomer = null;
+    foreach(var custo in DictCustomer) {
+        customer customers = custo.Value;
+        if (customers != null)
+        {
+            if (customers.CurrentOrder.id == servingorder.id)
+            {
+                servingcustomer = customers;
+                break;
+
+
+            }
+            else {
+                continue;
+            
+            }
+        }
+    
+    
+    }
+    Console.WriteLine($"membership teir: {servingcustomer.Rewards.tier}        points: {servingcustomer.Rewards.points}");
+    if (servingcustomer.IsBirthday()) {
+        Console.WriteLine("happy birthday");
+        double highest = 0;
+        foreach (IceCream ice in servingorder.IceCreamlist) {
+            if (ice.CalculatePrice() >= highest)
+            {
+                highest = ice.CalculatePrice();
+
+            }
+            else {
+                continue;
+            
+            }
+        
+        }
+        total -= highest;
+        Console.WriteLine($"new total :{total}");
+    
+    
+    
+    }
+    
+    foreach (IceCream order in servingorder.IceCreamlist) {
+        IceCream firstice = servingorder.IceCreamlist[0];
+        servingcustomer.Rewards.Punch();
+        if (servingcustomer.Rewards.punchCard == 11) {
+            Console.WriteLine("you have 11 punches on ur punch card.your first icecreamm is free");
+            servingcustomer.Rewards.punchCard = 0;
+            total-= firstice.CalculatePrice();
+
+
+
+
+        }
+
+    
+    }
+
+
+
+
+} 
 Dictionary<int,string> wafflelist = new Dictionary<int,string>();
 void initwaffle(Dictionary<int, string> wafflelist) {
     wafflelist.Add(1, "regular");

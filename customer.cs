@@ -1,18 +1,14 @@
-﻿//==========================================================
-// Student Number : S10257702
-// Student Name : Jia Xiang
-// Partner Name : Asyiq Nuruddin
-//==========================================================
+﻿using PRG2_Assignment_Order;
+using PRG2_Assignment_PointCard;
 using System;
 using System.Collections.Generic;
-using PRG2_Assignment_Order;
-using PRG2_Assignment_PointCard;
-// Make sure to include the correct namespace for the Order class
 
 namespace PRG2_Assignment_Customer
 {
     internal class customer
     {
+        private static int nextOrderId = 1;  // Static variable to keep track of the next available order ID
+
         public string Name { get; set; }
         public int MemberId { get; set; }
         public DateTime Dob { get; set; }
@@ -37,30 +33,23 @@ namespace PRG2_Assignment_Customer
 
         public void MakeOrder()
         {
-            // Increment the order ID to make it unique
-            int newOrderId = OrderHistory.Count + 1;
-
             // Create a new order with a unique ID and the current timestamp
-            CurrentOrder = new Order(newOrderId, DateTime.Now);
+            CurrentOrder = new Order(nextOrderId, DateTime.Now);
+
+            // Increment the next available order ID for the next order
+            nextOrderId++;
 
             // Move the current order to order history
             if (CurrentOrder != null)
             {
                 OrderHistory.Add(CurrentOrder);
             }
-            
         }
 
         public bool IsBirthday()
         {
-            
-            
-            if ( Dob == DateTime.Now) { 
-                return true;
-            
-            }
-            else { return false; }
-            
+            // Check if the current date matches the customer's birthday
+            return Dob.Month == DateTime.Now.Month && Dob.Day == DateTime.Now.Day;
         }
 
         public override string ToString()
