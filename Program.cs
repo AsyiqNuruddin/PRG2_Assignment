@@ -53,7 +53,7 @@ while (true)
         Option6();
     }else if (usrInp == "7")
     {
-        //Option7();
+        Option7();
     }else if (usrInp == "8")
     {
         //Option8();
@@ -805,8 +805,8 @@ void Option6()
     
 
 }
-void Optiion7() { 
-    Order servingorder = GoldQueueOrder.Dequeue();
+void Option7() { 
+    Order servingorder = RegularQueueOrder.Dequeue();
     double total = servingorder.CalcualteTotal();
     foreach (IceCream ice in servingorder.IceCreamlist) {
         Console.WriteLine(ice);

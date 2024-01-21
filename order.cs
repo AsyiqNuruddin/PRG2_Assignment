@@ -157,11 +157,12 @@ namespace PRG2_Assignment_Order
                     string option = Console.ReadLine();
                     if (option == "1")
                     {
-                        Console.Write("Enter new type(Cone or cup): ");
+                        Console.Write("Enter new type(waffle or cup): ");
                         string newtype = Console.ReadLine();
                         if (newtype == "cup")
                         {
                             modifiedice = new Cup("cup", result.Scoops, result.Flavours, result.Toppings);
+                            IceCreamlist[id - 1] = modifiedice;
 
                         }
                         else if (newtype == "waffle")
@@ -171,8 +172,10 @@ namespace PRG2_Assignment_Order
                             int wafflenum = Convert.ToInt32(Console.ReadLine());
                             string waffeflav = wafflelist[wafflenum];
                             modifiedice = new Waffle("waffle", result.Scoops, result.Flavours, result.Toppings, waffeflav);
+                            IceCreamlist[id - 1] = modifiedice;
                         }
-                        IceCreamlist[id - 1] = modifiedice;
+                        else { Console.WriteLine("invalid input."); }
+                        
 
 
                     }
@@ -287,6 +290,7 @@ namespace PRG2_Assignment_Order
                         if (dipped.ToLower() == "y")
                         {
                             modifiedice = new Cone("cone", result.Scoops, result.Flavours, result.Toppings, true);
+                            IceCreamlist[id - 1] = modifiedice;
 
 
 
@@ -294,11 +298,13 @@ namespace PRG2_Assignment_Order
                         else if (dipped.ToLower() == "n")
                         {
                             modifiedice = new Cone("cone", result.Scoops, result.Flavours, result.Toppings, false);
+                            IceCreamlist[id - 1] = modifiedice;
 
 
 
                         }
-                        IceCreamlist[id - 1] = modifiedice;
+                        else { Console.WriteLine("invalid input"); }
+                        
 
                     }
 
