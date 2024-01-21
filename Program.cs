@@ -858,7 +858,7 @@ void Optiion7() {
     
     foreach (IceCream order in servingorder.IceCreamlist) {
         IceCream firstice = servingorder.IceCreamlist[0];
-        servingcustomer.Rewards.Punch();
+        
         if (servingcustomer.Rewards.punchCard == 11) {
             Console.WriteLine("you have 11 punches on ur punch card.your first icecreamm is free");
             servingcustomer.Rewards.punchCard = 0;
@@ -871,7 +871,18 @@ void Optiion7() {
 
     
     }
+    if (servingcustomer.Rewards.tier == "Ordinary")
+    {
+        Console.WriteLine($"fianl toatal: {total}");
+        int points = Convert.ToInt16(Math.Floor(total * 0.72));
+        servingcustomer.Rewards.AddPoints(points);
 
+
+    }
+    else {
+        Console.WriteLine($"points: {servingcustomer.Rewards.points}");
+    
+    }
 
 
 
