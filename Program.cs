@@ -19,7 +19,9 @@ using System.Runtime.Intrinsics.X86;
 // Student Number : S10262791
 // Student Name : Asyiq Nuruddin
 //==========================================================
-Dictionary<int, customer> DictCustomer = new Dictionary<int, customer>();
+Dictionary<int, Customer
+> DictCustomer = new Dictionary<int, Customer
+>();
 Queue<Order> GoldQueueOrder = new Queue<Order>();
 Queue<Order> RegularQueueOrder = new Queue<Order>();
 Dictionary<int, Flavour> DictFlavour = new Dictionary<int, Flavour>();
@@ -92,7 +94,9 @@ void InitCustomer(string txtfile)
         while ((s = sr.ReadLine()) != null)
         {
             rowList = s.Split(',').ToList();
-            customer newCustomer = new customer(rowList[0], Convert.ToInt32(rowList[1]), Convert.ToDateTime(rowList[2]));
+            Customer
+ newCustomer = new Customer
+(rowList[0], Convert.ToInt32(rowList[1]), Convert.ToDateTime(rowList[2]));
             newCustomer.Rewards = new PointCard(Convert.ToInt32(rowList[4]), Convert.ToInt32(rowList[5]));
             newCustomer.Rewards.tier = rowList[3];
             DictCustomer.Add(Convert.ToInt32(rowList[1]), newCustomer);
@@ -351,7 +355,8 @@ void DisplayToppings(Dictionary<int, Topping> dt)
 // Student Name : Asyiq Nuruddin
 //==========================================================
 
-void Option1(Dictionary<int, customer> DictCustomer) 
+void Option1(Dictionary<int, Customer
+> DictCustomer) 
 {
     foreach(var kvp in DictCustomer)
     {
@@ -365,7 +370,8 @@ void Option2()
     {
         Console.WriteLine($"Name: {kvp.Value.Name,-15} Member ID:{kvp.Value.MemberId,-10} DateofBirth: {kvp.Value.Dob,-10:dd/MM/yyyy}");
         Console.WriteLine("orders");
-        customer customer = kvp.Value;
+        Customer
+ customer = kvp.Value;
         if(customer != null && customer.CurrentOrder != null && customer.CurrentOrder.IceCreamlist != null) {
             foreach (IceCream or in customer.CurrentOrder.IceCreamlist) {
                 Console.WriteLine(or);
@@ -409,7 +415,9 @@ void Option3()
     }
     if (!same)
     {
-        customer newCustomer = new customer(nameInp, idInp, dob);
+        Customer
+ newCustomer = new Customer
+(nameInp, idInp, dob);
         Console.WriteLine("Their registration customer details");
         Console.WriteLine($"Name: {newCustomer.Name,-10} Member ID:{newCustomer.MemberId,-10} DateofBirth: {newCustomer.Dob,-10:dd/MM/yyyy}");
         PointCard newPC = new PointCard(0, 0);
@@ -435,7 +443,9 @@ void Option3()
 // Student Number : S10262791
 // Student Name : Asyiq Nuruddin
 //==========================================================
-static customer? Search(Dictionary<int,customer> sDict, int userInp)
+static Customer
+? Search(Dictionary<int,Customer
+> sDict, int userInp)
 {
     foreach (var v in sDict)
     {
@@ -549,7 +559,8 @@ void Option4()
     IceCream newice = null;
     Console.Write("Select the customer: ");
     int idInp = Convert.ToInt32(Console.ReadLine());
-    customer? result = Search(DictCustomer, idInp);
+    Customer
+? result = Search(DictCustomer, idInp);
     if (result != null)
     {
         Console.WriteLine("Found Customer ");
@@ -654,7 +665,8 @@ void Option5() {
     Option1(DictCustomer);
     Console.Write("Select the customer: ");
     int idInp = Convert.ToInt32(Console.ReadLine());
-    customer? result = Search(DictCustomer, idInp);
+    Customer
+? result = Search(DictCustomer, idInp);
     if (result != null)
     {
         List<IceCream> currentorder = result.CurrentOrder.IceCreamlist;
@@ -696,7 +708,8 @@ void Option6()
     Option1(DictCustomer);
     Console.Write("Select the customer: ");
     int idInp = Convert.ToInt32(Console.ReadLine());
-    customer? result = Search(DictCustomer, idInp);
+    Customer
+? result = Search(DictCustomer, idInp);
 
     if (result != null)
     {
@@ -818,9 +831,11 @@ void Option7() {
 
     }
     Console.WriteLine($"total cost: {total}");
-    customer servingcustomer = null;
+    Customer
+ servingcustomer = null;
     foreach(var custo in DictCustomer) {
-        customer customers = custo.Value;
+        Customer
+ customers = custo.Value;
         if (customers != null)
         {
             if (customers.CurrentOrder.id == servingorder.id)
@@ -944,7 +959,8 @@ void displaywaffle(Dictionary<int, string> wafflelist) {
 
 
 
-void Makeicecream(string type,customer result) {
+void Makeicecream(string type,Customer
+ result) {
     IceCream newIceCream = null;
     List<Flavour> flavlist = new List<Flavour>();
     List<Topping> toplist = new List<Topping>();
@@ -1162,7 +1178,8 @@ void modifydiplay() {
 }
 
 
-void modifyicecream(IceCream result,customer cust ) {
+void modifyicecream(IceCream result,Customer
+ cust ) {
     Dictionary<int, string> wafflelist = new Dictionary<int, string>();
     initwaffle(wafflelist);
     List<Flavour> flavlist = new List<Flavour>();
@@ -1643,7 +1660,8 @@ void orderscsv()
                     
                     string[] stringtolist = line.Split(",");
                     if (stringtolist != null) {
-                        customer custom = DictCustomer[Convert.ToInt16(stringtolist[1])];
+                        Customer
+ custom = DictCustomer[Convert.ToInt16(stringtolist[1])];
                         Order newor = null;
                         IceCream iceCream = null;
                         if (custom.OrderHistory == null)

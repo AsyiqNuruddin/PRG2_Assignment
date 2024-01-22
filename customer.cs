@@ -5,7 +5,8 @@ using System.Collections.Generic;
 
 namespace PRG2_Assignment_Customer
 {
-    internal class customer
+    internal class Customer
+
     {
         private static int nextOrderId = 1;  // Static variable to keep track of the next available order ID
 
@@ -16,13 +17,15 @@ namespace PRG2_Assignment_Customer
         public List<Order> OrderHistory { get; set; }
         public PointCard Rewards { get; set; }
 
-        public customer()
+        public Customer
+()
         {
             CurrentOrder = new Order();
             OrderHistory = new List<Order>();
         }
 
-        public customer(string name, int memberId, DateTime birth)
+        public Customer
+(string name, int memberId, DateTime birth)
         {
             Name = name;
             MemberId = memberId;
