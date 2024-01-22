@@ -22,9 +22,7 @@ using System.Linq;
 // Student Number : S10262791
 // Student Name : Asyiq Nuruddin
 //==========================================================
-Dictionary<int, Customer
->DictCustomer = new Dictionary<int, Customer
->();
+Dictionary<int, Customer>DictCustomer = new Dictionary<int, Customer>();
 Queue<Order> GoldQueueOrder = new Queue<Order>();
 Queue<Order> RegularQueueOrder = new Queue<Order>();
 Dictionary<int, Flavour> DictFlavour = new Dictionary<int, Flavour>();
@@ -86,7 +84,7 @@ void Intialdisplay() {
     Console.WriteLine("[4] Create customer order");
     Console.WriteLine("[5] Display order detail of customner");
     Console.WriteLine("[6] Modify order detail");
-    Console.WriteLine("[7] check out");
+    Console.WriteLine("[7] Check Out");
     Console.WriteLine("[8] Display cahrged amount break down"); 
     Console.WriteLine("[0] Exit");
 
@@ -110,9 +108,7 @@ void InitCustomer(string txtfile)
         while ((s = sr.ReadLine()) != null)
         {
             rowList = s.Split(',').ToList();
-            Customer
- newCustomer = new Customer
-(rowList[0], Convert.ToInt32(rowList[1]), Convert.ToDateTime(rowList[2]));
+            Customer newCustomer = new Customer (rowList[0], Convert.ToInt32(rowList[1]), Convert.ToDateTime(rowList[2]));
             newCustomer.Rewards = new PointCard(Convert.ToInt32(rowList[4]), Convert.ToInt32(rowList[5]));
             newCustomer.Rewards.tier = rowList[3];
             DictCustomer.Add(Convert.ToInt32(rowList[1]), newCustomer);
@@ -377,7 +373,7 @@ void Option1(Dictionary<int, Customer
     foreach(var kvp in DictCustomer)
     {
         Console.WriteLine($"Name: {kvp.Value.Name,-15} Member ID:{kvp.Value.MemberId,-10} DateofBirth: {kvp.Value.Dob,-10:dd/MM/yyyy} MemberShip Status: {kvp.Value.Rewards.tier,-10} Points: {kvp.Value.Rewards.points,-3} Punch Card: {kvp.Value.Rewards.punchCard}");
-        Console.WriteLine(kvp.Value.OrderHistory.Count);
+        // Console.WriteLine(kvp.Value.OrderHistory.Count);
     }
 }
 void Option2() 
@@ -386,8 +382,7 @@ void Option2()
     {
         Console.WriteLine($"Name: {kvp.Value.Name,-15} Member ID:{kvp.Value.MemberId,-10} DateofBirth: {kvp.Value.Dob,-10:dd/MM/yyyy}");
         Console.WriteLine("orders");
-        Customer
- customer = kvp.Value;
+        Customer customer = kvp.Value;
         if(customer != null && customer.CurrentOrder != null && customer.CurrentOrder.IceCreamlist != null) {
             foreach (IceCream or in customer.CurrentOrder.IceCreamlist) {
                 Console.WriteLine(or);
@@ -432,8 +427,7 @@ void Option3()
     if (!same)
     {
         Customer
- newCustomer = new Customer
-(nameInp, idInp, dob);
+        newCustomer = new Customer (nameInp, idInp, dob);
         Console.WriteLine("Their registration customer details");
         Console.WriteLine($"Name: {newCustomer.Name,-10} Member ID:{newCustomer.MemberId,-10} DateofBirth: {newCustomer.Dob,-10:dd/MM/yyyy}");
         PointCard newPC = new PointCard(0, 0);
