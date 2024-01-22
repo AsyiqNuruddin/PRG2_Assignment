@@ -920,7 +920,7 @@ void Option8() {
 
 Dictionary<int,string> wafflelist = new Dictionary<int,string>();
 void initwaffle(Dictionary<int, string> wafflelist) {
-    wafflelist.Add(1, "regular");
+    wafflelist.Add(1, "Original");
     wafflelist.Add(2, "Red velvet");
     wafflelist.Add(3, "charcoal");
     wafflelist.Add(4, "pandan waffle");
