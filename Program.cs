@@ -453,8 +453,7 @@ void Option3()
 // Student Number : S10262791
 // Student Name : Asyiq Nuruddin
 //==========================================================
-static Customer
-? Search(Dictionary<int,Customer
+static Customer? Search(Dictionary<int,Customer
 > sDict, int userInp)
 {
     foreach (var v in sDict)
@@ -569,8 +568,7 @@ void Option4()
     IceCream newice = null;
     Console.Write("Select the customer: ");
     int idInp = Convert.ToInt32(Console.ReadLine());
-    Customer
-? result = Search(DictCustomer, idInp);
+    Customer? result = Search(DictCustomer, idInp);
     if (result != null)
     {
         Console.WriteLine("Found Customer ");
