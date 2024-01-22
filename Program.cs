@@ -913,45 +913,9 @@ void Option7() {
 
 } 
 void Option8() {
-    double  yearlytoal = 0;
-    Console.Write("Enter the year: ");
-    int inputYear = int.Parse(Console.ReadLine());
-
-    // Assuming DictCustomer is a Dictionary<string, customer>
-    double[] monthlyTotals = new double[12]; // One entry for each month
-
-    foreach (var custo in DictCustomer) {
-        customer custom = custo.Value;
-
-        // Group orders by month
-        var ordersByMonth = custom.OrderHistory
-            .Where(or => or.timeFulfilled.HasValue && or.timeFulfilled.Value.Year == inputYear)
-            .GroupBy(or => or.timeFulfilled.Value.Month);
-
-        // Iterate through each month
-        foreach (var monthGroup in ordersByMonth) {
-            int month = monthGroup.Key;
-
-            // Retrieve IceCreamList for the month
-            List<IceCream> iceCreamList = monthGroup
-                .SelectMany(or => or.IceCreamlist)
-                .ToList();
-
-            // Calculate total for the month
-            double monthTotal = iceCreamList.Sum(iceCream => iceCream.CalculatePrice());
-            monthlyTotals[month - 1] += monthTotal; // Adjust month index to 0-based
-            yearlytoal += monthTotal;
-
-            // Do something with the monthTotal or other logic
-            
-        }
-    }
-
-    // Print the total for each month
-    for (int i = 0; i < monthlyTotals.Length; i++) {
-        Console.WriteLine($"Total for {CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i + 1)}: {monthlyTotals[i]}");
-    }
-    Console.WriteLine($"total: {yearlytoal}");
+    
+        
+    
 }
 
 Dictionary<int,string> wafflelist = new Dictionary<int,string>();
