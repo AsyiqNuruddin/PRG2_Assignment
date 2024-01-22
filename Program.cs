@@ -836,8 +836,16 @@ void Option6()
     
 
 }
-void Option7() { 
-    Order servingorder = RegularQueueOrder.Dequeue();
+void Option7() {
+    Order servingorder = null;
+    if (GoldQueueOrder.Count == 0) { 
+        servingorder = GoldQueueOrder.Dequeue();
+    
+    }
+    else
+    {
+        servingorder = RegularQueueOrder.Dequeue();
+    }
     double total = servingorder.CalcualteTotal();
     foreach (IceCream ice in servingorder.IceCreamlist) {
         Console.WriteLine(ice);
