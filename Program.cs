@@ -76,7 +76,7 @@ do{
 while (true);
 
 void Intialdisplay() {
-    Console.WriteLine("i.c treats icecream shop");
+    Console.WriteLine("-------i.c treats icecream shop-------");
     Console.WriteLine("[1] List all customers");
     Console.WriteLine("[2] List all current orders");
     Console.WriteLine("[3] Register new customer");
