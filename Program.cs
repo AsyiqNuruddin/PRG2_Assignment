@@ -32,8 +32,10 @@ InitFlavours("flavours.csv",DictFlavour);
 InitToppings("toppings.csv",DictTopping);
 InitOrders("orders.csv");
 // Loop of Options
-while (true) 
-{
+
+do{
+    Intialdisplay();
+
     Console.Write("Please enter your option: ");
     string usrInp = Console.ReadLine();
     if (usrInp == "1")
@@ -61,7 +63,7 @@ while (true)
     {
         Option8();
     }
-    else if(usrInp == "-1")
+    else if(usrInp == "0")
     {
         Console.WriteLine("Thanks for using the application!");
         break;
@@ -71,8 +73,19 @@ while (true)
         Console.WriteLine("Please enter a appriopriate input [1 - 7] Option or [-1] to Exit");
     }
 }
-void intialdisplay() {
-    Console.WriteLine();
+while (true);
+
+void Intialdisplay() {
+    Console.WriteLine("i.c treats icecream shop");
+    Console.WriteLine("[1] List all customers");
+    Console.WriteLine("[2] List all current orders");
+    Console.WriteLine("[3] Register new customer");
+    Console.WriteLine("[4] Create customer order");
+    Console.WriteLine("[5] Display order detail of customner");
+    Console.WriteLine("[6] Modify order detail");
+    Console.WriteLine("[7] check out");
+    Console.WriteLine("[8] Display cahrged amount break down"); 
+    Console.WriteLine("[0] Exit");
 
 }
 //==========================================================
