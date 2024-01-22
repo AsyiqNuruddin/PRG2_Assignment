@@ -13,6 +13,9 @@ using System.Diagnostics;
 using Microsoft.VisualBasic.FileIO;
 using static System.Formats.Asn1.AsnWriter;
 using System.Runtime.Intrinsics.X86;
+using System.Numerics;
+using System.Reflection.PortableExecutable;
+using System.Linq;
 
 
 //==========================================================
@@ -20,7 +23,7 @@ using System.Runtime.Intrinsics.X86;
 // Student Name : Asyiq Nuruddin
 //==========================================================
 Dictionary<int, Customer
-> DictCustomer = new Dictionary<int, Customer
+>DictCustomer = new Dictionary<int, Customer
 >();
 Queue<Order> GoldQueueOrder = new Queue<Order>();
 Queue<Order> RegularQueueOrder = new Queue<Order>();
@@ -213,7 +216,7 @@ void InitOrders(string txtfile)
         }
     }
 }
-// 4Option,5Scoops,6Dipped,7WaffleFlavour,8Flavour1,9Flavour2,10Flavour3,11Topping1,12Topping2,13Topping3,14Topping4
+// 0Id,1MemberId,2TimeReceived,3TimeFulfilled,4Option,5Scoops,6Dipped,7WaffleFlavour,8Flavour1,9Flavour2,10Flavour3,11Topping1,12Topping2,13Topping3,14Topping4
 IceCream IceCreamRead(string Option, int Scoops, string Dipped, string? WaffleFlavour, string? Flavour1, string? Flavour2, string? Flavour3, string? Topping1, string? Topping2, string? Topping3, string? Topping4)
 {
     IceCream? newIC = new Cup();
@@ -374,7 +377,7 @@ void Option1(Dictionary<int, Customer
     foreach(var kvp in DictCustomer)
     {
         Console.WriteLine($"Name: {kvp.Value.Name,-15} Member ID:{kvp.Value.MemberId,-10} DateofBirth: {kvp.Value.Dob,-10:dd/MM/yyyy} MemberShip Status: {kvp.Value.Rewards.tier,-10} Points: {kvp.Value.Rewards.points,-3} Punch Card: {kvp.Value.Rewards.punchCard}");
-        // Console.WriteLine(kvp.Value.OrderHistory.Count);
+        Console.WriteLine(kvp.Value.OrderHistory.Count);
     }
 }
 void Option2() 
@@ -608,6 +611,11 @@ void Option4()
                     (int, List<Flavour>, List<Topping>) cat = IceCreamAdd(DictFlavour, DictTopping);
                     newice = new Cone("Cone", cat.Item1, cat.Item2, cat.Item3, false);
                 }
+                else
+                {
+                    Console.WriteLine("Only [Y/N] or [y/n] accepted");
+                    break;
+                }
             }
             else if (choiceInp == "waffle")
             {
@@ -644,7 +652,7 @@ void Option4()
             }
             else
             {
-                Console.WriteLine("Invalid Input (Y/N) or (y/n) only\nOrder will be stopped");
+                Console.WriteLine("Invalid Input (Y/N) or (y/n) only\nOrdering will be stopped");
             }
         }
 
@@ -684,7 +692,6 @@ void Option5() {
     {
         List<IceCream> currentorder = result.CurrentOrder.IceCreamlist;
         Console.WriteLine("current order");
-        Console.WriteLine(result.CurrentOrder.timeRecieved);
         foreach (IceCream currenrorderice in currentorder)
         {
             Console.WriteLine(currenrorderice);
@@ -919,7 +926,7 @@ void Option7() {
         servingcustomer.OrderHistory.Add(servingcustomer.CurrentOrder);
         servingcustomer.CurrentOrder = null;
 
-
+        WriteIceCream(servingorder,servingcustomer.MemberId);
     }
     else {
         Console.WriteLine($"points: {servingcustomer.Rewards.points}");
@@ -948,10 +955,72 @@ void Option7() {
         }
     
     }
+    
+}
+// peck // 0Id,1MemberId,2TimeReceived,3TimeFulfilled,4Option,5Scoops,6Dipped,7WaffleFlavour,8Flavour1,9Flavour2,10Flavour3,11Topping1,12Topping2,13Topping3,14Topping4
+void WriteIceCream(Order order,int id)
+{
+    foreach(var v  in order.IceCreamlist)
+    {
+        using (StreamWriter sw = new StreamWriter("orders.csv", true))
+        {
+            string flavstr = "";
+            if (v.Flavours.Count > 0)
+            {
+                if (v.Toppings.Count == 1)
+                {
+                    flavstr = string.Join(",", v.Flavours[0].Type, "", "");
+                }
+                else if (v.Toppings.Count == 2)
+                {
+                    flavstr = string.Join(",", v.Flavours[0].Type, v.Flavours[1].Type, "");
+                }
+                else if (v.Toppings.Count == 3)
+                {
+                    flavstr = string.Join(",", v.Flavours[0].Type, v.Flavours[1].Type, v.Flavours[2].Type);
+                }
+            }
+            string topstr = "";
+            if(v.Toppings.Count > 0)
+            {
+                if(v.Toppings.Count == 1)
+                {
+                    topstr = string.Join(",", v.Toppings[0].Type,"","","");
+                }
+                else if (v.Toppings.Count == 2)
+                {
+                    topstr = string.Join(",", v.Toppings[0].Type, v.Toppings[1].Type, "", "");
+                }
+                else if (v.Toppings.Count == 3)
+                {
+                    topstr = string.Join(",", v.Toppings[0].Type, v.Toppings[1].Type, v.Toppings[2].Type, "");
+                }
+                else if (v.Toppings.Count == 4)
+                {
+                    topstr = string.Join(",", v.Toppings[0].Type, v.Toppings[1].Type, v.Toppings[2].Type, v.Toppings[3].Type);
+                }
+            }
+            string? row;
+            row = string.Join(",",order.id,id, order.timeRecieved,order.timeFulfilled,v.Option,v.Scoops );
+            if (v is Cup)
+            {
+                row = string.Join(",", order.id, id, order.timeRecieved, order.timeFulfilled, v.Option, v.Scoops,"","", flavstr,topstr);
+            }
+            else if (v is Cone)
+            {
+                Cone cone = (Cone)v;
+                row = string.Join(",", order.id, id, order.timeRecieved, order.timeFulfilled, v.Option, v.Scoops, cone.Dipped, "", flavstr, topstr);
+            }
+            else if (v is Waffle)
+            {
+                Waffle waf = (Waffle)v;
+                row = string.Join(",", order.id, id, order.timeRecieved, order.timeFulfilled, v.Option, v.Scoops, "", waf.WaffleFlavour, flavstr, topstr);
+            }
+            sw.WriteLine("\n"+row);
+        }
+    }
 
-
-
-} 
+}
 void Option8() {
     Console.Write("Enter the year: ");
     int inyear = Convert.ToInt32(Console.ReadLine());
