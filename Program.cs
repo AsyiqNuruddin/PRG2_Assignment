@@ -838,7 +838,7 @@ void Option6()
 }
 void Option7() {
     Order servingorder = null;
-    if (GoldQueueOrder.Count == 0) { 
+    if (GoldQueueOrder.Count != 0) { 
         servingorder = GoldQueueOrder.Dequeue();
     
     }
