@@ -374,7 +374,7 @@ void Option1(Dictionary<int, Customer
     foreach(var kvp in DictCustomer)
     {
         Console.WriteLine($"Name: {kvp.Value.Name,-15} Member ID:{kvp.Value.MemberId,-10} DateofBirth: {kvp.Value.Dob,-10:dd/MM/yyyy} MemberShip Status: {kvp.Value.Rewards.tier,-10} Points: {kvp.Value.Rewards.points,-3} Punch Card: {kvp.Value.Rewards.punchCard}");
-        Console.WriteLine(kvp.Value.OrderHistory.Count);
+        // Console.WriteLine(kvp.Value.OrderHistory.Count);
     }
 }
 void Option2() 
@@ -953,9 +953,38 @@ void Option7() {
 
 } 
 void Option8() {
-    
-        
-    
+    Console.Write("Enter the year: ");
+    int inyear = Convert.ToInt32(Console.ReadLine());
+    double yeartotal = 0;
+
+    double[] monthlyTotals = new double[12];
+
+    foreach (var cus in DictCustomer.Values)
+    {
+        var sortedOrders = cus.OrderHistory
+        .Where(or => or.timeFulfilled.HasValue && or.timeFulfilled.Value.Year == inyear)
+        .GroupBy(or => or.timeFulfilled.Value.Month);
+        foreach (var months in sortedOrders)
+        {
+            int month = months.Key;
+
+            // Retrieve IceCreamList for the month
+            List<IceCream> iceCreamList = months
+                .SelectMany(or => or.IceCreamlist)
+                .ToList();
+
+            // Calculate total for the month
+            double monthTotal = iceCreamList.Sum(iceCream => iceCream.CalculatePrice());
+            monthlyTotals[month - 1] += monthTotal; // Adjust month index to 0-based
+            yeartotal += monthTotal;
+        }
+    }
+    for (int i = 0; i < monthlyTotals.Length; i++)
+    {
+        Console.WriteLine($"{CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i + 1)} {inyear}: ${monthlyTotals[i]:0.00}");
+    }
+    Console.WriteLine($"Total: ${yeartotal:0.00}");
+
 }
 
 Dictionary<int,string> wafflelist = new Dictionary<int,string>();
