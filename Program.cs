@@ -69,6 +69,10 @@ while (true)
         Console.WriteLine("Please enter a appriopriate input [1 - 7] Option or [-1] to Exit");
     }
 }
+void intialdisplay() {
+    Console.WriteLine();
+
+}
 //==========================================================
 // Student Number : S10262791
 // Student Name : Asyiq Nuruddin
