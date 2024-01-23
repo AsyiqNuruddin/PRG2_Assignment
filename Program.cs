@@ -59,10 +59,10 @@ do{
         Option6();
     }else if (usrInp == "7")
     {
-        Option7();
+        // Option7();
     }else if (usrInp == "8")
     {
-        Option8();
+        // Option8();
     }
     else if(usrInp == "0")
     {
@@ -835,27 +835,29 @@ void Option6()
     
 
 }
-void Option7() {
+void Option7()
+{
     Order servingorder = null;
-    if (GoldQueueOrder.Count != 0) { 
+    if (GoldQueueOrder.Count != 0)
+    {
         servingorder = GoldQueueOrder.Dequeue();
-    
+
     }
     else
     {
         servingorder = RegularQueueOrder.Dequeue();
     }
     double total = servingorder.CalcualteTotal();
-    foreach (IceCream ice in servingorder.IceCreamlist) {
+    foreach (IceCream ice in servingorder.IceCreamlist)
+    {
         Console.WriteLine(ice);
 
     }
     Console.WriteLine($"total cost: {total}");
-    Customer
- servingcustomer = null;
-    foreach(var custo in DictCustomer) {
-        Customer
- customers = custo.Value;
+    Customer servingcustomer = null;
+    foreach (var custo in DictCustomer)
+    {
+        Customer customers = custo.Value;
         if (customers != null)
         {
             if (customers.CurrentOrder.id == servingorder.id)
@@ -865,38 +867,42 @@ void Option7() {
 
 
             }
-            else {
+            else
+            {
                 continue;
-            
+
             }
         }
-    
-    
+
+
     }
     Console.WriteLine($"membership teir: {servingcustomer.Rewards.tier}        points: {servingcustomer.Rewards.points}");
-    if (servingcustomer.IsBirthday()) {
+    if (servingcustomer.IsBirthday())
+    {
         Console.WriteLine("happy birthday");
         double highest = 0;
-        foreach (IceCream ice in servingorder.IceCreamlist) {
+        foreach (IceCream ice in servingorder.IceCreamlist)
+        {
             if (ice.CalculatePrice() >= highest)
             {
                 highest = ice.CalculatePrice();
 
             }
-            else {
+            else
+            {
                 continue;
-            
+
             }
-        
+
         }
         total -= highest;
         Console.WriteLine($"new total :{total}");
-    
-    
-    
+
+
+
     }
-    
-    
+
+
     if (servingcustomer.Rewards.tier == "Ordinary")
     {
         IceCream firstice = servingorder.IceCreamlist[0];
@@ -918,13 +924,15 @@ void Option7() {
         servingcustomer.OrderHistory.Add(servingcustomer.CurrentOrder);
         servingcustomer.CurrentOrder = null;
 
-        WriteIceCream(servingorder,servingcustomer.MemberId);
+        WriteIceCream(servingorder, servingcustomer.MemberId);
     }
-    else {
+    else
+    {
         Console.WriteLine($"points: {servingcustomer.Rewards.points}");
         Console.Write("would u like to redeem some points(y/n): ");
         string redeem = Console.ReadLine();
-        if (redeem == "y") {
+        if (redeem == "y")
+        {
             Console.Write("how much point would u like to redeem(1 point = 0.02): ");
             int point = Convert.ToInt16(Console.ReadLine());
             double discounted = point * 0.02;
@@ -936,23 +944,25 @@ void Option7() {
         servingcustomer.Rewards.AddPoints(points);
         servingcustomer.CurrentOrder.timeFulfilled = DateTime.Now;
         servingcustomer.OrderHistory.Add(servingcustomer.CurrentOrder);
-        servingcustomer.CurrentOrder = null ;
+        servingcustomer.CurrentOrder = null;
 
     }
-    foreach (IceCream ice in servingorder.IceCreamlist) {
+    foreach (IceCream ice in servingorder.IceCreamlist)
+    {
         servingcustomer.Rewards.Punch();
-        if (servingcustomer.Rewards.punchCard == 10) {
+        if (servingcustomer.Rewards.punchCard == 10)
+        {
             break;
-        
+
         }
-    
+
     }
-    
+
 }
 // peck // 0Id,1MemberId,2TimeReceived,3TimeFulfilled,4Option,5Scoops,6Dipped,7WaffleFlavour,8Flavour1,9Flavour2,10Flavour3,11Topping1,12Topping2,13Topping3,14Topping4
-void WriteIceCream(Order order,int id)
+void WriteIceCream(Order order, int id)
 {
-    foreach(var v  in order.IceCreamlist)
+    foreach (var v in order.IceCreamlist)
     {
         using (StreamWriter sw = new StreamWriter("orders.csv", true))
         {
@@ -973,11 +983,11 @@ void WriteIceCream(Order order,int id)
                 }
             }
             string topstr = "";
-            if(v.Toppings.Count > 0)
+            if (v.Toppings.Count > 0)
             {
-                if(v.Toppings.Count == 1)
+                if (v.Toppings.Count == 1)
                 {
-                    topstr = string.Join(",", v.Toppings[0].Type,"","","");
+                    topstr = string.Join(",", v.Toppings[0].Type, "", "", "");
                 }
                 else if (v.Toppings.Count == 2)
                 {
@@ -993,10 +1003,10 @@ void WriteIceCream(Order order,int id)
                 }
             }
             string? row;
-            row = string.Join(",",order.id,id, order.timeRecieved,order.timeFulfilled,v.Option,v.Scoops );
+            row = string.Join(",", order.id, id, order.timeRecieved, order.timeFulfilled, v.Option, v.Scoops);
             if (v is Cup)
             {
-                row = string.Join(",", order.id, id, order.timeRecieved, order.timeFulfilled, v.Option, v.Scoops,"","", flavstr,topstr);
+                row = string.Join(",", order.id, id, order.timeRecieved, order.timeFulfilled, v.Option, v.Scoops, "", "", flavstr, topstr);
             }
             else if (v is Cone)
             {
@@ -1008,12 +1018,13 @@ void WriteIceCream(Order order,int id)
                 Waffle waf = (Waffle)v;
                 row = string.Join(",", order.id, id, order.timeRecieved, order.timeFulfilled, v.Option, v.Scoops, "", waf.WaffleFlavour, flavstr, topstr);
             }
-            sw.WriteLine("\n"+row);
+            sw.WriteLine(row);
         }
     }
 
 }
-void Option8() {
+void Option8()
+{
     Console.Write("Enter the year: ");
     int inyear = Convert.ToInt32(Console.ReadLine());
     double yeartotal = 0;
@@ -1048,8 +1059,9 @@ void Option8() {
 
 }
 
-Dictionary<int,string> wafflelist = new Dictionary<int,string>();
-void initwaffle(Dictionary<int, string> wafflelist) {
+Dictionary<int, string> wafflelist = new Dictionary<int, string>();
+void initwaffle(Dictionary<int, string> wafflelist)
+{
     wafflelist.Add(1, "Original");
     wafflelist.Add(2, "Red velvet");
     wafflelist.Add(3, "charcoal");
@@ -1059,8 +1071,10 @@ void initwaffle(Dictionary<int, string> wafflelist) {
 
 
 }
-void displaywaffle(Dictionary<int, string> wafflelist) {
-    foreach (var kpv in wafflelist) {
+void displaywaffle(Dictionary<int, string> wafflelist)
+{
+    foreach (var kpv in wafflelist)
+    {
         Console.WriteLine($"[{kpv.Key}]: {kpv.Value,-10}");
 
     }
@@ -1070,8 +1084,9 @@ void displaywaffle(Dictionary<int, string> wafflelist) {
 
 
 
-void Makeicecream(string type,Customer
- result) {
+void Makeicecream(string type, Customer
+ result)
+{
     IceCream newIceCream = null;
     List<Flavour> flavlist = new List<Flavour>();
     List<Topping> toplist = new List<Topping>();
@@ -1090,7 +1105,7 @@ void Makeicecream(string type,Customer
         {
             Console.Write($"Enter flavour number {scoopIndex} : ");
             int newflav = Convert.ToInt32(Console.ReadLine());
-            Flavour addflact =DictFlavour[newflav ];
+            Flavour addflact = DictFlavour[newflav];
             if (addflact != null)
             {
                 flavlist.Add(addflact);
@@ -1125,17 +1140,18 @@ void Makeicecream(string type,Customer
 
         int newtop = Convert.ToInt16(Console.ReadLine());
         DisplayToppings(DictTopping);
-        for (int topIndex = 1; topIndex <= newtop; topIndex++) {
+        for (int topIndex = 1; topIndex <= newtop; topIndex++)
+        {
             Console.Write($"Enter toping number {topIndex} : ");
             int addtop = Convert.ToInt32(Console.ReadLine());
-            Topping toppingtolist = DictTopping[addtop ];
+            Topping toppingtolist = DictTopping[addtop];
             toplist.Add(toppingtolist);
 
 
         }
-        newIceCream = new Cup("cup",newscp,flavlist,toplist);
+        newIceCream = new Cup("cup", newscp, flavlist, toplist);
         result.CurrentOrder.AddIceCream(newIceCream);
-        
+
 
 
 
@@ -1143,7 +1159,8 @@ void Makeicecream(string type,Customer
     }
 
 
-    else if (type == "waffle") {
+    else if (type == "waffle")
+    {
         Console.Write("Enter number of scoops: ");
 
 
@@ -1154,7 +1171,7 @@ void Makeicecream(string type,Customer
         {
             Console.Write($"Enter flavour number {scoopIndex} : ");
             int newflav = Convert.ToInt32(Console.ReadLine());
-            Flavour addflact = DictFlavour[newflav ];
+            Flavour addflact = DictFlavour[newflav];
             if (addflact != null)
             {
                 flavlist.Add(addflact);
@@ -1202,11 +1219,12 @@ void Makeicecream(string type,Customer
         Console.Write("Enter waffle flavour: ");
         int wafflenum = Convert.ToInt32(Console.ReadLine());
         string waffeflav = wafflelist[wafflenum];
-        newIceCream = new Waffle("waffle", newscp, flavlist, toplist,waffeflav);
+        newIceCream = new Waffle("waffle", newscp, flavlist, toplist, waffeflav);
         result.CurrentOrder.AddIceCream(newIceCream);
 
     }
-    else if (type == "con") {
+    else if (type == "con")
+    {
         Console.Write("Enter number of scoops: ");
 
 
@@ -1217,12 +1235,13 @@ void Makeicecream(string type,Customer
         {
             Console.Write($"Enter flavour number {scoopIndex} : ");
             int newflav = Convert.ToInt32(Console.ReadLine());
-            Flavour addflact = DictFlavour[newflav ];
+            Flavour addflact = DictFlavour[newflav];
             if (addflact != null)
             {
                 flavlist.Add(addflact);
             }
-            else {
+            else
+            {
                 foreach (var flav in flavlist)
                 {
                     if (flav.Type == addflact.Type)
@@ -1262,26 +1281,29 @@ void Makeicecream(string type,Customer
         }
         Console.Write("Do you want your cone dipped?(Y/N):");
         string dipped = Console.ReadLine();
-        if (dipped.ToLower() == "y") {
+        if (dipped.ToLower() == "y")
+        {
             newIceCream = new Cone("cone", newscp, flavlist, toplist, true);
 
 
         }
-        else if (dipped.ToLower() == "n") {
+        else if (dipped.ToLower() == "n")
+        {
             newIceCream = new Cone("cone", newscp, flavlist, toplist, false);
 
 
         }
-        
+
         result.CurrentOrder.AddIceCream(newIceCream);
 
     }
 
 
 
-    
+
 }
-void modifydiplay() {
+void modifydiplay()
+{
     Console.WriteLine("[1] change type");
     Console.WriteLine("[2] cahnge number of scoop");
     Console.WriteLine("[3] cahnge flavour of scoop");
@@ -1289,8 +1311,9 @@ void modifydiplay() {
 }
 
 
-void modifyicecream(IceCream result,Customer
- cust ) {
+void modifyicecream(IceCream result, Customer
+ cust)
+{
     Dictionary<int, string> wafflelist = new Dictionary<int, string>();
     initwaffle(wafflelist);
     List<Flavour> flavlist = new List<Flavour>();
@@ -1427,7 +1450,8 @@ void modifyicecream(IceCream result,Customer
             }
             result.Toppings = toplist;
         }
-        else if (option == "5") {
+        else if (option == "5")
+        {
             Console.Write("Do you want your cone dipped?(Y/N):");
             string dipped = Console.ReadLine();
             if (dipped.ToLower() == "y")
@@ -1768,9 +1792,10 @@ void orderscsv()
                 string? line = sr.ReadLine();
                 if (line != null)
                 {
-                    
+
                     string[] stringtolist = line.Split(",");
-                    if (stringtolist != null) {
+                    if (stringtolist != null)
+                    {
                         Customer
  custom = DictCustomer[Convert.ToInt16(stringtolist[1])];
                         Order newor = null;
@@ -1809,7 +1834,7 @@ void orderscsv()
 
                             for (int i = 0; i <= scoops; i++)
                             {
-                                Flavour flavour = new Flavour(stringtolist[7 + i], true,1);
+                                Flavour flavour = new Flavour(stringtolist[7 + i], true, 1);
                                 fkav.Add(flavour);
 
                             }
@@ -1849,7 +1874,7 @@ void orderscsv()
 
                             for (int i = 0; i <= scoops; i++)
                             {
-                                Flavour flavour = new Flavour(stringtolist[7 + i], true,1);
+                                Flavour flavour = new Flavour(stringtolist[7 + i], true, 1);
                                 fkav.Add(flavour);
 
                             }
@@ -1890,7 +1915,7 @@ void orderscsv()
 
                             for (int i = 0; i <= scoops; i++)
                             {
-                                Flavour flavour = new Flavour(stringtolist[7 + i], true,1);
+                                Flavour flavour = new Flavour(stringtolist[7 + i], true, 1);
                                 fkav.Add(flavour);
 
                             }
@@ -1917,13 +1942,13 @@ void orderscsv()
                             iceCream = new Cup("cone", scoops, fkav, topping);
 
                         }
-                        
 
 
 
 
 
-                       
+
+
                         newor.IceCreamlist.Add(iceCream);
 
                     }
