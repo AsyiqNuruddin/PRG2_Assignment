@@ -1109,45 +1109,53 @@ void Makeicecream(string type, Customer
 
     if (type == "cup")
     {
-        Console.Write("Enter number of scoops: ");
+        Console.Write("Enter number of scoops[1-3]: ");
 
 
         int newscp = Convert.ToInt16(Console.ReadLine());
-
-        DisplayFlavours(DictFlavour);
-        for (int scoopIndex = 1; scoopIndex <= newscp; scoopIndex++)
+        if (newscp > 3 && newscp < 1)
         {
-            Console.Write($"Enter flavour number {scoopIndex} : ");
-            int newflav = Convert.ToInt32(Console.ReadLine());
-            Flavour addflact = DictFlavour[newflav];
-            if (addflact != null)
+            Console.WriteLine("invalid input");
+
+        }
+        else
+        {
+
+            DisplayFlavours(DictFlavour);
+            for (int scoopIndex = 1; scoopIndex <= newscp; scoopIndex++)
             {
-                flavlist.Add(addflact);
-            }
-            else
-            {
-                foreach (var flav in flavlist)
+                Console.Write($"Enter flavour number {scoopIndex} : ");
+                int newflav = Convert.ToInt32(Console.ReadLine());
+                Flavour addflact = DictFlavour[newflav];
+                if (addflact != null)
                 {
-                    if (flav.Type == addflact.Type)
+                    flavlist.Add(addflact);
+                }
+                else
+                {
+                    foreach (var flav in flavlist)
                     {
-                        flav.Quantity += 1;
+                        if (flav.Type == addflact.Type)
+                        {
+                            flav.Quantity += 1;
+
+
+                        }
 
 
                     }
+
+
+
+
+
 
 
                 }
 
 
 
-
-
-
-
             }
-
-
-
         }
         Console.Write("Enter number of toppings: ");
 
@@ -1175,45 +1183,53 @@ void Makeicecream(string type, Customer
 
     else if (type == "waffle")
     {
-        Console.Write("Enter number of scoops: ");
+        Console.Write("Enter number of scoops[1-3]: ");
 
 
         int newscp = Convert.ToInt16(Console.ReadLine());
-
-        DisplayFlavours(DictFlavour);
-        for (int scoopIndex = 1; scoopIndex <= newscp; scoopIndex++)
+        if (newscp > 3 && newscp < 1)
         {
-            Console.Write($"Enter flavour number {scoopIndex} : ");
-            int newflav = Convert.ToInt32(Console.ReadLine());
-            Flavour addflact = DictFlavour[newflav];
-            if (addflact != null)
+            Console.WriteLine("invalid input");
+
+        }
+        else
+        {
+
+            DisplayFlavours(DictFlavour);
+            for (int scoopIndex = 1; scoopIndex <= newscp; scoopIndex++)
             {
-                flavlist.Add(addflact);
-            }
-            else
-            {
-                foreach (var flav in flavlist)
+                Console.Write($"Enter flavour number {scoopIndex} : ");
+                int newflav = Convert.ToInt32(Console.ReadLine());
+                Flavour addflact = DictFlavour[newflav];
+                if (addflact != null)
                 {
-                    if (flav.Type == addflact.Type)
+                    flavlist.Add(addflact);
+                }
+                else
+                {
+                    foreach (var flav in flavlist)
                     {
-                        flav.Quantity += 1;
+                        if (flav.Type == addflact.Type)
+                        {
+                            flav.Quantity += 1;
+
+
+                        }
 
 
                     }
+
+
+
+
+
 
 
                 }
 
 
 
-
-
-
-
             }
-
-
-
         }
         Console.Write("Enter number of toppings: ");
 
@@ -1239,45 +1255,53 @@ void Makeicecream(string type, Customer
     }
     else if (type == "con")
     {
-        Console.Write("Enter number of scoops: ");
+        Console.Write("Enter number of scoops[1-3]: ");
 
 
         int newscp = Convert.ToInt16(Console.ReadLine());
-
-        DisplayFlavours(DictFlavour);
-        for (int scoopIndex = 1; scoopIndex <= newscp; scoopIndex++)
+        if (newscp > 3 && newscp < 1)
         {
-            Console.Write($"Enter flavour number {scoopIndex} : ");
-            int newflav = Convert.ToInt32(Console.ReadLine());
-            Flavour addflact = DictFlavour[newflav];
-            if (addflact != null)
+            Console.WriteLine("invalid input");
+
+        }
+        else
+        {
+
+            DisplayFlavours(DictFlavour);
+            for (int scoopIndex = 1; scoopIndex <= newscp; scoopIndex++)
             {
-                flavlist.Add(addflact);
-            }
-            else
-            {
-                foreach (var flav in flavlist)
+                Console.Write($"Enter flavour number {scoopIndex} : ");
+                int newflav = Convert.ToInt32(Console.ReadLine());
+                Flavour addflact = DictFlavour[newflav];
+                if (addflact != null)
                 {
-                    if (flav.Type == addflact.Type)
+                    flavlist.Add(addflact);
+                }
+                else
+                {
+                    foreach (var flav in flavlist)
                     {
-                        flav.Quantity += 1;
+                        if (flav.Type == addflact.Type)
+                        {
+                            flav.Quantity += 1;
+
+
+                        }
 
 
                     }
+
+
+
+
+
 
 
                 }
 
 
 
-
-
-
-
             }
-
-
-
         }
         Console.Write("Enter number of toppings: ");
 
