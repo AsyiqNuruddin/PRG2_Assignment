@@ -1157,22 +1157,35 @@ void Makeicecream(string type, Customer
 
             }
         }
-        Console.Write("Enter number of toppings: ");
-
-
-        int newtop = Convert.ToInt16(Console.ReadLine());
-        DisplayToppings(DictTopping);
-        for (int topIndex = 1; topIndex <= newtop; topIndex++)
+        while (true)
         {
-            Console.Write($"Enter toping number {topIndex} : ");
-            int addtop = Convert.ToInt32(Console.ReadLine());
-            Topping toppingtolist = DictTopping[addtop];
-            toplist.Add(toppingtolist);
+            Console.Write("Enter number of toppings[1-4]: ");
 
 
+            int newtop = Convert.ToInt16(Console.ReadLine());
+            if (newtop >= 1 && newtop <= 3)
+            {
+                DisplayToppings(DictTopping);
+                for (int topIndex = 1; topIndex <= newtop; topIndex++)
+                {
+                    Console.Write($"Enter toping number {topIndex} : ");
+                    int addtop = Convert.ToInt32(Console.ReadLine());
+                    Topping toppingtolist = DictTopping[addtop];
+                    toplist.Add(toppingtolist);
+
+                    newIceCream = new Cup("cup", newscp, flavlist, toplist);
+                    result.CurrentOrder.AddIceCream(newIceCream);
+                    break;
+
+
+                }
+            }
+            else
+            {
+                Console.WriteLine("invalid input");
+            }
         }
-        newIceCream = new Cup("cup", newscp, flavlist, toplist);
-        result.CurrentOrder.AddIceCream(newIceCream);
+        
 
 
 
@@ -1231,29 +1244,43 @@ void Makeicecream(string type, Customer
 
             }
         }
-        Console.Write("Enter number of toppings: ");
-
-
-        int newtop = Convert.ToInt16(Console.ReadLine());
-        DisplayToppings(DictTopping);
-        for (int topIndex = 1; topIndex <= newtop; topIndex++)
+        while (true)
         {
-            Console.Write($"Enter toping number {topIndex} : ");
-            int addtop = Convert.ToInt32(Console.ReadLine());
-            Topping toppingtolist = DictTopping[addtop];
-            toplist.Add(toppingtolist);
+            Console.Write("Enter number of toppings[1-4]: ");
 
 
+            int newtop = Convert.ToInt16(Console.ReadLine());
+            if (newtop >= 1 && newtop <= 3)
+            {
+                DisplayToppings(DictTopping);
+                for (int topIndex = 1; topIndex <= newtop; topIndex++)
+                {
+                    Console.Write($"Enter toping number {topIndex} : ");
+                    int addtop = Convert.ToInt32(Console.ReadLine());
+                    Topping toppingtolist = DictTopping[addtop];
+                    toplist.Add(toppingtolist);
+                    
+                    displaywaffle(wafflelist);
+                    Console.Write("Enter waffle flavour: ");
+                    int wafflenum = Convert.ToInt32(Console.ReadLine());
+                    string waffeflav = wafflelist[wafflenum];
+                    newIceCream = new Waffle("waffle", newscp, flavlist, toplist, waffeflav);
+                    result.CurrentOrder.AddIceCream(newIceCream);
+                    break;
+
+
+
+                }
+            }
+            else
+            {
+                Console.WriteLine("invalid input");
+            }
         }
-        displaywaffle(wafflelist);
-        Console.Write("Enter waffle flavour: ");
-        int wafflenum = Convert.ToInt32(Console.ReadLine());
-        string waffeflav = wafflelist[wafflenum];
-        newIceCream = new Waffle("waffle", newscp, flavlist, toplist, waffeflav);
-        result.CurrentOrder.AddIceCream(newIceCream);
+        
 
     }
-    else if (type == "con")
+    else if (type == "cone")
     {
         Console.Write("Enter number of scoops[1-3]: ");
 
@@ -1303,36 +1330,49 @@ void Makeicecream(string type, Customer
 
             }
         }
-        Console.Write("Enter number of toppings: ");
-
-
-        int newtop = Convert.ToInt16(Console.ReadLine());
-        DisplayToppings(DictTopping);
-        for (int topIndex = 1; topIndex <= newtop; topIndex++)
+        while (true)
         {
-            Console.Write($"Enter toping number {topIndex} : ");
-            int addtop = Convert.ToInt32(Console.ReadLine());
-            Topping toppingtolist = DictTopping[addtop];
-            toplist.Add(toppingtolist);
+            Console.Write("Enter number of toppings[1-4]: ");
 
 
+            int newtop = Convert.ToInt16(Console.ReadLine());
+            if (newtop >= 1 && newtop <= 3)
+            {
+                DisplayToppings(DictTopping);
+                for (int topIndex = 1; topIndex <= newtop; topIndex++)
+                {
+                    Console.Write($"Enter toping number {topIndex} : ");
+                    int addtop = Convert.ToInt32(Console.ReadLine());
+                    Topping toppingtolist = DictTopping[addtop];
+                    toplist.Add(toppingtolist);
+
+                    Console.Write("Do you want your cone dipped?(Y/N):");
+                    string dipped = Console.ReadLine();
+                    if (dipped.ToLower() == "y")
+                    {
+                        newIceCream = new Cone("cone", newscp, flavlist, toplist, true);
+
+
+                    }
+                    else if (dipped.ToLower() == "n")
+                    {
+                        newIceCream = new Cone("cone", newscp, flavlist, toplist, false);
+
+
+                    }
+
+                    result.CurrentOrder.AddIceCream(newIceCream);
+                    break;
+
+
+                }
+            }
+            else
+            {
+                Console.WriteLine("invalid input");
+            }
         }
-        Console.Write("Do you want your cone dipped?(Y/N):");
-        string dipped = Console.ReadLine();
-        if (dipped.ToLower() == "y")
-        {
-            newIceCream = new Cone("cone", newscp, flavlist, toplist, true);
-
-
-        }
-        else if (dipped.ToLower() == "n")
-        {
-            newIceCream = new Cone("cone", newscp, flavlist, toplist, false);
-
-
-        }
-
-        result.CurrentOrder.AddIceCream(newIceCream);
+        
 
     }
 
