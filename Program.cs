@@ -204,9 +204,23 @@ void InitOrders(string txtfile)
                     bool addOrderHist = false;
                     // 4Option,5Scoops,6Dipped,7WaffleFlavour,8Flavour1,9Flavour2,10Flavour3,11Topping1,12Topping2,13Topping3,14Topping4
                     IceCream newIC = IceCreamRead(rowList[4], Convert.ToInt32(rowList[5]), rowList[6], rowList[7], rowList[8], rowList[9], rowList[10], rowList[11], rowList[12], rowList[13], rowList[14]);
-                    order.AddIceCream(newIC);
-                    v.Value.OrderHistory.Add(order);
-                    addOrderHist = true;
+                    foreach (var o in v.Value.OrderHistory)
+                    {
+                        if(o.id == Convert.ToInt32(rowList[0]){
+                            addOrderHist = true;
+                            o.AddIceCream(newIC);
+                        }
+                        
+                    }
+                    if(!addOrderHist)
+                    {
+                        order.AddIceCream(newIC);
+                        v.Value.OrderHistory.Add(order);
+                    }
+                    else
+                    {
+
+                    }
                 }
             }
         }
