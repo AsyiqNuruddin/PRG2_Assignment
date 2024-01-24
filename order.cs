@@ -17,6 +17,7 @@ using PRG2_Assignment_Cup;
 using PRG2_Assignment_Customer;
 using PRG2_Assignment_Flavour;
 using PRG2_Assignment_Topping;
+using System.ComponentModel.Design;
 
 namespace PRG2_Assignment_Order
 {
@@ -182,31 +183,42 @@ namespace PRG2_Assignment_Order
                         }
                         else if (option == "2")
                         {
+
                             Console.Write("Enter number of scoops: ");
 
 
-                            int newscp = Convert.ToInt16(Console.ReadLine());
-
-                            DisplayFlavours(DictFlavour);
-                            for (int scoopIndex = 1; scoopIndex <= newscp; scoopIndex++)
+                                int newscp = Convert.ToInt16(Console.ReadLine());
+                            if (newscp < 1 && newscp > 3)
                             {
-                                Console.Write($"Enter flavour number {scoopIndex} : ");
-                                int newflav = Convert.ToInt32(Console.ReadLine());
-                                Flavour addflact = DictFlavour[newflav];
-                                if (addflact != null)
+
+                                DisplayFlavours(DictFlavour);
+                                for (int scoopIndex = 1; scoopIndex <= newscp; scoopIndex++)
                                 {
-                                    flavlist.Add(addflact);
-                                }
-                                else
-                                {
-                                    foreach (var flav in flavlist)
+                                    Console.Write($"Enter flavour number {scoopIndex} : ");
+                                    int newflav = Convert.ToInt32(Console.ReadLine());
+                                    Flavour addflact = DictFlavour[newflav];
+                                    if (addflact != null)
                                     {
-                                        if (flav.Type == addflact.Type)
+                                        flavlist.Add(addflact);
+                                    }
+                                    else
+                                    {
+                                        foreach (var flav in flavlist)
                                         {
-                                            flav.Quantity += 1;
+                                            if (flav.Type == addflact.Type)
+                                            {
+                                                flav.Quantity += 1;
+
+
+                                            }
 
 
                                         }
+
+
+
+
+
 
 
                                     }
@@ -214,15 +226,15 @@ namespace PRG2_Assignment_Order
 
 
 
-
-
-
                                 }
-
-
+                            result.Flavours = flavlist;
 
                             }
-                            result.Flavours = flavlist;
+                        else {
+                            Console.WriteLine("invalid input");
+
+                        }
+                            
                         }
                         else if (option == "3")
                         {
@@ -267,11 +279,14 @@ namespace PRG2_Assignment_Order
                         }
                         else if (option == "4")
                         {
-                            List<Topping> toplist = new List<Topping>();
-                            Console.Write("Enter number of toppings: ");
+                        List<Topping> toplist = new List<Topping>();
+                        Console.Write("Enter number of toppings[1-4]: ");
 
 
-                            int newtop = Convert.ToInt16(Console.ReadLine());
+
+                        int newtop = Convert.ToInt16(Console.ReadLine());
+                        if (newtop < 1 && newtop > 4)
+                        {
                             DisplayToppings(DictTopping);
                             for (int topIndex = 1; topIndex <= newtop; topIndex++)
                             {
@@ -284,6 +299,8 @@ namespace PRG2_Assignment_Order
                             }
                             result.Toppings = toplist;
                         }
+                        else { Console.WriteLine("invalid input"); }
+                    }
                         else if (option == "5")
                         {
                             Console.Write("Do you want your cone dipped?(Y/N):");
@@ -349,10 +366,192 @@ namespace PRG2_Assignment_Order
                         }
                         else if (option == "2")
                         {
-                            Console.Write("Enter number of scoops: ");
+                             Console.Write("Enter number of scoops: ");
 
 
-                            int newscp = Convert.ToInt16(Console.ReadLine());
+                                int newscp = Convert.ToInt16(Console.ReadLine());
+                            if (newscp < 1 && newscp > 3)
+                            {
+
+                                DisplayFlavours(DictFlavour);
+                                for (int scoopIndex = 1; scoopIndex <= newscp; scoopIndex++)
+                                {
+                                    Console.Write($"Enter flavour number {scoopIndex} : ");
+                                    int newflav = Convert.ToInt32(Console.ReadLine());
+                                    Flavour addflact = DictFlavour[newflav];
+                                    if (addflact != null)
+                                    {
+                                        flavlist.Add(addflact);
+                                    }
+                                    else
+                                    {
+                                        foreach (var flav in flavlist)
+                                        {
+                                            if (flav.Type == addflact.Type)
+                                            {
+                                                flav.Quantity += 1;
+
+
+                                            }
+
+
+                                        }
+
+
+
+
+
+
+
+                                    }
+
+
+
+
+                                }
+                                result.Flavours = flavlist;
+
+                            }
+                            else {
+                                Console.WriteLine("invalid input");
+
+                            }
+                        }
+                        else if (option == "3")
+                        {
+                            flavlist.Clear();
+                            int count = 1;
+                            foreach (var flavour in result.Flavours)
+                            {
+                                Console.Write($"Enter flavour number {count} : ");
+                                count++;
+                                int newflav = Convert.ToInt32(Console.ReadLine());
+                                Flavour addflact = DictFlavour[newflav];
+                                if (addflact != null)
+                                {
+                                    flavlist.Add(addflact);
+                                }
+                                else
+                                {
+                                    foreach (var flav in flavlist)
+                                    {
+                                        if (flav.Type == addflact.Type)
+                                        {
+                                            flav.Quantity += 1;
+
+
+                                        }
+
+
+                                    }
+
+
+
+
+
+
+
+                                }
+
+
+                            }
+                            result.Flavours = flavlist;
+
+                        }
+                        else if (option == "4")
+                        {
+                        List<Topping> toplist = new List<Topping>();
+                        Console.Write("Enter number of toppings[1-4]: ");
+
+
+
+                        int newtop = Convert.ToInt16(Console.ReadLine());
+                        if (newtop < 1 && newtop > 4)
+                        {
+                            DisplayToppings(DictTopping);
+                            for (int topIndex = 1; topIndex <= newtop; topIndex++)
+                            {
+                                Console.Write($"Enter toping number {topIndex} : ");
+                                int addtop = Convert.ToInt32(Console.ReadLine());
+                                Topping toppingtolist = DictTopping[addtop];
+                                toplist.Add(toppingtolist);
+
+
+                            }
+                            result.Toppings = toplist;
+                        }
+                        else { Console.WriteLine("invalid input"); }
+                    }
+                        else if (option == "5")
+                        {
+                            displaywaffle(wafflelist);
+                            Console.Write("Enter waffle flavour: ");
+                            int wafflenum = Convert.ToInt32(Console.ReadLine());
+                            string waffeflav = wafflelist[wafflenum];
+                            modifiedice = new Waffle("waffle", result.Scoops, result.Flavours, result.Toppings, waffeflav);
+                            IceCreamlist[id - 1] = modifiedice;
+
+                        }
+
+                    }
+                    else if (result is Cup)
+                    {
+                        modifydiplay();
+                        Console.Write("Enter an option: ");
+                        string option = Console.ReadLine();
+                    if (option == "1")
+                    {
+                        Console.Write("Enter new type(Cone or Waffle): ");
+                        string newtype = Console.ReadLine();
+                        if (newtype == "cone")
+                        {
+                            Console.Write("Do you want your cone dipped?(Y/N):");
+                            string dipped = Console.ReadLine();
+                            if (dipped.ToLower() == "y")
+                            {
+                                modifiedice = new Cone("cone", result.Scoops, result.Flavours, result.Toppings, true);
+
+
+
+                            }
+                            else if (dipped.ToLower() == "n")
+                            {
+                                modifiedice = new Cone("cone", result.Scoops, result.Flavours, result.Toppings, false);
+
+
+
+                            }
+                        }
+                        else if (newtype == "waffle")
+                        {
+                            displaywaffle(wafflelist);
+                            Console.Write("Enter waffle flavour: ");
+                            int wafflenum = Convert.ToInt32(Console.ReadLine());
+                            string waffeflav = wafflelist[wafflenum];
+                            modifiedice = new Waffle("waffle", result.Scoops, result.Flavours, result.Toppings, waffeflav);
+                        }
+                        else
+                        {
+                            Console.WriteLine("invalid input");
+
+                        }
+                        IceCreamlist[id - 1] = modifiedice;
+
+
+                    }
+                    else if (option == "2")
+                    {
+                        Console.Write("Enter number of scoops [1-3]: ");
+
+
+                        int newscp = Convert.ToInt16(Console.ReadLine());
+                        if (newscp > 3 && newscp < 1)
+                        {
+                            Console.WriteLine("invalid input");
+
+                        }
+                        else
+                        {
 
                             DisplayFlavours(DictFlavour);
                             for (int scoopIndex = 1; scoopIndex <= newscp; scoopIndex++)
@@ -391,222 +590,58 @@ namespace PRG2_Assignment_Order
                             }
                             result.Flavours = flavlist;
                         }
-                        else if (option == "3")
-                        {
-                            flavlist.Clear();
-                            int count = 1;
-                            foreach (var flavour in result.Flavours)
-                            {
-                                Console.Write($"Enter flavour number {count} : ");
-                                count++;
-                                int newflav = Convert.ToInt32(Console.ReadLine());
-                                Flavour addflact = DictFlavour[newflav];
-                                if (addflact != null)
-                                {
-                                    flavlist.Add(addflact);
-                                }
-                                else
-                                {
-                                    foreach (var flav in flavlist)
-                                    {
-                                        if (flav.Type == addflact.Type)
-                                        {
-                                            flav.Quantity += 1;
-
-
-                                        }
-
-
-                                    }
-
-
-
-
-
-
-
-                                }
-
-
-                            }
-                            result.Flavours = flavlist;
-
-                        }
-                        else if (option == "4")
-                        {
-                            List<Topping> toplist = new List<Topping>();
-                            Console.Write("Enter number of toppings: ");
-
-
-                            int newtop = Convert.ToInt16(Console.ReadLine());
-                            DisplayToppings(DictTopping);
-                            for (int topIndex = 1; topIndex <= newtop; topIndex++)
-                            {
-                                Console.Write($"Enter toping number {topIndex} : ");
-                                int addtop = Convert.ToInt32(Console.ReadLine());
-                                Topping toppingtolist = DictTopping[addtop];
-                                toplist.Add(toppingtolist);
-
-
-                            }
-                            result.Toppings = toplist;
-                        }
-                        else if (option == "5")
-                        {
-                            displaywaffle(wafflelist);
-                            Console.Write("Enter waffle flavour: ");
-                            int wafflenum = Convert.ToInt32(Console.ReadLine());
-                            string waffeflav = wafflelist[wafflenum];
-                            modifiedice = new Waffle("waffle", result.Scoops, result.Flavours, result.Toppings, waffeflav);
-                            IceCreamlist[id - 1] = modifiedice;
-
-                        }
-
                     }
-                    else if (result is Cup)
+                    else if (option == "3")
                     {
-                        modifydiplay();
-                        Console.Write("Enter an option: ");
-                        string option = Console.ReadLine();
-                        if (option == "1")
+                        flavlist.Clear();
+                        int count = 1;
+                        foreach (var flavour in result.Flavours)
                         {
-                            Console.Write("Enter new type(Cone or Waffle): ");
-                            string newtype = Console.ReadLine();
-                            if (newtype == "cone")
+                            Console.Write($"Enter flavour number {count} : ");
+                            count++;
+                            int newflav = Convert.ToInt32(Console.ReadLine());
+                            Flavour addflact = DictFlavour[newflav];
+                            if (addflact != null)
                             {
-                                Console.Write("Do you want your cone dipped?(Y/N):");
-                                string dipped = Console.ReadLine();
-                                if (dipped.ToLower() == "y")
-                                {
-                                    modifiedice = new Cone("cone", result.Scoops, result.Flavours, result.Toppings, true);
-
-
-
-                                }
-                                else if (dipped.ToLower() == "n")
-                                {
-                                    modifiedice = new Cone("cone", result.Scoops, result.Flavours, result.Toppings, false);
-
-
-
-                                }
-                            }
-                            else if (newtype == "waffle")
-                            {
-                                displaywaffle(wafflelist);
-                                Console.Write("Enter waffle flavour: ");
-                                int wafflenum = Convert.ToInt32(Console.ReadLine());
-                                string waffeflav = wafflelist[wafflenum];
-                                modifiedice = new Waffle("waffle", result.Scoops, result.Flavours, result.Toppings, waffeflav);
-                            }
-                            else {
-                                Console.WriteLine("invalid input");
-
-                            }
-                            IceCreamlist[id - 1] = modifiedice;
-
-
-                        }
-                        else if (option == "2")
-                        {
-                            Console.Write("Enter number of scoops [1-3]: ");
-
-
-                            int newscp = Convert.ToInt16(Console.ReadLine());
-                            if (newscp > 3)
-                            {
-                                Console.WriteLine("invalid input");
-
+                                flavlist.Add(addflact);
                             }
                             else
                             {
-
-                                DisplayFlavours(DictFlavour);
-                                for (int scoopIndex = 1; scoopIndex <= newscp; scoopIndex++)
+                                foreach (var flav in flavlist)
                                 {
-                                    Console.Write($"Enter flavour number {scoopIndex} : ");
-                                    int newflav = Convert.ToInt32(Console.ReadLine());
-                                    Flavour addflact = DictFlavour[newflav];
-                                    if (addflact != null)
+                                    if (flav.Type == addflact.Type)
                                     {
-                                        flavlist.Add(addflact);
-                                    }
-                                    else
-                                    {
-                                        foreach (var flav in flavlist)
-                                        {
-                                            if (flav.Type == addflact.Type)
-                                            {
-                                                flav.Quantity += 1;
-
-
-                                            }
-
-
-                                        }
-
-
-
-
-
+                                        flav.Quantity += 1;
 
 
                                     }
 
 
-
                                 }
-                                result.Flavours = flavlist;
-                            }
-                        }
-                        else if (option == "3")
-                        {
-                            flavlist.Clear();
-                            int count = 1;
-                            foreach (var flavour in result.Flavours)
-                            {
-                                Console.Write($"Enter flavour number {count} : ");
-                                count++;
-                                int newflav = Convert.ToInt32(Console.ReadLine());
-                                Flavour addflact = DictFlavour[newflav];
-                                if (addflact != null)
-                                {
-                                    flavlist.Add(addflact);
-                                }
-                                else
-                                {
-                                    foreach (var flav in flavlist)
-                                    {
-                                        if (flav.Type == addflact.Type)
-                                        {
-                                            flav.Quantity += 1;
-
-
-                                        }
-
-
-                                    }
 
 
 
 
 
-
-
-                                }
 
 
                             }
-                            result.Flavours = flavlist;
+
 
                         }
-                        else if (option == "4")
+                        result.Flavours = flavlist;
+
+                    }
+                    else if (option == "4")
+                    {
+                        List<Topping> toplist = new List<Topping>();
+                        Console.Write("Enter number of toppings[1-4]: ");
+
+
+
+                        int newtop = Convert.ToInt16(Console.ReadLine());
+                        if (newtop < 1 && newtop > 4)
                         {
-                            List<Topping> toplist = new List<Topping>();
-                            Console.Write("Enter number of toppings: ");
-
-
-                            int newtop = Convert.ToInt16(Console.ReadLine());
                             DisplayToppings(DictTopping);
                             for (int topIndex = 1; topIndex <= newtop; topIndex++)
                             {
@@ -619,9 +654,11 @@ namespace PRG2_Assignment_Order
                             }
                             result.Toppings = toplist;
                         }
-
-
+                        else { Console.WriteLine("invalid input"); }
                     }
+
+
+                }
 
                 
             }
