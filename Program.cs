@@ -197,28 +197,30 @@ void InitOrders(string txtfile)
 
             Order order = new Order(Convert.ToInt32(rowList[0]), Convert.ToDateTime(rowList[2]));
             order.timeFulfilled = Convert.ToDateTime(rowList[3]);
-            foreach (var v in DictCustomer)
+            // 4Option,5Scoops,6Dipped,7WaffleFlavour,8Flavour1,9Flavour2,10Flavour3,11Topping1,12Topping2,13Topping3,14Topping4
+            IceCream newIC = IceCreamRead(rowList[4], Convert.ToInt32(rowList[5]), rowList[6], rowList[7], rowList[8], rowList[9], rowList[10], rowList[11], rowList[12], rowList[13], rowList[14]);
+            foreach(var c in DictCustomer.Values)
             {
-                if (v.Key == Convert.ToInt32(rowList[1]))
+                if (c.OrderHistory != null)
                 {
-                    bool addOrderHist = false;
-                    // 4Option,5Scoops,6Dipped,7WaffleFlavour,8Flavour1,9Flavour2,10Flavour3,11Topping1,12Topping2,13Topping3,14Topping4
-                    IceCream newIC = IceCreamRead(rowList[4], Convert.ToInt32(rowList[5]), rowList[6], rowList[7], rowList[8], rowList[9], rowList[10], rowList[11], rowList[12], rowList[13], rowList[14]);
-                    foreach (var o in v.Value.OrderHistory)
+                    if (c.MemberId == Convert.ToInt32(rowList[1]))
                     {
-                        if(o.id == Convert.ToInt32(rowList[0]){
-                            addOrderHist = true;
-                            o.AddIceCream(newIC);
+                        if(c.OrderHistory.Count == 0)
+                        {
+                            order.AddIceCream(newIC);
+                            c.OrderHistory.Add(order);
                         }
-                        
-                    }
-                    if(!addOrderHist)
-                    {
-                        order.AddIceCream(newIC);
-                        v.Value.OrderHistory.Add(order);
-                    }
-                    else
-                    {
+                        else
+                        {
+                            foreach(var o in c.OrderHistory)
+                            {
+                                if(o.id == Convert.ToInt32(rowList[0]))
+                                {
+                                    o.AddIceCream(newIC);
+                                }
+                            }
+                        }
+
 
                     }
                 }
@@ -387,7 +389,7 @@ void Option1(Dictionary<int, Customer
     foreach(var kvp in DictCustomer)
     {
         Console.WriteLine($"Name: {kvp.Value.Name,-15} Member ID:{kvp.Value.MemberId,-10} DateofBirth: {kvp.Value.Dob,-10:dd/MM/yyyy} MemberShip Status: {kvp.Value.Rewards.tier,-10} Points: {kvp.Value.Rewards.points,-3} Punch Card: {kvp.Value.Rewards.punchCard}");
-        // Console.WriteLine(kvp.Value.OrderHistory.Count);
+        Console.WriteLine(kvp.Value.OrderHistory.Count);
     }
 }
 void Option2() 
@@ -707,13 +709,11 @@ void Option5() {
         Console.WriteLine("pass orders");
         foreach (Order pastorder in result.OrderHistory)
         {
+            Console.WriteLine("time recived");
             Console.WriteLine(pastorder.timeRecieved);
+            Console.WriteLine("time fulfiled");
             Console.WriteLine(pastorder.timeFulfilled);
-            foreach (IceCream pastorderice in pastorder.IceCreamlist)
-            {
-                Console.WriteLine(pastorder);
-
-            }
+            
 
 
         }
@@ -722,8 +722,7 @@ void Option5() {
     
 
 
-    // for each order, display all the details of the order including datetime received, datetime
-    //fulfilled(if applicable) and all ice cream details associated with the order
+   
 
 }
 void Option6()
