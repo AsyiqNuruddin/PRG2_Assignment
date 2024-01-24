@@ -43,13 +43,13 @@ namespace PRG2_Assignment_Order
         {
             try
             {
-                IceCream modice = IceCreamlist[id - 1];
+                IceCream result = IceCreamlist[id - 1];
 
                 Dictionary<int, Flavour> DictFlavour = new Dictionary<int, Flavour>();
                 Dictionary<int, Topping> DictTopping = new Dictionary<int, Topping>();
                 InitFlavours("flavours.csv", DictFlavour);
                 InitToppings("toppings.csv", DictTopping);
-                modifyicecream(modice);
+                
                 void DisplayFlavours(Dictionary<int, Flavour> df)
                 {
                     foreach (var v in df)
@@ -145,8 +145,7 @@ namespace PRG2_Assignment_Order
                     Console.WriteLine("[3] cahnge flavour of scoop");
                     Console.WriteLine("[4] change toppings");
                 }
-                void modifyicecream(IceCream result)
-                {
+                
                     Dictionary<int, string> wafflelist = new Dictionary<int, string>();
                     initwaffle(wafflelist);
                     List<Flavour> flavlist = new List<Flavour>();
@@ -624,7 +623,7 @@ namespace PRG2_Assignment_Order
 
                     }
 
-                }
+                
             }
             catch (IndexOutOfRangeException) {
                 Console.WriteLine("invalid option");
