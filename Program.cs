@@ -17,6 +17,7 @@ using System.Numerics;
 using System.Reflection.PortableExecutable;
 using System.Linq;
 using System.ComponentModel.Design;
+using System.Reflection.Metadata.Ecma335;
 
 
 //==========================================================
@@ -957,6 +958,14 @@ void Option7()
         servingcustomer.CurrentOrder.timeFulfilled = DateTime.Now;
         servingcustomer.OrderHistory.Add(servingcustomer.CurrentOrder);
         servingcustomer.CurrentOrder = null;
+        if (servingcustomer.Rewards.points >=50)
+        {
+            servingcustomer.Rewards.tier = "Silver";
+
+            Console.WriteLine("congrats u are now a silver teir member");
+
+        }
+        
 
         WriteIceCream(servingorder, servingcustomer.MemberId);
     }
@@ -974,11 +983,22 @@ void Option7()
 
         }
         else if (redeem == "n") { }
+        Console.WriteLine($"fianl toatal: {total}");
         int points = Convert.ToInt16(Math.Floor(total * 0.72));
         servingcustomer.Rewards.AddPoints(points);
         servingcustomer.CurrentOrder.timeFulfilled = DateTime.Now;
         servingcustomer.OrderHistory.Add(servingcustomer.CurrentOrder);
         servingcustomer.CurrentOrder = null;
+        if (servingcustomer.Rewards.tier == "Silver") {
+            if (servingcustomer.Rewards.points >= 100) {
+                servingcustomer.Rewards.tier = "gold";
+                Console.WriteLine("cpmgrats you are now a gold member!");
+
+
+
+            }
+        
+        }
 
     }
     foreach (IceCream ice in servingorder.IceCreamlist)
