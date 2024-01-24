@@ -16,6 +16,7 @@ using System.Runtime.Intrinsics.X86;
 using System.Numerics;
 using System.Reflection.PortableExecutable;
 using System.Linq;
+using System.ComponentModel.Design;
 
 
 //==========================================================
@@ -28,10 +29,22 @@ Queue<Order> RegularQueueOrder = new Queue<Order>();
 Dictionary<int, Flavour> DictFlavour = new Dictionary<int, Flavour>();
 Dictionary<int, Topping> DictTopping = new Dictionary<int, Topping>();
 
-InitCustomer("customers.csv");
-InitFlavours("flavours.csv",DictFlavour);
-InitToppings("toppings.csv",DictTopping);
-InitOrders("orders.csv");
+try
+{
+    InitCustomer("customers.csv");
+    InitFlavours("flavours.csv", DictFlavour);
+    InitToppings("toppings.csv", DictTopping);
+    InitOrders("orders.csv");
+}
+catch (IOException ioex)
+{
+    throw new IOException("An error occurred while processing the files.", ioex);
+}
+catch (Exception ex)
+{
+    throw new Exception("An generic error ocurred from file reading.");
+}
+
 // Loop of Options
 
 do{
@@ -212,12 +225,20 @@ void InitOrders(string txtfile)
                         }
                         else
                         {
+                            bool check = false;
                             foreach(var o in c.OrderHistory)
                             {
                                 if(o.id == Convert.ToInt32(rowList[0]))
                                 {
                                     o.AddIceCream(newIC);
+                                    check = true;
+                                    break;
                                 }
+                            }
+                            if (!check)
+                            {
+                                order.AddIceCream(newIC);
+                                c.OrderHistory.Add(order);
                             }
                         }
 
@@ -1038,37 +1059,48 @@ void WriteIceCream(Order order, int id)
 }
 void Option8()
 {
-    Console.Write("Enter the year: ");
-    int inyear = Convert.ToInt32(Console.ReadLine());
-    double yeartotal = 0;
-
-    double[] monthlyTotals = new double[12];
-
-    foreach (var cus in DictCustomer.Values)
+    void Option8()
     {
-        var sortedOrders = cus.OrderHistory
-        .Where(or => or.timeFulfilled.HasValue && or.timeFulfilled.Value.Year == inyear)
-        .GroupBy(or => or.timeFulfilled.Value.Month);
-        foreach (var months in sortedOrders)
+        Console.Write("Enter the year: ");
+        int inputYear = int.Parse(Console.ReadLine());
+
+        // Assuming DictCustomer is a Dictionary<string, customer>
+        double[] monthlyTotals = new double[12]; // One entry for each month
+
+        foreach (var custo in DictCustomer)
         {
-            int month = months.Key;
+            Customer custom = custo.Value;
 
-            // Retrieve IceCreamList for the month
-            List<IceCream> iceCreamList = months
-                .SelectMany(or => or.IceCreamlist)
-                .ToList();
+            // Group orders by month
+            var ordersByMonth = custom.OrderHistory
+                .Where(or => or.timeFulfilled.HasValue && or.timeFulfilled.Value.Year == inputYear)
+                .GroupBy(or => or.timeFulfilled.Value.Month);
 
-            // Calculate total for the month
-            double monthTotal = iceCreamList.Sum(iceCream => iceCream.CalculatePrice());
-            monthlyTotals[month - 1] += monthTotal; // Adjust month index to 0-based
-            yeartotal += monthTotal;
+            // Iterate through each month
+            foreach (var monthGroup in ordersByMonth)
+            {
+                int month = monthGroup.Key;
+
+                // Retrieve IceCreamList for the month
+                List<IceCream> iceCreamList = monthGroup
+                    .SelectMany(or => or.IceCreamlist)
+                    .ToList();
+
+                // Calculate total for the month
+                double monthTotal = iceCreamList.Sum(iceCream => iceCream.CalculatePrice());
+                monthlyTotals[month - 1] += monthTotal; // Adjust month index to 0-based
+
+                // Do something with the monthTotal or other logic
+                Console.WriteLine($"Month: {month}, Ice Cream Total: {monthTotal}");
+            }
+        }
+
+        // Print the total for each month
+        for (int i = 0; i < monthlyTotals.Length; i++)
+        {
+            Console.WriteLine($"Total for {CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i + 1)}: {monthlyTotals[i]}");
         }
     }
-    for (int i = 0; i < monthlyTotals.Length; i++)
-    {
-        Console.WriteLine($"{CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i + 1)} {inyear}: ${monthlyTotals[i]:0.00}");
-    }
-    Console.WriteLine($"Total: ${yeartotal:0.00}");
 
 }
 
