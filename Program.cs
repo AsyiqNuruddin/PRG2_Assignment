@@ -880,19 +880,19 @@ void Option3()
                 }
                 else if (choice == "2")
                 {
-                    bool repeat = true;
+                    ;
                     while (true) {
-                        Makeicecream(result,repeat);
+                        Makeicecream(result);
                         Console.Write("do you want to continue order(y 0r n)");
                         string input = Console.ReadLine();
                         if (input == "n")
                         {
-                            repeat = true;
+                            break;
+                            
                         }
                         else if (input == "y") {
-                            repeat = false;
-                            break;
-
+                            continue;
+                            
 
 
                         }
@@ -1247,14 +1247,14 @@ void Option3()
 
 
     void Makeicecream(Customer
-     result,bool reapeat)
+     result)
     {
         IceCream newIceCream = null;
         List<Flavour> flavlist = new List<Flavour>();
         List<Topping> toplist = new List<Topping>();
         Dictionary<int, string> wafflelist = new Dictionary<int, string>();
         initwaffle(wafflelist);
-    while (reapeat)
+    while (true)
     {
         Console.Write("Enter their ice cream order type (Cup, Cone or Waffle): ");
         string type = Console.ReadLine();
@@ -1364,6 +1364,7 @@ void Option3()
 
 
                 }
+                break;
 
 
 
@@ -1491,8 +1492,10 @@ void Option3()
                     }
                 }
                 else { Console.WriteLine("invalid input"); }
+                break;
 
             }
+            
         }
         else if (type == "cone")
         {
@@ -1566,6 +1569,7 @@ void Option3()
                                 {
                                     newIceCream = new Cone("cone", newscp, flavlist, toplist, true);
                                     result.CurrentOrder.AddIceCream(newIceCream);
+                                    break;
 
 
                                 }
@@ -1573,30 +1577,40 @@ void Option3()
                                 {
                                     newIceCream = new Cone("cone", newscp, flavlist, toplist, false);
                                     result.CurrentOrder.AddIceCream(newIceCream);
+                                    break;
 
 
                                 }
-                                else {
+                                else
+                                {
                                     Console.WriteLine("invalid input");
 
                                 }
                             }
+                            break;
 
-                            
+
                         }
 
                     }
-                }    
+                }
+                else {
+                    Console.WriteLine("invalid input");
+
+                }
+                break;
                 
                            
                 
             }
+            
         }
         else {
             Console.WriteLine("invalid input");
 
 
         }
+        break;
 
 
     }
