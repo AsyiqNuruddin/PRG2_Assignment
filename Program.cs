@@ -706,8 +706,28 @@ void Option3()
                     {
                         Console.WriteLine("invalid input");
                     }
-                    
+                    Console.Write("Do you want to continue order(y or n)");
+                string input = Console.ReadLine();
+                if (input == "y") {
+                    continue;
+                
                 }
+                else if (input == "n") {
+                    Console.WriteLine("order finished");
+                    break;
+                
+                }
+                else {
+                    Console.WriteLine("invalid input");
+                    Console.WriteLine("order finished");
+                    break;
+
+
+
+
+                }
+
+            }
 
                 if (result.CurrentOrder.IceCreamlist.Count != 0)
                 {
@@ -930,9 +950,11 @@ void Option3()
         if (GoldQueueOrder.Count != 0)
         {
             servingorder = GoldQueueOrder.Dequeue();
+            
 
         }
-        else
+        
+        else 
         {
             servingorder = RegularQueueOrder.Dequeue();
         }
