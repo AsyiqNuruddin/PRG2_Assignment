@@ -625,8 +625,7 @@ void Option3()
     //==========================================================
     void Option4()
 {
-    while (true)
-    {
+    
         try {
             // show Customer Details
             Option1(DictCustomer);
@@ -730,7 +729,7 @@ void Option3()
                     }
 
                 }
-                break;
+                
             }
             else
             {
@@ -745,7 +744,7 @@ void Option3()
         {
             Console.WriteLine($"An error occurred: {ex.Message}");
         }
-    }
+    
 }
     void Option5()
     {
@@ -1265,6 +1264,7 @@ void Option3()
 
 
                     }
+                    
                     while (true)
                     {
                         Console.Write("Enter number of toppings[1-4]: ");
@@ -1285,7 +1285,8 @@ void Option3()
                             }
                             newIceCream = new Cup("cup", newscp, flavlist, toplist);
                             result.CurrentOrder.AddIceCream(newIceCream);
-                            break;
+                            
+
                         }
                         else
                         {
@@ -1376,7 +1377,7 @@ void Option3()
             result.CurrentOrder.AddIceCream(newIceCream);
 
         }
-        else if (type == "con")
+        else if (type == "cone")
         {
             Console.Write("Enter number of scoops: ");
 
