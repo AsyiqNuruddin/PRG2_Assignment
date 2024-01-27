@@ -18,6 +18,7 @@ using System.Reflection.PortableExecutable;
 using System.Linq;
 using System.ComponentModel.Design;
 using System.Reflection.Metadata.Ecma335;
+using System.Linq.Expressions;
 
 
 //==========================================================
@@ -688,7 +689,7 @@ void Option3()
                 }
                 else
                 {
-                    break;
+                    Console.WriteLine("in valid input");
                 }
                 Console.WriteLine($"Your order: {newice}");
                 newOrd.AddIceCream(newice);
@@ -737,40 +738,65 @@ void Option3()
     }
     void Option5()
     {
-        Option1(DictCustomer);
-        Console.Write("Select the customer: ");
-        int idInp = Convert.ToInt32(Console.ReadLine());
-        Customer
-    ? result = Search(DictCustomer, idInp);
-        if (result != null)
+    while (true)
+    {
+        try
         {
-            List<IceCream> currentorder = result.CurrentOrder.IceCreamlist;
-            Console.WriteLine("current order");
-            foreach (IceCream currenrorderice in currentorder)
+
+            Option1(DictCustomer);
+            Console.Write("Select the customer: ");
+            int idInp = Convert.ToInt32(Console.ReadLine());
+            Customer
+        ? result = Search(DictCustomer, idInp);
+            if (result != null)
             {
-                Console.WriteLine(currenrorderice);
+                List<IceCream> currentorder = result.CurrentOrder.IceCreamlist;
+                Console.WriteLine("current order");
+                if (currentorder.Count == 0) {
+                    Console.WriteLine("no current orders");
+
+                }
+                foreach (IceCream currenrorderice in currentorder)
+                {
+                    Console.WriteLine(currenrorderice);
 
 
+                }
+                Console.WriteLine("pass orders");
+                if (result.OrderHistory.Count == 0)
+                {
+                    Console.WriteLine("no past orders");
+
+                }
+                foreach (Order pastorder in result.OrderHistory)
+                {
+                    Console.WriteLine("time recived");
+                    Console.WriteLine(pastorder.timeRecieved);
+                    Console.WriteLine("time fulfiled");
+                    Console.WriteLine(pastorder.timeFulfilled);
+
+
+
+                }
+                break;
             }
-            Console.WriteLine("pass orders");
-            foreach (Order pastorder in result.OrderHistory)
-            {
-                Console.WriteLine("time recived");
-                Console.WriteLine(pastorder.timeRecieved);
-                Console.WriteLine("time fulfiled");
-                Console.WriteLine(pastorder.timeFulfilled);
+            else { Console.WriteLine("invalid customer"); }
 
 
 
-            }
+
         }
-        else { Console.WriteLine("invalid customer"); }
-
-
-
-
-
+        catch (FormatException)
+        {
+            Console.WriteLine("Invalid input. Please enter a valid numeric value for customer ID.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred: {ex.Message}");
+        }
     }
+
+}
     void Option6()
 
     {
