@@ -1372,6 +1372,7 @@ void Option3()
 
 
             }
+            break;
 
         }
 
@@ -1495,7 +1496,8 @@ void Option3()
                 break;
 
             }
-            
+            break;
+
         }
         else if (type == "cone")
         {
@@ -1603,14 +1605,15 @@ void Option3()
                            
                 
             }
-            
+            break;
+
         }
         else {
             Console.WriteLine("invalid input");
 
 
         }
-        break;
+        
 
 
     }
