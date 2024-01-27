@@ -861,31 +861,11 @@ void Option3()
                 }
                 else if (choice == "2")
                 {
-                    while (true)
-                    {
-                        Console.Write("Enter their ice cream order type (Cup, Cone or Waffle): ");
-                        string choiceInp = Console.ReadLine();
-                        Makeicecream(choiceInp, result);
-                        Console.Write("Do you wish to continue ordering? (Y/N): ");
-                        string yesorno = Console.ReadLine();
-                        if (yesorno.ToLower() == "y")
-                        {
-                            continue;
-
-                        }
-                        else if (yesorno.ToLower() == "n")
-                        {
-                            Console.WriteLine("order finished.");
-                            break;
-
-                        }
-                        else
-                        {
-                            Console.WriteLine("invalid input.order finished.");
-
-
-                        }
-                    }
+                    
+                        
+                        Makeicecream(result);
+                        
+                    
 
                 }
                 else if (choice == "2")
@@ -1226,7 +1206,7 @@ void Option3()
 
 
 
-    void Makeicecream(string type, Customer
+    void Makeicecream(Customer
      result)
     {
         IceCream newIceCream = null;
@@ -1234,69 +1214,100 @@ void Option3()
         List<Topping> toplist = new List<Topping>();
         Dictionary<int, string> wafflelist = new Dictionary<int, string>();
         initwaffle(wafflelist);
+    while (true)
+    {
+        Console.Write("Enter their ice cream order type (Cup, Cone or Waffle): ");
+        string type = Console.ReadLine();
 
         if (type == "cup")
         {
-            Console.Write("Enter number of scoops: ");
-
-
-            int newscp = Convert.ToInt16(Console.ReadLine());
-
-            DisplayFlavours(DictFlavour);
-            for (int scoopIndex = 1; scoopIndex <= newscp; scoopIndex++)
+            while (true)
             {
-                Console.Write($"Enter flavour number {scoopIndex} : ");
-                int newflav = Convert.ToInt32(Console.ReadLine());
-                Flavour addflact = DictFlavour[newflav];
-                if (addflact != null)
+                Console.Write("Enter number of scoops[1-3]: ");
+
+
+
+                int newscp = Convert.ToInt16(Console.ReadLine());
+                if (newscp > 0 && newscp < 3)
                 {
-                    flavlist.Add(addflact);
-                }
-                else
-                {
-                    foreach (var flav in flavlist)
+                    DisplayFlavours(DictFlavour);
+                    for (int scoopIndex = 1; scoopIndex <= newscp; scoopIndex++)
                     {
-                        if (flav.Type == addflact.Type)
+                        Console.Write($"Enter flavour number {scoopIndex} : ");
+                        int newflav = Convert.ToInt32(Console.ReadLine());
+                        Flavour addflact = DictFlavour[newflav];
+                        if (addflact != null)
                         {
-                            flav.Quantity += 1;
+                            flavlist.Add(addflact);
+                        }
+                        else
+                        {
+                            foreach (var flav in flavlist)
+                            {
+                                if (flav.Type == addflact.Type)
+                                {
+                                    flav.Quantity += 1;
+
+
+                                }
+
+
+                            }
+
+
+
+
+
 
 
                         }
 
 
+
+                    }
+                    while (true)
+                    {
+                        Console.Write("Enter number of toppings[1-4]: ");
+
+
+                        int newtop = Convert.ToInt16(Console.ReadLine());
+                        if (newtop >= 1 && newtop <= 4)
+                        {
+                            DisplayToppings(DictTopping);
+                            for (int topIndex = 1; topIndex <= newtop; topIndex++)
+                            {
+                                Console.Write($"Enter toping number {topIndex} : ");
+                                int addtop = Convert.ToInt32(Console.ReadLine());
+                                Topping toppingtolist = DictTopping[addtop];
+                                toplist.Add(toppingtolist);
+
+
+                            }
+                            newIceCream = new Cup("cup", newscp, flavlist, toplist);
+                            result.CurrentOrder.AddIceCream(newIceCream);
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("invalid input");
+
+                        }
                     }
 
-
-
-
-
+                }
+                else
+                {
+                    Console.WriteLine("invalid input.");
 
 
                 }
 
 
 
-            }
-            Console.Write("Enter number of toppings: ");
 
-
-            int newtop = Convert.ToInt16(Console.ReadLine());
-            DisplayToppings(DictTopping);
-            for (int topIndex = 1; topIndex <= newtop; topIndex++)
-            {
-                Console.Write($"Enter toping number {topIndex} : ");
-                int addtop = Convert.ToInt32(Console.ReadLine());
-                Topping toppingtolist = DictTopping[addtop];
-                toplist.Add(toppingtolist);
 
 
             }
-            newIceCream = new Cup("cup", newscp, flavlist, toplist);
-            result.CurrentOrder.AddIceCream(newIceCream);
-
-
-
-
 
         }
 
@@ -1439,9 +1450,28 @@ void Option3()
             result.CurrentOrder.AddIceCream(newIceCream);
 
         }
+        Console.Write("Do you wish to continue ordering? (Y/N): ");
+        string yesorno = Console.ReadLine();
+        if (yesorno.ToLower() == "y")
+        {
+            continue;
+
+        }
+        else if (yesorno.ToLower() == "n")
+        {
+            Console.WriteLine("order finished.");
+            break;
+
+        }
+        else
+        {
+            Console.WriteLine("invalid input.order finished.");
 
 
+        }
 
+
+    }
 
     }
     void modifydiplay()
