@@ -1472,6 +1472,7 @@ void Option3()
                                 }
                             }
                             break;
+                            
 
 
                         }
@@ -1480,15 +1481,19 @@ void Option3()
                             Console.WriteLine("invalid input");
 
                         }
+                        
 
 
                     }
+                    break;
                 }
                 else { Console.WriteLine("invalid input"); }
                 
 
             }
             break;
+            
+            
 
         }
         else if (type == "cone")
@@ -1587,6 +1592,7 @@ void Option3()
                         }
 
                     }
+                    break;
                 }
                 else {
                     Console.WriteLine("invalid input");
@@ -1598,10 +1604,12 @@ void Option3()
                 
             }
             break;
+            
 
         }
         else {
             Console.WriteLine("invalid input");
+            continue;
 
 
         }
