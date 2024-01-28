@@ -871,7 +871,7 @@ void Option3()
                 }
                 else if (choice == "2")
                 {
-                    ;
+                    
                     while (true) {
                         Makeicecream(result);
                         Console.Write("do you want to continue order(y 0r n)");
@@ -890,6 +890,7 @@ void Option3()
 
 
                     }
+                    
                     
                         
                         
@@ -1355,7 +1356,7 @@ void Option3()
 
 
                 }
-                break;
+                
 
 
 
