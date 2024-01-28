@@ -1485,7 +1485,7 @@ void Option3()
                     }
                 }
                 else { Console.WriteLine("invalid input"); }
-                break;
+                
 
             }
             break;
@@ -1592,7 +1592,7 @@ void Option3()
                     Console.WriteLine("invalid input");
 
                 }
-                break;
+                
                 
                            
                 
