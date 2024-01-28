@@ -395,33 +395,49 @@ namespace PRG2_Assignment_Order
                         string option = Console.ReadLine();
                         if (option == "1")
                         {
-                            Console.Write("Enter new type(Cone or cup): ");
-                            string newtype = Console.ReadLine();
-                            if (newtype == "cone")
+                            while (true)
                             {
-                                Console.Write("Do you want your cone dipped?(Y/N):");
-                                string dipped = Console.ReadLine();
-                                if (dipped.ToLower() == "y")
+                                Console.Write("Enter new type(Cone or cup): ");
+                                string newtype = Console.ReadLine();
+                                if (newtype == "cone")
                                 {
-                                    modifiedice = new Cone("cone", result.Scoops, result.Flavours, result.Toppings, true);
+                                    Console.Write("Do you want your cone dipped?(Y/N):");
+                                    string dipped = Console.ReadLine();
+                                    while (true)
+                                    {
+                                        if (dipped.ToLower() == "y")
+                                        {
+                                            modifiedice = new Cone("cone", result.Scoops, result.Flavours, result.Toppings, true);
+                                            IceCreamlist[id - 1] = modifiedice;
+                                            break;
 
 
+
+                                        }
+                                        else if (dipped.ToLower() == "n")
+                                        {
+                                            modifiedice = new Cone("cone", result.Scoops, result.Flavours, result.Toppings, false);
+                                            IceCreamlist[id - 1] = modifiedice;
+                                            break;
+
+
+
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("invalid input");
+
+                                        }
+                                    }
+                                }
+                                else if (newtype == "cup")
+                                {
+                                    modifiedice = new Cup("cup", result.Scoops, result.Flavours, result.Toppings);
+                                    IceCreamlist[id - 1] = modifiedice;
 
                                 }
-                                else if (dipped.ToLower() == "n")
-                                {
-                                    modifiedice = new Cone("cone", result.Scoops, result.Flavours, result.Toppings, false);
-
-
-
-                                }
+                                
                             }
-                            else if (newtype == "cup")
-                            {
-                                modifiedice = new Cup("cup", result.Scoops, result.Flavours, result.Toppings);
-
-                            }
-                            IceCreamlist[id - 1] = modifiedice;
                         }
                         else if (option == "2")
                         {
@@ -600,42 +616,69 @@ namespace PRG2_Assignment_Order
                         string option = Console.ReadLine();
                         if (option == "1")
                         {
-                            Console.Write("Enter new type(Cone or Waffle): ");
-                            string newtype = Console.ReadLine();
-                            if (newtype == "cone")
+                            while (true)
                             {
-                                Console.Write("Do you want your cone dipped?(Y/N):");
-                                string dipped = Console.ReadLine();
-                                if (dipped.ToLower() == "y")
+                                Console.Write("Enter new type(Cone or Waffle): ");
+                                string newtype = Console.ReadLine();
+                                if (newtype == "cone")
                                 {
-                                    modifiedice = new Cone("cone", result.Scoops, result.Flavours, result.Toppings, true);
+                                    Console.Write("Do you want your cone dipped?(Y/N):");
+                                    string dipped = Console.ReadLine();
+                                    while (true)
+                                    {
+                                        if (dipped.ToLower() == "y")
+                                        {
+                                            modifiedice = new Cone("cone", result.Scoops, result.Flavours, result.Toppings, true);
+                                            IceCreamlist[id - 1] = modifiedice;
+                                            break;
 
 
+
+                                        }
+                                        else if (dipped.ToLower() == "n")
+                                        {
+                                            modifiedice = new Cone("cone", result.Scoops, result.Flavours, result.Toppings, false);
+                                            IceCreamlist[id - 1] = modifiedice;
+                                            break;
+
+
+
+                                        }
+                                        else {
+                                            Console.WriteLine("invalid input");
+
+                                        }
+                                    }
+                                }
+                                else if (newtype == "waffle")
+                                {
+
+                                    displaywaffle(wafflelist);
+                                    Console.Write("Enter waffle flavour: ");
+                                    while (true)
+                                    {
+                                        try
+                                        {
+                                            int wafflenum = Convert.ToInt32(Console.ReadLine());
+                                            string waffeflav = wafflelist[wafflenum];
+                                            modifiedice = new Waffle("waffle", result.Scoops, result.Flavours, result.Toppings, waffeflav);
+                                            break;
+                                        }
+                                        catch {
+                                            Console.WriteLine("invalid input.");
+
+                                        }
+                                    }
+                                    IceCreamlist[id - 1] = modifiedice;
+                                    break;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("invalid input");
 
                                 }
-                                else if (dipped.ToLower() == "n")
-                                {
-                                    modifiedice = new Cone("cone", result.Scoops, result.Flavours, result.Toppings, false);
-
-
-
-                                }
+                                
                             }
-                            else if (newtype == "waffle")
-                            {
-                                displaywaffle(wafflelist);
-                                Console.Write("Enter waffle flavour: ");
-                                int wafflenum = Convert.ToInt32(Console.ReadLine());
-                                string waffeflav = wafflelist[wafflenum];
-                                modifiedice = new Waffle("waffle", result.Scoops, result.Flavours, result.Toppings, waffeflav);
-                            }
-                            else
-                            {
-                                Console.WriteLine("invalid input");
-
-                            }
-                            IceCreamlist[id - 1] = modifiedice;
-
 
                         }
                         else if (option == "2")
