@@ -31,21 +31,12 @@ Queue<Order> RegularQueueOrder = new Queue<Order>();
 Dictionary<int, Flavour> DictFlavour = new Dictionary<int, Flavour>();
 Dictionary<int, Topping> DictTopping = new Dictionary<int, Topping>();
 
-try
-{
     InitCustomer("customers.csv");
     InitFlavours("flavours.csv", DictFlavour);
     InitToppings("toppings.csv", DictTopping);
     InitOrders("orders.csv");
-}
-catch (IOException )
-{
-    Console.WriteLine("An error occurred while processing the files.");
-}
-catch (Exception )
-{
-    Console.WriteLine("An generic error ocurred from file reading.");
-}
+
+
 
 // Loop of Options
 
