@@ -400,10 +400,11 @@ void DisplayToppings(Dictionary<int, Topping> dt)
 void Option1(Dictionary<int, Customer
 > DictCustomer) 
 {
-    foreach(var kvp in DictCustomer)
+    Console.WriteLine($"{"Name",-12}{"Member ID",-12}{"DateofBirth",-15}{"MemberShip",-15}{"Points",-7}{"Punches",-2}");
+    foreach (var kvp in DictCustomer)
     {
-        Console.WriteLine($"Name: {kvp.Value.Name,-15} Member ID:{kvp.Value.MemberId,-10} DateofBirth: {kvp.Value.Dob,-10:dd/MM/yyyy} MemberShip Status: {kvp.Value.Rewards.tier,-10} Points: {kvp.Value.Rewards.points,-3} Punch Card: {kvp.Value.Rewards.punchCard}");
-        Console.WriteLine(kvp.Value.OrderHistory.Count);
+        Console.WriteLine($"{kvp.Value.Name,-12}{kvp.Value.MemberId,-12}{kvp.Value.Dob,-15:dd/MM/yyyy}{kvp.Value.Rewards.tier,-15}{kvp.Value.Rewards.points,-7}{kvp.Value.Rewards.punchCard}");
+        // Console.WriteLine(kvp.Value.OrderHistory.Count);
     }
 }
 void Option2() 
