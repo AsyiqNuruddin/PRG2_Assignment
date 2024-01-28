@@ -91,13 +91,13 @@ namespace PRG2_Assignment
             {
                 price += 9.50;
             }
-            if (WaffleFlavour != "Plain")
+            if (WaffleFlavour != "Original")
             {
-                return $"\n{"Ice Cream Type: "+Option,-28}{"Price",-5}\n{$"Waffle Flavour: {WaffleFlavour}",-28}{"$3.00",-5}\n---------------------------------\n{"Scoops: " + Scoops,-28}{$"${price:0.00}",-5}{flavstring}{topstring}\n------------------------------\n{"Total",-28}${CalculatePrice():0.00}";
+                return $"\n{"Ice Cream Type: "+Option,-28}{"Price",-5}\n{$"Waffle Flavour: {WaffleFlavour}",-28}{"$3.00",-5}\n---------------------------------\n{"Scoops: " + Scoops,-28}{$"${price:0.00}",-5}{flavstring}{topstring}\n---------------------------------\n{"Total",-28}${CalculatePrice():0.00}";
             }
             else
             {
-                return $"\n{"Ice Cream Type: " + Option,-28}{"Price",-5}\n{$"Waffle Flavour: {WaffleFlavour}",-28}{"$0.00",-5}\n---------------------------------\n{"Scoops: " + Scoops,-28}{$"${price:0.00}",-5}{flavstring}{topstring}\n------------------------------\n{"Total",-28}${CalculatePrice():0.00}";
+                return $"\n{"Ice Cream Type: " + Option,-28}{"Price",-5}\n{$"Waffle Flavour: {WaffleFlavour}",-28}{"$0.00",-5}\n---------------------------------\n{"Scoops: " + Scoops,-28}{$"${price:0.00}",-5}{flavstring}{topstring}\n---------------------------------\n{"Total",-28}${CalculatePrice():0.00}";
             }
         }
     }

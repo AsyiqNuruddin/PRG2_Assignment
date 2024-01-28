@@ -94,11 +94,11 @@ namespace PRG2_Assignment_Cone
             }
             if (dipped)
             {
-                return $"\n{"Ice Cream Type: " + Option,-28}{"Price",-5}\n{"Dipped with Chocolate Cone",-28}{"$2.00",-5}\n---------------------------------\n{"Scoops: " + Scoops,-28}{$"${price:0.00}",-5}{flavstring}{topstring}\n------------------------------\n{"Total",-28}${CalculatePrice():0.00}";
+                return $"\n{"Ice Cream Type: " + Option,-28}{"Price",-5}\n{"Dipped with Chocolate Cone",-28}{"$2.00",-5}\n---------------------------------\n{"Scoops: " + Scoops,-28}{$"${price:0.00}",-5}{flavstring}{topstring}\n---------------------------------\n{"Total",-28}${CalculatePrice():0.00}";
             }
             else
             {
-                return $"\n{"Ice Cream Type: " + Option,-28}{"Price",-5}\n{"Plain Cone",-28}{"$0.00",-5}\n---------------------------------\n{"Scoops: "+Scoops,-28}{$"${price:0.00}",-5}{flavstring}{topstring}\n------------------------------\n{"Total",-28}${CalculatePrice():0.00}";
+                return $"\n{"Ice Cream Type: " + Option,-28}{"Price",-5}\n{"Plain Cone",-28}{"$0.00",-5}\n---------------------------------\n{"Scoops: "+Scoops,-28}{$"${price:0.00}",-5}{flavstring}{topstring}\n---------------------------------\n{"Total",-28}${CalculatePrice():0.00}";
             }
             
         }
