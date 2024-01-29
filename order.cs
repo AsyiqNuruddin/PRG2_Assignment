@@ -223,8 +223,9 @@ namespace PRG2_Assignment_Order
                                                 Console.Write($"Enter flavour number {scoopIndex} : ");
                                                 int newflav = Convert.ToInt32(Console.ReadLine());
                                                 Flavour addflact = DictFlavour[newflav];
-                                                if (addflact != null)
+                                                if (flavlist.Count == 0)
                                                 {
+
                                                     flavlist.Add(addflact);
                                                 }
                                                 else
@@ -288,8 +289,9 @@ namespace PRG2_Assignment_Order
                                         try
                                         {
                                             Flavour addflact = DictFlavour[newflav];
-                                            if (addflact != null)
+                                            if (flavlist.Count == 0)
                                             {
+
                                                 flavlist.Add(addflact);
                                             }
                                             else
@@ -506,8 +508,9 @@ namespace PRG2_Assignment_Order
                                                 Console.Write($"Enter flavour number {scoopIndex} : ");
                                                 int newflav = Convert.ToInt32(Console.ReadLine());
                                                 Flavour addflact = DictFlavour[newflav];
-                                                if (addflact != null)
+                                                if (flavlist.Count == 0)
                                                 {
+
                                                     flavlist.Add(addflact);
                                                 }
                                                 else
@@ -572,8 +575,9 @@ namespace PRG2_Assignment_Order
                                         try
                                         {
                                             Flavour addflact = DictFlavour[newflav];
-                                            if (addflact != null)
+                                            if (flavlist.Count == 0)
                                             {
+
                                                 flavlist.Add(addflact);
                                             }
                                             else
@@ -775,8 +779,9 @@ namespace PRG2_Assignment_Order
                                             Console.Write($"Enter flavour number {scoopIndex} : ");
                                             int newflav = Convert.ToInt32(Console.ReadLine());
                                             Flavour addflact = DictFlavour[newflav];
-                                            if (addflact != null)
+                                            if (flavlist.Count == 0)
                                             {
+
                                                 flavlist.Add(addflact);
                                             }
                                             else
@@ -840,8 +845,9 @@ namespace PRG2_Assignment_Order
                                     try
                                     {
                                         Flavour addflact = DictFlavour[newflav];
-                                        if (addflact != null)
+                                        if (flavlist.Count == 0)
                                         {
+
                                             flavlist.Add(addflact);
                                         }
                                         else
