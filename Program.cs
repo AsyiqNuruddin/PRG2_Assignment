@@ -543,6 +543,7 @@ void Option3()
 // Student Number : S10262791
 // Student Name : Asyiq Nuruddin
 //==========================================================
+// Search Customers based on Member ID
 static Customer? Search(Dictionary<int, Customer> sDict, int userInp)
 {
     foreach (var v in sDict)
@@ -558,6 +559,7 @@ static Customer? Search(Dictionary<int, Customer> sDict, int userInp)
 // Student Number : S10262791
 // Student Name : Asyiq Nuruddin
 //==========================================================
+// Make the flavour list and topping list for the IC
 (int, List<Flavour>, List<Topping>)? IceCreamAdd(Dictionary<int, Flavour> df, Dictionary<int, Topping> dt)
 {
     List<Flavour> flavList = new List<Flavour>();
@@ -1202,7 +1204,7 @@ void Option4()
                 Customer customers = custo.Value;
                 if (customers != null)
                 {
-                    if (customers.CurrentOrder.id != null)
+                    if (customers.CurrentOrder != null)
                     {
                         if (customers.CurrentOrder.id == servingorder.id)
                         {
