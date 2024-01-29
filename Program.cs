@@ -1044,236 +1044,244 @@ void Option6()
             Customer
         ? result = Search(DictCustomer, idInp);
 
-            
-            
-                if (result != null)
+
+
+            if (result != null)
+            {
+                if (result.CurrentOrder.IceCreamlist.Count != 0)
                 {
-                while (true)
-                {
-                    Console.WriteLine("Menu:\r\n1. Modify an existing ice cream in the order\r\n2. Add a new ice cream to the order\r\n3. Delete an existing ice cream from the order\r\n4. Exit");
-                    Console.Write("Please enter the number corresponding to your choice: ");
-                    string choice = Console.ReadLine();
-                    if (choice == "1")
+                    while (true)
                     {
-                        int count = 1;
-                        foreach (IceCream or in result.CurrentOrder.IceCreamlist)
+                        Console.WriteLine("Menu:\r\n1. Modify an existing ice cream in the order\r\n2. Add a new ice cream to the order\r\n3. Delete an existing ice cream from the order\r\n4. Exit");
+                        Console.Write("Please enter the number corresponding to your choice: ");
+                        string choice = Console.ReadLine();
+                        if (choice == "1")
                         {
-                            Console.WriteLine($"[{count}]");
-                            Console.WriteLine(or);
-                            count++;
-
-
-                        }
-                        Console.Write("Enter a ice cream to modify: ");
-                        try
-                        {
-                            int icecreanindex = Convert.ToInt32(Console.ReadLine());
-                            result.CurrentOrder.Modifyicecream(icecreanindex);
-                            Console.WriteLine($"Modified ice cream: \r\n{result.CurrentOrder.IceCreamlist[icecreanindex - 1]}");
-
-                        }
-                        catch (FormatException)
-                        {
-                            Console.WriteLine("invalid input.");
-
-                        }
-                        catch (IndexOutOfRangeException)
-                        {
-                            Console.WriteLine("invalid input.");
-
-                        }
-
-
-
-                    }
-                    else if (choice == "2")
-                    {
-                        int count = 1;
-                        
-
-                        while (true)
-                        {
-                            Makeicecream(result);
-                            Console.Write("do you want to continue order(y 0r n): ");
-                            string input = Console.ReadLine();
-                            if (input == "n")
+                            int count = 1;
+                            foreach (IceCream or in result.CurrentOrder.IceCreamlist)
                             {
-                                break;
-
-                            }
-                            else if (input == "y")
-                            {
+                                Console.WriteLine($"[{count}]");
+                                Console.WriteLine(or);
                                 count++;
-                                continue;
-
 
 
                             }
-                            else {
-                                Console.WriteLine("invalid input");
-                                break;
-
-                            }
-
-
-                        }
-                        int icenum = result.CurrentOrder.IceCreamlist.Count;
-                        Console.WriteLine("orders added:");
-                        for (int i = 1; i <= count; i++)
-                        {
-                            Console.WriteLine(result.CurrentOrder.IceCreamlist[icenum - i]);
-
-
-
-
-                        }
-
-
-
-
-
-
-
-
-
-                    }
-                    else if (choice == "3")
-                    {
-                        while (true)
-                        {
+                            Console.Write("Enter a ice cream to modify: ");
                             try
                             {
+                                int icecreanindex = Convert.ToInt32(Console.ReadLine());
+                                result.CurrentOrder.Modifyicecream(icecreanindex);
+                                Console.WriteLine($"Modified ice cream: \r\n{result.CurrentOrder.IceCreamlist[icecreanindex - 1]}");
 
-                                int count = 1;
-                                foreach (IceCream or in result.CurrentOrder.IceCreamlist)
+                            }
+                            catch (FormatException)
+                            {
+                                Console.WriteLine("invalid input.");
+
+                            }
+                            catch (IndexOutOfRangeException)
+                            {
+                                Console.WriteLine("invalid input.");
+
+                            }
+
+
+
+                        }
+                        else if (choice == "2")
+                        {
+                            int count = 1;
+
+
+                            while (true)
+                            {
+                                Makeicecream(result);
+                                Console.Write("do you want to continue order(y 0r n): ");
+                                string input = Console.ReadLine();
+                                if (input == "n")
                                 {
-                                    Console.WriteLine($"[{count}]");
-                                    Console.WriteLine(or);
+                                    break;
+
+                                }
+                                else if (input == "y")
+                                {
                                     count++;
+                                    continue;
+
 
 
                                 }
-                                Console.Write("Enter a ice cream to remove: ");
+                                else
+                                {
+                                    Console.WriteLine("invalid input");
+                                    break;
+
+                                }
+
+
+                            }
+                            int count1 = 1;
+
+                            Console.WriteLine("new current order:");
+                            foreach (IceCream or in result.CurrentOrder.IceCreamlist)
+                            {
+                                Console.WriteLine($"[{count1}]");
+                                Console.WriteLine(or);
+                                count++;
+
+
+                            }
+
+
+
+
+
+
+
+
+
+                        }
+                        else if (choice == "3")
+                        {
+                            while (true)
+                            {
                                 try
                                 {
-                                    int icecreanindex = Convert.ToInt32(Console.ReadLine());
-                                    result.CurrentOrder.DeleteIceCream(icecreanindex);
-                                    Console.WriteLine("new order:");
-                                    int count1 = 1;
+
+                                    int count = 1;
                                     foreach (IceCream or in result.CurrentOrder.IceCreamlist)
                                     {
-                                        Console.WriteLine($"[{count1}]");
+                                        Console.WriteLine($"[{count}]");
                                         Console.WriteLine(or);
                                         count++;
 
 
                                     }
-                                    Console.WriteLine("---------current order-------");
-                                    int count2 = 1;
-                                    foreach (IceCream or in result.CurrentOrder.IceCreamlist)
+                                    Console.Write("Enter a ice cream to remove: ");
+                                    try
                                     {
-                                        Console.WriteLine($"[{count2}]");
-                                        Console.WriteLine(or);
-                                        count++;
+                                        int icecreanindex = Convert.ToInt32(Console.ReadLine());
+                                        result.CurrentOrder.DeleteIceCream(icecreanindex);
+                                        Console.WriteLine("new order:");
+                                        int count1 = 1;
+                                        foreach (IceCream or in result.CurrentOrder.IceCreamlist)
+                                        {
+                                            Console.WriteLine($"[{count1}]");
+                                            Console.WriteLine(or);
+                                            count++;
 
 
+                                        }
+                                        Console.WriteLine("---------current order-------");
+                                        int count2 = 1;
+                                        foreach (IceCream or in result.CurrentOrder.IceCreamlist)
+                                        {
+                                            Console.WriteLine($"[{count2}]");
+                                            Console.WriteLine(or);
+                                            count++;
+
+
+                                        }
+
+                                        break;
                                     }
 
-                                    break;
-                                }
+                                    catch (FormatException)
+                                    {
+                                        Console.WriteLine("invalid input.");
 
-                                catch (FormatException)
+                                    }
+                                    catch (IndexOutOfRangeException)
+                                    {
+                                        Console.WriteLine("invalid input.");
+
+                                    }
+                                }
+                                catch (Exception)
                                 {
-                                    Console.WriteLine("invalid input.");
+                                    Console.WriteLine("invliad input.");
 
                                 }
-                                catch (IndexOutOfRangeException)
+                            }
+
+
+
+
+
+
+
+
+
+                        }
+                        else if (choice == "4")
+                        {
+                            break;
+
+                        }
+
+                        else { Console.WriteLine("invalid input"); }
+                        if (result.Rewards.tier == "Gold")
+                        {
+                            Queue<Order> temp = new Queue<Order>();
+                            while (GoldQueueOrder.Count > 0)
+                            {
+                                Order order = GoldQueueOrder.Dequeue();
+                                if (result.CurrentOrder.id == order.id)
                                 {
-                                    Console.WriteLine("invalid input.");
-
+                                    order = result.CurrentOrder;
                                 }
+                                temp.Enqueue(order);
+
                             }
-                            catch (Exception)
+                            while (temp.Count > 0)
                             {
-                                Console.WriteLine("invliad input.");
+                                Order neworders = temp.Dequeue();
+                                GoldQueueOrder.Enqueue(neworders);
+
+
+
 
                             }
-                        }
-
-
-
-
-
-
-
-
-
-                    }
-                    else if (choice == "4")
-                    {
-                        break;
-
-                    }
-
-                    else { Console.WriteLine("invalid input"); }
-                    if (result.Rewards.tier == "Gold")
-                    {
-                        Queue<Order> temp = new Queue<Order>();
-                        while (GoldQueueOrder.Count > 0) { 
-                            Order order = GoldQueueOrder.Dequeue();
-                            if (result.CurrentOrder.id == order.id)
-                            {
-                                order = result.CurrentOrder;
-                            }
-                            temp.Enqueue(order);
 
                         }
-                        while (temp.Count > 0) {
-                            Order neworders = temp.Dequeue();
-                            GoldQueueOrder.Enqueue(neworders);
-
-
-
-
-                        }
-
-                    }
-                    else {
-                        Queue<Order> temp = new Queue<Order>();
-                        while (RegularQueueOrder.Count > 0)
+                        else
                         {
-                            Order order = RegularQueueOrder.Dequeue();
-                            if (result.CurrentOrder.id == order.id)
+                            Queue<Order> temp = new Queue<Order>();
+                            while (RegularQueueOrder.Count > 0)
                             {
-                                order = result.CurrentOrder;
+                                Order order = RegularQueueOrder.Dequeue();
+                                if (result.CurrentOrder.id == order.id)
+                                {
+                                    order = result.CurrentOrder;
+                                }
+                                temp.Enqueue(order);
+
                             }
-                            temp.Enqueue(order);
+                            while (temp.Count > 0)
+                            {
+                                Order neworders = temp.Dequeue();
+                                RegularQueueOrder.Enqueue(neworders);
+
+
+
+
+                            }
+
 
                         }
-                        while (temp.Count > 0)
-                        {
-                            Order neworders = temp.Dequeue();
-                            RegularQueueOrder.Enqueue(neworders);
-
-
-
-
-                        }
-
-
                     }
+                    break;
                 }
-                break;
-                }
-                
+
                 else
                 {
                     Console.WriteLine("invalid custoemr.");
-                    
+
 
                 }
-            
 
+            }
+            else { Console.WriteLine("please make an order at option 4 first")}
             
         }
         catch (FormatException)
