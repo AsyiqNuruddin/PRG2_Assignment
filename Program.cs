@@ -566,6 +566,11 @@ static Customer? Search(Dictionary<int, Customer> sDict, int userInp)
                         flavList.Add(df[flvIndex]);
                     }
                 }
+                else
+                {
+                    Console.WriteLine("No such flavour number available");
+                    return null;
+                }
             }
         }
         else
@@ -577,9 +582,13 @@ static Customer? Search(Dictionary<int, Customer> sDict, int userInp)
     {
         Console.WriteLine("Invalid format only numbers [1-3]");
     }
-    catch (Exception ex) when(scoops <= 3 && scoops > 0)
+    catch (Exception ex) when(!(scoops <= 3 && scoops > 0))
     {
         Console.WriteLine("Invalid number of scoops | Only 1 to 3 scoops");
+    }
+    if(!(scoops <= 3 && scoops > 0))
+    {
+        return null;
     }
     try
     {
@@ -597,20 +606,33 @@ static Customer? Search(Dictionary<int, Customer> sDict, int userInp)
                 {
                     topList.Add(dt[topIndex]);
                 }
+                else
+                {
+                    Console.WriteLine("No such topping number available");
+                    return null;
+                }
             }
         }
         else if(topCount == 0)
         {
             Console.WriteLine("No toppings added");
         }
+        else
+        {
+            Console.WriteLine("Invalid number of toppings | Only 0 to 4 toppings");
+        }
     }
     catch (FormatException ex)
     {
         Console.WriteLine("Invalid format only numbers [0-4]");
     }
-    catch (Exception ex) when (topCount <= 4 && topCount >= 0)
+    catch (Exception ex) when (!(topCount <= 4 && topCount >= 0))
     {
         Console.WriteLine("Invalid number of toppings | Only 0 to 4 toppings");
+    }
+    if(!(topCount <= 4 && topCount >= 0))
+    {
+        return null;
     }
     if((scoops <= 3 && scoops > 0) && (topCount <= 4 && topCount >= 0))
     {
