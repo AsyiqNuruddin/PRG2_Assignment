@@ -713,7 +713,7 @@ void Option4()
             Console.WriteLine("Found Customer ");
             Order newOrd = result.CurrentOrder;
 
-            newOrd.id = maxorderid();
+            newOrd.id = maxorderid() + 1;
             newOrd.timeRecieved = DateTime.Now;
             while (true)
             {
