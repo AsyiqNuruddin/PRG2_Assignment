@@ -417,12 +417,7 @@ void maxorderid() {
     
     
     }
-    foreach(var i in DictCustomer)
-    {
-
-        Customer customer = i.Value;
-        customer.nextCustomerId = maxid;
-    }
+    
     
 
 
