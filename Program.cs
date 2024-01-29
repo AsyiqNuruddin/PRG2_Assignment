@@ -1275,16 +1275,20 @@ void Option6()
 
                 else
                 {
-                    Console.WriteLine("invalid custoemr.");
+                    Console.WriteLine("please make an order at otpion 4 first.");
+                    break;
 
 
                 }
 
             }
-            else {
-                Console.WriteLine("please make an order at option 4 first");
-                    }
-            
+            else
+            {
+                Console.WriteLine("invalid custoemr.");
+
+
+            }
+
         }
         catch (FormatException)
         {
