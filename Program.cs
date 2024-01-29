@@ -876,12 +876,13 @@ void Option4()
 }
     void Option5()
 {
+    Option1(DictCustomer);
     while (true)
     {
         try
         {
 
-            Option1(DictCustomer);
+            
 
             Console.Write("Select the customer: ");
             int idInp = Convert.ToInt32(Console.ReadLine());
