@@ -506,7 +506,7 @@ void Option3()
         }
         catch (FormatException)
         {
-            Console.WriteLine("Invalid format.");
+            Console.WriteLine("Invalid date format. Please enter a valid date in the format DD/MM/YYYY.");
         }
         catch (Exception ex)
         {
@@ -1268,22 +1268,23 @@ void Option4()
     // peck // 0Id,1MemberId,2TimeReceived,3TimeFulfilled,4Option,5Scoops,6Dipped,7WaffleFlavour,8Flavour1,9Flavour2,10Flavour3,11Topping1,12Topping2,13Topping3,14Topping4
     void WriteIceCream(Order order, int id)
     {
-        foreach (var v in order.IceCreamlist)
+        using (StreamWriter sw = new StreamWriter("orders.csv", true))
         {
-            using (StreamWriter sw = new StreamWriter("orders.csv", true))
+            foreach (var v in order.IceCreamlist)
             {
+            
                 string flavstr = "";
                 if (v.Flavours.Count > 0)
                 {
-                    if (v.Toppings.Count == 1)
+                    if (v.Flavours.Count == 1)
                     {
                         flavstr = string.Join(",", v.Flavours[0].Type, "", "");
                     }
-                    else if (v.Toppings.Count == 2)
+                    else if (v.Flavours.Count == 2)
                     {
                         flavstr = string.Join(",", v.Flavours[0].Type, v.Flavours[1].Type, "");
                     }
-                    else if (v.Toppings.Count == 3)
+                    else if (v.Flavours.Count == 3)
                     {
                         flavstr = string.Join(",", v.Flavours[0].Type, v.Flavours[1].Type, v.Flavours[2].Type);
                     }
