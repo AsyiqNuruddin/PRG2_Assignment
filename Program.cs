@@ -401,14 +401,20 @@ int maxorderid() {
         foreach (var or in customer.OrderHistory) {
             if (or.id >= maxid)
             {
-                maxid = or.id;
+                maxid = or.id + 1;
             }
             else {
                 continue;
             }
         }
+        if(customer.CurrentOrder.id >= maxid)
+        {
+
+            maxid = customer.CurrentOrder.id+1;
+        }
+        
     }
-    maxid += 1;
+    
     return maxid;
 }
 //==========================================================
