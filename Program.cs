@@ -773,6 +773,7 @@ void Option4()
                 {
                     Console.WriteLine("Chosen Cup");
                     (int, List<Flavour>, List<Topping>)? cat = IceCreamAdd(DictFlavour, DictTopping);
+                    // if method return null will stop the order else will add Ice Cream
                     if (cat != null)
                     {
                         newice = new Cup("Cup", cat.Value.Item1, cat.Value.Item2, cat.Value.Item3);
@@ -790,9 +791,11 @@ void Option4()
                     Console.Write("Do you want your cone dipped?(Y/N): ");
                     string dipInp = Console.ReadLine();
                     dipInp = dipInp.ToLower();
+                    // If cone dipped
                     if (dipInp == "y")
                     {
                         (int, List<Flavour>, List<Topping>)? cat = IceCreamAdd(DictFlavour, DictTopping);
+                        // if method return null will stop the order else will add Ice Cream
                         if (cat != null)
                         {
                             newice = new Cone("Cone", cat.Value.Item1, cat.Value.Item2, cat.Value.Item3, true);
@@ -803,9 +806,11 @@ void Option4()
                             break;
                         }
                     }
+                    // If cone not dipped
                     else if (dipInp == "n")
                     {
                         (int, List<Flavour>, List<Topping>)? cat = IceCreamAdd(DictFlavour, DictTopping);
+                        // if method return null will stop the order else will add Ice Cream
                         if (cat != null)
                         {
                             newice = new Cone("Cone", cat.Value.Item1, cat.Value.Item2, cat.Value.Item3, false);
@@ -818,6 +823,7 @@ void Option4()
                     }
                     else
                     {
+                        // Breaks when user enter wrong format for IsDipped
                         Console.WriteLine("Only [Y/N] or [y/n] accepted");
                         break;
                     }
@@ -828,10 +834,12 @@ void Option4()
                     Console.WriteLine("Chosen Waffle");
                     Console.Write("Do you want a waffle flavour?(Red velvet, charcoal, or pandan) or original: ");
                     string wafInp = Console.ReadLine();
+                    // This method return null if invalid waffle input and return the Correct format of Waffle
                     string waf = WaffleChoice(wafInp);
                     if (waf != null)
                     {
                         (int, List<Flavour>, List<Topping>)? cat = IceCreamAdd(DictFlavour, DictTopping);
+                        // if method return null will stop the order else will add Ice Cream
                         if(cat != null)
                         {
                             newice = new Waffle("Waffle", cat.Value.Item1, cat.Value.Item2, cat.Value.Item3, waf);
@@ -844,6 +852,7 @@ void Option4()
                     }
                     else
                     {
+                        // Breaks when user input ill waffle
                         Console.WriteLine($"Waffle flavour {wafInp} not available or invalid input");
                         break;
                     }
@@ -864,15 +873,18 @@ void Option4()
                     check = check.ToLower();
                     if (check == "y")
                     {
+                        // Continues the order process again
                         continue;
                     }
                     else if (check == "n")
                     {
+                        // Saves order when user wish to
                         Console.WriteLine("Order saved");
                         break;
                     }
                     else
                     {
+                        // Saves order when wish order again input is ill
                         Console.WriteLine("Invalid Input [Y/N] or [y/n] only\nOrder will be stopped and saved");
                         break;
                     }
