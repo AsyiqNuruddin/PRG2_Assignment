@@ -223,8 +223,10 @@ void InitOrders(string txtfile)
             order.timeFulfilled = Convert.ToDateTime(rowList[3]);
             // 4Option,5Scoops,6Dipped,7WaffleFlavour,8Flavour1,9Flavour2,10Flavour3,11Topping1,12Topping2,13Topping3,14Topping4
             IceCream newIC = IceCreamRead(rowList[4], Convert.ToInt32(rowList[5]), rowList[6], rowList[7], rowList[8], rowList[9], rowList[10], rowList[11], rowList[12], rowList[13], rowList[14]);
+          
             foreach(var c in DictCustomer.Values)
             {
+
                 if (c.OrderHistory != null)
                 {
                     if (c.MemberId == Convert.ToInt32(rowList[1]))
@@ -390,6 +392,34 @@ IceCream IceCreamRead(string Option, int Scoops, string Dipped, string? WaffleFl
         newIC = new Waffle(Option, Scoops, flavList, topList, WaffleFlavour);
     }
     return newIC;
+}
+void maxorderid() {
+    int maxid = 0;
+    foreach(var i in DictCustomer) { 
+        Customer customer = i.Value;
+        foreach (var or in customer.OrderHistory) {
+            if (or.id >= maxid)
+            {
+                maxid = or.id;
+
+
+            }
+            else {
+                continue;
+            
+            }
+        
+        
+        
+        }
+
+    
+    
+    }
+    
+
+
+
 }
 //==========================================================
 // Student Number : S10262791
