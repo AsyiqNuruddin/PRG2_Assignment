@@ -401,13 +401,20 @@ int maxorderid() {
         foreach (var or in customer.OrderHistory) {
             if (or.id >= maxid)
             {
-                maxid = or.id;
+                maxid = or.id + 1;
             }
             else {
                 continue;
             }
         }
+        if(customer.CurrentOrder.id >= maxid)
+        {
+
+            maxid = customer.CurrentOrder.id+1;
+        }
+        
     }
+    
     return maxid;
 }
 //==========================================================
@@ -877,12 +884,13 @@ void Option4()
 }
     void Option5()
 {
+    Option1(DictCustomer);
     while (true)
     {
         try
         {
 
-            Option1(DictCustomer);
+            
 
             Console.Write("Select the customer: ");
             int idInp = Convert.ToInt32(Console.ReadLine());
