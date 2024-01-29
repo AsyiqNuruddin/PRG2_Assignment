@@ -764,9 +764,21 @@ void Option4()
         ? result = Search(DictCustomer, idInp);
             if (result != null)
             {
-                List<IceCream> currentorder = result.CurrentOrder.IceCreamlist;
+                int currentcount =0;
+                List<IceCream> currentorder = null;
+                if (result.CurrentOrder.IceCreamlist != null)
+                {
+                    currentorder = result.CurrentOrder.IceCreamlist;
+
+                }
+                else { 
+                    currentcount= 0;
+                
+                }
+
+                
                 Console.WriteLine("current order");
-                if (currentorder.Count == 0)
+                if (currentcount == 0)
                 {
                     Console.WriteLine("no current orders");
 
@@ -1013,18 +1025,15 @@ void Option4()
 
 
             }
+            
 
             else
             {
                 servingorder = RegularQueueOrder.Dequeue();
             }
             double total = servingorder.CalcualteTotal();
-            foreach (IceCream ice in servingorder.IceCreamlist)
-            {
-                Console.WriteLine(ice);
-
-            }
-            Console.WriteLine($"total cost: {total}");
+            
+            
             Customer servingcustomer = null;
             foreach (var custo in DictCustomer)
             {
@@ -1047,7 +1056,14 @@ void Option4()
 
 
             }
+            Console.WriteLine($"name:{servingcustomer.Name}     Teir:{servingcustomer.Rewards.tier}     points:{servingcustomer.Rewards.points}      punch card:{servingcustomer.Rewards.punchCard}");
+            foreach (IceCream ice in servingorder.IceCreamlist)
+            {
+                Console.WriteLine(ice);
+
+            }
             Console.WriteLine($"membership teir: {servingcustomer.Rewards.tier}        points: {servingcustomer.Rewards.points}");
+            Console.WriteLine($"current cost: ${total:0.00}");
             if (servingcustomer.IsBirthday())
             {
                 Console.WriteLine("happy birthday");
@@ -1088,7 +1104,7 @@ void Option4()
 
 
                 }
-                Console.WriteLine($"fianl toatal: {total}");
+                Console.WriteLine($"fianl toatal: ${total:0.00}");
                 int points = Convert.ToInt16(Math.Floor(total * 0.72));
                 servingcustomer.Rewards.AddPoints(points);
                 servingcustomer.CurrentOrder.timeFulfilled = DateTime.Now;
@@ -1116,10 +1132,11 @@ void Option4()
                     int point = Convert.ToInt16(Console.ReadLine());
                     double discounted = point * 0.02;
                     total -= discounted;
+                    
 
                 }
                 else if (redeem == "n") { }
-                Console.WriteLine($"fianl toatal: {total}");
+                Console.WriteLine($"fianl toatal: ${total:0.00}");
                 int points = Convert.ToInt16(Math.Floor(total * 0.72));
                 servingcustomer.Rewards.AddPoints(points);
                 servingcustomer.CurrentOrder.timeFulfilled = DateTime.Now;
@@ -1137,6 +1154,7 @@ void Option4()
                     }
 
                 }
+                
 
             }
             foreach (IceCream ice in servingorder.IceCreamlist)
@@ -1149,8 +1167,11 @@ void Option4()
                 }
 
             }
+            break;
         }
         catch(InvalidOperationException) {
+            Console.WriteLine();
+            Console.WriteLine("no current orders");
             break;
 
         }
