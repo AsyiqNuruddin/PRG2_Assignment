@@ -543,6 +543,7 @@ void Option3()
 // Student Number : S10262791
 // Student Name : Asyiq Nuruddin
 //==========================================================
+// Search Customers based on Member ID
 static Customer? Search(Dictionary<int, Customer> sDict, int userInp)
 {
     foreach (var v in sDict)
@@ -558,6 +559,7 @@ static Customer? Search(Dictionary<int, Customer> sDict, int userInp)
 // Student Number : S10262791
 // Student Name : Asyiq Nuruddin
 //==========================================================
+// Make the flavour list and topping list for the IC
 (int, List<Flavour>, List<Topping>)? IceCreamAdd(Dictionary<int, Flavour> df, Dictionary<int, Topping> dt)
 {
     List<Flavour> flavList = new List<Flavour>();
@@ -626,7 +628,7 @@ static Customer? Search(Dictionary<int, Customer> sDict, int userInp)
             for (int i = 1; i < topCount + 1; i++)
             {
                 DisplayToppings(DictTopping);
-                Console.Write($"Choose the [{i}] topping : ");
+                Console.Write($"Choose the [{i}] topping: ");
                 int topIndex = Convert.ToInt32(Console.ReadLine());
                 if (dt.ContainsKey(topIndex))
                 {
@@ -721,6 +723,7 @@ void Option4()
             Order newOrd = result.CurrentOrder;
 
             newOrd.id = maxorderid() + 1;
+            Console.WriteLine(newOrd.id);
             newOrd.timeRecieved = DateTime.Now;
             while (true)
             {
@@ -1247,21 +1250,22 @@ void Option4()
                 Customer customers = custo.Value;
                 if (customers != null)
                 {
-                    if (customers.CurrentOrder.id == servingorder.id)
+                    if (customers.CurrentOrder != null)
                     {
-                        servingcustomer = customers;
-                        break;
+                        if (customers.CurrentOrder.id == servingorder.id)
+                        {
+                            servingcustomer = customers;
+                            break;
 
 
-                    }
-                    else
-                    {
-                        continue;
+                        }
+                        else
+                        {
+                            continue;
 
+                        }
                     }
                 }
-
-
             }
             Console.WriteLine($"name:{servingcustomer.Name}     Teir:{servingcustomer.Rewards.tier}     points:{servingcustomer.Rewards.points}      punch card:{servingcustomer.Rewards.punchCard}");
             foreach (IceCream ice in servingorder.IceCreamlist)
