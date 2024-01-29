@@ -1272,7 +1272,7 @@ void Option4()
                 servingcustomer.Rewards.AddPoints(points);
                 servingcustomer.CurrentOrder.timeFulfilled = DateTime.Now;
                 servingcustomer.OrderHistory.Add(servingcustomer.CurrentOrder);
-                servingcustomer.CurrentOrder = new Order();
+                servingcustomer.CurrentOrder = null;
                 
                 if (servingcustomer.Rewards.points >= 50)
                 {
