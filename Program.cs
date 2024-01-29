@@ -407,10 +407,13 @@ int maxorderid() {
                 continue;
             }
         }
-        if(customer.CurrentOrder.id >= maxid)
+        if (customer.CurrentOrder != null)
         {
+            if (customer.CurrentOrder.id >= maxid)
+            {
 
-            maxid = customer.CurrentOrder.id+1;
+                maxid = customer.CurrentOrder.id + 1;
+            }
         }
         
     }
