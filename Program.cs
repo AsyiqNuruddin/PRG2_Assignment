@@ -982,12 +982,18 @@ void Option5()
                     Console.WriteLine("no current orders");
 
                 }
-                foreach (IceCream currenrorderice in currentorder)
-                {
-                    Console.WriteLine(currenrorderice);
+                else {
+                    Console.WriteLine($"order recieved:{result.CurrentOrder.timeRecieved.ToString("dd / mm / yyyy HH: mm:ss")}");
+                    foreach (IceCream currenrorderice in currentorder)
+                    {
+                        Console.WriteLine(currenrorderice);
+
+
+                    }
 
 
                 }
+                
                 Console.WriteLine("pass orders");
                 if (result.OrderHistory.Count == 0)
                 {
@@ -997,9 +1003,13 @@ void Option5()
                 foreach (Order pastorder in result.OrderHistory)
                 {
                     Console.WriteLine("time recived");
-                    Console.WriteLine(pastorder.timeRecieved);
-                    Console.WriteLine("time fulfiled");
-                    Console.WriteLine(pastorder.timeFulfilled);
+                    Console.WriteLine(pastorder.timeRecieved.ToString("dd/mm/yyyy HH:mm:ss"));
+                    if (pastorder.timeFulfilled != null)
+                    {
+                        DateTime? dadateofdone = pastorder.timeFulfilled;
+                        Console.WriteLine("time fulfiled");
+                        Console.WriteLine(dadateofdone);
+                    }
 
 
 
