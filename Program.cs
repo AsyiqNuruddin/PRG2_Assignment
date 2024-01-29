@@ -583,9 +583,11 @@ static Customer? Search(Dictionary<int, Customer> sDict, int userInp)
 // Make the flavour list and topping list for the IC
 (int, List<Flavour>, List<Topping>)? IceCreamAdd(Dictionary<int, Flavour> df, Dictionary<int, Topping> dt)
 {
+    // init list for parsing data
     List<Flavour> flavList = new List<Flavour>();
     List<Topping> topList = new List<Topping>();
     Console.Write("Enter number of scoops [1-3]: ");
+    // init all variables for error handling and more
     int scoops = 0;
     int topCount = 0;
     int flvIndex = 0;
@@ -621,7 +623,7 @@ static Customer? Search(Dictionary<int, Customer> sDict, int userInp)
                 }
                 else
                 {
-                    Console.WriteLine("No such flavour number available");
+                    Console.WriteLine("No Such Flavour Number Available");
                     return null;
                 }
             }
@@ -634,12 +636,12 @@ static Customer? Search(Dictionary<int, Customer> sDict, int userInp)
     }
     catch (FormatException ex)
     {
-        Console.WriteLine("Invalid format only numbers [1-3]");
+        Console.WriteLine("Invalid format only numbers [1-3] scoops and [1-6] flavours");
         error = true;
     }
     catch (Exception ex) when(!(scoops <= 3 && scoops > 0))
     {
-        Console.WriteLine("Invalid number of scoops | Only 1 to 3 scoops");
+        Console.WriteLine("Invalid Number of Scoops | Only 1 to 3 Scoops");
         error = true;
     }
     if(!(scoops <= 3 && scoops > 0) || error)
@@ -664,25 +666,25 @@ static Customer? Search(Dictionary<int, Customer> sDict, int userInp)
                 }
                 else
                 {
-                    Console.WriteLine("No such topping number available");
+                    Console.WriteLine("No Such Topping Number Available");
                     error = true;
                 }
             }
         }
         else if(topCount == 0)
         {
-            Console.WriteLine("No toppings added");
+            Console.WriteLine("No Toppings Added");
             error = true;
         }
         else
         {
-            Console.WriteLine("Invalid number of toppings | Only 0 to 4 toppings");
+            Console.WriteLine("Invalid Number Of Toppings | Only 0 to 4 Toppings");
             error = true;
         }
     }
     catch (FormatException ex)
     {
-        Console.WriteLine("Invalid format only numbers [0-4]");
+        Console.WriteLine("Invalid format only numbers [0-4] toppings and [1-4] flavours");
         error = true;
     }
     catch (Exception ex) when (!(topCount <= 4 && topCount >= 0))
@@ -701,7 +703,7 @@ static Customer? Search(Dictionary<int, Customer> sDict, int userInp)
     }
     else
     {
-        Console.WriteLine("Your inputs are invalid");
+        Console.WriteLine("Your inputs are Invalid");
         return null;
     }
 }
