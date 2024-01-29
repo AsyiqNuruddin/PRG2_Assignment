@@ -6,8 +6,9 @@ using System.Collections.Generic;
 namespace PRG2_Assignment_Customer
 {
     internal class Customer
+
     {
-        private int nextOrderId;  // Instance variable to keep track of the next available order ID for this customer
+        private static int nextOrderId = 1;  // Static variable to keep track of the next available order ID
 
         public string Name { get; set; }
         public int MemberId { get; set; }
@@ -15,31 +16,22 @@ namespace PRG2_Assignment_Customer
         public Order CurrentOrder { get; set; }
         public List<Order> OrderHistory { get; set; }
         public PointCard Rewards { get; set; }
-        public int CustomerId { get; }  // Instance variable to store the customer's unique ID
 
-        public int nextCustomerId = 1;  // Static variable to generate unique customer IDs
-
-        public Customer()
+        public Customer
+()
         {
-            CustomerId = nextCustomerId;
-            nextCustomerId++;
-
             CurrentOrder = new Order();
             OrderHistory = new List<Order>();
-            nextOrderId = 1;  // Initialize the nextOrderId for this customer
         }
 
-        public Customer(string name, int memberId, DateTime birth)
+        public Customer
+(string name, int memberId, DateTime birth)
         {
             Name = name;
             MemberId = memberId;
             Dob = birth;
-            CustomerId = nextCustomerId;
-            nextCustomerId++;
-
             CurrentOrder = new Order();
             OrderHistory = new List<Order>();
-            nextOrderId = 1;  // Initialize the nextOrderId for this customer
         }
 
         public void MakeOrder()
@@ -65,7 +57,7 @@ namespace PRG2_Assignment_Customer
 
         public override string ToString()
         {
-            return $"{Name} {MemberId} {Dob} (Customer ID: {CustomerId})";
+            return $"{Name} {MemberId} {Dob}";
         }
     }
 }

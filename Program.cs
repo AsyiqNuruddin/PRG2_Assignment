@@ -730,6 +730,7 @@ void Option4()
         {
             Console.WriteLine("Found Customer ");
             Order newOrd = result.CurrentOrder;
+            
             newOrd.id = result.OrderHistory.Count + 1;
             newOrd.timeRecieved = DateTime.Now;
             while (true)
@@ -1281,6 +1282,7 @@ void Option4()
                 servingcustomer.CurrentOrder.timeFulfilled = DateTime.Now;
                 servingcustomer.OrderHistory.Add(servingcustomer.CurrentOrder);
                 servingcustomer.CurrentOrder = null;
+                
                 if (servingcustomer.Rewards.points >= 50)
                 {
                     servingcustomer.Rewards.tier = "Silver";
@@ -1324,31 +1326,32 @@ void Option4()
                     }
                     else if (redeem == "n") { }
                     Console.WriteLine($"fianl toatal: ${total:0.00}");
-                    int points = Convert.ToInt16(Math.Floor(total * 0.72));
-                    servingcustomer.Rewards.AddPoints(points);
-                    servingcustomer.CurrentOrder.timeFulfilled = DateTime.Now;
-                    servingcustomer.OrderHistory.Add(servingcustomer.CurrentOrder);
-                    servingcustomer.CurrentOrder = null;
-                    if (servingcustomer.Rewards.tier == "Silver")
+                    
+                }
+                int points = Convert.ToInt16(Math.Floor(total * 0.72));
+                servingcustomer.Rewards.AddPoints(points);
+                servingcustomer.CurrentOrder.timeFulfilled = DateTime.Now;
+                WriteIceCream(servingorder, servingcustomer.MemberId);
+                servingcustomer.OrderHistory.Add(servingcustomer.CurrentOrder);
+                servingcustomer.CurrentOrder = null;
+                if (servingcustomer.Rewards.tier == "Silver")
+                {
+                    if (servingcustomer.Rewards.points >= 100)
                     {
-                        if (servingcustomer.Rewards.points
-    >= 100)
-                        {
-                            servingcustomer.Rewards.tier = "gold";
-                            Console.WriteLine("cpmgrats you are now a gold member!");
+                        servingcustomer.Rewards.tier = "gold";
+                        Console.WriteLine("cpmgrats you are now a gold member!");
 
 
-
-                        }
 
                     }
+
                 }
 
 
-                
+
 
             }
-            WriteIceCream(servingorder, servingcustomer.MemberId);
+            
             foreach (IceCream ice in servingorder.IceCreamlist)
             {
                 servingcustomer.Rewards.Punch();
