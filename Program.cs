@@ -520,18 +520,19 @@ void Option3()
                     same = true;
                 }
             }
+            // If the id is not same with an exisitng customer it can be added
             if (!same)
             {
                 Console.Write("Enter their Date Of Birth in DD/MM/YYYY: ");
                 DateTime dob = Convert.ToDateTime(Console.ReadLine());
-                Customer
-                newCustomer = new Customer(nameInp, idInp, dob);
+                Customer newCustomer = new Customer(nameInp, idInp, dob);
                 Console.WriteLine("Their registration customer details");
                 Console.WriteLine($"Name: {newCustomer.Name,-10} Member ID:{newCustomer.MemberId,-10} DateofBirth: {newCustomer.Dob,-10:dd/MM/yyyy}");
+                // Set customer a point card with default info
                 PointCard newPC = new PointCard(0, 0);
                 newPC.tier = "Ordinary";
                 newCustomer.Rewards = newPC;
-
+                // Write the customer info in customers.csvs
                 using (StreamWriter sw = new StreamWriter("customers.csv", true))
                 {
                     string? row;
@@ -540,6 +541,7 @@ void Option3()
                 }
                 DictCustomer.Add(newCustomer.MemberId, newCustomer);
                 Console.WriteLine("Registration Successfull");
+                // It breaks when successful if not it will repeat
                 break;
             }
             else
@@ -549,7 +551,8 @@ void Option3()
         }
         catch (FormatException)
         {
-            Console.WriteLine("Invalid date format. Please enter a valid date in the format DD/MM/YYYY.");
+            // Only error possible here is date error
+            Console.WriteLine("Invalid format. Please enter a valid format");
         }
         catch (Exception ex)
         {
@@ -744,6 +747,7 @@ void Option4()
         // show Customer Details
         Option1(DictCustomer);
         IceCream newice = null;
+        // Select and find the customer
         Console.Write("Select the customer: ");
         int idInp = Convert.ToInt32(Console.ReadLine());
         Customer? result = Search(DictCustomer, idInp);
