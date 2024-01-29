@@ -25,12 +25,14 @@ using System.Linq.Expressions;
 // Student Number : S10262791
 // Student Name : Asyiq Nuruddin
 //==========================================================
+// Init the Dict and Queues
 Dictionary<int, Customer>DictCustomer = new Dictionary<int, Customer>();
 Queue<Order> GoldQueueOrder = new Queue<Order>();
 Queue<Order> RegularQueueOrder = new Queue<Order>();
 Dictionary<int, Flavour> DictFlavour = new Dictionary<int, Flavour>();
 Dictionary<int, Topping> DictTopping = new Dictionary<int, Topping>();
 
+// Error Handling incase process file errors
 try
 {
     InitCustomer("customers.csv");
@@ -111,6 +113,7 @@ void Intialdisplay() {
 // Student Number : S10262791
 // Student Name : Asyiq Nuruddin
 //==========================================================
+// Reading of customers
 void InitCustomer(string txtfile)
 {
     using (StreamReader sr = new StreamReader(txtfile))
@@ -137,6 +140,7 @@ void InitCustomer(string txtfile)
 // Student Number : S10262791
 // Student Name : Asyiq Nuruddin
 //==========================================================
+// Read Flavours and add it to a dict
 void InitFlavours(string txtfile, Dictionary<int, Flavour> df)
 {
     using (StreamReader sr = new StreamReader(txtfile))
@@ -172,6 +176,7 @@ void InitFlavours(string txtfile, Dictionary<int, Flavour> df)
 // Student Number : S10262791
 // Student Name : Asyiq Nuruddin
 //==========================================================
+// Read toppings and add it to a dict
 void InitToppings(string txtfile, Dictionary<int, Topping> dt)
 {
     using (StreamReader sr = new StreamReader(txtfile))
@@ -197,6 +202,7 @@ void InitToppings(string txtfile, Dictionary<int, Topping> dt)
 // Student Number : S10262791
 // Student Name : Asyiq Nuruddin
 //==========================================================
+// Reading of Ice Cream Order History
 void InitOrders(string txtfile)
 {
     using (StreamReader sr = new StreamReader(txtfile))
@@ -254,6 +260,7 @@ void InitOrders(string txtfile)
         }
     }
 }
+// Reading of icecreams FORMAT from the history
 // 0Id,1MemberId,2TimeReceived,3TimeFulfilled,4Option,5Scoops,6Dipped,7WaffleFlavour,8Flavour1,9Flavour2,10Flavour3,11Topping1,12Topping2,13Topping3,14Topping4
 IceCream IceCreamRead(string Option, int Scoops, string Dipped, string? WaffleFlavour, string? Flavour1, string? Flavour2, string? Flavour3, string? Topping1, string? Topping2, string? Topping3, string? Topping4)
 {
@@ -411,9 +418,11 @@ void DisplayToppings(Dictionary<int, Topping> dt)
 
 void Option1(Dictionary<int, Customer> DictCustomer) 
 {
+    // Title
     Console.WriteLine($"{"Name",-12}{"Member ID",-12}{"DateofBirth",-15}{"MemberShip",-15}{"Points",-7}{"Punches",-2}");
     foreach (var kvp in DictCustomer)
     {
+        // Writing of a single customer
         Console.WriteLine($"{kvp.Value.Name,-12}{kvp.Value.MemberId,-12}{kvp.Value.Dob,-15:dd/MM/yyyy}{kvp.Value.Rewards.tier,-15}{kvp.Value.Rewards.points,-7}{kvp.Value.Rewards.punchCard}");
         // Console.WriteLine(kvp.Value.OrderHistory.Count);
     }
@@ -498,7 +507,6 @@ void Option3()
         catch (FormatException)
         {
             Console.WriteLine("Invalid date format. Please enter a valid date in the format DD/MM/YYYY.");
-            // You might want to handle the error, ask the user to enter the date again, or take appropriate action.
         }
         catch (Exception ex)
         {
@@ -1221,7 +1229,8 @@ void Option4()
                 servingcustomer.CurrentOrder = null;
                 if (servingcustomer.Rewards.tier == "Silver")
                 {
-                    if (servingcustomer.Rewards.points >= 100)
+                    if (servingcustomer.Rewards.points 
+>= 100)
                     {
                         servingcustomer.Rewards.tier = "gold";
                         Console.WriteLine("cpmgrats you are now a gold member!");
@@ -1246,7 +1255,8 @@ void Option4()
             }
             break;
         }
-        catch(InvalidOperationException) {
+        catch
+(InvalidOperationException) {
             Console.WriteLine();
             Console.WriteLine("no current orders");
             break;
@@ -1323,6 +1333,9 @@ void Option4()
     {
         void Option8()
         {
+            void 
+Option8()
+        {
             Console.Write("Enter the year: ");
             int inputYear = int.Parse(Console.ReadLine());
 
@@ -1362,6 +1375,7 @@ void Option4()
             {
                 Console.WriteLine($"Total for {CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i + 1)}: {monthlyTotals[i]}");
             }
+        }
         }
 
     }
