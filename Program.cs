@@ -48,7 +48,6 @@ catch (Exception ex)
 {
     throw new Exception("An generic error ocurred from file reading.");
 }
-maxorderid();
 
 
 
@@ -267,6 +266,10 @@ void InitOrders(string txtfile)
         }
     }
 }
+//==========================================================
+// Student Number : S10262791
+// Student Name : Asyiq Nuruddin
+//==========================================================
 // Reading of icecreams FORMAT from the history
 // 0Id,1MemberId,2TimeReceived,3TimeFulfilled,4Option,5Scoops,6Dipped,7WaffleFlavour,8Flavour1,9Flavour2,10Flavour3,11Topping1,12Topping2,13Topping3,14Topping4
 IceCream IceCreamRead(string Option, int Scoops, string Dipped, string? WaffleFlavour, string? Flavour1, string? Flavour2, string? Flavour3, string? Topping1, string? Topping2, string? Topping3, string? Topping4)
@@ -290,7 +293,6 @@ IceCream IceCreamRead(string Option, int Scoops, string Dipped, string? WaffleFl
             {
                 flavList.Add(v.Value);
             }
-
         }
         foreach (var v in DictTopping)
         {
@@ -518,18 +520,19 @@ void Option3()
                     same = true;
                 }
             }
+            // If the id is not same with an exisitng customer it can be added
             if (!same)
             {
                 Console.Write("Enter their Date Of Birth in DD/MM/YYYY: ");
                 DateTime dob = Convert.ToDateTime(Console.ReadLine());
-                Customer
-                newCustomer = new Customer(nameInp, idInp, dob);
+                Customer newCustomer = new Customer(nameInp, idInp, dob);
                 Console.WriteLine("Their registration customer details");
                 Console.WriteLine($"Name: {newCustomer.Name,-10} Member ID:{newCustomer.MemberId,-10} DateofBirth: {newCustomer.Dob,-10:dd/MM/yyyy}");
+                // Set customer a point card with default info
                 PointCard newPC = new PointCard(0, 0);
                 newPC.tier = "Ordinary";
                 newCustomer.Rewards = newPC;
-
+                // Write the customer info in customers.csvs
                 using (StreamWriter sw = new StreamWriter("customers.csv", true))
                 {
                     string? row;
@@ -538,6 +541,7 @@ void Option3()
                 }
                 DictCustomer.Add(newCustomer.MemberId, newCustomer);
                 Console.WriteLine("Registration Successfull");
+                // It breaks when successful if not it will repeat
                 break;
             }
             else
@@ -547,7 +551,8 @@ void Option3()
         }
         catch (FormatException)
         {
-            Console.WriteLine("Invalid date format. Please enter a valid date in the format DD/MM/YYYY.");
+            // Only error possible here is date error
+            Console.WriteLine("Invalid format. Please enter a valid format");
         }
         catch (Exception ex)
         {
@@ -578,9 +583,11 @@ static Customer? Search(Dictionary<int, Customer> sDict, int userInp)
 // Make the flavour list and topping list for the IC
 (int, List<Flavour>, List<Topping>)? IceCreamAdd(Dictionary<int, Flavour> df, Dictionary<int, Topping> dt)
 {
+    // init list for parsing data
     List<Flavour> flavList = new List<Flavour>();
     List<Topping> topList = new List<Topping>();
     Console.Write("Enter number of scoops [1-3]: ");
+    // init all variables for error handling and more
     int scoops = 0;
     int topCount = 0;
     int flvIndex = 0;
@@ -616,7 +623,7 @@ static Customer? Search(Dictionary<int, Customer> sDict, int userInp)
                 }
                 else
                 {
-                    Console.WriteLine("No such flavour number available");
+                    Console.WriteLine("No Such Flavour Number Available");
                     return null;
                 }
             }
@@ -629,12 +636,12 @@ static Customer? Search(Dictionary<int, Customer> sDict, int userInp)
     }
     catch (FormatException ex)
     {
-        Console.WriteLine("Invalid format only numbers [1-3]");
+        Console.WriteLine("Invalid format only numbers [1-3] scoops and [1-6] flavours");
         error = true;
     }
     catch (Exception ex) when(!(scoops <= 3 && scoops > 0))
     {
-        Console.WriteLine("Invalid number of scoops | Only 1 to 3 scoops");
+        Console.WriteLine("Invalid Number of Scoops | Only 1 to 3 Scoops");
         error = true;
     }
     if(!(scoops <= 3 && scoops > 0) || error)
@@ -659,25 +666,25 @@ static Customer? Search(Dictionary<int, Customer> sDict, int userInp)
                 }
                 else
                 {
-                    Console.WriteLine("No such topping number available");
+                    Console.WriteLine("No Such Topping Number Available");
                     error = true;
                 }
             }
         }
         else if(topCount == 0)
         {
-            Console.WriteLine("No toppings added");
+            Console.WriteLine("No Toppings Added");
             error = true;
         }
         else
         {
-            Console.WriteLine("Invalid number of toppings | Only 0 to 4 toppings");
+            Console.WriteLine("Invalid Number Of Toppings | Only 0 to 4 Toppings");
             error = true;
         }
     }
     catch (FormatException ex)
     {
-        Console.WriteLine("Invalid format only numbers [0-4]");
+        Console.WriteLine("Invalid format only numbers [0-4] toppings and [1-4] flavours");
         error = true;
     }
     catch (Exception ex) when (!(topCount <= 4 && topCount >= 0))
@@ -689,13 +696,14 @@ static Customer? Search(Dictionary<int, Customer> sDict, int userInp)
     {
         return null;
     }
+    // If preconditions meet and no error it will send the data
     if((scoops <= 3 && scoops > 0) && (topCount <= 4 && topCount >= 0) || !(error))
     {
         return (scoops, flavList, topList);
     }
     else
     {
-        Console.WriteLine("Your inputs are invalid");
+        Console.WriteLine("Your inputs are Invalid");
         return null;
     }
 }
@@ -741,6 +749,7 @@ void Option4()
         // show Customer Details
         Option1(DictCustomer);
         IceCream newice = null;
+        // Select and find the customer
         Console.Write("Select the customer: ");
         int idInp = Convert.ToInt32(Console.ReadLine());
         Customer? result = Search(DictCustomer, idInp);
@@ -757,11 +766,14 @@ void Option4()
                 Console.Write("Enter their ice cream order type (Cup, Cone or Waffle): ");
 
                 string choiceInp = Console.ReadLine();
+                // Lower to prevent case sensitive
                 choiceInp = choiceInp.ToLower();
+                // Option Cup
                 if (choiceInp == "cup")
                 {
                     Console.WriteLine("Chosen Cup");
                     (int, List<Flavour>, List<Topping>)? cat = IceCreamAdd(DictFlavour, DictTopping);
+                    // if method return null will stop the order else will add Ice Cream
                     if (cat != null)
                     {
                         newice = new Cup("Cup", cat.Value.Item1, cat.Value.Item2, cat.Value.Item3);
@@ -772,15 +784,18 @@ void Option4()
                         break;
                     }
                 }
+                // Option Cone
                 else if (choiceInp == "cone")
                 {
                     Console.WriteLine($"Chosen Cone");
                     Console.Write("Do you want your cone dipped?(Y/N): ");
                     string dipInp = Console.ReadLine();
                     dipInp = dipInp.ToLower();
+                    // If cone dipped
                     if (dipInp == "y")
                     {
                         (int, List<Flavour>, List<Topping>)? cat = IceCreamAdd(DictFlavour, DictTopping);
+                        // if method return null will stop the order else will add Ice Cream
                         if (cat != null)
                         {
                             newice = new Cone("Cone", cat.Value.Item1, cat.Value.Item2, cat.Value.Item3, true);
@@ -791,9 +806,11 @@ void Option4()
                             break;
                         }
                     }
+                    // If cone not dipped
                     else if (dipInp == "n")
                     {
                         (int, List<Flavour>, List<Topping>)? cat = IceCreamAdd(DictFlavour, DictTopping);
+                        // if method return null will stop the order else will add Ice Cream
                         if (cat != null)
                         {
                             newice = new Cone("Cone", cat.Value.Item1, cat.Value.Item2, cat.Value.Item3, false);
@@ -806,19 +823,23 @@ void Option4()
                     }
                     else
                     {
+                        // Breaks when user enter wrong format for IsDipped
                         Console.WriteLine("Only [Y/N] or [y/n] accepted");
                         break;
                     }
                 }
+                // Option Waffle
                 else if (choiceInp == "waffle")
                 {
                     Console.WriteLine("Chosen Waffle");
                     Console.Write("Do you want a waffle flavour?(Red velvet, charcoal, or pandan) or original: ");
                     string wafInp = Console.ReadLine();
+                    // This method return null if invalid waffle input and return the Correct format of Waffle
                     string waf = WaffleChoice(wafInp);
                     if (waf != null)
                     {
                         (int, List<Flavour>, List<Topping>)? cat = IceCreamAdd(DictFlavour, DictTopping);
+                        // if method return null will stop the order else will add Ice Cream
                         if(cat != null)
                         {
                             newice = new Waffle("Waffle", cat.Value.Item1, cat.Value.Item2, cat.Value.Item3, waf);
@@ -831,6 +852,7 @@ void Option4()
                     }
                     else
                     {
+                        // Breaks when user input ill waffle
                         Console.WriteLine($"Waffle flavour {wafInp} not available or invalid input");
                         break;
                     }
@@ -840,35 +862,41 @@ void Option4()
                     Console.WriteLine("Invalid Input");
                     break;
                 }
+                // If no IceCream wont add to the order
                 if(newice!= null)
                 {
                     Console.WriteLine($"Your order: {newice}");
                     newOrd.AddIceCream(newice);
-                    Console.Write("Do you wish to continue ordering? (Y/N): ");
+                    Console.Write("Do you wish to continue ordering? [Y/N]: ");
                     string check = Console.ReadLine();
+                    // Prevent case sensitive
                     check = check.ToLower();
                     if (check == "y")
                     {
+                        // Continues the order process again
                         continue;
                     }
                     else if (check == "n")
                     {
+                        // Saves order when user wish to
                         Console.WriteLine("Order saved");
                         break;
                     }
                     else
                     {
-                        Console.WriteLine("Invalid Input (Y/N) or (y/n) only\nOrder will be stopped and saved");
+                        // Saves order when wish order again input is ill
+                        Console.WriteLine("Invalid Input [Y/N] or [y/n] only\nOrder will be stopped and saved");
                         break;
                     }
                 }
                 else
                 {
+                    // Prints that your Ice Cream had error
                     Console.WriteLine("Your IceCream is invalid");
                     break;
                 }
             }
-
+            // If no ice cream in order wont enqueue the order
             if (result.CurrentOrder.IceCreamlist.Count != 0)
             {
                 Console.WriteLine($"\nOrder Number[{result.CurrentOrder.id}] is successfull");
@@ -893,19 +921,23 @@ void Option4()
             }
             else
             {
+                // no Ice Cream user reenter data
                 Console.WriteLine("Error occured when making IceCream\nPlease restart your ordering process");
             }
                 
         }
         else
         {
+            // No such user
             Console.WriteLine("Customer Member ID not found");
         }
     }
+    // Formating error
     catch (FormatException)
     {
         Console.WriteLine("Invalid input. Please enter a valid numeric value for customer ID.");
     }
+    // General Error
     catch (Exception ex)
     {
         Console.WriteLine($"An error occurred: {ex.Message}");
@@ -1458,8 +1490,12 @@ void Option7()
     
 
     }
-    // peck // 0Id,1MemberId,2TimeReceived,3TimeFulfilled,4Option,5Scoops,6Dipped,7WaffleFlavour,8Flavour1,9Flavour2,10Flavour3,11Topping1,12Topping2,13Topping3,14Topping4
-    void WriteIceCream(Order order, int id)
+//==========================================================
+// Student Number : S10262791
+// Student Name : Asyiq Nuruddin
+//==========================================================
+// peck // 0Id,1MemberId,2TimeReceived,3TimeFulfilled,4Option,5Scoops,6Dipped,7WaffleFlavour,8Flavour1,9Flavour2,10Flavour3,11Topping1,12Topping2,13Topping3,14Topping4
+void WriteIceCream(Order order, int id)
     {
         using (StreamWriter sw = new StreamWriter("orders.csv", true))
         {
