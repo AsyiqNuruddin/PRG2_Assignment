@@ -96,7 +96,11 @@ do
     }
 }
 while (true);
-
+//==========================================================
+// Student Number : s10257702
+// Student Name : khoo jia xiang
+//==========================================================
+//display
 void Intialdisplay() {
     Console.WriteLine("-------i.c treats icecream shop-------");
     Console.WriteLine("[1] List all customers");
@@ -394,6 +398,11 @@ IceCream IceCreamRead(string Option, int Scoops, string Dipped, string? WaffleFl
     }
     return newIC;
 }
+//==========================================================
+// Student Number : s10257702
+// Student Name : khoo jia xiang
+//==========================================================
+//find order id
 int maxorderid() {
     int maxid = 0;
     foreach(var i in DictCustomer) { 
@@ -412,7 +421,7 @@ int maxorderid() {
             if (customer.CurrentOrder.id >= maxid)
             {
 
-                maxid = customer.CurrentOrder.id + 1;
+                maxid = customer.CurrentOrder.id;
             }
         }
         
@@ -455,6 +464,10 @@ void Option1(Dictionary<int, Customer> DictCustomer)
         Console.WriteLine($"{kvp.Value.Name,-12}{kvp.Value.MemberId,-12}{kvp.Value.Dob,-15:dd/MM/yyyy}{kvp.Value.Rewards.tier,-15}{kvp.Value.Rewards.points,-7}{kvp.Value.Rewards.punchCard}");
     }
 }
+//==========================================================
+// Student Number : s10257702
+// Student Name : khoo jia xiang
+//==========================================================
 void Option2() 
 {
     foreach (var kvp in DictCustomer)
@@ -887,7 +900,11 @@ void Option4()
         Console.WriteLine($"An error occurred: {ex.Message}");
     }
 }
-    void Option5()
+//==========================================================
+// Student Number : s10257702
+// Student Name : khoo jia xiang
+//==========================================================
+void Option5()
 {
     Option1(DictCustomer);
     while (true)
@@ -963,8 +980,11 @@ void Option4()
     }
 
 }
-
-    void Option6()
+//==========================================================
+// Student Number : s10257702
+// Student Name : khoo jia xiang
+//==========================================================
+void Option6()
 
     {
         Option1(DictCustomer);
@@ -1224,10 +1244,14 @@ void Option4()
 
 
     }
-    void Option7()
+//==========================================================
+// Student Number : s10257702
+// Student Name : khoo jia xiang
+//==========================================================
+void Option7()
     {
-    while (true)
-    {
+    
+    do{
         try
         {
             Order servingorder = null;
@@ -1404,7 +1428,33 @@ void Option4()
                 }
 
             }
-            break;
+            if (GoldQueueOrder.Count != 0 || GoldQueueOrder.Count != 0)
+            {
+                
+                    Console.Write("continue to next order?(y or n): ");
+                    string prompt = Console.ReadLine();
+                    if (prompt == "y")
+                    {
+                        continue;
+
+                    }
+                    else if (prompt == "n")
+                    {
+                        break;
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("invalid input");
+                    break;
+                    
+
+                    }
+                
+            }
+
+
+
             
             
         }
@@ -1415,6 +1465,7 @@ void Option4()
 
         }
     }
+    while (true);
 
     }
     // peck // 0Id,1MemberId,2TimeReceived,3TimeFulfilled,4Option,5Scoops,6Dipped,7WaffleFlavour,8Flavour1,9Flavour2,10Flavour3,11Topping1,12Topping2,13Topping3,14Topping4
@@ -1532,8 +1583,12 @@ Option8()
         }
 
     }
+//==========================================================
+// Student Number : s10257702
+// Student Name : khoo jia xiang
+//==========================================================
 
-    Dictionary<int, string> wafflelist = new Dictionary<int, string>();
+Dictionary<int, string> wafflelist = new Dictionary<int, string>();
     void initwaffle(Dictionary<int, string> wafflelist)
     {
         wafflelist.Add(1, "Original");
@@ -1554,11 +1609,14 @@ Option8()
         }
 
     }
+//==========================================================
+// Student Number : s10257702
+// Student Name : khoo jia xiang
+//==========================================================
 
 
 
-
-    void Makeicecream(Customer
+void Makeicecream(Customer
      result)
     {
         IceCream newIceCream = null;
