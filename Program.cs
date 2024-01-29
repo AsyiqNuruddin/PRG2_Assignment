@@ -1281,7 +1281,9 @@ void Option6()
                 }
 
             }
-            else { Console.WriteLine("please make an order at option 4 first")}
+            else {
+                Console.WriteLine("please make an order at option 4 first");
+                    }
             
         }
         catch (FormatException)
