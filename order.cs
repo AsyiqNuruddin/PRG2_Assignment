@@ -203,34 +203,43 @@ namespace PRG2_Assignment_Order
                                     DisplayFlavours(DictFlavour);
                                     for (int scoopIndex = 1; scoopIndex <= newscp; scoopIndex++)
                                     {
-                                        Console.Write($"Enter flavour number {scoopIndex} : ");
-                                        int newflav = Convert.ToInt32(Console.ReadLine());
-                                        Flavour addflact = DictFlavour[newflav];
-                                        if (addflact != null)
+                                        try
                                         {
-                                            flavlist.Add(addflact);
-                                        }
-                                        else
-                                        {
-                                            foreach (var flav in flavlist)
+
+                                            Console.Write($"Enter flavour number {scoopIndex} : ");
+                                            int newflav = Convert.ToInt32(Console.ReadLine());
+                                            Flavour addflact = DictFlavour[newflav];
+                                            if (addflact != null)
                                             {
-                                                if (flav.Type == addflact.Type)
+                                                flavlist.Add(addflact);
+                                            }
+                                            else
+                                            {
+                                                foreach (var flav in flavlist)
                                                 {
-                                                    flav.Quantity += 1;
+                                                    if (flav.Type == addflact.Type)
+                                                    {
+                                                        flav.Quantity += 1;
+
+
+                                                    }
 
 
                                                 }
 
 
+
+
+
+
+
                                             }
-
-
-
-
-
-
-
                                         }
+                                        catch (Exception ex) {
+                                            Console.WriteLine("invalid input");
+                                            scoopIndex--;
+                                                
+                                                }
 
 
 
@@ -454,32 +463,42 @@ namespace PRG2_Assignment_Order
                                     DisplayFlavours(DictFlavour);
                                     for (int scoopIndex = 1; scoopIndex <= newscp; scoopIndex++)
                                     {
-                                        Console.Write($"Enter flavour number {scoopIndex} : ");
-                                        int newflav = Convert.ToInt32(Console.ReadLine());
-                                        Flavour addflact = DictFlavour[newflav];
-                                        if (addflact != null)
+                                        try
                                         {
-                                            flavlist.Add(addflact);
-                                        }
-                                        else
-                                        {
-                                            foreach (var flav in flavlist)
+
+                                            Console.Write($"Enter flavour number {scoopIndex} : ");
+                                            int newflav = Convert.ToInt32(Console.ReadLine());
+                                            Flavour addflact = DictFlavour[newflav];
+                                            if (addflact != null)
                                             {
-                                                if (flav.Type == addflact.Type)
+                                                flavlist.Add(addflact);
+                                            }
+                                            else
+                                            {
+                                                foreach (var flav in flavlist)
                                                 {
-                                                    flav.Quantity += 1;
+                                                    if (flav.Type == addflact.Type)
+                                                    {
+                                                        flav.Quantity += 1;
+
+
+                                                    }
 
 
                                                 }
 
 
+
+
+
+
+
                                             }
-
-
-
-
-
-
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            Console.WriteLine("invalid input");
+                                            scoopIndex--;
 
                                         }
 
@@ -696,32 +715,42 @@ namespace PRG2_Assignment_Order
                                     DisplayFlavours(DictFlavour);
                                     for (int scoopIndex = 1; scoopIndex <= newscp; scoopIndex++)
                                     {
-                                        Console.Write($"Enter flavour number {scoopIndex} : ");
-                                        int newflav = Convert.ToInt32(Console.ReadLine());
-                                        Flavour addflact = DictFlavour[newflav];
-                                        if (addflact != null)
+                                        try
                                         {
-                                            flavlist.Add(addflact);
-                                        }
-                                        else
-                                        {
-                                            foreach (var flav in flavlist)
+
+                                            Console.Write($"Enter flavour number {scoopIndex} : ");
+                                            int newflav = Convert.ToInt32(Console.ReadLine());
+                                            Flavour addflact = DictFlavour[newflav];
+                                            if (addflact != null)
                                             {
-                                                if (flav.Type == addflact.Type)
+                                                flavlist.Add(addflact);
+                                            }
+                                            else
+                                            {
+                                                foreach (var flav in flavlist)
                                                 {
-                                                    flav.Quantity += 1;
+                                                    if (flav.Type == addflact.Type)
+                                                    {
+                                                        flav.Quantity += 1;
+
+
+                                                    }
 
 
                                                 }
 
 
+
+
+
+
+
                                             }
-
-
-
-
-
-
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            Console.WriteLine("invalid input");
+                                            scoopIndex--;
 
                                         }
 
