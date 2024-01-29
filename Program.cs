@@ -934,24 +934,27 @@ void Option4()
     void Option6()
 
     {
+        Option1(DictCustomer);
     while (true)
     {
         try
         {
 
 
-            Option1(DictCustomer);
+            
             Console.Write
 ("Select the customer: ");
             int idInp = Convert.ToInt32(Console.ReadLine());
             Customer
         ? result = Search(DictCustomer, idInp);
 
-            while (true)
-            {
+            
+            
                 if (result != null)
                 {
-                    Console.WriteLine("Menu:\r\n1. Modify an existing ice cream in the order\r\n2. Add a new ice cream to the order\r\n3. Delete an existing ice cream from the order\r\n4.Exit");
+                while (true)
+                {
+                    Console.WriteLine("Menu:\r\n1. Modify an existing ice cream in the order\r\n2. Add a new ice cream to the order\r\n3. Delete an existing ice cream from the order\r\n4. Exit");
                     Console.Write("Please enter the number corresponding to your choice: ");
                     string choice = Console.ReadLine();
                     if (choice == "1")
@@ -970,7 +973,7 @@ void Option4()
                         {
                             int icecreanindex = Convert.ToInt32(Console.ReadLine());
                             result.CurrentOrder.Modifyicecream(icecreanindex);
-                            Console.WriteLine($"Modified ice cream: \r\n{result.CurrentOrder.IceCreamlist[icecreanindex-1]}");
+                            Console.WriteLine($"Modified ice cream: \r\n{result.CurrentOrder.IceCreamlist[icecreanindex - 1]}");
 
                         }
                         catch (FormatException)
@@ -983,7 +986,7 @@ void Option4()
                             Console.WriteLine("invalid input.");
 
                         }
-                        
+
 
 
                     }
@@ -995,7 +998,7 @@ void Option4()
                         while (true)
                         {
                             Makeicecream(result);
-                            Console.Write("do you want to continue order(y 0r n)");
+                            Console.Write("do you want to continue order(y 0r n): ");
                             string input = Console.ReadLine();
                             if (input == "n")
                             {
@@ -1010,18 +1013,24 @@ void Option4()
 
 
                             }
+                            else {
+                                Console.WriteLine("invalid input");
+                                break;
+
+                            }
 
 
                         }
                         Console.WriteLine("orders added:");
-                        for (int i = 1; i <= count; i++) {
-                            Console.WriteLine(result.CurrentOrder.IceCreamlist[icenum-1]);
+                        for (int i = 1; i <= count; i++)
+                        {
+                            Console.WriteLine(result.CurrentOrder.IceCreamlist[icenum - 1]);
 
 
 
 
                         }
-                        
+
 
 
 
@@ -1062,6 +1071,17 @@ void Option4()
 
 
                                     }
+                                    Console.WriteLine("---------current order-------");
+                                    int count2 = 1;
+                                    foreach (IceCream or in result.CurrentOrder.IceCreamlist)
+                                    {
+                                        Console.WriteLine($"[{count2}]");
+                                        Console.WriteLine(or);
+                                        count++;
+
+
+                                    }
+
                                     break;
                                 }
 
@@ -1076,13 +1096,14 @@ void Option4()
 
                                 }
                             }
-                            catch (Exception) {
+                            catch (Exception)
+                            {
                                 Console.WriteLine("invliad input.");
 
                             }
                         }
-                        
-                        
+
+
 
 
 
@@ -1091,21 +1112,26 @@ void Option4()
 
 
                     }
-                    else if (choice == "4") {
+                    else if (choice == "4")
+                    {
                         break;
-                    
+
                     }
+
                     else { Console.WriteLine("invalid input"); }
+                }
+                break;
                 }
                 
                 else
                 {
                     Console.WriteLine("invalid custoemr.");
+                    
 
                 }
-            }
+            
 
-            break;
+            
         }
         catch (FormatException)
         {
@@ -1139,6 +1165,7 @@ void Option4()
                 servingorder = RegularQueueOrder.Dequeue();
             }
             double total = servingorder.CalcualteTotal();
+            int ordercount = servingorder.IceCreamlist.Count;
             
             
             Customer servingcustomer = null;
@@ -1226,45 +1253,65 @@ void Option4()
                 }
 
 
-                WriteIceCream(servingorder, servingcustomer.MemberId);
+                
             }
             else
             {
-                Console.WriteLine($"points: {servingcustomer.Rewards.points}");
-                Console.Write("would u like to redeem some points(y/n): ");
-                string redeem = Console.ReadLine();
-                if (redeem == "y")
+                IceCream firstice = servingorder.IceCreamlist[0];
+                if (servingcustomer.Rewards.punchCard == 10)
                 {
-                    Console.Write("how much point would u like to redeem(1 point = 0.02): ");
-                    int point = Convert.ToInt16(Console.ReadLine());
-                    double discounted = point * 0.02;
-                    total -= discounted;
-                    
+                    Console.WriteLine("you have 11 punches on ur punch card.your first icecreamm is free");
+                    servingcustomer.Rewards.punchCard = 0;
+                    total -= firstice.CalculatePrice();
+                    ordercount--;
+                    Console.WriteLine($"toatal: ${total:0.00}");
+
+
+
 
                 }
-                else if (redeem == "n") { }
-                Console.WriteLine($"fianl toatal: ${total:0.00}");
-                int points = Convert.ToInt16(Math.Floor(total * 0.72));
-                servingcustomer.Rewards.AddPoints(points);
-                servingcustomer.CurrentOrder.timeFulfilled = DateTime.Now;
-                servingcustomer.OrderHistory.Add(servingcustomer.CurrentOrder);
-                servingcustomer.CurrentOrder = null;
-                if (servingcustomer.Rewards.tier == "Silver")
+                if (total > 0)
                 {
-                    if (servingcustomer.Rewards.points 
->= 100)
+                    Console.WriteLine($"points: {servingcustomer.Rewards.points}");
+                    Console.Write("would u like to redeem some points(y/n): ");
+                    string redeem = Console.ReadLine();
+                    if (redeem == "y")
                     {
-                        servingcustomer.Rewards.tier = "gold";
-                        Console.WriteLine("cpmgrats you are now a gold member!");
-
+                        Console.Write("how much point would u like to redeem(1 point = 0.02): ");
+                        int point = Convert.ToInt16(Console.ReadLine());
+                        double discounted = point * 0.02;
+                        total -= discounted;
+                        Console.WriteLine($"curent toatal: ${total:0.00}");
 
 
                     }
+                    else if (redeem == "n") { }
+                    Console.WriteLine($"fianl toatal: ${total:0.00}");
+                    int points = Convert.ToInt16(Math.Floor(total * 0.72));
+                    servingcustomer.Rewards.AddPoints(points);
+                    servingcustomer.CurrentOrder.timeFulfilled = DateTime.Now;
+                    servingcustomer.OrderHistory.Add(servingcustomer.CurrentOrder);
+                    servingcustomer.CurrentOrder = null;
+                    if (servingcustomer.Rewards.tier == "Silver")
+                    {
+                        if (servingcustomer.Rewards.points
+    >= 100)
+                        {
+                            servingcustomer.Rewards.tier = "gold";
+                            Console.WriteLine("cpmgrats you are now a gold member!");
 
+
+
+                        }
+
+                    }
                 }
+
+
                 
 
             }
+            WriteIceCream(servingorder, servingcustomer.MemberId);
             foreach (IceCream ice in servingorder.IceCreamlist)
             {
                 servingcustomer.Rewards.Punch();
@@ -1275,6 +1322,7 @@ void Option4()
                 }
 
             }
+            
             break;
         }
         catch
