@@ -506,7 +506,7 @@ void Option3()
         }
         catch (FormatException)
         {
-            Console.WriteLine("Invalid date format. Please enter a valid date in the format DD/MM/YYYY.");
+            Console.WriteLine("Invalid format.");
         }
         catch (Exception ex)
         {
