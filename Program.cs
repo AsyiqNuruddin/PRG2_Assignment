@@ -750,7 +750,7 @@ void Option4()
     }
 }
     void Option5()
-    {
+{
     while (true)
     {
         try
@@ -766,7 +766,8 @@ void Option4()
             {
                 List<IceCream> currentorder = result.CurrentOrder.IceCreamlist;
                 Console.WriteLine("current order");
-                if (currentorder.Count == 0) {
+                if (currentorder.Count == 0)
+                {
                     Console.WriteLine("no current orders");
 
                 }
@@ -811,6 +812,7 @@ void Option4()
     }
 
 }
+
     void Option6()
 
     {
@@ -1000,149 +1002,159 @@ void Option4()
     }
     void Option7()
     {
-        Order servingorder = null;
-        if (GoldQueueOrder.Count != 0)
+    while (true)
+    {
+        try
         {
-            servingorder = GoldQueueOrder.Dequeue();
-            
-
-        }
-        
-        else 
-        {
-            servingorder = RegularQueueOrder.Dequeue();
-        }
-        double total = servingorder.CalcualteTotal();
-        foreach (IceCream ice in servingorder.IceCreamlist)
-        {
-            Console.WriteLine(ice);
-
-        }
-        Console.WriteLine($"total cost: {total}");
-        Customer servingcustomer = null;
-        foreach (var custo in DictCustomer)
-        {
-            Customer customers = custo.Value;
-            if (customers != null)
+            Order servingorder = null;
+            if (GoldQueueOrder.Count != 0)
             {
-                if (customers.CurrentOrder.id == servingorder.id)
-                {
-                    servingcustomer = customers;
-                    break;
+                servingorder = GoldQueueOrder.Dequeue();
 
 
-                }
-                else
-                {
-                    continue;
-
-                }
             }
 
-
-        }
-        Console.WriteLine($"membership teir: {servingcustomer.Rewards.tier}        points: {servingcustomer.Rewards.points}");
-        if (servingcustomer.IsBirthday())
-        {
-            Console.WriteLine("happy birthday");
-            double highest = 0;
+            else
+            {
+                servingorder = RegularQueueOrder.Dequeue();
+            }
+            double total = servingorder.CalcualteTotal();
             foreach (IceCream ice in servingorder.IceCreamlist)
             {
-                if (ice.CalculatePrice() >= highest)
+                Console.WriteLine(ice);
+
+            }
+            Console.WriteLine($"total cost: {total}");
+            Customer servingcustomer = null;
+            foreach (var custo in DictCustomer)
+            {
+                Customer customers = custo.Value;
+                if (customers != null)
                 {
-                    highest = ice.CalculatePrice();
+                    if (customers.CurrentOrder.id == servingorder.id)
+                    {
+                        servingcustomer = customers;
+                        break;
+
+
+                    }
+                    else
+                    {
+                        continue;
+
+                    }
+                }
+
+
+            }
+            Console.WriteLine($"membership teir: {servingcustomer.Rewards.tier}        points: {servingcustomer.Rewards.points}");
+            if (servingcustomer.IsBirthday())
+            {
+                Console.WriteLine("happy birthday");
+                double highest = 0;
+                foreach (IceCream ice in servingorder.IceCreamlist)
+                {
+                    if (ice.CalculatePrice() >= highest)
+                    {
+                        highest = ice.CalculatePrice();
+
+                    }
+                    else
+                    {
+                        continue;
+
+                    }
 
                 }
-                else
+                total -= highest;
+                Console.WriteLine($"new total :{total}");
+
+
+
+            }
+
+
+            if (servingcustomer.Rewards.tier == "Ordinary")
+            {
+                IceCream firstice = servingorder.IceCreamlist[0];
+
+                if (servingcustomer.Rewards.punchCard == 11)
                 {
-                    continue;
+                    Console.WriteLine("you have 11 punches on ur punch card.your first icecreamm is free");
+                    servingcustomer.Rewards.punchCard = 0;
+                    total -= firstice.CalculatePrice();
 
-                }
-                
-            }
-            total -= highest;
-            Console.WriteLine($"new total :{total}");
-
-
-
-        }
-
-
-        if (servingcustomer.Rewards.tier == "Ordinary")
-        {
-            IceCream firstice = servingorder.IceCreamlist[0];
-
-            if (servingcustomer.Rewards.punchCard == 11)
-            {
-                Console.WriteLine("you have 11 punches on ur punch card.your first icecreamm is free");
-                servingcustomer.Rewards.punchCard = 0;
-                total -= firstice.CalculatePrice();
-
-
-
-
-            }
-            Console.WriteLine($"fianl toatal: {total}");
-            int points = Convert.ToInt16(Math.Floor(total * 0.72));
-            servingcustomer.Rewards.AddPoints(points);
-            servingcustomer.CurrentOrder.timeFulfilled = DateTime.Now;
-            servingcustomer.OrderHistory.Add(servingcustomer.CurrentOrder);
-            servingcustomer.CurrentOrder = null;
-            if (servingcustomer.Rewards.points >= 50)
-            {
-                servingcustomer.Rewards.tier = "Silver";
-
-                Console.WriteLine("congrats u are now a silver teir member");
-
-            }
-
-
-            WriteIceCream(servingorder, servingcustomer.MemberId);
-        }
-        else
-        {
-            Console.WriteLine($"points: {servingcustomer.Rewards.points}");
-            Console.Write("would u like to redeem some points(y/n): ");
-            string redeem = Console.ReadLine();
-            if (redeem == "y")
-            {
-                Console.Write("how much point would u like to redeem(1 point = 0.02): ");
-                int point = Convert.ToInt16(Console.ReadLine());
-                double discounted = point * 0.02;
-                total -= discounted;
-
-            }
-            else if (redeem == "n") { }
-            Console.WriteLine($"fianl toatal: {total}");
-            int points = Convert.ToInt16(Math.Floor(total * 0.72));
-            servingcustomer.Rewards.AddPoints(points);
-            servingcustomer.CurrentOrder.timeFulfilled = DateTime.Now;
-            servingcustomer.OrderHistory.Add(servingcustomer.CurrentOrder);
-            servingcustomer.CurrentOrder = null;
-            if (servingcustomer.Rewards.tier == "Silver")
-            {
-                if (servingcustomer.Rewards.points >= 100)
-                {
-                    servingcustomer.Rewards.tier = "gold";
-                    Console.WriteLine("cpmgrats you are now a gold member!");
 
 
 
                 }
+                Console.WriteLine($"fianl toatal: {total}");
+                int points = Convert.ToInt16(Math.Floor(total * 0.72));
+                servingcustomer.Rewards.AddPoints(points);
+                servingcustomer.CurrentOrder.timeFulfilled = DateTime.Now;
+                servingcustomer.OrderHistory.Add(servingcustomer.CurrentOrder);
+                servingcustomer.CurrentOrder = null;
+                if (servingcustomer.Rewards.points >= 50)
+                {
+                    servingcustomer.Rewards.tier = "Silver";
 
+                    Console.WriteLine("congrats u are now a silver teir member");
+
+                }
+
+
+                WriteIceCream(servingorder, servingcustomer.MemberId);
             }
-
-        }
-        foreach (IceCream ice in servingorder.IceCreamlist)
-        {
-            servingcustomer.Rewards.Punch();
-            if (servingcustomer.Rewards.punchCard == 10)
+            else
             {
-                break;
+                Console.WriteLine($"points: {servingcustomer.Rewards.points}");
+                Console.Write("would u like to redeem some points(y/n): ");
+                string redeem = Console.ReadLine();
+                if (redeem == "y")
+                {
+                    Console.Write("how much point would u like to redeem(1 point = 0.02): ");
+                    int point = Convert.ToInt16(Console.ReadLine());
+                    double discounted = point * 0.02;
+                    total -= discounted;
+
+                }
+                else if (redeem == "n") { }
+                Console.WriteLine($"fianl toatal: {total}");
+                int points = Convert.ToInt16(Math.Floor(total * 0.72));
+                servingcustomer.Rewards.AddPoints(points);
+                servingcustomer.CurrentOrder.timeFulfilled = DateTime.Now;
+                servingcustomer.OrderHistory.Add(servingcustomer.CurrentOrder);
+                servingcustomer.CurrentOrder = null;
+                if (servingcustomer.Rewards.tier == "Silver")
+                {
+                    if (servingcustomer.Rewards.points >= 100)
+                    {
+                        servingcustomer.Rewards.tier = "gold";
+                        Console.WriteLine("cpmgrats you are now a gold member!");
+
+
+
+                    }
+
+                }
 
             }
+            foreach (IceCream ice in servingorder.IceCreamlist)
+            {
+                servingcustomer.Rewards.Punch();
+                if (servingcustomer.Rewards.punchCard == 10)
+                {
+                    break;
+
+                }
+
+            }
+        }
+        catch(InvalidOperationException) {
+            break;
 
         }
+    }
 
     }
     // peck // 0Id,1MemberId,2TimeReceived,3TimeFulfilled,4Option,5Scoops,6Dipped,7WaffleFlavour,8Flavour1,9Flavour2,10Flavour3,11Topping1,12Topping2,13Topping3,14Topping4
