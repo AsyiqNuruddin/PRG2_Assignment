@@ -766,7 +766,9 @@ void Option4()
                 Console.Write("Enter their ice cream order type (Cup, Cone or Waffle): ");
 
                 string choiceInp = Console.ReadLine();
+                // Lower to prevent case sensitive
                 choiceInp = choiceInp.ToLower();
+                // Option Cup
                 if (choiceInp == "cup")
                 {
                     Console.WriteLine("Chosen Cup");
@@ -781,6 +783,7 @@ void Option4()
                         break;
                     }
                 }
+                // Option Cone
                 else if (choiceInp == "cone")
                 {
                     Console.WriteLine($"Chosen Cone");
@@ -819,6 +822,7 @@ void Option4()
                         break;
                     }
                 }
+                // Option Waffle
                 else if (choiceInp == "waffle")
                 {
                     Console.WriteLine("Chosen Waffle");
@@ -849,12 +853,14 @@ void Option4()
                     Console.WriteLine("Invalid Input");
                     break;
                 }
+                // If no IceCream wont add to the order
                 if(newice!= null)
                 {
                     Console.WriteLine($"Your order: {newice}");
                     newOrd.AddIceCream(newice);
-                    Console.Write("Do you wish to continue ordering? (Y/N): ");
+                    Console.Write("Do you wish to continue ordering? [Y/N]: ");
                     string check = Console.ReadLine();
+                    // Prevent case sensitive
                     check = check.ToLower();
                     if (check == "y")
                     {
@@ -867,17 +873,18 @@ void Option4()
                     }
                     else
                     {
-                        Console.WriteLine("Invalid Input (Y/N) or (y/n) only\nOrder will be stopped and saved");
+                        Console.WriteLine("Invalid Input [Y/N] or [y/n] only\nOrder will be stopped and saved");
                         break;
                     }
                 }
                 else
                 {
+                    // Prints that your Ice Cream had error
                     Console.WriteLine("Your IceCream is invalid");
                     break;
                 }
             }
-
+            // If no ice cream in order wont enqueue the order
             if (result.CurrentOrder.IceCreamlist.Count != 0)
             {
                 Console.WriteLine($"\nOrder Number[{result.CurrentOrder.id}] is successfull");
@@ -902,19 +909,23 @@ void Option4()
             }
             else
             {
+                // no Ice Cream user reenter data
                 Console.WriteLine("Error occured when making IceCream\nPlease restart your ordering process");
             }
                 
         }
         else
         {
+            // No such user
             Console.WriteLine("Customer Member ID not found");
         }
     }
+    // Formating error
     catch (FormatException)
     {
         Console.WriteLine("Invalid input. Please enter a valid numeric value for customer ID.");
     }
+    // General Error
     catch (Exception ex)
     {
         Console.WriteLine($"An error occurred: {ex.Message}");
@@ -1466,8 +1477,12 @@ void Option7()
     
 
     }
-    // peck // 0Id,1MemberId,2TimeReceived,3TimeFulfilled,4Option,5Scoops,6Dipped,7WaffleFlavour,8Flavour1,9Flavour2,10Flavour3,11Topping1,12Topping2,13Topping3,14Topping4
-    void WriteIceCream(Order order, int id)
+//==========================================================
+// Student Number : S10262791
+// Student Name : Asyiq Nuruddin
+//==========================================================
+// peck // 0Id,1MemberId,2TimeReceived,3TimeFulfilled,4Option,5Scoops,6Dipped,7WaffleFlavour,8Flavour1,9Flavour2,10Flavour3,11Topping1,12Topping2,13Topping3,14Topping4
+void WriteIceCream(Order order, int id)
     {
         using (StreamWriter sw = new StreamWriter("orders.csv", true))
         {
