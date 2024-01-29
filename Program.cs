@@ -583,6 +583,9 @@ static Customer? Search(Dictionary<int, Customer> sDict, int userInp)
     Console.Write("Enter number of scoops [1-3]: ");
     int scoops = 0;
     int topCount = 0;
+    int flvIndex = 0;
+    int topIndex = 0;
+    bool error =  false;
     try
     {
         scoops = Convert.ToInt32(Console.ReadLine());
@@ -590,9 +593,10 @@ static Customer? Search(Dictionary<int, Customer> sDict, int userInp)
         {
             for (int i = 1; i < scoops + 1; i++)
             {
+                flvIndex = 0;
                 DisplayFlavours(DictFlavour);
                 Console.Write($"Choose the flavour of scoop [{i}]: ");
-                int flvIndex = Convert.ToInt32(Console.ReadLine());
+                flvIndex = Convert.ToInt32(Console.ReadLine());
                 if (df.ContainsKey(flvIndex))
                 {
                     if (flavList.Contains(df[flvIndex]))
@@ -620,17 +624,20 @@ static Customer? Search(Dictionary<int, Customer> sDict, int userInp)
         else
         {
             Console.WriteLine("Invalid number of scoops | Only 1 to 3 scoops");
+            error = true;
         }
     }
     catch (FormatException ex)
     {
         Console.WriteLine("Invalid format only numbers [1-3]");
+        error = true;
     }
     catch (Exception ex) when(!(scoops <= 3 && scoops > 0))
     {
         Console.WriteLine("Invalid number of scoops | Only 1 to 3 scoops");
+        error = true;
     }
-    if(!(scoops <= 3 && scoops > 0))
+    if(!(scoops <= 3 && scoops > 0) || error)
     {
         return null;
     }
@@ -645,7 +652,7 @@ static Customer? Search(Dictionary<int, Customer> sDict, int userInp)
             {
                 DisplayToppings(DictTopping);
                 Console.Write($"Choose the [{i}] topping: ");
-                int topIndex = Convert.ToInt32(Console.ReadLine());
+                topIndex = Convert.ToInt32(Console.ReadLine());
                 if (dt.ContainsKey(topIndex))
                 {
                     topList.Add(dt[topIndex]);
@@ -653,32 +660,36 @@ static Customer? Search(Dictionary<int, Customer> sDict, int userInp)
                 else
                 {
                     Console.WriteLine("No such topping number available");
-                    return null;
+                    error = true;
                 }
             }
         }
         else if(topCount == 0)
         {
             Console.WriteLine("No toppings added");
+            error = true;
         }
         else
         {
             Console.WriteLine("Invalid number of toppings | Only 0 to 4 toppings");
+            error = true;
         }
     }
     catch (FormatException ex)
     {
         Console.WriteLine("Invalid format only numbers [0-4]");
+        error = true;
     }
     catch (Exception ex) when (!(topCount <= 4 && topCount >= 0))
     {
         Console.WriteLine("Invalid number of toppings | Only 0 to 4 toppings");
+        error = true;
     }
-    if(!(topCount <= 4 && topCount >= 0))
+    if(!(topCount <= 4 && topCount >= 0) || error)
     {
         return null;
     }
-    if((scoops <= 3 && scoops > 0) && (topCount <= 4 && topCount >= 0))
+    if((scoops <= 3 && scoops > 0) && (topCount <= 4 && topCount >= 0) || !(error))
     {
         return (scoops, flavList, topList);
     }
