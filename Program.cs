@@ -394,7 +394,7 @@ IceCream IceCreamRead(string Option, int Scoops, string Dipped, string? WaffleFl
     }
     return newIC;
 }
-void maxorderid() {
+int maxorderid() {
     int maxid = 0;
     foreach(var i in DictCustomer) { 
         Customer customer = i.Value;
@@ -402,26 +402,13 @@ void maxorderid() {
             if (or.id >= maxid)
             {
                 maxid = or.id;
-
-
             }
             else {
                 continue;
-            
             }
-        
-        
-        
         }
-
-    
-    
     }
-    
-    
-
-
-
+    return maxid;
 }
 //==========================================================
 // Student Number : S10262791
@@ -860,7 +847,6 @@ void Option4()
                 if (result.Rewards.tier == "Gold")
                 {
                     GoldQueueOrder.Enqueue(newOrd);
-                    Console.WriteLine(result);
                 }
                 else
                 {
