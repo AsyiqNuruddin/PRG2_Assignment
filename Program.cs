@@ -407,10 +407,13 @@ int maxorderid() {
                 continue;
             }
         }
-        if(customer.CurrentOrder.id >= maxid)
+        if (customer.CurrentOrder != null)
         {
+            if (customer.CurrentOrder.id >= maxid)
+            {
 
-            maxid = customer.CurrentOrder.id+1;
+                maxid = customer.CurrentOrder.id + 1;
+            }
         }
         
     }
@@ -1149,6 +1152,52 @@ void Option4()
                     }
 
                     else { Console.WriteLine("invalid input"); }
+                    if (result.Rewards.tier == "Gold")
+                    {
+                        Queue<Order> temp = new Queue<Order>();
+                        while (GoldQueueOrder.Count > 0) { 
+                            Order order = GoldQueueOrder.Dequeue();
+                            if (result.CurrentOrder.id == order.id)
+                            {
+                                order = result.CurrentOrder;
+                            }
+                            temp.Enqueue(order);
+
+                        }
+                        while (temp.Count > 0) {
+                            Order neworders = temp.Dequeue();
+                            GoldQueueOrder.Enqueue(neworders);
+
+
+
+
+                        }
+
+                    }
+                    else {
+                        Queue<Order> temp = new Queue<Order>();
+                        while (RegularQueueOrder.Count > 0)
+                        {
+                            Order order = RegularQueueOrder.Dequeue();
+                            if (result.CurrentOrder.id == order.id)
+                            {
+                                order = result.CurrentOrder;
+                            }
+                            temp.Enqueue(order);
+
+                        }
+                        while (temp.Count > 0)
+                        {
+                            Order neworders = temp.Dequeue();
+                            RegularQueueOrder.Enqueue(neworders);
+
+
+
+
+                        }
+
+
+                    }
                 }
                 break;
                 }
@@ -1359,8 +1408,7 @@ void Option4()
             
             
         }
-        catch
-(InvalidOperationException) {
+        catch(InvalidOperationException) {
             Console.WriteLine();
             Console.WriteLine("no current orders");
             break;
