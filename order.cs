@@ -197,7 +197,7 @@ namespace PRG2_Assignment_Order
 
 
                                 int newscp = Convert.ToInt16(Console.ReadLine());
-                                if (newscp < 1 && newscp > 3)
+                                if (newscp >= 1 && newscp <= 3)
                                 {
 
                                     DisplayFlavours(DictFlavour);
@@ -326,7 +326,7 @@ namespace PRG2_Assignment_Order
 
 
                                     int newtop = Convert.ToInt16(Console.ReadLine());
-                                    if (newtop < 1 && newtop > 4)
+                                    if (newtop >= 1 && newtop <= 4)
                                     {
                                         DisplayToppings(DictTopping);
 
@@ -457,7 +457,7 @@ namespace PRG2_Assignment_Order
 
 
                                 int newscp = Convert.ToInt16(Console.ReadLine());
-                                if (newscp < 1 && newscp > 3)
+                                if (newscp >= 1 && newscp <= 3)
                                 {
 
                                     DisplayFlavours(DictFlavour);
@@ -588,7 +588,7 @@ namespace PRG2_Assignment_Order
 
 
                                     int newtop = Convert.ToInt16(Console.ReadLine());
-                                    if (newtop < 1 && newtop > 4)
+                                    if (newtop >= 1 && newtop <= 4)
                                     {
                                         DisplayToppings(DictTopping);
 
@@ -668,6 +668,7 @@ namespace PRG2_Assignment_Order
 
                                         }
                                     }
+                                    break;
                                 }
                                 else if (newtype == "waffle")
                                 {
@@ -705,11 +706,11 @@ namespace PRG2_Assignment_Order
                             while (true)
                             {
 
-                                Console.Write("Enter number of scoops: ");
+                                Console.Write("Enter number of scoops[1-3]: ");
 
 
                                 int newscp = Convert.ToInt16(Console.ReadLine());
-                                if (newscp < 1 && newscp > 3)
+                                if (newscp >= 1 && newscp <= 3)
                                 {
 
                                     DisplayFlavours(DictFlavour);
@@ -760,6 +761,7 @@ namespace PRG2_Assignment_Order
                                     }
                                     result.Flavours = flavlist;
                                     break;
+
 
                                 }
                                 else
@@ -838,7 +840,7 @@ namespace PRG2_Assignment_Order
 
 
                                     int newtop = Convert.ToInt16(Console.ReadLine());
-                                    if (newtop < 1 && newtop > 4)
+                                    if (newtop >= 1 && newtop <= 4)
                                     {
                                         DisplayToppings(DictTopping);
 
