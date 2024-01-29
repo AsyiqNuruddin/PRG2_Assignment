@@ -48,7 +48,6 @@ catch (Exception ex)
 {
     throw new Exception("An generic error ocurred from file reading.");
 }
-maxorderid();
 
 
 
@@ -267,6 +266,10 @@ void InitOrders(string txtfile)
         }
     }
 }
+//==========================================================
+// Student Number : S10262791
+// Student Name : Asyiq Nuruddin
+//==========================================================
 // Reading of icecreams FORMAT from the history
 // 0Id,1MemberId,2TimeReceived,3TimeFulfilled,4Option,5Scoops,6Dipped,7WaffleFlavour,8Flavour1,9Flavour2,10Flavour3,11Topping1,12Topping2,13Topping3,14Topping4
 IceCream IceCreamRead(string Option, int Scoops, string Dipped, string? WaffleFlavour, string? Flavour1, string? Flavour2, string? Flavour3, string? Topping1, string? Topping2, string? Topping3, string? Topping4)
@@ -290,7 +293,6 @@ IceCream IceCreamRead(string Option, int Scoops, string Dipped, string? WaffleFl
             {
                 flavList.Add(v.Value);
             }
-
         }
         foreach (var v in DictTopping)
         {
@@ -689,6 +691,7 @@ static Customer? Search(Dictionary<int, Customer> sDict, int userInp)
     {
         return null;
     }
+    // If preconditions meet and no error it will send the data
     if((scoops <= 3 && scoops > 0) && (topCount <= 4 && topCount >= 0) || !(error))
     {
         return (scoops, flavList, topList);
