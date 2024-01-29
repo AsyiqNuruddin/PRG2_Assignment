@@ -424,7 +424,6 @@ void Option1(Dictionary<int, Customer> DictCustomer)
     {
         // Writing of a single customer
         Console.WriteLine($"{kvp.Value.Name,-12}{kvp.Value.MemberId,-12}{kvp.Value.Dob,-15:dd/MM/yyyy}{kvp.Value.Rewards.tier,-15}{kvp.Value.Rewards.points,-7}{kvp.Value.Rewards.punchCard}");
-        // Console.WriteLine(kvp.Value.OrderHistory.Count);
     }
 }
 void Option2() 
@@ -920,7 +919,8 @@ void Option4()
 
 
             Option1(DictCustomer);
-            Console.Write("Select the customer: ");
+            Console.Write
+("Select the customer: ");
             int idInp = Convert.ToInt32(Console.ReadLine());
             Customer
         ? result = Search(DictCustomer, idInp);
