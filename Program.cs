@@ -48,6 +48,7 @@ catch (Exception ex)
 {
     throw new Exception("An generic error ocurred from file reading.");
 }
+maxorderid();
 
 
 
@@ -415,6 +416,12 @@ void maxorderid() {
 
     
     
+    }
+    foreach(var i in DictCustomer)
+    {
+
+        Customer customer = i.Value;
+        customer.nextCustomerId = maxid;
     }
     
 

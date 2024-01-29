@@ -17,7 +17,7 @@ namespace PRG2_Assignment_Customer
         public PointCard Rewards { get; set; }
         public int CustomerId { get; }  // Instance variable to store the customer's unique ID
 
-        private static int nextCustomerId = 1;  // Static variable to generate unique customer IDs
+        public int nextCustomerId = 1;  // Static variable to generate unique customer IDs
 
         public Customer()
         {
