@@ -25,12 +25,14 @@ using System.Linq.Expressions;
 // Student Number : S10262791
 // Student Name : Asyiq Nuruddin
 //==========================================================
+// Init the Dict and Queues
 Dictionary<int, Customer>DictCustomer = new Dictionary<int, Customer>();
 Queue<Order> GoldQueueOrder = new Queue<Order>();
 Queue<Order> RegularQueueOrder = new Queue<Order>();
 Dictionary<int, Flavour> DictFlavour = new Dictionary<int, Flavour>();
 Dictionary<int, Topping> DictTopping = new Dictionary<int, Topping>();
 
+// Error Handling incase process file errors
 try
 {
     InitCustomer("customers.csv");
@@ -111,6 +113,7 @@ void Intialdisplay() {
 // Student Number : S10262791
 // Student Name : Asyiq Nuruddin
 //==========================================================
+// Reading of customers
 void InitCustomer(string txtfile)
 {
     using (StreamReader sr = new StreamReader(txtfile))
@@ -137,6 +140,7 @@ void InitCustomer(string txtfile)
 // Student Number : S10262791
 // Student Name : Asyiq Nuruddin
 //==========================================================
+// Read Flavours and add it to a dict
 void InitFlavours(string txtfile, Dictionary<int, Flavour> df)
 {
     using (StreamReader sr = new StreamReader(txtfile))
@@ -172,6 +176,7 @@ void InitFlavours(string txtfile, Dictionary<int, Flavour> df)
 // Student Number : S10262791
 // Student Name : Asyiq Nuruddin
 //==========================================================
+// Read toppings and add it to a dict
 void InitToppings(string txtfile, Dictionary<int, Topping> dt)
 {
     using (StreamReader sr = new StreamReader(txtfile))
@@ -197,6 +202,7 @@ void InitToppings(string txtfile, Dictionary<int, Topping> dt)
 // Student Number : S10262791
 // Student Name : Asyiq Nuruddin
 //==========================================================
+// Reading of Ice Cream Order History
 void InitOrders(string txtfile)
 {
     using (StreamReader sr = new StreamReader(txtfile))
@@ -254,6 +260,7 @@ void InitOrders(string txtfile)
         }
     }
 }
+// Reading of icecreams FORMAT from the history
 // 0Id,1MemberId,2TimeReceived,3TimeFulfilled,4Option,5Scoops,6Dipped,7WaffleFlavour,8Flavour1,9Flavour2,10Flavour3,11Topping1,12Topping2,13Topping3,14Topping4
 IceCream IceCreamRead(string Option, int Scoops, string Dipped, string? WaffleFlavour, string? Flavour1, string? Flavour2, string? Flavour3, string? Topping1, string? Topping2, string? Topping3, string? Topping4)
 {
@@ -411,11 +418,12 @@ void DisplayToppings(Dictionary<int, Topping> dt)
 
 void Option1(Dictionary<int, Customer> DictCustomer) 
 {
+    // Title
     Console.WriteLine($"{"Name",-12}{"Member ID",-12}{"DateofBirth",-15}{"MemberShip",-15}{"Points",-7}{"Punches",-2}");
     foreach (var kvp in DictCustomer)
     {
+        // Writing of a single customer
         Console.WriteLine($"{kvp.Value.Name,-12}{kvp.Value.MemberId,-12}{kvp.Value.Dob,-15:dd/MM/yyyy}{kvp.Value.Rewards.tier,-15}{kvp.Value.Rewards.points,-7}{kvp.Value.Rewards.punchCard}");
-        // Console.WriteLine(kvp.Value.OrderHistory.Count);
     }
 }
 void Option2() 
@@ -498,7 +506,6 @@ void Option3()
         catch (FormatException)
         {
             Console.WriteLine("Invalid date format. Please enter a valid date in the format DD/MM/YYYY.");
-            // You might want to handle the error, ask the user to enter the date again, or take appropriate action.
         }
         catch (Exception ex)
         {
@@ -525,63 +532,117 @@ static Customer? Search(Dictionary<int, Customer> sDict, int userInp)
 // Student Number : S10262791
 // Student Name : Asyiq Nuruddin
 //==========================================================
-(int, List<Flavour>, List<Topping>) IceCreamAdd(Dictionary<int, Flavour> df, Dictionary<int, Topping> dt)
+(int, List<Flavour>, List<Topping>)? IceCreamAdd(Dictionary<int, Flavour> df, Dictionary<int, Topping> dt)
 {
-    Console.Write("Enter number of scoops [1-3]: ");
-    int scoops = Convert.ToInt32(Console.ReadLine());
     List<Flavour> flavList = new List<Flavour>();
-    if (scoops <= 3 && scoops > 0)
+    List<Topping> topList = new List<Topping>();
+    Console.Write("Enter number of scoops [1-3]: ");
+    int scoops = 0;
+    int topCount = 0;
+    try
     {
-        for (int i = 1; i < scoops + 1; i++)
+        scoops = Convert.ToInt32(Console.ReadLine());
+        if (scoops <= 3 && scoops > 0)
         {
-            DisplayFlavours(DictFlavour);
-            Console.Write($"Choose the flavour of scoop [{i}]: ");
-            int flvIndex = Convert.ToInt32(Console.ReadLine());
-            if (df.ContainsKey(flvIndex))
+            for (int i = 1; i < scoops + 1; i++)
             {
-                if (flavList.Contains(df[flvIndex]))
+                DisplayFlavours(DictFlavour);
+                Console.Write($"Choose the flavour of scoop [{i}]: ");
+                int flvIndex = Convert.ToInt32(Console.ReadLine());
+                if (df.ContainsKey(flvIndex))
                 {
-                    foreach (var v in flavList)
+                    if (flavList.Contains(df[flvIndex]))
                     {
-                        if (v == df[flvIndex])
+                        foreach (var v in flavList)
                         {
-                            v.Quantity = v.Quantity + 1;
+                            if (v == df[flvIndex])
+                            {
+                                v.Quantity = v.Quantity + 1;
+                            }
                         }
+                    }
+                    else
+                    {
+                        flavList.Add(df[flvIndex]);
                     }
                 }
                 else
                 {
-                    flavList.Add(df[flvIndex]);
+                    Console.WriteLine("No such flavour number available");
+                    return null;
                 }
             }
         }
+        else
+        {
+            Console.WriteLine("Invalid number of scoops | Only 1 to 3 scoops");
+        }
     }
-    else
+    catch (FormatException ex)
+    {
+        Console.WriteLine("Invalid format only numbers [1-3]");
+    }
+    catch (Exception ex) when(!(scoops <= 3 && scoops > 0))
     {
         Console.WriteLine("Invalid number of scoops | Only 1 to 3 scoops");
     }
-    Console.Write("Enter number of toppings [1-4]: ");
-    int topCount = Convert.ToInt32(Console.ReadLine());
-    List<Topping> topList = new List<Topping>();
-    if (topCount > 0 && topCount <= 4)
+    if(!(scoops <= 3 && scoops > 0))
     {
-        for (int i = 1; i < topCount + 1; i++)
+        return null;
+    }
+    try
+    {
+        Console.Write("Enter number of toppings [1-4]: ");
+        topCount = Convert.ToInt32(Console.ReadLine());
+
+        if (topCount > 0 && topCount <= 4)
         {
-            DisplayToppings(DictTopping);
-            Console.Write($"Choose the [{i}] topping : ");
-            int topIndex = Convert.ToInt32(Console.ReadLine());
-            if (dt.ContainsKey(topIndex))
+            for (int i = 1; i < topCount + 1; i++)
             {
-                topList.Add(dt[topIndex]);
+                DisplayToppings(DictTopping);
+                Console.Write($"Choose the [{i}] topping : ");
+                int topIndex = Convert.ToInt32(Console.ReadLine());
+                if (dt.ContainsKey(topIndex))
+                {
+                    topList.Add(dt[topIndex]);
+                }
+                else
+                {
+                    Console.WriteLine("No such topping number available");
+                    return null;
+                }
             }
         }
+        else if(topCount == 0)
+        {
+            Console.WriteLine("No toppings added");
+        }
+        else
+        {
+            Console.WriteLine("Invalid number of toppings | Only 0 to 4 toppings");
+        }
+    }
+    catch (FormatException ex)
+    {
+        Console.WriteLine("Invalid format only numbers [0-4]");
+    }
+    catch (Exception ex) when (!(topCount <= 4 && topCount >= 0))
+    {
+        Console.WriteLine("Invalid number of toppings | Only 0 to 4 toppings");
+    }
+    if(!(topCount <= 4 && topCount >= 0))
+    {
+        return null;
+    }
+    if((scoops <= 3 && scoops > 0) && (topCount <= 4 && topCount >= 0))
+    {
+        return (scoops, flavList, topList);
     }
     else
     {
-        Console.WriteLine("No toppings added");
+        Console.WriteLine("Your inputs are invalid");
+        return null;
     }
-
-    return (scoops, flavList, topList);
 }
 string? WaffleChoice(string wafInp)
 {
@@ -643,8 +704,16 @@ void Option4()
                 if (choiceInp == "cup")
                 {
                     Console.WriteLine("Chosen Cup");
-                    (int, List<Flavour>, List<Topping>) cat = IceCreamAdd(DictFlavour, DictTopping);
-                    newice = new Cup("Cup", cat.Item1, cat.Item2, cat.Item3);
+                    (int, List<Flavour>, List<Topping>)? cat = IceCreamAdd(DictFlavour, DictTopping);
+                    if (cat != null)
+                    {
+                        newice = new Cup("Cup", cat.Value.Item1, cat.Value.Item2, cat.Value.Item3);
+                    }
+                    else
+                    {
+                        newice = null;
+                        break;
+                    }
                 }
                 else if (choiceInp == "cone")
                 {
@@ -654,13 +723,29 @@ void Option4()
                     dipInp = dipInp.ToLower();
                     if (dipInp == "y")
                     {
-                        (int, List<Flavour>, List<Topping>) cat = IceCreamAdd(DictFlavour, DictTopping);
-                        newice = new Cone("Cone", cat.Item1, cat.Item2, cat.Item3, true);
+                        (int, List<Flavour>, List<Topping>)? cat = IceCreamAdd(DictFlavour, DictTopping);
+                        if (cat != null)
+                        {
+                            newice = new Cone("Cone", cat.Value.Item1, cat.Value.Item2, cat.Value.Item3, true);
+                        }
+                        else
+                        {
+                            newice = null;
+                            break;
+                        }
                     }
                     else if (dipInp == "n")
                     {
-                        (int, List<Flavour>, List<Topping>) cat = IceCreamAdd(DictFlavour, DictTopping);
-                        newice = new Cone("Cone", cat.Item1, cat.Item2, cat.Item3, false);
+                        (int, List<Flavour>, List<Topping>)? cat = IceCreamAdd(DictFlavour, DictTopping);
+                        if (cat != null)
+                        {
+                            newice = new Cone("Cone", cat.Value.Item1, cat.Value.Item2, cat.Value.Item3, false);
+                        }
+                        else
+                        {
+                            newice = null;
+                            break;
+                        }
                     }
                     else
                     {
@@ -676,12 +761,21 @@ void Option4()
                     string waf = WaffleChoice(wafInp);
                     if (waf != null)
                     {
-                        (int, List<Flavour>, List<Topping>) cat = IceCreamAdd(DictFlavour, DictTopping);
-                        newice = new Waffle("Waffle", cat.Item1, cat.Item2, cat.Item3, waf);
+                        (int, List<Flavour>, List<Topping>)? cat = IceCreamAdd(DictFlavour, DictTopping);
+                        if(cat != null)
+                        {
+                            newice = new Waffle("Waffle", cat.Value.Item1, cat.Value.Item2, cat.Value.Item3, waf);
+                        }
+                        else
+                        {
+                            newice = null;
+                            break;
+                        }
                     }
                     else
                     {
-                        Console.WriteLine($"Waffle flavour {wafInp} not available or invalid");
+                        Console.WriteLine($"Waffle flavour {wafInp} not available or invalid input");
+                        break;
                     }
                 }
                 else
@@ -689,23 +783,31 @@ void Option4()
                     Console.WriteLine("Invalid Input");
                     break;
                 }
-                Console.WriteLine($"Your order: {newice}");
-                newOrd.AddIceCream(newice);
-                Console.Write("Do you wish to continue ordering? (Y/N): ");
-                string check = Console.ReadLine();
-                check = check.ToLower();
-                if (check == "y")
+                if(newice!= null)
                 {
-                    continue;
-                }
-                else if (check == "n")
-                {
-                    Console.WriteLine("Order saved");
-                    break;
+                    Console.WriteLine($"Your order: {newice}");
+                    newOrd.AddIceCream(newice);
+                    Console.Write("Do you wish to continue ordering? (Y/N): ");
+                    string check = Console.ReadLine();
+                    check = check.ToLower();
+                    if (check == "y")
+                    {
+                        continue;
+                    }
+                    else if (check == "n")
+                    {
+                        Console.WriteLine("Order saved");
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input (Y/N) or (y/n) only\nOrder will be stopped and saved");
+                        break;
+                    }
                 }
                 else
                 {
-                    Console.WriteLine("Invalid Input (Y/N) or (y/n) only\\nOrder will be stopped and saved");
+                    Console.WriteLine("Your IceCream is invalid");
                     break;
                 }
             }
@@ -732,6 +834,10 @@ void Option4()
                     RegularQueueOrder.Enqueue(newOrd);
                 }
 
+            }
+            else
+            {
+                Console.WriteLine("Error occured when making IceCream\nPlease restart your ordering process");
             }
                 
         }
@@ -835,7 +941,8 @@ void Option4()
 
 
             Option1(DictCustomer);
-            Console.Write("Select the customer: ");
+            Console.Write
+("Select the customer: ");
             int idInp = Convert.ToInt32(Console.ReadLine());
             Customer
         ? result = Search(DictCustomer, idInp);
@@ -1144,7 +1251,8 @@ void Option4()
                 servingcustomer.CurrentOrder = null;
                 if (servingcustomer.Rewards.tier == "Silver")
                 {
-                    if (servingcustomer.Rewards.points >= 100)
+                    if (servingcustomer.Rewards.points 
+>= 100)
                     {
                         servingcustomer.Rewards.tier = "gold";
                         Console.WriteLine("cpmgrats you are now a gold member!");
@@ -1169,7 +1277,8 @@ void Option4()
             }
             break;
         }
-        catch(InvalidOperationException) {
+        catch
+(InvalidOperationException) {
             Console.WriteLine();
             Console.WriteLine("no current orders");
             break;
@@ -1181,22 +1290,23 @@ void Option4()
     // peck // 0Id,1MemberId,2TimeReceived,3TimeFulfilled,4Option,5Scoops,6Dipped,7WaffleFlavour,8Flavour1,9Flavour2,10Flavour3,11Topping1,12Topping2,13Topping3,14Topping4
     void WriteIceCream(Order order, int id)
     {
-        foreach (var v in order.IceCreamlist)
+        using (StreamWriter sw = new StreamWriter("orders.csv", true))
         {
-            using (StreamWriter sw = new StreamWriter("orders.csv", true))
+            foreach (var v in order.IceCreamlist)
             {
+            
                 string flavstr = "";
                 if (v.Flavours.Count > 0)
                 {
-                    if (v.Toppings.Count == 1)
+                    if (v.Flavours.Count == 1)
                     {
                         flavstr = string.Join(",", v.Flavours[0].Type, "", "");
                     }
-                    else if (v.Toppings.Count == 2)
+                    else if (v.Flavours.Count == 2)
                     {
                         flavstr = string.Join(",", v.Flavours[0].Type, v.Flavours[1].Type, "");
                     }
-                    else if (v.Toppings.Count == 3)
+                    else if (v.Flavours.Count == 3)
                     {
                         flavstr = string.Join(",", v.Flavours[0].Type, v.Flavours[1].Type, v.Flavours[2].Type);
                     }
@@ -1246,6 +1356,9 @@ void Option4()
     {
         void Option8()
         {
+            void 
+Option8()
+        {
             Console.Write("Enter the year: ");
             int inputYear = int.Parse(Console.ReadLine());
 
@@ -1285,6 +1398,7 @@ void Option4()
             {
                 Console.WriteLine($"Total for {CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i + 1)}: {monthlyTotals[i]}");
             }
+        }
         }
 
     }
