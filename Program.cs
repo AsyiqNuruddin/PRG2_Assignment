@@ -1262,7 +1262,7 @@ void Option6()
 void Option7()
     {
     
-    do{
+    while(true){
         try
         {
             Order servingorder = null;
@@ -1439,30 +1439,8 @@ void Option7()
                 }
 
             }
-            if (GoldQueueOrder.Count != 0 || GoldQueueOrder.Count != 0)
-            {
-                
-                    Console.Write("continue to next order?(y or n): ");
-                    string prompt = Console.ReadLine();
-                    if (prompt == "y")
-                    {
-                        continue;
-
-                    }
-                    else if (prompt == "n")
-                    {
-                        break;
-
-                    }
-                    else
-                    {
-                        Console.WriteLine("invalid input");
-                    break;
-                    
-
-                    }
-                
-            }
+            break;
+            
 
 
 
@@ -1476,7 +1454,7 @@ void Option7()
 
         }
     }
-    while (true);
+    
 
     }
     // peck // 0Id,1MemberId,2TimeReceived,3TimeFulfilled,4Option,5Scoops,6Dipped,7WaffleFlavour,8Flavour1,9Flavour2,10Flavour3,11Topping1,12Topping2,13Topping3,14Topping4
