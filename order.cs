@@ -235,7 +235,7 @@ namespace PRG2_Assignment_Order
                                                     {
                                                         if (flav.Type == addflact.Type)
                                                         {
-                                                            flav.Quantity += 1;
+                                                            addflact.Quantity += 1;;
                                                             add = true;
 
 
@@ -320,7 +320,7 @@ namespace PRG2_Assignment_Order
                                                 {
                                                     if (flav.Type == addflact.Type)
                                                     {
-                                                        flav.Quantity += 1;
+                                                        addflact.Quantity += 1;
                                                         add = true;
 
 
@@ -555,7 +555,7 @@ namespace PRG2_Assignment_Order
                                                     {
                                                         if (flav.Type == addflact.Type)
                                                         {
-                                                            flav.Quantity += 1;
+                                                            addflact.Quantity += 1;
                                                             add = true;
 
 
@@ -642,7 +642,7 @@ namespace PRG2_Assignment_Order
                                                 {
                                                     if (flav.Type == addflact.Type)
                                                     {
-                                                        flav.Quantity += 1;
+                                                        addflact.Quantity += 1;
                                                         add = true;
 
 
@@ -864,7 +864,7 @@ namespace PRG2_Assignment_Order
                                                 {
                                                     if (flav.Type == addflact.Type)
                                                     {
-                                                        flav.Quantity += 1;
+                                                        addflact.Quantity += 1;
                                                         add = true;
 
 
@@ -950,7 +950,7 @@ namespace PRG2_Assignment_Order
                                             {
                                                 if (flav.Type == addflact.Type)
                                                 {
-                                                    flav.Quantity += 1;
+                                                    addflact.Quantity += 1;
                                                     add = true;
 
 
