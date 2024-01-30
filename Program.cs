@@ -19,6 +19,7 @@ using System.Linq;
 using System.ComponentModel.Design;
 using System.Reflection.Metadata.Ecma335;
 using System.Linq.Expressions;
+using System.Reflection.Metadata;
 
 
 //==========================================================
@@ -1077,23 +1078,31 @@ void Option6()
 
 
                             }
-                            Console.Write("Enter a ice cream to modify: ");
-                            try
+                            
+                            while (true)
                             {
-                                int icecreanindex = Convert.ToInt32(Console.ReadLine());
-                                result.CurrentOrder.Modifyicecream(icecreanindex);
-                                Console.WriteLine($"Modified ice cream: \r\n{result.CurrentOrder.IceCreamlist[icecreanindex - 1]}");
+                                try
+                                {
+                                    Console.Write("Enter a ice cream to modify: ");
+                                    int icecreanindex = Convert.ToInt32(Console.ReadLine());
+                                    result.CurrentOrder.Modifyicecream(icecreanindex);
+                                    Console.WriteLine($"Modified ice cream: \r\n{result.CurrentOrder.IceCreamlist[icecreanindex - 1]}");
+                                    break;
 
-                            }
-                            catch (FormatException)
-                            {
-                                Console.WriteLine("invalid input.");
+                                }
+                                catch (FormatException)
+                                {
+                                    Console.WriteLine("invalid input.");
 
-                            }
-                            catch (IndexOutOfRangeException)
-                            {
-                                Console.WriteLine("invalid input.");
+                                }
+                                catch (IndexOutOfRangeException)
+                                {
+                                    Console.WriteLine("invalid input.");
 
+                                }
+                                catch {
+                                    Console.WriteLine("invalid input.");
+                                }
                             }
 
 
@@ -1686,14 +1695,15 @@ void Makeicecream(Customer result)
         
     while (true)
     {
+        IceCream newIceCream = null;
+        List<Flavour> flavlist = new List<Flavour>();
+        List<Topping> toplist = new List<Topping>();
         Console.Write("Enter their ice cream order type (Cup, Cone or Waffle): ");
         string type = Console.ReadLine();
 
         if (type == "cup")
         {
-            IceCream newIceCream = null;
-            List<Flavour> flavlist = new List<Flavour>();
-            List<Topping> toplist = new List<Topping>();
+            
             
             while (true)
             {
@@ -1842,9 +1852,7 @@ void Makeicecream(Customer result)
 
         else if (type == "waffle")
         {
-            IceCream newIceCream = null;
-            List<Flavour> flavlist = new List<Flavour>();
-            List<Topping> toplist = new List<Topping>();
+            
             Dictionary<int, string> wafflelist = new Dictionary<int, string>();
             initwaffle(wafflelist);
             while (true)
@@ -2004,9 +2012,7 @@ void Makeicecream(Customer result)
         }
         else if (type == "cone")
         {
-            IceCream newIceCream = null;
-            List<Flavour> flavlist = new List<Flavour>();
-            List<Topping> toplist = new List<Topping>();
+            
             
             while (true)
             {

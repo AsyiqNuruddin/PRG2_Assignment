@@ -295,8 +295,9 @@ namespace PRG2_Assignment_Order
                             else if (option == "3")
                             {
                                 flavlist.Clear();
+                                DisplayFlavours(DictFlavour);
 
-                                int scps = result.Flavours.Count;
+                                int scps = result.Scoops;
                                 while (true)
                                 {
                                     for (int i = 1; i <= scps; i++)
@@ -616,8 +617,9 @@ namespace PRG2_Assignment_Order
                             else if (option == "3")
                             {
                                 flavlist.Clear();
+                                DisplayFlavours(DictFlavour);
 
-                                int scps = result.Flavours.Count;
+                                int scps = result.Scoops;
                                 while (true)
                                 {
                                     for (int i = 1; i <= scps; i++)
@@ -924,7 +926,8 @@ namespace PRG2_Assignment_Order
                         {
                             flavlist.Clear();
 
-                            int scps = result.Flavours.Count;
+                            int scps = result.Scoops;
+                            DisplayFlavours(DictFlavour);
                             while (true)
                             {
                                 for (int i = 1; i <= scps; i++)
