@@ -1734,7 +1734,7 @@ void Makeicecream(Customer result)
                                 {
                                     if (flav.Type == addflact.Type)
                                     {
-                                        addflact.Quantity += 1;
+                                        flav.Quantity += 1;
                                         add = true;
 
 
@@ -1884,7 +1884,7 @@ void Makeicecream(Customer result)
                                 {
                                     if (flav.Type == addflact.Type)
                                     {
-                                        addflact.Quantity += 1;
+                                        flav.Quantity += 1;
                                         add = true;
 
 
@@ -2043,7 +2043,7 @@ void Makeicecream(Customer result)
                                 {
                                     if (flav.Type == addflact.Type)
                                     {
-                                        addflact.Quantity += 1;
+                                        flav.Quantity += 1;
                                         add = true;
 
 
