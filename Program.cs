@@ -1072,6 +1072,7 @@ void Option6()
                             {
                                 Console.WriteLine($"[{count}]");
                                 Console.WriteLine(or);
+                                Console.WriteLine();
                                 count++;
 
 
@@ -1106,7 +1107,7 @@ void Option6()
                             while (true)
                             {
                                 Makeicecream(result);
-                                Console.Write("do you want to continue order(y 0r n): ");
+                                Console.Write("do you want to continue order(Y/n): ");
                                 string input = Console.ReadLine();
                                 if (input == "n")
                                 {
@@ -1133,12 +1134,14 @@ void Option6()
 
                             }
                             int count1 = 1;
+                            Console.WriteLine(  );
 
                             Console.WriteLine("new current order:");
                             foreach (IceCream or in result.CurrentOrder.IceCreamlist)
                             {
                                 Console.WriteLine($"[{count1}]");
                                 Console.WriteLine(or);
+                                Console.WriteLine();
                                 count++;
 
 
@@ -1735,14 +1738,14 @@ void Makeicecream(Customer result)
                                 if (!add)
                                 {
                                     flavlist.Add(addflact);
-                                    break;
+                                    
 
 
 
                                 }
                                 else
                                 {
-                                    break;
+                                    
 
                                 }
 
@@ -1830,6 +1833,8 @@ void Makeicecream(Customer result)
 
 
             }
+            Console.WriteLine("your order: ");
+            Console.WriteLine(newIceCream);
             break;
 
         }
@@ -1885,14 +1890,14 @@ void Makeicecream(Customer result)
                                 if (!add)
                                 {
                                     flavlist.Add(addflact);
-                                    break;
+                                    
 
 
 
                                 }
                                 else
                                 {
-                                    break;
+                                    
 
                                 }
 
@@ -1990,6 +1995,8 @@ void Makeicecream(Customer result)
                 
 
             }
+            Console.WriteLine("your order: ");
+            Console.WriteLine(newIceCream);
             break;
             
             
@@ -2044,14 +2051,14 @@ void Makeicecream(Customer result)
                                 if (!add)
                                 {
                                     flavlist.Add(addflact);
-                                    break;
+                                    
 
 
 
                                 }
                                 else
                                 {
-                                    break;
+                                    
 
                                 }
 
@@ -2141,8 +2148,7 @@ void Makeicecream(Customer result)
                         }
 
                     }
-                    Console.WriteLine("your order: ");
-                    Console.WriteLine(newIceCream);
+                    
                     break;
                 }
                 else {
@@ -2154,6 +2160,8 @@ void Makeicecream(Customer result)
                            
                 
             }
+            Console.WriteLine("your order: ");
+            Console.WriteLine(newIceCream);
             break;
             
 

@@ -143,7 +143,7 @@ namespace PRG2_Assignment_Order
                 {
                     Console.WriteLine("[1] change type");
                     Console.WriteLine("[2] change number of scoop");
-                    Console.WriteLine("[3] cahnge flavour of scoop");
+                    Console.WriteLine("[3] change flavour of scoop");
                     Console.WriteLine("[4] change toppings");
                 }
                 while (true)
@@ -249,13 +249,13 @@ namespace PRG2_Assignment_Order
                                                     if (!add)
                                                     {
                                                         flavlist.Add(addflact);
-                                                        break;
+                                                        
 
 
 
                                                     }
                                                     else {
-                                                        break;
+                                                        
                                                     
                                                     }
 
@@ -278,6 +278,7 @@ namespace PRG2_Assignment_Order
 
 
                                         }
+                                        result.Scoops = newscp;
                                         result.Flavours = flavlist;
                                         break;
 
@@ -332,14 +333,14 @@ namespace PRG2_Assignment_Order
                                                 if (!add)
                                                 {
                                                     flavlist.Add(addflact);
-                                                    break;
+                                                    
 
 
 
                                                 }
                                                 else
                                                 {
-                                                    break;
+                                                    
 
                                                 }
 
@@ -567,14 +568,14 @@ namespace PRG2_Assignment_Order
                                                     if (!add)
                                                     {
                                                         flavlist.Add(addflact);
-                                                        break;
+                                                        
 
 
 
                                                     }
                                                     else
                                                     {
-                                                        break;
+                                                        
 
                                                     }
 
@@ -597,6 +598,7 @@ namespace PRG2_Assignment_Order
 
 
                                         }
+                                        result.Scoops = newscp;
                                         result.Flavours = flavlist;
                                         break;
 
@@ -652,14 +654,14 @@ namespace PRG2_Assignment_Order
                                                 if (!add)
                                                 {
                                                     flavlist.Add(addflact);
-                                                    break;
+                                                    
 
 
 
                                                 }
                                                 else
                                                 {
-                                                    break;
+                                                    
 
                                                 }
 
@@ -874,14 +876,14 @@ namespace PRG2_Assignment_Order
                                                 if (!add)
                                                 {
                                                     flavlist.Add(addflact);
-                                                    break;
+                                                    
 
 
 
                                                 }
                                                 else
                                                 {
-                                                    break;
+                                                    
 
                                                 }
 
@@ -904,6 +906,7 @@ namespace PRG2_Assignment_Order
 
 
                                     }
+                                    result.Scoops = newscp;
                                     result.Flavours = flavlist;
                                     break;
 
