@@ -1110,6 +1110,7 @@ void Option6()
                                 string input = Console.ReadLine();
                                 if (input == "n")
                                 {
+                                    Console.WriteLine("order finished");
                                     break;
 
                                 }
@@ -1124,6 +1125,7 @@ void Option6()
                                 else
                                 {
                                     Console.WriteLine("invalid input");
+                                    Console.WriteLine("order finished");
                                     break;
 
                                 }
@@ -1197,7 +1199,7 @@ void Option6()
                                         }
                                         catch (IndexOutOfRangeException)
                                         {
-                                            Console.WriteLine("invalid input.");
+                                            Console.WriteLine("invalid ice cream.");
 
                                         }
                                     }
