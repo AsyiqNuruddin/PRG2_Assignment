@@ -230,25 +230,33 @@ namespace PRG2_Assignment_Order
                                                 }
                                                 else
                                                 {
+                                                    bool add = false;
                                                     foreach (var flav in flavlist)
                                                     {
                                                         if (flav.Type == addflact.Type)
                                                         {
                                                             flav.Quantity += 1;
-
-
-                                                        }
-                                                        else
-                                                        {
-                                                            flavlist.Add(addflact);
-                                                            break;
+                                                            add = true;
 
 
 
                                                         }
+                                                        
 
 
 
+                                                    }
+                                                    if (!add)
+                                                    {
+                                                        flavlist.Add(addflact);
+                                                        break;
+
+
+
+                                                    }
+                                                    else {
+                                                        break;
+                                                    
                                                     }
 
 
@@ -305,28 +313,35 @@ namespace PRG2_Assignment_Order
                                             }
                                             else
                                             {
+                                                bool add = false;
                                                 foreach (var flav in flavlist)
                                                 {
                                                     if (flav.Type == addflact.Type)
                                                     {
                                                         flav.Quantity += 1;
-
-
-                                                    }
-                                                    else
-                                                    {
-                                                        flavlist.Add(addflact);
-                                                        break;
+                                                        add = true;
 
 
 
                                                     }
+
 
 
 
                                                 }
+                                                if (!add)
+                                                {
+                                                    flavlist.Add(addflact);
+                                                    break;
 
 
+
+                                                }
+                                                else
+                                                {
+                                                    break;
+
+                                                }
 
 
 
@@ -533,23 +548,33 @@ namespace PRG2_Assignment_Order
                                                 }
                                                 else
                                                 {
+                                                    bool add = false;
                                                     foreach (var flav in flavlist)
                                                     {
                                                         if (flav.Type == addflact.Type)
                                                         {
                                                             flav.Quantity += 1;
-
-
-                                                        }
-                                                        else {
-                                                            flavlist.Add(addflact);
-                                                            break;
+                                                            add = true;
 
 
 
                                                         }
-                                                        
 
+
+
+
+                                                    }
+                                                    if (!add)
+                                                    {
+                                                        flavlist.Add(addflact);
+                                                        break;
+
+
+
+                                                    }
+                                                    else
+                                                    {
+                                                        break;
 
                                                     }
 
@@ -608,24 +633,33 @@ namespace PRG2_Assignment_Order
                                             }
                                             else
                                             {
+                                                bool add = false;
                                                 foreach (var flav in flavlist)
                                                 {
                                                     if (flav.Type == addflact.Type)
                                                     {
                                                         flav.Quantity += 1;
-
-
-                                                    }
-                                                    else
-                                                    {
-                                                        flavlist.Add(addflact);
-                                                        break;
+                                                        add = true;
 
 
 
                                                     }
 
 
+
+
+                                                }
+                                                if (!add)
+                                                {
+                                                    flavlist.Add(addflact);
+                                                    break;
+
+
+
+                                                }
+                                                else
+                                                {
+                                                    break;
 
                                                 }
 
@@ -821,24 +855,33 @@ namespace PRG2_Assignment_Order
                                             }
                                             else
                                             {
+                                                bool add = false;
                                                 foreach (var flav in flavlist)
                                                 {
                                                     if (flav.Type == addflact.Type)
                                                     {
                                                         flav.Quantity += 1;
-
-
-                                                    }
-                                                    else
-                                                    {
-                                                        flavlist.Add(addflact);
-                                                        break;
+                                                        add = true;
 
 
 
                                                     }
 
 
+
+
+                                                }
+                                                if (!add)
+                                                {
+                                                    flavlist.Add(addflact);
+                                                    break;
+
+
+
+                                                }
+                                                else
+                                                {
+                                                    break;
 
                                                 }
 
@@ -896,28 +939,33 @@ namespace PRG2_Assignment_Order
                                         }
                                         else
                                         {
+                                            bool add = false;
                                             foreach (var flav in flavlist)
                                             {
-                                                
-                                                    if (flav.Type == addflact.Type)
-                                                    {
-                                                        flav.Quantity += 1;
-
-
-                                                    }
-                                                    else
-                                                    {
-                                                        flavlist.Add(addflact);
-                                                        break;
+                                                if (flav.Type == addflact.Type)
+                                                {
+                                                    flav.Quantity += 1;
+                                                    add = true;
 
 
 
-                                                    }
+                                                }
 
 
 
-                                                
 
+                                            }
+                                            if (!add)
+                                            {
+                                                flavlist.Add(addflact);
+                                                break;
+
+
+
+                                            }
+                                            else
+                                            {
+                                                break;
 
                                             }
 
