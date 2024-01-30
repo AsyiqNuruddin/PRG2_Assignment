@@ -1205,8 +1205,9 @@ void Option6()
                                     }
                                     else {
                                         Console.WriteLine();
-                                        Console.WriteLine("cannot");
+                                        Console.WriteLine("cannot delete ice cream");
                                         Console.WriteLine("There must be at least 1 ice cream in order.");
+                                        break;
 
                                     }
                                 }
@@ -1392,8 +1393,10 @@ void Option7()
 
                 }
                 total -= highest;
+                
+                Console.WriteLine("most expensive ice cream is free!!!");
+                Console.WriteLine($"price of most expensive ice cream {highest}");
                 Console.WriteLine($"new total :{total}");
-                Console.WriteLine("most rxpensive ice cream is free!!!");
                 Console.WriteLine();
 
 
