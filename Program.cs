@@ -1410,7 +1410,7 @@ void Option7()
                 
                 Console.WriteLine("most expensive ice cream is free!!!");
                 Console.WriteLine($"price of most expensive ice cream {highest}");
-                Console.WriteLine($"new total :{total}");
+                Console.WriteLine($"new total : ${total:0.00}");
                 Console.WriteLine();
 
 
@@ -1443,7 +1443,7 @@ void Option7()
                 {
                     servingcustomer.Rewards.tier = "Silver";
 
-                    Console.WriteLine("congrats u are now a silver teir member");
+                    Console.WriteLine("congrats you are now a silver teir member");
 
                 }
 
@@ -1490,11 +1490,11 @@ void Option7()
                 WriteIceCream(servingorder, servingcustomer.MemberId);
                 servingcustomer.OrderHistory.Add(servingcustomer.CurrentOrder);
                 servingcustomer.CurrentOrder = null;
-                if (servingcustomer.Rewards.tier == "Silver")
+                if (servingcustomer.Rewards.tier.ToLower() == "silver")
                 {
                     if (servingcustomer.Rewards.points >= 100)
                     {
-                        servingcustomer.Rewards.tier = "gold";
+                        servingcustomer.Rewards.tier = "Gold";
                         Console.WriteLine("cpmgrats you are now a gold member!");
 
 

@@ -207,7 +207,7 @@ namespace PRG2_Assignment_Order
                                 while (true)
                                 {
 
-                                    Console.Write("Enter number of scoops: ");
+                                    Console.Write("Enter number of scoops[1-3]: ");
 
 
                                     int newscp = Convert.ToInt16(Console.ReadLine());
@@ -527,7 +527,7 @@ namespace PRG2_Assignment_Order
                                 while (true)
                                 {
 
-                                    Console.Write("Enter number of scoops[1-4]: ");
+                                    Console.Write("Enter number of scoops[1-3]: ");
 
 
                                     int newscp = Convert.ToInt16(Console.ReadLine());
