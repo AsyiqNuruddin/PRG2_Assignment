@@ -1696,7 +1696,7 @@ void Makeicecream(Customer result)
 
 
                 int newscp = Convert.ToInt16(Console.ReadLine());
-                if (newscp > 0 && newscp < 3)
+                if (newscp > 0 && newscp <= 3)
                 {
                     DisplayFlavours(DictFlavour);
                     for (int scoopIndex = 1; scoopIndex <= newscp; scoopIndex++)
@@ -1721,6 +1721,15 @@ void Makeicecream(Customer result)
 
 
                                     }
+                                    else
+                                    {
+                                        flavlist.Add(addflact);
+                                        break;
+
+
+
+                                    }
+
 
 
                                 }
@@ -1828,7 +1837,7 @@ void Makeicecream(Customer result)
 
 
                 int newscp = Convert.ToInt16(Console.ReadLine());
-                if (newscp > 0 && newscp < 3)
+                if (newscp > 0 && newscp <= 3)
                 {
                     DisplayFlavours(DictFlavour);
                     for (int scoopIndex = 1; scoopIndex <= newscp; scoopIndex++)
@@ -1853,6 +1862,15 @@ void Makeicecream(Customer result)
 
 
                                     }
+                                    else
+                                    {
+                                        flavlist.Add(addflact);
+                                        break;
+
+
+
+                                    }
+
 
 
                                 }
@@ -1969,7 +1987,7 @@ void Makeicecream(Customer result)
 
 
                 int newscp = Convert.ToInt16(Console.ReadLine());
-                if (newscp > 0 && newscp < 3)
+                if (newscp > 0 && newscp <= 3)
                 {
                     DisplayFlavours(DictFlavour);
                     for (int scoopIndex = 1; scoopIndex <= newscp; scoopIndex++)
@@ -1994,6 +2012,15 @@ void Makeicecream(Customer result)
 
 
                                     }
+                                    else
+                                    {
+                                        flavlist.Add(addflact);
+                                        break;
+
+
+
+                                    }
+
 
 
                                 }

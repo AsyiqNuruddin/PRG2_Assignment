@@ -238,6 +238,15 @@ namespace PRG2_Assignment_Order
 
 
                                                         }
+                                                        else
+                                                        {
+                                                            flavlist.Add(addflact);
+                                                            break;
+
+
+
+                                                        }
+
 
 
                                                     }
@@ -304,6 +313,15 @@ namespace PRG2_Assignment_Order
 
 
                                                     }
+                                                    else
+                                                    {
+                                                        flavlist.Add(addflact);
+                                                        break;
+
+
+
+                                                    }
+
 
 
                                                 }
@@ -523,6 +541,14 @@ namespace PRG2_Assignment_Order
 
 
                                                         }
+                                                        else {
+                                                            flavlist.Add(addflact);
+                                                            break;
+
+
+
+                                                        }
+                                                        
 
 
                                                     }
@@ -590,6 +616,15 @@ namespace PRG2_Assignment_Order
 
 
                                                     }
+                                                    else
+                                                    {
+                                                        flavlist.Add(addflact);
+                                                        break;
+
+
+
+                                                    }
+
 
 
                                                 }
@@ -794,6 +829,15 @@ namespace PRG2_Assignment_Order
 
 
                                                     }
+                                                    else
+                                                    {
+                                                        flavlist.Add(addflact);
+                                                        break;
+
+
+
+                                                    }
+
 
 
                                                 }
@@ -854,12 +898,25 @@ namespace PRG2_Assignment_Order
                                         {
                                             foreach (var flav in flavlist)
                                             {
-                                                if (flav.Type == addflact.Type)
-                                                {
-                                                    flav.Quantity += 1;
+                                                
+                                                    if (flav.Type == addflact.Type)
+                                                    {
+                                                        flav.Quantity += 1;
 
 
-                                                }
+                                                    }
+                                                    else
+                                                    {
+                                                        flavlist.Add(addflact);
+                                                        break;
+
+
+
+                                                    }
+
+
+
+                                                
 
 
                                             }
