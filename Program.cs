@@ -1320,10 +1320,12 @@ void Option6()
         catch (FormatException)
         {
             Console.WriteLine("Invalid input. Please enter a valid numeric value for customer ID.");
+            break;
         }
         catch (Exception ex)
         {
             Console.WriteLine($"An error occurred: {ex.Message}");
+            break;
         }
     }
 
