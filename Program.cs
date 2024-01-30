@@ -970,6 +970,7 @@ void Option5()
                 if (result.CurrentOrder.IceCreamlist != null)
                 {
                     currentorder = result.CurrentOrder.IceCreamlist;
+                    currentcount = currentorder.Count;
 
                 }
                 else { 
