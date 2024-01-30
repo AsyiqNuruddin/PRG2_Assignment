@@ -1372,7 +1372,7 @@ void Option7()
             Console.WriteLine($"current cost: ${total:0.00}");
             if (servingcustomer.IsBirthday())
             {
-                Console.WriteLine("happy birthday");
+                Console.WriteLine($"happy birthday {servingcustomer.Name}!!!");
                 double highest = 0;
                 foreach (IceCream ice in servingorder.IceCreamlist)
                 {
@@ -1390,6 +1390,8 @@ void Option7()
                 }
                 total -= highest;
                 Console.WriteLine($"new total :{total}");
+                Console.WriteLine("most rxpensive ice cream is free!!!");
+                Console.WriteLine();
 
 
 
