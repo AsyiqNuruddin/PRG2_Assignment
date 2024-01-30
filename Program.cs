@@ -148,6 +148,7 @@ void InitCustomer(string txtfile)
 // Read Flavours and add it to a dict
 void InitFlavours(string txtfile, Dictionary<int, Flavour> df)
 {
+    
     using (StreamReader sr = new StreamReader(txtfile))
     {
         List<string> headers = new List<string>();
@@ -1698,6 +1699,8 @@ void Makeicecream(Customer result)
         IceCream newIceCream = null;
         List<Flavour> flavlist = new List<Flavour>();
         List<Topping> toplist = new List<Topping>();
+        DictFlavour.Clear();
+        InitFlavours("flavours.csv", DictFlavour);
         Console.Write("Enter their ice cream order type (Cup, Cone or Waffle): ");
         string type = Console.ReadLine();
 
