@@ -537,7 +537,7 @@ namespace PRG2_Assignment_Order
                                             }
                                             catch (Exception ex)
                                             {
-                                                Console.WriteLine("invalid input");
+                                                Console.WriteLine("Invalid flavour number. Please try again.");
                                                 scoopIndex--;
 
                                             }
@@ -605,7 +605,7 @@ namespace PRG2_Assignment_Order
                                         }
                                         catch (Exception)
                                         {
-                                            Console.WriteLine("invalid error");
+                                            Console.WriteLine("Invalid flavour number. Please try again.");
                                             i--;
                                             continue;
 
@@ -646,7 +646,7 @@ namespace PRG2_Assignment_Order
                                                 }
                                                 catch (Exception)
                                                 {
-                                                    Console.WriteLine("invalid input");
+                                                    Console.WriteLine("Invalid topping number. Please try again.");
                                                     topIndex--;
                                                     continue;
 
@@ -808,7 +808,7 @@ namespace PRG2_Assignment_Order
                                         }
                                         catch (Exception ex)
                                         {
-                                            Console.WriteLine("invalid input");
+                                            Console.WriteLine("Invalid flavour number. Please try again.");
                                             scoopIndex--;
 
                                         }
@@ -875,7 +875,7 @@ namespace PRG2_Assignment_Order
                                     }
                                     catch (Exception)
                                     {
-                                        Console.WriteLine("invalid error");
+                                        Console.WriteLine("Invalid flavour number. Please try again.");
                                         i--;
                                         continue;
 
@@ -916,7 +916,7 @@ namespace PRG2_Assignment_Order
                                             }
                                             catch (Exception)
                                             {
-                                                Console.WriteLine("invalid input");
+                                                Console.WriteLine("Invalid topping number. Please try again.");
                                                 topIndex--;
                                                 continue;
 
