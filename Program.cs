@@ -1731,7 +1731,7 @@ void Makeicecream(Customer result)
                             }
                         }
                         catch {
-                            Console.WriteLine("invalid input");
+                            Console.WriteLine("Invalid flavour number. Please try again.");
                             scoopIndex--;
 
 
@@ -1783,7 +1783,7 @@ void Makeicecream(Customer result)
                         }
                         else
                         {
-                            Console.WriteLine("invalid input");
+                            Console.WriteLine("invalid input.");
 
                         }
                     }
@@ -1863,7 +1863,7 @@ void Makeicecream(Customer result)
                             }
                         }
                         catch {
-                            Console.WriteLine("invalid input");
+                            Console.WriteLine("Invalid flavour number. Please try again.");
                             scoopIndex--;
 
                         }
@@ -1971,35 +1971,45 @@ void Makeicecream(Customer result)
                     DisplayFlavours(DictFlavour);
                     for (int scoopIndex = 1; scoopIndex <= newscp; scoopIndex++)
                     {
-                        Console.Write($"Enter flavour number {scoopIndex} : ");
-                        int newflav = Convert.ToInt32(Console.ReadLine());
-                        Flavour addflact = DictFlavour[newflav];
-                        if (flavlist.Count == 0)
+                        try
                         {
-
-                            flavlist.Add(addflact);
-                        }
-                        else
-                        {
-                            foreach (var flav in flavlist)
+                            Console.Write($"Enter flavour number {scoopIndex} : ");
+                            int newflav = Convert.ToInt32(Console.ReadLine());
+                            Flavour addflact = DictFlavour[newflav];
+                            if (flavlist.Count == 0)
                             {
-                                if (flav.Type == addflact.Type)
+
+                                flavlist.Add(addflact);
+                            }
+                            else
+                            {
+                                foreach (var flav in flavlist)
                                 {
-                                    flav.Quantity += 1;
+                                    if (flav.Type == addflact.Type)
+                                    {
+                                        flav.Quantity += 1;
+
+
+                                    }
 
 
                                 }
 
 
+
+
+
+
+
                             }
-
-
-
-
-
-
+                        }
+                        catch
+                        {
+                            Console.WriteLine("Invalid flavour number. Please try again.");
+                            scoopIndex--;
 
                         }
+
 
 
 
