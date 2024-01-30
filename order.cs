@@ -999,6 +999,7 @@ namespace PRG2_Assignment_Order
 
                         }
                         else { Console.WriteLine("invalid input"); }
+                        Console.WriteLine(result);
                     }
                     break;
 

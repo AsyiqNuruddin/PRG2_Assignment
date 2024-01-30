@@ -1374,6 +1374,7 @@ void Option7()
             }
             Console.WriteLine($"membership teir: {servingcustomer.Rewards.tier}        points: {servingcustomer.Rewards.points}");
             Console.WriteLine($"current cost: ${total:0.00}");
+            Console.WriteLine();
             if (servingcustomer.IsBirthday())
             {
                 Console.WriteLine($"happy birthday {servingcustomer.Name}!!!");
@@ -1504,6 +1505,8 @@ void Option7()
                 }
 
             }
+            Console.WriteLine();
+            Console.WriteLine("order checked out");
             break;
             
 
