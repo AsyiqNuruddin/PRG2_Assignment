@@ -434,9 +434,10 @@ namespace PRG2_Assignment_Order
                             else if (option == "5")
                             {
                                 Console.Write("Do you want your cone dipped?(Y/N):");
-                                string dipped = Console.ReadLine();
+                                
                                 while (true)
                                 {
+                                    string dipped = Console.ReadLine();
                                     if (dipped.ToLower() == "y")
                                     {
                                         modifiedice = new Cone("cone", result.Scoops, result.Flavours, result.Toppings, true);
@@ -486,10 +487,11 @@ namespace PRG2_Assignment_Order
                                     string newtype = Console.ReadLine();
                                     if (newtype == "cone")
                                     {
+                                        Console.Write("Do you want your cone dipped?(Y/N):");
 
                                         while (true)
                                         {
-                                            Console.Write("Do you want your cone dipped?(Y/N):");
+
                                             string dipped = Console.ReadLine();
                                             if (dipped.ToLower() == "y")
                                             {
@@ -766,6 +768,30 @@ namespace PRG2_Assignment_Order
                                 break;
 
                             }
+                            else if (option == "5") {
+                                displaywaffle(wafflelist);
+                                while (true)
+                                {
+                                    try
+                                    {
+                                        
+                                        Console.Write("Enter waffle flavour: ");
+                                        int wafflenum = Convert.ToInt32(Console.ReadLine());
+                                        string waffeflav = wafflelist[wafflenum];
+                                        modifiedice = new Waffle("waffle", result.Scoops, result.Flavours, result.Toppings, waffeflav);
+                                        break;
+                                    }
+                                    catch
+                                    {
+                                        Console.WriteLine("invalid input.");
+
+                                    }
+                                }
+                                break;
+
+
+
+                            }
                             else
                             {
                                 Console.WriteLine("invalid input");
@@ -789,6 +815,7 @@ namespace PRG2_Assignment_Order
                                 string newtype = Console.ReadLine();
                                 if (newtype == "cone")
                                 {
+                                    Console.Write("Do you want your cone dipped?(Y/N):");
 
                                     while (true)
                                     {
@@ -833,6 +860,7 @@ namespace PRG2_Assignment_Order
                                             int wafflenum = Convert.ToInt32(Console.ReadLine());
                                             string waffeflav = wafflelist[wafflenum];
                                             modifiedice = new Waffle("waffle", result.Scoops, result.Flavours, result.Toppings, waffeflav);
+                                            IceCreamlist[id - 1] = modifiedice;
                                             break;
                                         }
                                         catch
