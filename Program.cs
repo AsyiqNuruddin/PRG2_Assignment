@@ -1420,6 +1420,7 @@ void Option7()
 
 
             }
+            
 
 
             if (servingcustomer.Rewards.tier == "Ordinary")
@@ -1429,7 +1430,10 @@ void Option7()
                 if (servingcustomer.Rewards.punchCard == 11)
                 {
                     Console.WriteLine("you have 11 punches on ur punch card.your first icecreamm is free");
-                    servingcustomer.Rewards.punchCard = 0;
+                    servingcustomer.Rewards.punchCard = -1;
+                    
+                    
+                    
                     total -= firstice.CalculatePrice();
 
 
@@ -1461,10 +1465,10 @@ void Option7()
                 if (servingcustomer.Rewards.punchCard == 10)
                 {
                     Console.WriteLine("you have 11 punches on ur punch card.your first icecreamm is free");
-                    servingcustomer.Rewards.punchCard = 0;
+                    servingcustomer.Rewards.punchCard = -1;
                     total -= firstice.CalculatePrice();
                     ordercount--;
-                    Console.WriteLine($"toatal: ${total:0.00}");
+                    Console.WriteLine($"current toatal: ${total:0.00}");
 
 
 
@@ -1473,21 +1477,66 @@ void Option7()
                 if (total > 0)
                 {
                     Console.WriteLine($"points: {servingcustomer.Rewards.points}");
-                    Console.Write("would u like to redeem some points(y/n): ");
-                    string redeem = Console.ReadLine();
-                    if (redeem == "y")
+                    while (true)
                     {
-                        Console.Write("how much point would u like to redeem(1 point = 0.02): ");
-                        int point = Convert.ToInt16(Console.ReadLine());
-                        double discounted = point * 0.02;
-                        total -= discounted;
-                        Console.WriteLine($"Current toatal: ${total:0.00}");
+                        try
+                        {
+                            Console.Write("would u like to redeem some points(y/n): ");
+                            string redeem = Console.ReadLine();
+                            if (redeem == "y")
+                            {
+                                while (true)
+                                {
+                                    try
+                                    {
+                                        Console.Write("how much point would u like to redeem(1 point = 0.02): ");
+                                        int point = Convert.ToInt16(Console.ReadLine());
+                                        if (point > 0 && point <= servingcustomer.Rewards.points)
+                                        {
+                                            double discounted = point * 0.02;
+                                            total -= discounted;
+                                            Console.WriteLine($"final toatal: ${total:0.00}");
+                                            break;
+
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("invalid input");
+
+                                        }
+                                    }
+                                    catch
+                                    {
+                                        Console.WriteLine("invalid input");
+                                    }
+                                }
+                                break;
 
 
+
+                            }
+                            else if (redeem == "n")
+                            {
+                                Console.WriteLine($"final toatal: ${total:0.00}");
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("invalid input");
+                            }
+                        }
+                        catch
+                        {
+                            Console.WriteLine("invalid input");
+
+
+                        }
                     }
-                    else if (redeem == "n") { }
+
+
+                }
+                else {
                     Console.WriteLine($"final toatal: ${total:0.00}");
-                    
                 }
                 int points = Convert.ToInt16(Math.Floor(total * 0.72));
                 servingcustomer.Rewards.AddPoints(points);
@@ -1500,7 +1549,9 @@ void Option7()
                     if (servingcustomer.Rewards.points >= 100)
                     {
                         servingcustomer.Rewards.tier = "Gold";
-                        Console.WriteLine("cpmgrats you are now a gold member!");
+                        Console.WriteLine("congrats you are now a gold member!");
+                        Console.WriteLine($"membership teir: {servingcustomer.Rewards.tier}        points: {servingcustomer.Rewards.points}");
+
 
 
 
