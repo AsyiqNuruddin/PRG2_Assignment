@@ -2316,13 +2316,16 @@ void Makeicecream(Customer result)
 
 }
 
-
+//==========================================================
+// Student Number : s10257702
+// Student Name : khoo jia xiang
+//==========================================================
 
 void writecustomer() {
-    using (StreamWriter sw = new StreamWriter("customers", false)) {
-        sw.WriteLine("Name","MemberId","DOB"  , "MembershipStatus", "MembershipPoints", "PunchCard");
+    using (StreamWriter sw = new StreamWriter("customers.csv", false)) {
+        sw.WriteLine("Name,MemberId,DOB,MembershipStatus, MembershipPoints,punchcard");
         foreach (var custo in DictCustomer) {
-            sw.WriteLine(custo.Value.Name,Convert.ToString(custo.Value.Dob), Convert.ToString(custo.Value.Rewards.tier), Convert.ToString(custo.Value.Rewards.points), Convert.ToString(custo.Value.Rewards.punchCard));
+            sw.WriteLine($"{custo.Value.Name},{Convert.ToString(custo.Value.Dob)}, {Convert.ToString(custo.Value.Rewards.tier)}, {Convert.ToString(custo.Value.Rewards.points)}, {Convert.ToString(custo.Value.Rewards.punchCard)}");
         
         
         
