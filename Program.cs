@@ -1155,7 +1155,7 @@ void Option6()
                                 Console.WriteLine($"[{count1}]");
                                 Console.WriteLine(or);
                                 Console.WriteLine();
-                                count++;
+                                count1++;
 
 
                             }
@@ -1171,10 +1171,8 @@ void Option6()
                         }
                         else if (choice == "3")
                         {
-                            while (true)
-                            {
-                                try
-                                {
+                            
+                                
                                     if (result.CurrentOrder.IceCreamlist.Count > 1)
                                     {
 
@@ -1187,37 +1185,41 @@ void Option6()
 
 
                                         }
-                                        Console.Write("Enter a ice cream to remove: ");
-                                        try
+                                        
+                                        while (true)
                                         {
-                                            int icecreanindex = Convert.ToInt32(Console.ReadLine());
-                                            result.CurrentOrder.DeleteIceCream(icecreanindex);
-                                            Console.WriteLine();
-                                            Console.WriteLine("current order:");
-                                            int count1 = 1;
-                                            foreach (IceCream or in result.CurrentOrder.IceCreamlist)
+                                            try
                                             {
-                                                Console.WriteLine($"[{count1}]");
-                                                Console.WriteLine(or);
-                                                count1++;
+                                                Console.Write("Enter a ice cream to remove: ");
+                                                int icecreanindex = Convert.ToInt32(Console.ReadLine());
+                                                result.CurrentOrder.DeleteIceCream(icecreanindex);
+                                                Console.WriteLine();
+                                                Console.WriteLine("current order:");
+                                                int count1 = 1;
+                                                foreach (IceCream or in result.CurrentOrder.IceCreamlist)
+                                                {
+                                                    Console.WriteLine($"[{count1}]");
+                                                    Console.WriteLine(or);
+                                                    count1++;
 
 
+                                                }
+
+
+                                                break;
                                             }
 
 
-                                            break;
-                                        }
+                                            catch (FormatException)
+                                            {
+                                                Console.WriteLine("invalid input.");
 
+                                            }
+                                            catch (IndexOutOfRangeException)
+                                            {
+                                                Console.WriteLine("invalid ice cream.");
 
-                                        catch (FormatException)
-                                        {
-                                            Console.WriteLine("invalid input.");
-
-                                        }
-                                        catch (IndexOutOfRangeException)
-                                        {
-                                            Console.WriteLine("invalid ice cream.");
-
+                                            }
                                         }
                                     }
                                     else {
@@ -1227,13 +1229,8 @@ void Option6()
                                         break;
 
                                     }
-                                }
-                                catch (Exception)
-                                {
-                                    Console.WriteLine("invliad input.");
-
-                                }
-                            }
+                            
+                                
 
 
 
@@ -1718,36 +1715,56 @@ void Makeicecream(Customer result)
             
             while (true)
             {
-                Console.Write("Enter number of scoops[1-3]: ");
-
-
-
-                int newscp = Convert.ToInt16(Console.ReadLine());
-                if (newscp > 0 && newscp <= 3)
+                try
                 {
-                    DisplayFlavours(DictFlavour);
-                    for (int scoopIndex = 1; scoopIndex <= newscp; scoopIndex++)
-                    {
-                        try
-                        {
-                            Console.Write($"Enter flavour number {scoopIndex} : ");
-                            int newflav = Convert.ToInt32(Console.ReadLine());
-                            Flavour addflact = DictFlavour[newflav];
-                            if (flavlist.Count ==0)
-                            {
-                                
-                                flavlist.Add(addflact);
-                            }
-                            else
-                            {
-                                bool add = false;
-                                foreach (var flav in flavlist)
-                                {
-                                    if (flav.Type == addflact.Type)
-                                    {
-                                        flav.Quantity += 1;
-                                        add = true;
+                    Console.Write("Enter number of scoops[1-3]: ");
 
+
+
+                    int newscp = Convert.ToInt16(Console.ReadLine());
+                    if (newscp > 0 && newscp <= 3)
+                    {
+                        DisplayFlavours(DictFlavour);
+                        for (int scoopIndex = 1; scoopIndex <= newscp; scoopIndex++)
+                        {
+                            try
+                            {
+                                Console.Write($"Enter flavour number {scoopIndex} : ");
+                                int newflav = Convert.ToInt32(Console.ReadLine());
+                                Flavour addflact = DictFlavour[newflav];
+                                if (flavlist.Count == 0)
+                                {
+
+                                    flavlist.Add(addflact);
+                                }
+                                else
+                                {
+                                    bool add = false;
+                                    foreach (var flav in flavlist)
+                                    {
+                                        if (flav.Type == addflact.Type)
+                                        {
+                                            flav.Quantity += 1;
+                                            add = true;
+
+
+
+                                        }
+
+
+
+
+                                    }
+                                    if (!add)
+                                    {
+                                        flavlist.Add(addflact);
+
+
+
+
+                                    }
+                                    else
+                                    {
 
 
                                     }
@@ -1755,103 +1772,95 @@ void Makeicecream(Customer result)
 
 
 
-                                }
-                                if (!add)
-                                {
-                                    flavlist.Add(addflact);
-                                    
 
+
+
+                                }
+                            }
+                            catch
+                            {
+                                Console.WriteLine("Invalid flavour number. Please try again.");
+                                scoopIndex--;
+
+
+                            }
+
+
+
+                        }
+                        while (true)
+                        {
+                            try
+                            {
+                                Console.Write("Enter number of toppings[1-4]: ");
+
+
+                                int newtop = Convert.ToInt16(Console.ReadLine());
+                                if (newtop >= 1 && newtop <= 4)
+                                {
+                                    DisplayToppings(DictTopping);
+
+                                    for (int topIndex = 1; topIndex <= newtop; topIndex++)
+                                    {
+                                        try
+                                        {
+                                            Console.Write($"Enter topping number {topIndex}: ");
+                                            int addtop = Convert.ToInt32(Console.ReadLine());
+
+                                            // Check if the entered topping number is valid
+                                            if (DictTopping.ContainsKey(addtop))
+                                            {
+                                                Topping toppingToList = DictTopping[addtop];
+                                                toplist.Add(toppingToList);
+                                            }
+                                            else
+                                            {
+                                                Console.WriteLine("Invalid topping number. Please try again.");
+                                                topIndex--;  // This line has been removed, loop will continue without decrementing topIndex
+                                            }
+                                        }
+                                        catch (Exception)
+                                        {
+                                            Console.WriteLine("Invalid input. Please enter a valid topping number.");
+                                            topIndex--;  // This line has been removed, loop will continue without decrementing topIndex
+                                        }
+                                    }
+                                    newIceCream = new Cup("cup", newscp, flavlist, toplist);
+                                    result.CurrentOrder.AddIceCream(newIceCream);
+                                    break;
 
 
                                 }
                                 else
                                 {
-                                    
+                                    Console.WriteLine("invalid input.");
 
                                 }
-
-
-
-
-
-
-
                             }
-                        }
-                        catch {
-                            Console.WriteLine("Invalid flavour number. Please try again.");
-                            scoopIndex--;
-
-
-                        }
-
-
-
-                    }
-                    while (true)
-                    {
-                        Console.Write("Enter number of toppings[1-4]: ");
-
-
-                        int newtop = Convert.ToInt16(Console.ReadLine());
-                        if (newtop >= 1 && newtop <= 4)
-                        {
-                            DisplayToppings(DictTopping);
-
-                            for (int topIndex = 1; topIndex <= newtop; topIndex++)
+                            catch
                             {
-                                try
-                                {
-                                    Console.Write($"Enter topping number {topIndex}: ");
-                                    int addtop = Convert.ToInt32(Console.ReadLine());
+                                Console.WriteLine("invalid error");
 
-                                    // Check if the entered topping number is valid
-                                    if (DictTopping.ContainsKey(addtop))
-                                    {
-                                        Topping toppingToList = DictTopping[addtop];
-                                        toplist.Add(toppingToList);
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("Invalid topping number. Please try again.");
-                                        topIndex--;  // This line has been removed, loop will continue without decrementing topIndex
-                                    }
-                                }
-                                catch (Exception)
-                                {
-                                    Console.WriteLine("Invalid input. Please enter a valid topping number.");
-                                    topIndex--;  // This line has been removed, loop will continue without decrementing topIndex
-                                }
                             }
-                            newIceCream = new Cup("cup", newscp, flavlist, toplist);
-                            result.CurrentOrder.AddIceCream(newIceCream);
-                            break;
-
-
                         }
-                        else
-                        {
-                            Console.WriteLine("invalid input.");
+                        break;
 
-                        }
+
+
                     }
-                    break;
+                    else
+                    {
+                        Console.WriteLine("invalid input.");
+
+
+                    }
+
+
 
 
 
                 }
-                else
-                {
-                    Console.WriteLine("invalid input.");
-
-
-                }
-                
-
-
-
-
-
+                catch { Console.WriteLine("invalid iput"); }
 
             }
             Console.WriteLine("your order: ");
@@ -1868,36 +1877,56 @@ void Makeicecream(Customer result)
             initwaffle(wafflelist);
             while (true)
             {
-                Console.Write("Enter number of scoops[1-3]: ");
-
-
-
-                int newscp = Convert.ToInt16(Console.ReadLine());
-                if (newscp > 0 && newscp <= 3)
+                try
                 {
-                    DisplayFlavours(DictFlavour);
-                    for (int scoopIndex = 1; scoopIndex <= newscp; scoopIndex++)
+                    Console.Write("Enter number of scoops[1-3]: ");
+
+
+
+                    int newscp = Convert.ToInt16(Console.ReadLine());
+                    if (newscp > 0 && newscp <= 3)
                     {
-                        try
+                        DisplayFlavours(DictFlavour);
+                        for (int scoopIndex = 1; scoopIndex <= newscp; scoopIndex++)
                         {
-                            Console.Write($"Enter flavour number {scoopIndex} : ");
-                            int newflav = Convert.ToInt32(Console.ReadLine());
-                            Flavour addflact = DictFlavour[newflav];
-                            if (flavlist.Count == 0)
+                            try
                             {
-
-                                flavlist.Add(addflact);
-                            }
-                            else
-                            {
-                                bool add = false;
-                                foreach (var flav in flavlist)
+                                Console.Write($"Enter flavour number {scoopIndex} : ");
+                                int newflav = Convert.ToInt32(Console.ReadLine());
+                                Flavour addflact = DictFlavour[newflav];
+                                if (flavlist.Count == 0)
                                 {
-                                    if (flav.Type == addflact.Type)
-                                    {
-                                        flav.Quantity += 1;
-                                        add = true;
 
+                                    flavlist.Add(addflact);
+                                }
+                                else
+                                {
+                                    bool add = false;
+                                    foreach (var flav in flavlist)
+                                    {
+                                        if (flav.Type == addflact.Type)
+                                        {
+                                            flav.Quantity += 1;
+                                            add = true;
+
+
+
+                                        }
+
+
+
+
+                                    }
+                                    if (!add)
+                                    {
+                                        flavlist.Add(addflact);
+
+
+
+
+                                    }
+                                    else
+                                    {
 
 
                                     }
@@ -1905,114 +1934,106 @@ void Makeicecream(Customer result)
 
 
 
+
+
+
                                 }
-                                if (!add)
+                            }
+                            catch
+                            {
+                                Console.WriteLine("Invalid flavour number. Please try again.");
+                                scoopIndex--;
+
+                            }
+
+
+
+                        }
+                        while (true)
+                        {
+                            try
+                            {
+                                Console.Write("Enter number of toppings[1-4]: ");
+
+
+                                int newtop = Convert.ToInt16(Console.ReadLine());
+                                if (newtop >= 1 && newtop <= 4)
                                 {
-                                    flavlist.Add(addflact);
-                                    
+                                    DisplayToppings(DictTopping);
+
+                                    for (int topIndex = 1; topIndex <= newtop; topIndex++)
+                                    {
+                                        try
+                                        {
+                                            Console.Write($"Enter topping number {topIndex}: ");
+                                            int addtop = Convert.ToInt32(Console.ReadLine());
+
+                                            // Check if the entered topping number is valid
+                                            if (DictTopping.ContainsKey(addtop))
+                                            {
+                                                Topping toppingToList = DictTopping[addtop];
+                                                toplist.Add(toppingToList);
+                                            }
+                                            else
+                                            {
+                                                Console.WriteLine("Invalid topping number. Please try again.");
+                                                topIndex--;  // This line has been removed, loop will continue without decrementing topIndex
+                                            }
+                                        }
+                                        catch (Exception)
+                                        {
+                                            Console.WriteLine("Invalid input. Please enter a valid topping number.");
+                                            topIndex--;  // This line has been removed, loop will continue without decrementing topIndex
+                                        }
+                                    }
+                                    while (true)
+                                    {
+                                        try
+                                        {
+                                            displaywaffle(wafflelist);
+                                            Console.Write("Enter waffle flavour: ");
+                                            int wafflenum = Convert.ToInt32(Console.ReadLine());
+                                            string waffeflav = wafflelist[wafflenum];
+                                            newIceCream = new Waffle("waffle", newscp, flavlist, toplist, waffeflav);
+                                            result.CurrentOrder.AddIceCream(newIceCream);
+                                            break;
+                                        }
+                                        catch (IndexOutOfRangeException)
+                                        {
+                                            Console.WriteLine("invalid input");
+
+                                        }
+                                        catch (Exception)
+                                        {
+                                            Console.WriteLine("invalid input ");
+
+                                        }
+                                    }
+                                    break;
 
 
 
                                 }
                                 else
                                 {
-                                    
-
-                                }
-
-
-
-
-
-
-
-                            }
-                        }
-                        catch {
-                            Console.WriteLine("Invalid flavour number. Please try again.");
-                            scoopIndex--;
-
-                        }
-
-
-
-                    }
-                    while (true)
-                    {
-                        Console.Write("Enter number of toppings[1-4]: ");
-
-
-                        int newtop = Convert.ToInt16(Console.ReadLine());
-                        if (newtop >= 1 && newtop <= 4)
-                        {
-                            DisplayToppings(DictTopping);
-
-                            for (int topIndex = 1; topIndex <= newtop; topIndex++)
-                            {
-                                try
-                                {
-                                    Console.Write($"Enter topping number {topIndex}: ");
-                                    int addtop = Convert.ToInt32(Console.ReadLine());
-
-                                    // Check if the entered topping number is valid
-                                    if (DictTopping.ContainsKey(addtop))
-                                    {
-                                        Topping toppingToList = DictTopping[addtop];
-                                        toplist.Add(toppingToList);
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("Invalid topping number. Please try again.");
-                                        topIndex--;  // This line has been removed, loop will continue without decrementing topIndex
-                                    }
-                                }
-                                catch (Exception)
-                                {
-                                    Console.WriteLine("Invalid input. Please enter a valid topping number.");
-                                    topIndex--;  // This line has been removed, loop will continue without decrementing topIndex
-                                }
-                            }
-                            while (true)
-                            {
-                                try
-                                {
-                                    displaywaffle(wafflelist);
-                                    Console.Write("Enter waffle flavour: ");
-                                    int wafflenum = Convert.ToInt32(Console.ReadLine());
-                                    string waffeflav = wafflelist[wafflenum];
-                                    newIceCream = new Waffle("waffle", newscp, flavlist, toplist, waffeflav);
-                                    result.CurrentOrder.AddIceCream(newIceCream);
-                                    break;
-                                }
-                                catch (IndexOutOfRangeException)
-                                {
                                     Console.WriteLine("invalid input");
 
                                 }
-                                catch (Exception) {
-                                    Console.WriteLine("invalid input ");
-
-                                }
                             }
-                            break;
-                            
+                            catch
+                            {
+                                Console.WriteLine("invalid error");
+                            }
 
 
-                        }
-                        else
-                        {
-                            Console.WriteLine("invalid input");
 
                         }
-                        
-
-
+                        break;
                     }
-                    break;
-                }
-                else { Console.WriteLine("invalid input"); }
-                
+                    else { Console.WriteLine("invalid input"); }
 
+                }
+                catch { Console.WriteLine("invalid input"); }
             }
             Console.WriteLine("your order: ");
             Console.WriteLine(newIceCream);
@@ -2027,155 +2048,171 @@ void Makeicecream(Customer result)
             
             while (true)
             {
-                Console.Write("Enter number of scoops[1-3]: ");
-
-
-
-                int newscp = Convert.ToInt16(Console.ReadLine());
-                if (newscp > 0 && newscp <= 3)
+                try
                 {
-                    DisplayFlavours(DictFlavour);
-                    for (int scoopIndex = 1; scoopIndex <= newscp; scoopIndex++)
-                    {
-                        try
-                        {
-                            Console.Write($"Enter flavour number {scoopIndex} : ");
-                            int newflav = Convert.ToInt32(Console.ReadLine());
-                            Flavour addflact = DictFlavour[newflav];
-                            if (flavlist.Count == 0)
-                            {
+                    Console.Write("Enter number of scoops[1-3]: ");
 
-                                flavlist.Add(addflact);
-                            }
-                            else
+
+
+                    int newscp = Convert.ToInt16(Console.ReadLine());
+                    if (newscp > 0 && newscp <= 3)
+                    {
+                        DisplayFlavours(DictFlavour);
+                        for (int scoopIndex = 1; scoopIndex <= newscp; scoopIndex++)
+                        {
+                            try
                             {
-                                bool add = false;
-                                foreach (var flav in flavlist)
+                                Console.Write($"Enter flavour number {scoopIndex} : ");
+                                int newflav = Convert.ToInt32(Console.ReadLine());
+                                Flavour addflact = DictFlavour[newflav];
+                                if (flavlist.Count == 0)
                                 {
-                                    if (flav.Type == addflact.Type)
+
+                                    flavlist.Add(addflact);
+                                }
+                                else
+                                {
+                                    bool add = false;
+                                    foreach (var flav in flavlist)
                                     {
-                                        flav.Quantity += 1;
-                                        add = true;
+                                        if (flav.Type == addflact.Type)
+                                        {
+                                            flav.Quantity += 1;
+                                            add = true;
+
+
+
+                                        }
+
 
 
 
                                     }
-
-
-
-
-                                }
-                                if (!add)
-                                {
-                                    flavlist.Add(addflact);
-                                    
-
-
-
-                                }
-                                else
-                                {
-                                    
-
-                                }
-
-
-
-
-
-
-
-                            }
-                        }
-                        catch
-                        {
-                            Console.WriteLine("Invalid flavour number. Please try again.");
-                            scoopIndex--;
-
-                        }
-
-
-
-
-                    }
-                    while (true)
-                    {
-                        Console.Write("Enter number of toppings[1-4]: ");
-
-
-                        int newtop = Convert.ToInt16(Console.ReadLine());
-                        if (newtop >= 1 && newtop <= 4)
-                        {
-                            DisplayToppings(DictTopping);
-
-                            for (int topIndex = 1; topIndex <= newtop; topIndex++)
-                            {
-                                try
-                                {
-                                    Console.Write($"Enter topping number {topIndex}: ");
-                                    int addtop = Convert.ToInt32(Console.ReadLine());
-
-                                    // Check if the entered topping number is valid
-                                    if (DictTopping.ContainsKey(addtop))
+                                    if (!add)
                                     {
-                                        Topping toppingToList = DictTopping[addtop];
-                                        toplist.Add(toppingToList);
+                                        flavlist.Add(addflact);
+
+
+
+
                                     }
                                     else
                                     {
-                                        Console.WriteLine("Invalid topping number. Please try again.");
-                                        topIndex--;  // This line has been removed, loop will continue without decrementing topIndex
+
+
                                     }
-                                }
-                                catch (Exception)
-                                {
-                                    Console.WriteLine("Invalid input. Please enter a valid topping number.");
-                                    topIndex--;  // This line has been removed, loop will continue without decrementing topIndex
+
+
+
+
+
+
+
                                 }
                             }
-                            while (true)
+                            catch
                             {
-                                Console.Write("Do you want your cone dipped?(Y/N):");
-                                string dipped = Console.ReadLine();
-                                if (dipped.ToLower() == "y")
+                                Console.WriteLine("Invalid flavour number. Please try again.");
+                                scoopIndex--;
+
+                            }
+
+
+
+
+                        }
+                        while (true)
+                        {
+                            try
+                            {
+                                Console.Write("Enter number of toppings[1-4]: ");
+
+
+                                int newtop = Convert.ToInt16(Console.ReadLine());
+                                if (newtop >= 1 && newtop <= 4)
                                 {
-                                    newIceCream = new Cone("cone", newscp, flavlist, toplist, true);
-                                    result.CurrentOrder.AddIceCream(newIceCream);
+                                    DisplayToppings(DictTopping);
+
+                                    for (int topIndex = 1; topIndex <= newtop; topIndex++)
+                                    {
+                                        try
+                                        {
+                                            Console.Write($"Enter topping number {topIndex}: ");
+                                            int addtop = Convert.ToInt32(Console.ReadLine());
+
+                                            // Check if the entered topping number is valid
+                                            if (DictTopping.ContainsKey(addtop))
+                                            {
+                                                Topping toppingToList = DictTopping[addtop];
+                                                toplist.Add(toppingToList);
+                                            }
+                                            else
+                                            {
+                                                Console.WriteLine("Invalid topping number. Please try again.");
+                                                topIndex--;  // This line has been removed, loop will continue without decrementing topIndex
+                                            }
+                                        }
+                                        catch (Exception)
+                                        {
+                                            Console.WriteLine("Invalid input. Please enter a valid topping number.");
+                                            topIndex--;  // This line has been removed, loop will continue without decrementing topIndex
+                                        }
+                                    }
+                                    while (true)
+                                    {
+                                        Console.Write("Do you want your cone dipped?(Y/N):");
+                                        string dipped = Console.ReadLine();
+                                        if (dipped.ToLower() == "y")
+                                        {
+                                            newIceCream = new Cone("cone", newscp, flavlist, toplist, true);
+                                            result.CurrentOrder.AddIceCream(newIceCream);
+                                            break;
+
+
+                                        }
+                                        else if (dipped.ToLower() == "n")
+                                        {
+                                            newIceCream = new Cone("cone", newscp, flavlist, toplist, false);
+                                            result.CurrentOrder.AddIceCream(newIceCream);
+                                            break;
+
+
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("invalid input");
+
+                                        }
+                                    }
                                     break;
 
-
-                                }
-                                else if (dipped.ToLower() == "n")
-                                {
-                                    newIceCream = new Cone("cone", newscp, flavlist, toplist, false);
-                                    result.CurrentOrder.AddIceCream(newIceCream);
-                                    break;
-
-
-                                }
-                                else
-                                {
-                                    Console.WriteLine("invalid input");
 
                                 }
                             }
-                            break;
+                            catch
+                            {
+                                Console.WriteLine("invalid input.");
+
+                            }
 
 
                         }
 
+                        break;
                     }
-                    
-                    break;
+                    else
+                    {
+                        Console.WriteLine("invalid input");
+
+                    }
+
+
+
                 }
-                else {
+                catch {
                     Console.WriteLine("invalid input");
 
                 }
-                
-                
-                           
-                
             }
             Console.WriteLine("your order: ");
             Console.WriteLine(newIceCream);
