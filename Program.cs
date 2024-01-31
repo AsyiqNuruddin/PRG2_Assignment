@@ -20,6 +20,7 @@ using System.ComponentModel.Design;
 using System.Reflection.Metadata.Ecma335;
 using System.Linq.Expressions;
 using System.Reflection.Metadata;
+using System.Xml.Linq;
 
 
 //==========================================================
@@ -1578,6 +1579,7 @@ void Option7()
             Console.WriteLine($"Name: {servingcustomer.Name}   membership teir: {servingcustomer.Rewards.tier}        points: {servingcustomer.Rewards.points}   punch card: {servingcustomer.Rewards.punchCard}");
             Console.WriteLine();
             Console.WriteLine("order checked out");
+            writecustomer();
             break;
             
 
@@ -2312,7 +2314,25 @@ void Makeicecream(Customer result)
 
     }
 
+}
+
+
+
+void writecustomer() {
+    using (StreamWriter sw = new StreamWriter("customers", false)) {
+        sw.WriteLine("Name","MemberId","DOB"  , "MembershipStatus", "MembershipPoints", "PunchCard");
+        foreach (var custo in DictCustomer) {
+            sw.WriteLine(custo.Value.Name,Convert.ToString(custo.Value.Dob), Convert.ToString(custo.Value.Rewards.tier), Convert.ToString(custo.Value.Rewards.points), Convert.ToString(custo.Value.Rewards.punchCard));
+        
+        
+        
+        }
+    
+    
     }
+
+
+}
    
 
 
