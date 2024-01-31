@@ -967,13 +967,13 @@ void Option5()
             {
                 int currentcount =0;
                 List<IceCream> currentorder = null;
-                if (result.CurrentOrder.IceCreamlist != null)
+                if (result.CurrentOrder != null && result.CurrentOrder.IceCreamlist.Count != 0)
                 {
                     currentorder = result.CurrentOrder.IceCreamlist;
                     currentcount = currentorder.Count;
 
                 }
-                else { 
+                else  { 
                     currentcount= 0;
                 
                 }
@@ -1028,10 +1028,12 @@ void Option5()
         catch (FormatException)
         {
             Console.WriteLine("Invalid input. Please enter a valid numeric value for customer ID.");
+            break;
         }
         catch (Exception ex)
         {
             Console.WriteLine($"An error occurred: {ex.Message}");
+            break;
         }
     }
 
@@ -1450,9 +1452,10 @@ void Option7()
                     Console.WriteLine("congrats you are now a silver teir member");
 
                 }
+                WriteIceCream(servingorder, servingcustomer.MemberId);
 
 
-                
+
             }
             else
             {
@@ -1480,12 +1483,12 @@ void Option7()
                         int point = Convert.ToInt16(Console.ReadLine());
                         double discounted = point * 0.02;
                         total -= discounted;
-                        Console.WriteLine($"curent toatal: ${total:0.00}");
+                        Console.WriteLine($"Current toatal: ${total:0.00}");
 
 
                     }
                     else if (redeem == "n") { }
-                    Console.WriteLine($"fianl toatal: ${total:0.00}");
+                    Console.WriteLine($"final toatal: ${total:0.00}");
                     
                 }
                 int points = Convert.ToInt16(Math.Floor(total * 0.72));

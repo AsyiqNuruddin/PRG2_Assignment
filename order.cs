@@ -926,7 +926,8 @@ namespace PRG2_Assignment_Order
                         {
                             flavlist.Clear();
 
-                            int scps = result.Scoops;
+                            int scps = result.Scoops ;
+                            Console.WriteLine(scps);
                             DisplayFlavours(DictFlavour);
                             while (true)
                             {
@@ -964,16 +965,12 @@ namespace PRG2_Assignment_Order
                                             if (!add)
                                             {
                                                 flavlist.Add(addflact);
-                                                break;
+                                                
 
 
 
                                             }
-                                            else
-                                            {
-                                                break;
-
-                                            }
+                                            
 
 
 
