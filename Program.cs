@@ -414,7 +414,7 @@ int maxorderid() {
         foreach (var or in customer.OrderHistory) {
             if (or.id >= maxid)
             {
-                maxid = or.id + 1;
+                maxid = or.id ;
             }
             else {
                 continue;
@@ -1192,13 +1192,14 @@ void Option6()
                                         {
                                             int icecreanindex = Convert.ToInt32(Console.ReadLine());
                                             result.CurrentOrder.DeleteIceCream(icecreanindex);
+                                            Console.WriteLine();
                                             Console.WriteLine("current order:");
                                             int count1 = 1;
                                             foreach (IceCream or in result.CurrentOrder.IceCreamlist)
                                             {
                                                 Console.WriteLine($"[{count1}]");
                                                 Console.WriteLine(or);
-                                                count++;
+                                                count1++;
 
 
                                             }
