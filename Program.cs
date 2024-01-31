@@ -1575,6 +1575,8 @@ void Option7()
 
             }
             Console.WriteLine();
+            Console.WriteLine($"Name{servingcustomer.Name}   membership teir: {servingcustomer.Rewards.tier}        points: {servingcustomer.Rewards.points}   punch card: {servingcustomer.Rewards.punchCard}");
+            Console.WriteLine();
             Console.WriteLine("order checked out");
             break;
             
