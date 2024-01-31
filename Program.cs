@@ -1575,7 +1575,7 @@ void Option7()
 
             }
             Console.WriteLine();
-            Console.WriteLine($"Name{servingcustomer.Name}   membership teir: {servingcustomer.Rewards.tier}        points: {servingcustomer.Rewards.points}   punch card: {servingcustomer.Rewards.punchCard}");
+            Console.WriteLine($"Name: {servingcustomer.Name}   membership teir: {servingcustomer.Rewards.tier}        points: {servingcustomer.Rewards.points}   punch card: {servingcustomer.Rewards.punchCard}");
             Console.WriteLine();
             Console.WriteLine("order checked out");
             break;
@@ -1613,6 +1613,7 @@ void WriteIceCream(Order order, int id)
                 {
                     if (v.Flavours.Count == 1)
                     {
+                        
                         flavstr = string.Join(",", v.Flavours[0].Type, "", "");
                     }
                     else if (v.Flavours.Count == 2)
