@@ -1613,12 +1613,37 @@ void WriteIceCream(Order order, int id)
                 {
                     if (v.Flavours.Count == 1)
                     {
+                        if (v.Flavours[0].Quantity == 2)
+                        {
+                            flavstr = string.Join(",", v.Flavours[0].Type, v.Flavours[0].Type, "");
+
+                        }
+                        else if (v.Flavours[0].Quantity == 3)
+                        {
+                            flavstr = string.Join(",", v.Flavours[0].Type, v.Flavours[0].Type, v.Flavours[0].Type);
+                        }
+                        else {
+                            flavstr = string.Join(",", v.Flavours[0].Type,"","");
+                        }
                         
-                        flavstr = string.Join(",", v.Flavours[0].Type, "", "");
+                        
                     }
                     else if (v.Flavours.Count == 2)
                     {
-                        flavstr = string.Join(",", v.Flavours[0].Type, v.Flavours[1].Type, "");
+                        if (v.Flavours[0].Quantity == 2)
+                        {
+                            flavstr = string.Join(",", v.Flavours[0].Type, v.Flavours[0].Type, v.Flavours[1].Type);
+
+                        }
+                        else if (v.Flavours[1].Quantity == 2)
+                        {
+                            flavstr = string.Join(",", v.Flavours[0].Type, v.Flavours[1].Type, v.Flavours[1].Type);
+
+                        }
+                        else {
+                            flavstr = string.Join(",", v.Flavours[0].Type, v.Flavours[1].Type, "");
+                        }
+                        
                     }
                     else if (v.Flavours.Count == 3)
                     {
@@ -1630,6 +1655,8 @@ void WriteIceCream(Order order, int id)
                 {
                     if (v.Toppings.Count == 1)
                     {
+                        
+                   
                         topstr = string.Join(",", v.Toppings[0].Type, "", "", "");
                     }
                     else if (v.Toppings.Count == 2)
