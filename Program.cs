@@ -2323,9 +2323,9 @@ void Makeicecream(Customer result)
 
 void writecustomer() {
     using (StreamWriter sw = new StreamWriter("customers.csv", false)) {
-        sw.WriteLine("Name,MemberId,DOB,MembershipStatus, MembershipPoints,punchcard");
+        sw.WriteLine("Name,MemberId,DOB,MembershipStatus, MembershipPoints,PunchCard");
         foreach (var custo in DictCustomer) {
-            sw.WriteLine($"{custo.Value.Name},{Convert.ToString(custo.Value.Dob)}, {Convert.ToString(custo.Value.Rewards.tier)}, {Convert.ToString(custo.Value.Rewards.points)}, {Convert.ToString(custo.Value.Rewards.punchCard)}");
+            sw.WriteLine($"{custo.Value.Name},{custo.Value.MemberId},{Convert.ToString(custo.Value.Dob)}, {Convert.ToString(custo.Value.Rewards.tier)}, {Convert.ToString(custo.Value.Rewards.points)}, {Convert.ToString(custo.Value.Rewards.punchCard)}");
         
         
         
